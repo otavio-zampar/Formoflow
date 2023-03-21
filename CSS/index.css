@@ -1,0 +1,36 @@
+#searchBar{
+    position: absolute;
+    height: 3rem;
+    width: 90vw;
+    top: calc(100px + 1.5rem);
+    left: 5vw;
+    padding-left: 2vw;
+    border: 0px;
+    border-radius: 1rem;
+    font-size: 1.5rem;
+    outline: #f0f0f0 solid 3px;
+    box-shadow: 6px 5px 7px #0000001f;
+}
+
+#searchBar:focus{
+    transition: 100ms;
+    outline: #d1d1d1 solid 3px;
+}
+
+#searchBar:hover{
+    transition: 100ms;
+    background-color: #fdfdfd;
+}
+
+#lupa{
+    height: 1.5rem;
+    width: 1.5rem;
+    position: absolute;
+    left: calc(93vw - 1rem);
+    top: calc(100px + 2.25rem);
+    cursor: pointer;
+}
+#lupa:hover{
+    transition: 100ms;
+    transform: scale(110%);
+}

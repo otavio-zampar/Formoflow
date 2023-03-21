@@ -1,0 +1,95 @@
+.sidenavCalc {
+    height: 100%;
+    width: 0%;
+    top: 0;
+    margin: 0;
+    background-color: #322c40;
+    padding-top: 60px;
+}
+.sidenavDraw {
+    height: 100%;
+    width: 0%;
+    top: 0;
+    margin: 0;
+    background-color: #B6B7CF;
+    padding-top: 60px;
+}
+.base{
+    position: fixed;
+    overflow-x: hidden;
+    transition: 0.5s;
+    margin-top: 0%;
+    margin-bottom: 100%;
+}
+.pill{
+    height: 5rem;
+    width: 7rem;
+    cursor: pointer;
+    z-index: 4;
+    top: 45%; 
+    left: -3.5rem;
+}
+
+/* .pill:hover{
+    transition: 0.3;
+    left: -2.5rem;
+
+} */
+
+.basic_instruments{
+    height: 2.7rem;
+    width: 2.7rem;
+    cursor: pointer;
+    position: absolute;
+    left: 43%;
+    top:2vh;
+    transition: .1s transform, .1s -webkit-transform;
+}
+/* .basic_instruments:hover{
+    transform: scale(1.02);
+} */
+
+#myCanvas{
+    /* height: 90vh;
+    width: 55vw; */
+    background-color:#fff;
+    margin-left: 0px;
+    border-radius: 15px;
+    position: absolute;
+    /* border: 3px dotted #000; */
+}
+#myCanvas:hover{
+    cursor: crosshair;
+}
+
+#btnDraw{
+    height:2.5rem;
+    width: auto;
+    margin-top: 1.25rem;
+    margin-left: 3.5rem;
+    transition: 0.3s; 
+    transform: rotate(180deg);
+}
+
+/* #btnDraw:hover{
+    transition: 0.3s;
+    margin-left: 4rem;
+} */
+
+#btnCalc{
+    height:2.5rem;
+    width: auto;
+    margin-top: 1.25rem;
+    margin-left: 3.5rem;
+    transition: 0.3s; 
+    transform: rotate(180deg);
+}
+
+/* #btnCalc:hover{
+    transition: 0.3;
+    margin-left: 4rem;
+} */
+
+#sizeRange{
+    width: 96.5%;
+}

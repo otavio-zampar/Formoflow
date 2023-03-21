@@ -1,0 +1,133 @@
+<!-- INÍCIO DO NAVEGADOR. Navbar que fica em cima de todas as páginas para acesso rápido de outras partes do site -->
+<nav class="navbar-expand-lg navbar-dark">
+        <div class="container">
+        <nav class="navbar navbar-expand-lg fixed-top navbar-dark" style="background-color: purple;">
+	        <a class="navbar-brand mr-auto mr-lg-0" href="index.php">Calculadora</a>
+
+	        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mynavbar">
+	          <span class="navbar-toggler-icon"></span>
+	        </button>
+
+	        <div class="collapse navbar-collapse" id="mynavbar">
+
+	          <ul class="navbar-nav mr-auto" >
+                
+	            <li class="nav-iten">
+	              <a class="nav-link" href="fisica.php">Física</a>
+	            </li>
+	            <li class="nav-iten">
+	              <a class="nav-link" href="quimica.php">Química</a>
+	            </li>
+	            <li class="nav-iten">
+	              <a class="nav-link" href="math.php">matemática</a>
+	            </li>
+				<li class="nav-iten">
+	              <a class="nav-link" href="contato.php"> Contate-nos </a>
+	            </li>
+	          </ul>
+	        </div>
+	      </div>
+	</nav>
+    <!--Fim da barra horizontal do teto-->
+    <!-- Inicio do menu lateral -->
+    <style>
+      .sidenav {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: rgb(6, 58, 117);
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 60px;
+      }
+      
+      .sidenav a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+      }
+      
+      .sidenav a:hover {
+        color: #f1f1f1;
+      }
+      
+      .sidenav .closebtn {
+        position: absolute;
+        top: -2;
+        right: 25px;
+        font-size: 36px;
+        margin-right: 190px;
+      }
+      
+      #main {
+        transition: margin-left .5s;
+        padding: 16px;
+      }
+      
+      @media screen and (max-height: 450px) {
+        .sidenav {padding-top: 15px;}
+        .sidenav a {font-size: 18px;}
+      }
+      </style>
+      <p> <br><br>
+      <div id="mySidenav" class="sidenav">
+         <center> <a href="javascript:void(0)" class="closebtn" onmousedown="closeNav()">&times;</a>
+      <font color="white">
+      <br><br>
+      
+      <!--Calculadora-->
+      <form name="calculator" >
+        <br><br>
+        A solução é:  
+        <input type="textfield" name="ans" value=""></form>
+        <!--colocar um verificador para a pontuaçao, se tiver mais de um '.' a conta quebra-->
+        <input type="button" value="1" onmousedown="document.calculator.ans.value+='1'">
+        <input type="button" value="2" onmousedown="document.calculator.ans.value+='2'">
+        <input type="button" value="3" onmousedown="document.calculator.ans.value+='3'"> 
+        <input type="button" value="+" onmousedown="document.calculator.ans.value+='+'"> <br>
+        <input type="button" value="4" onmousedown="document.calculator.ans.value+='4'">
+        <input type="button" value="5" onmousedown="document.calculator.ans.value+='5'">
+        <input type="button" value="6" onmousedown="document.calculator.ans.value+='6'">
+        <input type="button" value="-" onmousedown="document.calculator.ans.value+='-'"> <br>
+        <input type="button" value="7" onmousedown="document.calculator.ans.value+='7'">
+        <input type="button" value="8" onmousedown="document.calculator.ans.value+='8'">
+        <input type="button" value="9" onmousedown="document.calculator.ans.value+='9'">
+        <input type="button" value="*" onmousedown="document.calculator.ans.value+='*'"> <br>
+        <input type="button" value="/" onmousedown="document.calculator.ans.value+='/'">
+        <input type="button" value="0" onmousedown="document.calculator.ans.value+='0'">
+        <input type="button" value="." onmousedown="document.calculator.ans.value+='.'">
+        <input type="button" value="=" onmousedown="document.calculator.ans.value=eval(document.calculator.ans.value)">
+        <br>
+        <input type="reset" value="Reset" onmousedown="document.calculator.ans.value=' '">
+        <br>
+      <!--fim calculadora-->
+    </div>
+      <!--botão dos --- na vertical-->
+      <font color="black">
+      <div id="main">
+      
+        <span style="font-size:30px;cursor:pointer" onmousedown="openNav()">&#9776; Calculadora </span>
+      
+      </div>
+      </font>
+      
+      <script>
+      function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+        document.getElementById("main").style.marginLeft = "250px";
+        document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+      }
+      
+      function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("main").style.marginLeft= "0";
+        document.body.style.backgroundColor = "SteelBlue";
+      }
+      </script>
+         <!-- Acaba menu lateral -->
