@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .ActualDiv {
+      width: 200px;
+      height: 200px;
+	  margin-bottom: 10px;
+      background-color: red;
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+    .ActualDiv form {
+      margin-bottom: 10px;
+    }
+    .ActualDiv input[type="text"] {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 5px;
+    }
+    .ActualDiv button {
+      padding: 5px 10px;
+      background-color: white;
+      color: red;
+      border: none;
+      cursor: pointer;
+    }
+    .ActualDiv button:hover {
+      background-color: #ddd;
+    }
+    .ActualDiv .icon {
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+	
+	.DraggableDiv {
+		width: 200px;
+		height: 30px;
+		background-color: blue;
+		position: absolute;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		color: white;
+		font-family: Arial, sans-serif;
+		
+	}
+	
+	.no-scroll {
+    overflow: hidden;
+  }
+	
+	.resize-handle {
+      width: 20px;
+      height: 20px;
+      background-color: #337ab7;
+      position: absolute;
+      bottom: 0px;
+      right: 0px;
+      cursor: nwse-resize;
+    }
+  </style>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+</head>
+<body class="no-scroll">
+  <button onclick="createDiv()">Create Div</button>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+    var divCount = 0;
+
+    function createDiv() {
+      var randomId = 'div' + divCount++;
+      var ActualDiv = $('<div>').attr('id', randomId).addClass('ActualDiv');
+      var DraggableDiv = $('<div>').attr('id', 'draggableDiv' + randomId).addClass('DraggableDiv');
+      var form = $('<form>');
+      var input = $('<input>').attr('type', 'text').attr('placeholder', 'Enter text');
+      var icon = $('<div>').addClass('icon').html('&#128515;'); // Unicode emoji for smiling face
+      var ActualResizeHandle = $('<div>').addClass('resize-handle');
+      var button = $('<button>').text('Submit');
+
+      form.append(input);
+      ActualDiv.append(form);
+      ActualDiv.append(icon);
+      ActualDiv.append(button);
+      $('body').append(ActualDiv);
+	  $('body').append(DraggableDiv);
+	  ActualDiv.append(ActualResizeHandle);
+
+      ActualDiv.resizable({
+        handles: {
+          se: ".resize-handle"
+        },
+        minHeight: 200,
+        minWidth: 200,
+        resize: function(event, ui) {
+          var actualWidth = ui.size.width;
+          var actualHeight = ui.size.height;
+
+          DraggableDiv.css({
+            width: actualWidth,
+            
+          });
+        }
+      });
+
+      DraggableDiv.draggable({
+        drag: function(event, ui) {
+          var offset = ui.offset;
+          var left = offset.left;
+          var top = offset.top;
+
+          $("#" + randomId).css({
+            left: left,
+            top: top
+          });
+        }
+      });
+    }
+  </script>
+</body>
+</html>

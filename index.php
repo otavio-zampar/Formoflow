@@ -54,7 +54,7 @@
         
         
         
-                nao funciona hehe, falta ajax </pre>
+                nao funciona ainda </pre>
         <!-- <div id="pesquisa"></div> -->
     </div>
 
