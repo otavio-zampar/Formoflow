@@ -3,7 +3,7 @@ var img = new Image;
 var dec = inc = 0;
 
 window.onload = function(){
-    // alert();
+        
     document.getElementById("sizeText").value = 5;
     document.getElementById("sizeRange").value = 5;
     document.getElementById("ColPck").value = '#000000';
@@ -20,16 +20,6 @@ window.onload = function(){
             var canvasX = 0, canvasY = 0;
             ctx.lineWidth = 5;
             arrCanvas.push(myCanvas.toDataURL());
-
-        //     ctx.moveTo(0, 0);
-        //     ctx.lineTo(ctx.canvas.width, ctx.canvas.height);
-        //     ctx.stroke();
-
-        //     ctx.globalCompositeOperation = "destination-out";
-        //     ctx.moveTo(100, 100);
-        //     ctx.lineTo(ctx.canvas.width, ctx.canvas.height);
-        //     ctx.stroke();
-
 
             $(myCanvas)
             .mousedown(function(event){
@@ -78,6 +68,31 @@ window.onload = function(){
                     }
 
             });
+
+            // Função para atualizar a posição do círculo de acordo com a posição do mouse
+            function seguirMouse(event) {
+                var ctx = myCanvas.getContext("2d");
+                var mouseX = event.offsetX;
+                var mouseY = event.offsetY;
+
+                // Atualize a posição do círculo
+                mouseFollower.style.left = mouseX - ctx.lineWidth/2 + "px"; // 10 é metade do tamanho do círculo
+                mouseFollower.style.top = mouseY - ctx.lineWidth/2 + "px";
+            }
+
+            // Adicione um ouvinte de evento para capturar o movimento do mouse
+            myCanvas.addEventListener("mousemove", seguirMouse);
+            myCanvas.addEventListener("mouseleave", function () {
+                mouseFollower.style.display = "none";
+                isDown = false;
+                ctx.closePath();
+            });
+    
+            // Adiciona um ouvinte de evento para mostrar o círculo quando o mouse entra no div
+            myCanvas.addEventListener("mouseenter", function () {
+                mouseFollower.style.display = "block";
+            });
+
     }
      
     $('#ColPck').change(function () {
@@ -121,8 +136,11 @@ function changeSize(value){
         }else{
                 ctx.lineWidth = arr[arr.length-1];
         }
+        var mouseFollower = document.getElementById("mouseFollower");
+        mouseFollower.style.height = ctx.lineWidth + "px";
+        mouseFollower.style.width = ctx.lineWidth + "px";
 }
-function download_img(yrn){
+function download_img(yrn){ // yrn = yourname?
         // ainda esta baixando com nomes estranhos, seria bom mudar
         var image = myCanvas.toDataURL("image/png");
         var link = document.createElement('a');
@@ -140,7 +158,7 @@ function historySave(){
         dec = arrCanvas.length;
         // console.log(dec);
 }
-function und(){
+function und(){ //undo
         
         img.src = arrCanvas[dec];
         myCanvas.getContext("2d").clearRect(0, 0, myCanvas.width, myCanvas.height);
@@ -152,7 +170,7 @@ function und(){
         inc = dec;
 }
 
-function red(){
+function red(){ //redo
 
         img.src = arrCanvas[inc];
         myCanvas.getContext("2d").clearRect(0, 0, myCanvas.width, myCanvas.height);
@@ -173,6 +191,9 @@ function increaseSize(dif){
                 ctx.lineWidth--;
         }
         document.getElementById('sizeText').value = ctx.lineWidth;
+        var mouseFollower = document.getElementById("mouseFollower");
+        mouseFollower.style.height = ctx.lineWidth + "px";
+        mouseFollower.style.width = ctx.lineWidth + "px";
 }
 
 function getOposite(y){

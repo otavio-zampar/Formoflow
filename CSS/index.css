@@ -1,8 +1,16 @@
+#container{
+    height: calc(100vh - 100px);
+    width: 100vw; 
+    position: fixed; 
+    top:100px; 
+    left:0px;
+}
+
 #searchBar{
     position: absolute;
     height: 3rem;
     width: 90vw;
-    top: calc(100px + 1.5rem);
+    top: 1.5rem;
     left: 5vw;
     padding-left: 2vw;
     border: 0px;
@@ -27,7 +35,7 @@
     width: 1.5rem;
     position: absolute;
     left: calc(93vw - 1rem);
-    top: calc(100px + 2.25rem);
+    top: 2.25rem;
     cursor: pointer;
 }
 #lupa:hover{

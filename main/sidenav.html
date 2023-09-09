@@ -5,7 +5,7 @@
             <path fill-rule="evenodd" d="M9.224 1.553a.5.5 0 0 1 .223.67L6.56 8l2.888 5.776a.5.5 0 1 1-.894.448l-3-6a.5.5 0 0 1 0-.448l3-6a.5.5 0 0 1 .67-.223z"/>
         </svg>
     </div>
-        <div id="myCalc" class="sidenavCalc base" style="z-index: 5; height: 100%; width: 40%; left: -40%; border-top-right-radius: 25px; border-bottom-right-radius: 25px;">
+        <div id="myCalc" class="sidenavCalc base" style="z-index: 9995; height: 100%; width: 40%; left: -40%; border-top-right-radius: 25px; border-bottom-right-radius: 25px;">
             <div class="shadow" style="height:94%; top: 3%; width:90%; margin-left: 5%; border-radius: 15px; position: absolute;">
                 <!-- div de resposta -->
                 <div style="background-color:#605869; height:30%; width:100%; position: absolute; border-top-left-radius: 15px; border-top-right-radius: 15px;">
@@ -13,7 +13,6 @@
                         <input type="text" id="answer" name="ans" value="" onkeydown="return TriggeredKey(this);" onkeyup="{
                                 if(window.event.keyCode == 13){
                                     document.calculator.preAns.value = document.calculator.ans.value;
-                                    break;
                                 }
                             }" autocomplete="off">
                         <input type="text" id="preAns" name="preAns" value="" autocomplete="off" disabled> <!-- caixa de texto da pergunta caso precise: disabled-->
@@ -46,7 +45,7 @@
                         }">
                     </div>
                 <!-- div de operaçoes -->
-                <div style="background-color:#605869; top:30%; left: 70%; height:68%; width:3px; position: absolute; z-index: 6;"></div> <!-- this is the border separating the two divs -->
+                <div style="background-color:#605869; top:30%; left: 70%; height:68%; width:3px; position: absolute; z-index: 9996;"></div> <!-- this is the border separating the two divs -->
                 <div class="grid-container" style="background-color:#1f1926; color: #B6B7CF; top:30%; left: 70%; height:70%; width:25%; position: absolute;">
                     <p class="grid-item-operandos noCopy" style="position: relative; cursor: pointer; font-size: 3rem;" onmousedown="document.calculator.ans.value = document.calculator.ans.value.substring(0, document.calculator.ans.value.length - 1); i = 0; f = 0;">
                     C</p>
@@ -82,9 +81,9 @@
                     }">+</p>
                 </div>
                 <!-- div de operaçoes extras -->
-                <div style="background-color:#322c40; top: 95%; left: 95%; height: 5%; width: 5%; position: absolute; z-index: 9;"></div>
-                <div id="corner" style="background-color:#B6B7CF; top: 95%; left: 95%; height: 5%; width: 5%; position: absolute; z-index: 9; border-bottom-right-radius: 15px; cursor: pointer;" onmousedown="if(openExt == 0){openExtra();}"></div>
-                <div id="myExtra" style="background-color:#B6B7CF; top:30%; left: 95%; height:70%; width:55%; position: absolute; transition: 0.5s; z-index: 7;">
+                <div style="background-color:#322c40; top: 95%; left: 95%; height: 5%; width: 5%; position: absolute; z-index: 9999;"></div>
+                <div id="corner" style="background-color:#B6B7CF; top: 95%; left: 95%; height: 5%; width: 5%; position: absolute; z-index: 9999; border-bottom-right-radius: 15px; cursor: pointer;" onmousedown="if(openExt == 0){openExtra();}"></div>
+                <div id="myExtra" style="background-color:#B6B7CF; top:30%; left: 95%; height:70%; width:55%; position: absolute; transition: 0.5s; z-index: 9997;">
                     <div class="grid-container" style="grid-template-columns: 10% auto; padding: 0%;">
                         <div style="height: 115%; width: 100%; margin-bottom: 0%; cursor: pointer;" onmousedown="openExtra()">
                             <svg id="rotate" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#1f1926" class="bi bi-chevron-compact-left" viewBox="0 0 16 16" style="height: 2rem; width:2rem; margin-top:30vh;">
@@ -123,7 +122,7 @@
                     </div>
                 </div>
             </div>
-            <div style="background-color:#322c40; top:30%; left: 95%; height:70%; width:65%; position: absolute; z-index: 99;"></div>
+            <div style="background-color:#322c40; top:30%; left: 95%; height:70%; width:65%; position: absolute; z-index: 99999;"></div>
         </div>
     <!-- desenho -->
     <div class="rounded-pill base pill" id="btnMyDraw" style="top: calc(45vh + 5rem); background-color: #B6B7CF;" onmousedown='openDraw()'>
@@ -131,7 +130,7 @@
             <path fill-rule="evenodd" d="M9.224 1.553a.5.5 0 0 1 .223.67L6.56 8l2.888 5.776a.5.5 0 1 1-.894.448l-3-6a.5.5 0 0 1 0-.448l3-6a.5.5 0 0 1 .67-.223z"/>
         </svg>
     </div>
-        <div id="myDraw" class="sidenavDraw base" style="z-index: 5; height: 100vh; width: 70%; left: -70%; border-top-right-radius: 25px; border-bottom-right-radius: 25px;">
+        <div id="myDraw" class="sidenavDraw base" style="z-index: 9995; height: 100vh; max-height: 100vh; width: 70%; left: -70%; border-top-right-radius: 25px; border-bottom-right-radius: 25px;">
             <!-- menu para configuraçoes da caneta -->
             <!-- div de canetas de desenho -->
             <div class="shadow" style="background-color:#f2f2f2; height:90vh; width:20vw; left: -8%; top: 5vh; border: 5px; border-radius: 15px; position: absolute; overflow: hidden;">
@@ -239,6 +238,7 @@
                 <canvas id="myCanvas" class="shadow">
                     Sorry, your browser doesn't support canvas technology.
                 </canvas>
+                <div id="mouseFollower"></div>
             </div>
         </div>
 <!-- Acaba menu lateral -->

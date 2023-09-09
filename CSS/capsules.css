@@ -1,0 +1,107 @@
+.BtnCreateDiv{
+    position: absolute;
+    top: 30%;
+    left: 30%;
+}
+
+.ActualDiv {
+    width: 300px;
+    height: 300px;
+    /* background-color: red; */
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    font-family: Arial, sans-serif;
+  }
+  .tstDiv {
+    width: 300px;
+    height: 300px;
+    justify-content: center;
+    padding: 60px;
+    background-color: aliceblue;
+  }
+  .tstDiv form {
+    margin-bottom: 10px;
+  }
+  .tstDiv input[type="text"] {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 5px;
+  }
+  /* .tstDiv button:hover {
+    background-color: #ddd;
+  } */
+  .tstDiv .icon {
+    font-size: 30px;
+    margin-bottom: 10px;
+  }
+  
+  .DraggableDiv {
+      width: 300px;
+      height: 30px;
+      background-color: blue;
+      position: absolute;
+      justify-content: left;
+      padding-left: 15px;
+      vertical-align: middle;
+      color: white;
+      font-family: Arial, sans-serif;
+      
+  }
+  .minimize{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    right: 30px;
+    top: 0px;
+    background-color: green;
+    opacity: 1;
+  } 
+  .close{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    right: 0px;
+    top: 0px;
+    background-color: red;
+    opacity: 1;
+  }
+  
+  .resize-handle {
+    bottom: 0px;
+    background-color: #337ab7;
+    position: absolute;
+  }
+  .s {
+    width: 300px;
+    height: 5px;
+    cursor: s-resize;
+    left: 0px;
+  }
+  .e {
+    width: 5px;
+    height: 300px;
+    cursor: e-resize;
+    right: 0px;
+  }
+  .w {
+    width: 5px;
+    height: 300px;
+    cursor: w-resize;
+    left: 0px;
+  }
+  .se {
+    width: 5px;
+    height: 5px;
+    cursor: se-resize;
+    right: 0px;
+  }
+  .sw {
+    width: 5px;
+    height: 5px;
+    cursor: sw-resize;
+    left: 0px;
+  }
