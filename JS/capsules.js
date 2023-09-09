@@ -21,8 +21,11 @@ function createDiv(nomeForm, actualName, inputForm) { // Bhaskhara, bhaskara, 3
         var nome = $('<p>').text(nomeForm);
         var form = $('<form>');
         
+        var inputElements = [];
+
         for (let index = 0; index < inputForm; index++) {
-            var input = $('<input>').attr('type', 'text').attr('placeholder', 'Enter text').attr('id', "input"+index);
+            var input = $('<input>').attr('type', 'text').attr('placeholder', 'Enter text').attr('id', "input"+divCount+index);
+            inputElements.push(input); // Armazena a referência do elemento no array
             form.append(input);
         }
         var icon = $('<div>').addClass('icon').html('&#128515;'); // Unicode emoji for smiling face        
@@ -32,7 +35,7 @@ function createDiv(nomeForm, actualName, inputForm) { // Bhaskhara, bhaskara, 3
             
             var avaliacao = actualName+"(";
             for (let index = 0; index < inputForm; index++) {
-                avaliacao += $("#input"+index).val();
+                avaliacao += inputElements[index].val();
                 if (index < inputForm-1) {
                     avaliacao += ", ";
                 }
@@ -139,6 +142,20 @@ function createDiv(nomeForm, actualName, inputForm) { // Bhaskhara, bhaskara, 3
         }else{
             ActualDiv.children().show();
             mini = 0;
+            // Aumente o z-index da div ao clicar nela
+            var highestZIndex = 10;
+
+            // Encontre o maior z-index entre todas as divs visíveis
+            $('.ActualDiv').each(function() {
+                var zIndex = parseInt($(this).css('z-index'));
+                if (!isNaN(zIndex) && zIndex > highestZIndex) {
+                    highestZIndex = zIndex;
+                }
+            });
+
+            // Defina o z-index da div atual como o maior z-index + 1
+            DraggableDiv.css('z-index', highestZIndex + 1);
+            ActualDiv.css('z-index', highestZIndex + 1);
         }
     });
 
