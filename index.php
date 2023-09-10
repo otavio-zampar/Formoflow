@@ -40,6 +40,18 @@
 
 
     <div id="container">
+        
+    <!-- <a href="https://www.freepik.com/free-photo/old-black-background-grunge-texture-dark-wallpaper-blackboard-chalkboard-room-wall_11712558.htm#query=black%20chalkboard%20background&position=0&from_view=keyword&track=ais">Image by benzoix</a> on Freepik -->
+        <!-- Linhas horizontais -->
+        <script>
+            var tst = 2000;
+            for (let i = 0; i <= tst; i++) {
+                $('#container').append($('<div>').addClass('linha-horizontal opaque').css('top', i*tst/200 +"px"));
+            }
+            for (let i = 0; i <= tst; i++) {
+                $('#container').append($('<div>').addClass('linha-vertical opaque').css('left', i*tst/200 +"px"));
+            }
+        </script>
 
         <input type="text" id="searchBar" onkeyup="resultado(this.value)" placeholder="Pesquisar...">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16" id="lupa" onclick="createDiv('Bhaskara', 'bhaskara', 3)">

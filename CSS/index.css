@@ -2,8 +2,36 @@
     height: calc(100vh - 100px);
     width: 100vw; 
     position: fixed; 
+    background-color: #ffffff;
     top:100px; 
     left:0px;
+}
+.opaque{
+    opacity: 0.1;
+}
+
+.linha-horizontal {
+    border: 1px solid #80b9e0;
+    width: 100vw;
+    position: absolute;
+}
+
+.linha-vertical {
+    border: 1px solid #80b9e0;
+    height: 100vh;
+    position: absolute;
+}
+
+.linha-horizontal:nth-child(4n) {
+    border-width: 1px;
+    z-index: 1;
+    border-color: black;
+}
+
+.linha-vertical:nth-child(4n) {
+    border-width: 1px;
+    z-index: 1;
+    border-color: black;
 }
 
 #searchBar{
@@ -15,6 +43,7 @@
     padding-left: 2vw;
     border: 0px;
     border-radius: 1rem;
+    z-index: 2;
     font-size: 1.5rem;
     outline: #f0f0f0 solid 3px;
     box-shadow: 6px 5px 7px #0000001f;
@@ -33,6 +62,7 @@
 #lupa{
     height: 1.5rem;
     width: 1.5rem;
+    z-index: 2;
     position: absolute;
     left: calc(93vw - 1rem);
     top: 2.25rem;

@@ -76,6 +76,7 @@ window.onload = function(){
                 var mouseY = event.offsetY;
 
                 // Atualize a posição do círculo
+                mouseFollower.style.opacity = 1;
                 mouseFollower.style.left = mouseX - ctx.lineWidth/2 + "px"; // 10 é metade do tamanho do círculo
                 mouseFollower.style.top = mouseY - ctx.lineWidth/2 + "px";
             }

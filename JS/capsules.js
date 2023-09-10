@@ -6,7 +6,7 @@ function createDiv(nomeForm, actualName, inputForm) { // Bhaskhara, bhaskara, 3
     var ActualDiv = $('<div>').attr('id', randomId).addClass('ActualDiv');
     var DraggableDiv = $('<div>').attr('id', 'draggable' + randomId).addClass('DraggableDiv');
     var minimize = $('<div>').addClass('minimize');
-    var close = $('<div>').addClass('close');
+    var CloseR = $('<div>').addClass('CloseR');
     var tstDiv = $('<div>').addClass('tstDiv');
     var ActualResizeHandle = $('<div>').addClass('resize-handle s ui-resizable-s'); // S
     var ActualResizeHandle2 = $('<div>').addClass('resize-handle e ui-resizable-e') // E
@@ -62,7 +62,7 @@ function createDiv(nomeForm, actualName, inputForm) { // Bhaskhara, bhaskara, 3
     $('body').append(DraggableDiv);
     DraggableDiv.append(nome);
     DraggableDiv.append(minimize);
-    DraggableDiv.append(close);
+    DraggableDiv.append(CloseR);
     tstDiv.append(form);
     tstDiv.append(icon);
     ActualDiv.append(tstDiv);
@@ -128,7 +128,7 @@ function createDiv(nomeForm, actualName, inputForm) { // Bhaskhara, bhaskara, 3
         $(this).css('z-index', highestZIndex + 1);
         ActualDiv.css('z-index', highestZIndex + 1);
     });
-    close.on('mousedown', function(){
+    CloseR.on('mousedown', function(){
 
         $("#"+DraggableDiv.attr("id")).remove();
         $("#"+ActualDiv.attr("id")).remove();
@@ -139,7 +139,7 @@ function createDiv(nomeForm, actualName, inputForm) { // Bhaskhara, bhaskara, 3
         if(mini == 0){
             ActualDiv.children().hide();
             mini = 1;
-        }else{
+        }else{  
             ActualDiv.children().show();
             mini = 0;
             // Aumente o z-index da div ao clicar nela
