@@ -46,12 +46,22 @@
         <script>
             var tst = 2000;
             for (let i = 0; i <= tst; i++) {
-                $('#container').append($('<div>').addClass('linha-horizontal opaque').css('top', i*tst/200 +"px"));
+                $('#container').append($('<div>').addClass('linha-horizontal opaque').css('top', i*10 +"px"));
             }
             for (let i = 0; i <= tst; i++) {
-                $('#container').append($('<div>').addClass('linha-vertical opaque').css('left', i*tst/200 +"px"));
+                $('#container').append($('<div>').addClass('linha-vertical opaque').css('left', i*10 +"px"));
             }
         </script>
+
+        <!-- <script>
+            var tst = 100;
+            for (let i = 0; i <= tst; i++) {
+                for (let j = 0; j <= 200; j++) {
+                    $('#container').append($('<div>').addClass('dot').css('top', i*20 +"px").css('left', j*20 +"px"));
+            }
+            }
+        </script> -->
+
 
         <input type="text" id="searchBar" onkeyup="resultado(this.value)" placeholder="Pesquisar...">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16" id="lupa" onclick="createDiv('Bhaskara', 'bhaskara', 3)">

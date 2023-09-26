@@ -6,7 +6,17 @@ function createDiv(nomeForm, actualName, inputForm) { // Bhaskhara, bhaskara, 3
     var ActualDiv = $('<div>').attr('id', randomId).addClass('ActualDiv');
     var DraggableDiv = $('<div>').attr('id', 'draggable' + randomId).addClass('DraggableDiv');
     var minimize = $('<div>').addClass('minimize');
+    {
     var CloseR = $('<div>').addClass('CloseR');
+    CloseR.append(
+        $('<svg xmlns="http://www.w3.org/2000/svg"'+
+            'width="16" height="16" fill="black" '+
+            'class="bi bi-x" viewBox="0 0 16 16" '+
+            'style="height: 30px; width: 30px; cursor: pointer; color: black;">')
+        .append('<path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>')
+    );
+    
+    }
     var tstDiv = $('<div>').addClass('tstDiv');
     var ActualResizeHandle = $('<div>').addClass('resize-handle s ui-resizable-s'); // S
     var ActualResizeHandle2 = $('<div>').addClass('resize-handle e ui-resizable-e') // E

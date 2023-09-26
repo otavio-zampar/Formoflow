@@ -10,14 +10,25 @@
     opacity: 0.1;
 }
 
+.dot {
+    /* transform: rotate(1deg); */
+    height: 1px;
+    margin: 5px;
+    width: 1px;
+    background-color: black;
+    position: absolute;
+}
+
 .linha-horizontal {
     border: 1px solid #80b9e0;
+    /* transform: rotate(1deg); */
     width: 100vw;
     position: absolute;
 }
 
 .linha-vertical {
     border: 1px solid #80b9e0;
+    /* transform: rotate(1deg); */
     height: 100vh;
     position: absolute;
 }
@@ -32,6 +43,18 @@
     border-width: 1px;
     z-index: 1;
     border-color: black;
+}
+
+.linha-horizontal:nth-child(16n) {
+    border-width: 1px;
+    z-index: 1;
+    border-color: rgb(207, 0, 0);
+}
+
+.linha-vertical:nth-child(16n) {
+    border-width: 1px;
+    z-index: 1;
+    border-color: rgb(207, 0, 0);
 }
 
 #searchBar{

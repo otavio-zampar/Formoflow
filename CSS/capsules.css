@@ -4,21 +4,28 @@
     left: 30%;
 }
 
+@keyframes fade-In {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
 .ActualDiv {
-    width: 300px;
-    height: 300px;
-    /* background-color: red; */
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: black;
-    font-family: Arial, sans-serif;
+  animation: fade-In 0.05s;
+  -webkit-animation: fade-In 0.05s;
+  width: 320px;
+  height: 320px;
+  /* background-color: red; */
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  font-family: Arial, sans-serif;
   }
   .tstDiv {
-    width: 300px;
-    height: 300px;
+    width: 320px;
+    height: 320px;
     justify-content: center;
     padding: 60px;
     background-color: aliceblue;
@@ -40,16 +47,17 @@
   }
   
   .DraggableDiv {
-      width: 300px;
-      height: 30px;
-      background-color: blue;
-      position: absolute;
-      justify-content: left;
-      padding-left: 15px;
-      vertical-align: middle;
-      color: white;
-      font-family: Arial, sans-serif;
-      
+    animation: fade-In 0.05s;
+    -webkit-animation: fade-In 0.05s;
+    width: 320px;
+    height: 30px;
+    background-color: blue;
+    position: absolute;
+    justify-content: left;
+    padding-left: 15px;
+    vertical-align: middle;
+    color: white;
+    font-family: Arial, sans-serif;   
   }
   .minimize{
     position: absolute;
@@ -76,20 +84,20 @@
     position: absolute;
   }
   .s {
-    width: 300px;
+    width: 320px;
     height: 5px;
     cursor: s-resize;
     left: 0px;
   }
   .e {
     width: 5px;
-    height: 300px;
+    height: 320px;
     cursor: e-resize;
     right: 0px;
   }
   .w {
     width: 5px;
-    height: 300px;
+    height: 320px;
     cursor: w-resize;
     left: 0px;
   }
