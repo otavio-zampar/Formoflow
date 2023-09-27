@@ -1,4 +1,13 @@
 $(document).ready(function () {
+
+    $("#searchBar").focus(function () {
+        $("#lista").css("outline", "#2d2d2d solid 3px");
+    });
+
+    $("#searchBar").blur(function () {
+        $("#lista").css("outline", "#f0f0f0 solid 3px");
+    });
+
     const data = [
         { option: "bhaskara", message: "Bom dia" },
         { option: "pitágoras", message: "Boa noite" },
@@ -7,7 +16,7 @@ $(document).ready(function () {
     ];
     
 
-    $("#search-input").on("input", function () {
+    $("#searchBar").on("input", function () {
         const query = $(this).val().toLowerCase().trim();
         const resultsList = $("#lista");
         
@@ -15,6 +24,7 @@ $(document).ready(function () {
 
         if (query.length === 0) {
             $(".pesquisa").hide();
+            $("#searchBar").css("border-radius", "1rem");
             return;
         }
 
@@ -22,6 +32,7 @@ $(document).ready(function () {
 
         if (filteredResults.length > 0) {
             filteredResults.forEach((result, index) => {
+                $("#searchBar").css("border-radius", "1rem 1rem 0rem 0rem");
                 setTimeout(() => {
                     const listItem = $("<li>").text(result.option);
                     listItem.addClass("resposta");

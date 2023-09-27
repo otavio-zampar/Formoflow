@@ -7,19 +7,13 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
     <link rel="shortcut icon" href="#"> 
-    <script src="js\capsules.js"></script>
     <title>Calculadora</title>
 
+    <!-- ADICIONAR SCRIPTS E CSS EM SIDENAVHEAD.HTML, OBRIGADO -->
     <?php
         include("./main/sidenavHead.html");
     ?>
 
-    <link rel="stylesheet" type="text/css" href="css/index.css">
-    <link rel="stylesheet" type="text/css" href="css/capsules.css">
-    <script src="./js/math/bhaskara.js"></script>
-    <script src="./js/math/hipotenusa.js"></script>
-    <script src="./js/math/perimetro.js"></script>
-    <script src="./js/math/areas2d.js"></script>
 
 
     <!-- ajax pra achar resultado -->
@@ -34,8 +28,8 @@
     </script> -->
 
 </head>
-<body style="background-color: #f0f0f0; overflow: hidden;">
-    
+<body style="background-color: #f0f0f0;"> <!-- overflow: hidden; -->
+
     <?php
         include("./main/header.html");
         include("./main/sidenav.html");
@@ -66,16 +60,20 @@
         </script> -->
 
 
-        <input type="text" id="searchBar" onkeyup="resultado(this.value)" placeholder="Pesquisar...">
+        <input type="text" id="searchBar" placeholder="Pesquisar..."> <!-- onkeyup="resultado(this.value)" -->
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16" id="lupa" onclick="createDiv('Bhaskara', 'bhaskara', 3)">
             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
         </svg>
 
-        <div style="position: absolute; top: 300px; left: 300px; height: 100px; width: 100px;  background-color: black; z-index: 9999;" onclick="createDiv('Hipotenusa', 'hipotenusa', 2)"></div>
+        <div id="pesquisa" class="absolute">
+            <ul id="lista" class="absolute"></ul>
+        </div>
+
+        <!-- <div style="position: absolute; top: 300px; left: 300px; height: 100px; width: 100px;  background-color: black; z-index: 9999;" onclick="createDiv('Hipotenusa', 'hipotenusa', 2)"></div>
         <div style="position: absolute; top: 300px; left: 400px; height: 100px; width: 100px;  background-color: green; z-index: 9999;" onclick="createDiv('Cateto', 'cateto', 2)"></div>
         <div style="position: absolute; top: 300px; left: 500px; height: 100px; width: 100px;  background-color: red; z-index: 9999;" onclick="createDiv('Perímetro', 'perimetro', 2)"></div>
-        <div style="position: absolute; top: 300px; left: 600px; height: 100px; width: 100px;  background-color: blue; z-index: 9999;" onclick="createDiv('Área de retângulo', 'Aretangulo', 2)"></div>
-        <div id="pesquisa"></div>
+        <div style="position: absolute; top: 300px; left: 600px; height: 100px; width: 100px;  background-color: blue; z-index: 9999;" onclick="createDiv('Área de retângulo', 'Aretangulo', 2)"></div> -->
+        
     </div>
 
     <?php

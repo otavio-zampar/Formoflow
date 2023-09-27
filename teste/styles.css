@@ -4,7 +4,7 @@
 .margin{
     margin: 0px;
 }
-.search-container {
+.searchBar {
     text-align: center;
     top: 0px;
     left: 0px;
@@ -23,7 +23,7 @@
     border: 0px solid black;
 } */
 
-.results-container {
+.pesquisa {
     text-align: center;
     display: none;
     padding: 0px;
@@ -33,18 +33,21 @@
     border: 1px solid black;
 }
 
+.resposta:hover{
+    cursor: pointer;
+}
 
-.answer-container{
+.resposta{
     padding: 10px;
     border: 1px solid black;
     background-color: white;
 }
-.answer-container:nth-child(even){
+.resposta:nth-child(even){
     padding: 10px;
     background-color: #f2f2f2;
 }
 
-#results-list {
+#lista {
     list-style-type: none;
     margin: 0px;
     padding: 0;

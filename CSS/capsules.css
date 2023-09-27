@@ -1,3 +1,8 @@
+:root{
+  --divTop: 200px;
+  --divLeft: 200px;
+}
+
 .BtnCreateDiv{
     position: absolute;
     top: 30%;
@@ -14,6 +19,8 @@
   -webkit-animation: fade-In 0.05s;
   width: 320px;
   height: 320px;
+  top: var(--divTop);
+  left: var(--divLeft);
   /* background-color: red; */
   position: absolute;
   display: flex;
@@ -51,6 +58,8 @@
     -webkit-animation: fade-In 0.05s;
     width: 320px;
     height: 30px;
+    top: var(--divTop);
+    left: var(--divLeft);
     background-color: blue;
     position: absolute;
     justify-content: left;
