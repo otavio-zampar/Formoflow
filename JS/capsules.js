@@ -1,5 +1,10 @@
 var divCount = 0;
 
+function getColor(){
+    var color = Math.floor(Math.random()*16777215).toString(16);
+    return "#"+color;
+}
+
 function createDiv(nomeForm, actualName, inputForm) { // Bhaskhara, bhaskara, 3
     var randomId = 'div' + divCount++;
     var mini = 0;
@@ -18,6 +23,7 @@ function createDiv(nomeForm, actualName, inputForm) { // Bhaskhara, bhaskara, 3
     
     }
     var tstDiv = $('<div>').addClass('tstDiv');
+    tstDiv.css("background-color", getColor());
     var ActualResizeHandle = $('<div>').addClass('resize-handle s ui-resizable-s'); // S
     var ActualResizeHandle2 = $('<div>').addClass('resize-handle e ui-resizable-e') // E
     var ActualResizeHandle3 = $('<div>').addClass('resize-handle w ui-resizable-w'); //.css('z-index', '0px'); // W
@@ -45,7 +51,11 @@ function createDiv(nomeForm, actualName, inputForm) { // Bhaskhara, bhaskara, 3
             
             var avaliacao = actualName+"(";
             for (let index = 0; index < inputForm; index++) {
-                avaliacao += inputElements[index].val();
+                if (inputElements[index].val() == "") {
+                    avaliacao += "0";
+                }else{
+                    avaliacao += inputElements[index].val();
+                }
                 if (index < inputForm-1) {
                     avaliacao += ", ";
                 }
@@ -57,7 +67,7 @@ function createDiv(nomeForm, actualName, inputForm) { // Bhaskhara, bhaskara, 3
                 icon.text(eval(avaliacao));
             } catch(e){
                 if (e instanceof SyntaxError) {
-                    console.log("Erro de sintaxe (comum)");
+                    console.log("Erro de sintaxe (esperado)");
                     // Faça algo para lidar com o erro de sintaxe, se necessário
                   } else {
                     // Outros tipos de erros que não são de sintaxe
