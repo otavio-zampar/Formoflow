@@ -32,9 +32,14 @@ $(document).ready(function () {
         const filteredResults = data.filter(item => item.toLowerCase().includes(query));
 
         if (filteredResults.length > 0) {
-            filteredResults.forEach(result => {
-                const listItem = $("<li>").text(result);
-                resultsList.append(listItem);
+            filteredResults.forEach((result, index) => {
+                setTimeout(() => {
+                    const listItem = $("<li>").text(result);
+                    listItem.addClass("answer-container");
+                    // listItem.on("click", alert());
+                    resultsList.append(listItem);
+                    // resultsList
+                }, 1 * index); // Atraso de 100ms para cada item
             });
             $(".results-container").show();
         } else {
