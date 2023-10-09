@@ -7,6 +7,7 @@ window.onload = function(){
     document.getElementById("sizeText").value = 5;
     document.getElementById("sizeRange").value = 5;
     document.getElementById("ColPck").value = '#000000';
+    
 
     const vw = document.documentElement.clientWidth / 100;
     const vh = document.documentElement.clientHeight / 100;
@@ -95,10 +96,11 @@ window.onload = function(){
             });
 
     }
-     
+
     $('#ColPck').change(function () {
             curColor = document.getElementById("ColPck").value;
     });
+    
 };
 
 window.onresize = function(){
@@ -114,11 +116,8 @@ window.onresize = function(){
 function clearCanvas(){
     var ctx = myCanvas.getContext("2d");
     ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
-    for(let i = arrCanvas.length + 1; i > 0; i++){
-            arrCanvas[i].pop();
-    }
+    arrCanvas = [];
     arrCanvas.push(myCanvas.toDataURL());
-    console.log(arrCanvas.length);
 }
 
 function changeSize(value){

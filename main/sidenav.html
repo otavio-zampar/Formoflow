@@ -207,18 +207,17 @@
                 
                     <!-- color -->
                     <input id="ColPck" style="margin: 0px; grid-row-start: 2; grid-row-end: 4; height: 70px; width: 8vw;" type="color"/>
-                    
                 </div>
 
                 <div style="display: grid; grid-template-columns: auto auto; grid-column-start: 1; grid-column-end: 5; grid-row-start: 5; gap: 1vh; width: 13vw; right: 1vw; bottom: 3vh; position: absolute;">
                     <!-- arrCanvas -->
-                    <button style="margin: 0px;" onmousedown="und();">kinda Undo</button>
+                    <button style="margin: 0px;" onclick="und();">kinda Undo</button>
             
                     <!-- redo -->
-                    <button style="margin: 0px;" onmousedown="red();">kinda Redo</button>
+                    <button style="margin: 0px;" onclick="red();">kinda Redo</button>
                     
                     <!-- save -->
-                <button style="margin: 0px; grid-column-start: 1; grid-column-end: 3;" onmousedown="{
+                <button style="margin: 0px; grid-column-start: 1; grid-column-end: 3;" onclick="{
                     
                     // perguntar se quer fundo transparente
                     download_img();
