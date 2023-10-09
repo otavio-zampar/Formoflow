@@ -1,13 +1,5 @@
 $(document).ready(function () {
 
-    $("#searchBar").focus(function () {
-        $("#lista").css("outline", "#2d2d2d solid 3px");
-    });
-
-    $("#searchBar").blur(function () {
-        $("#lista").css("outline", "#f0f0f0 solid 3px");
-    });
-
     const data = [
         { option: "bhaskara", message: "Bom dia" },
         { option: "pitágoras", message: "Boa noite" },
@@ -48,5 +40,18 @@ $(document).ready(function () {
         } else {
             $(".pesquisa").hide();
         }
+    });
+
+    $("#searchBar").focus(function () {
+        if ($("#searchBar").val().toLowerCase().trim().length != 0) {
+            $("#lista").css("outline", "#d1d1d1 solid 3px");
+        }
+    });
+
+    $("#searchBar").blur(function () {
+        if ($("#searchBar").val().toLowerCase().trim().length == 0) {
+            $("#lista").css("outline", "#f0f0f0 solid 3px");
+        }
+        
     });
 });

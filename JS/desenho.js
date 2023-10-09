@@ -122,7 +122,6 @@ function clearCanvas(){
 }
 
 function changeSize(value){
-        //nao consegui fazer sem o 'for' por motivos que me falham a compreensao
         //ie value = Math.round(0.02 * (i + 20) * ....
         var arr = [];
         for (let i = 0; i < value; i++) {

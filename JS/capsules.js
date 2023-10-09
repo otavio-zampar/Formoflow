@@ -5,6 +5,8 @@ function getColor(){
     return "#"+color;
 }
 
+
+// para criar uma div sem o onclick é so colocar o inputForm como 0
 function createDiv(nomeForm, actualName, inputForm) { // Bhaskhara, bhaskara, 3
     var randomId = 'div' + divCount++;
     var mini = 0;
