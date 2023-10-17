@@ -242,47 +242,12 @@
         </div>
 <!-- Acaba menu lateral -->
 
-<!-- 
-    <pre class="noCopy">                
-                    parenteses nao funcionam, eles so nao funcionam.
+<div class="rounded-pill base pill" id="btnMyCalc" style="top: 50vh; left: calc(100vw - 3.5rem); background-color: #228bb4;">
 
-                    há problemas ao criar equaçoes com fatoraçao, como: '(2!)', onde ele somente retorna o numero;
-                    ha um problema similar em potenciaçao, onde '(2+2)^3' retorna 10, '2 + 2^3', no lugar de 64;
+    <input type="hidden" name="MAX_FILE_SIZE" value="20971520" />
+    <input type="file" accept="image/*" onchange="uploadImg(this.files[0])">
+    <!-- <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffffff" class="bi bi-chevron-compact-left" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M9.224 1.553a.5.5 0 0 1 .223.67L6.56 8l2.888 5.776a.5.5 0 1 1-.894.448l-3-6a.5.5 0 0 1 0-.448l3-6a.5.5 0 0 1 .67-.223z"/>
+    </svg> -->
 
-                    é possivel calculos como '4^-1' que retorna 0.25 e '2 + 4^-1' que retorna 2.25;
-
-                    muitos dos casos tem o mesmo problema: repetiçao de caracter nao retorna mais de uma vez, entao 3! + 3! nao funciona, pq 
-                    o primeiro 3! é resolvido mas o segarrCanvas nao devido a uma dependencia a str.indexOf() no codigo.
-
-                    dos que funcionam: 'sin', 'cos', 'tan' e 'log' nao precisam de ')' no final da operação, neat;
-                    'e' é a constante de euler;
-
-                    vc pode escrever diretamente na caixa de texto agora, add coisas dps ainda só vai add na ultima posiçao..
-                    mas excluir e add valores direto do teclado funcionam ( '*', '/', '+', '-', '2.2', até 'Math.PI',
-                    Se vc sabe algum cálculo do obj Math vc consegue resolver dentro da caixa);
-
-                    IMPORTANTE: quando ha Sin, Cos ou Tan o codigo automaticamente arredonda alguns valores (como Sin(30) por exemplo)
-                    isto porque o objeto Math utilizado nao retorna o valor exato e sim uma aproximaçao (margem de erro de 10^-16),
-                    a partir dai o codigo arredonda valores exatos (mais especificamente numeros proximos de 1, 0 e 0.5 dentro da margem)
-
-                    raizes de numeros negativos aparecem como NaN ("Not a Number");
-
-                    por ultimo: o CE na area de resposta limpa toda a equação;
-
-                    Exemplos de cálculos que funcionam na calculadora:
-    </pre>
-    <pre>
-                    √2
-                    7√2
-                    3π
-                    E
-                    4+√2
-                    1+√1+1
-                    Log(10)π
-                    
-
-                    entre outros...
-
-    </pre>
-
--->
+</div>

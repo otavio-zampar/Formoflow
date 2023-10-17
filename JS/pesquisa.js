@@ -1,12 +1,8 @@
-$(document).ready(function () {
+function removeAccents(str) {
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/([^\w]+|\s+)/g, "");
+}
 
-    const data = [
-        { option: "bhaskara", message: "Bom dia" },
-        { option: "pitágoras", message: "Boa noite" },
-        { option: "área do círculo", message: "Olá, como vai?" },
-        // Adicione outras opções com mensagens personalizadas aqui
-    ];
-    
+$(document).ready(function () {  
 
     $("#searchBar").on("input", function () {
         const query = $(this).val().toLowerCase().trim();
@@ -20,16 +16,24 @@ $(document).ready(function () {
             return;
         }
 
-        const filteredResults = data.filter(item => item.option.toLowerCase().includes(query));
+        const normalizedQuery = removeAccents(query.toLowerCase());
+        const filteredResults = data.filter(item => {
+          const normalizedOption = removeAccents(item.option.toLowerCase());
+          return normalizedOption.includes(normalizedQuery);
+        });
+        const startsWithQuery = filteredResults.filter(item => item.option.toLowerCase().startsWith(query));
+        const doesNotStartWithQuery = filteredResults.filter(item => !item.option.toLowerCase().startsWith(query));
+        const prioritizedResults = startsWithQuery.concat(doesNotStartWithQuery);
 
-        if (filteredResults.length > 0) {
-            filteredResults.forEach((result, index) => {
+
+        if (prioritizedResults.length > 0) {
+            prioritizedResults.slice(0, 6).forEach((result, index) => {
                 $("#searchBar").css("border-radius", "1rem 1rem 0rem 0rem");
                 setTimeout(() => {
                     const listItem = $("<li>").text(result.option);
                     listItem.addClass("resposta");
                     listItem.click(() => {
-                        alert(result.message);
+                        createDiv(result.option, result.form, result.qnt);
                     });
                     // listItem.on("click", alert());
                     resultsList.append(listItem);
