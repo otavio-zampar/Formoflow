@@ -2,7 +2,7 @@
     height: calc(100vh - 100px);
     width: 100vw; 
     position: fixed; 
-    background-color: #ffffff;
+    background-color: var(--White);
     top:100px; 
     left:0px;
 }
@@ -20,14 +20,14 @@
 }
 
 .linha-horizontal {
-    border: 1px solid #80b9e0;
+    border: 1px solid var(--AzulClaroBkg);
     /* transform: rotate(1deg); */
     width: 100vw;
     position: absolute;
 }
 
 .linha-vertical {
-    border: 1px solid #80b9e0;
+    border: 1px solid var(--AzulClaroBkg);
     /* transform: rotate(1deg); */
     height: 100vh;
     position: absolute;

@@ -3,6 +3,8 @@
   --divLeft: 200px;
 }
 
+@value --AccentColor from "./root.css";
+
 .BtnCreateDiv{
     position: absolute;
     top: 30%;
@@ -46,7 +48,7 @@
     margin-bottom: 5px;
   }
   /* .tstDiv button:hover {
-    background-color: #ddd;
+    background-color: var(--LightGray);
   } */
   .tstDiv .icon {
     font-size: 30px;
@@ -60,7 +62,7 @@
     height: 30px;
     top: var(--divTop);
     left: var(--divLeft);
-    background-color: blue;
+    background-color: var(--BaseColor);
     position: absolute;
     justify-content: left;
     padding-left: 15px;
@@ -89,7 +91,8 @@
   
   .resize-handle {
     bottom: 0px;
-    background-color: #337ab7;
+    /* background-color: var(--AccentColor); */
+    background-color: var(--BaseColor);
     position: absolute;
   }
   .s {

@@ -13,7 +13,7 @@
     ?>
 
 </head>
-<body style="background-color: #f0f0f0; overflow-y: hidden;"> <!-- overflow: hidden; -->
+<body style="background-color: var(--AlmostWhite); overflow-y: hidden;"> <!-- overflow: hidden; -->
 
     <?php
         include("./main/header.html");

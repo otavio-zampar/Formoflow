@@ -5,7 +5,7 @@ html{
     position: fixed;
     height: 100px;
     width: 100vw;
-    background-color: #6c6e8c;
+    background-color: var(--AccentColor);
     z-index: 3;
 }
 .noCopy{
@@ -13,7 +13,7 @@ html{
 }
 #list{
     z-index:inherit;
-    background-color: black;
+    background-color: var(--SecondAccentColor);
     color: white;
     border-width: 0px;
     transition: color 0.05s;
@@ -50,7 +50,7 @@ div.sticky{
     right: 5%;
     z-index: 2;
     font-size: 16px;
-    background-color: #1f1926;
+    background-color: var(--RealDarkBlue);
     color: none;
     cursor: pointer;
     opacity: 0;
@@ -61,14 +61,14 @@ div.sticky{
 }
 
 #myBtn:hover {
-    background-color: #1f19269f;
+    background-color: var(--TransparentDarkBlue);
     -webkit-transition: background-color 0.2s;
     transition: background-color 0.2s;
 }
 
 .btnSubmit{
-    background-color: #1f1926;
-    border-color: #1f1926;
+    background-color: var(--RealDarkBlue);
+    border-color: var(--RealDarkBlue);
     color: white;
     cursor: pointer;
     border-radius: 4px;
@@ -93,14 +93,14 @@ div.sticky{
     top: 100vh;
     height: 40vh;
     padding: 20px;
-    background-color: #6c6e8c;
+    background-color: var(--AccentColor);
     border-radius: 20px;
     transition: 0.3s;
     z-index: 999;
 }
 #answer{
-    color:#f2f2f2;
-    background-color: #605869;
+    color:var(--WhiteGray);
+    background-color: var(--SecondAccentColor);
     border-width: 0px;
     height: 100%;
     width: 95%;
@@ -109,8 +109,8 @@ div.sticky{
     font-size: xxx-large;
 }
 #preAns{
-    color:#e2e2e2;
-    background-color: #605869;
+    color:var(--OtherWhiteGray);
+    background-color: var(--SecondAccentColor);
     border-width: 0px;
     height: 30%;
     width: 92%;
@@ -124,29 +124,29 @@ div.sticky{
     align-content: center;
 }
 .grid-item-number {
-    background-color: #1f1926;
+    background-color: var(--RealDarkBlue);
     border: 0px;
     padding-left: 10%;
     padding-right: 10%;
     font-size: 4rem;
     text-align: center;
-    color: #f2f2f2; 
+    color: var(--WhiteGray); 
 }
 .grid-item-operandos{
-    background-color: #1f192600;
+    background-color: var(--ExtremelyTransparentDarkBlue);
     border: 0px;
     padding: 5%;
-    color: #B6B7CF;
+    color: var(--AccentColor);
     margin-bottom: 0%;
     font-size: 4rem;
     line-height: 4.5rem;
     text-align: center;
 }
 .grid-item-extra{
-    background-color: #B6B7CF;
+    background-color: var(--AccentColor);
     border: 0px;
     padding-bottom: 15%;
-    color: #1f1926; 
+    color: var(--RealDarkBlue); 
     margin: 5%;
     margin-left: 15%;
     font-size: 2rem;

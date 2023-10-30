@@ -198,7 +198,13 @@ function uploadImg(selectedFile){
         var CloseR = $('<div>').addClass('CloseR');
         }
         var tstDiv = $('<div>').addClass('tstDiv');
+        tstDiv.css("padding", "0px");
+        tstDiv.css("padding-top", "30px");
         tstDiv.css("background-color", getColor());
+        tstDiv.css("width", img);
+        tstDiv.css("height", );
+
+
         var ActualResizeHandle = $('<div>').addClass('resize-handle s ui-resizable-s'); // S
         var ActualResizeHandle2 = $('<div>').addClass('resize-handle e ui-resizable-e') // E
         var ActualResizeHandle3 = $('<div>').addClass('resize-handle w ui-resizable-w'); //.css('z-index', '0px'); // W
@@ -239,8 +245,8 @@ function uploadImg(selectedFile){
                 se: ".se",
                 sw: ".sw",
             },
-            minHeight: 300,
-            minWidth: 300,
+            minHeight: 50,
+            minWidth: 50,
             resize: function(event, ui) {
                 var actualWidth = ui.size.width;
                 var actualHeight = ui.size.height;
@@ -321,7 +327,7 @@ function uploadImg(selectedFile){
         reader.readAsDataURL(selectedFile);
 
         // var ar = imgElement.naturalWidth / imgElement.naturalHeight;
-        alert(imgElement.naturalHeight);
+        alert(imgElement.height);
 
     } else {
         alert('Nenhum arquivo selecionado.');

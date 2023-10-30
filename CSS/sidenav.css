@@ -1,9 +1,11 @@
+@import "./root.css";
+
 .sidenavCalc {
     height: 100%;
     width: 0%;
     top: 0;
     margin: 0;
-    background-color: #322c40;
+    background-color: var(--BaseColor);
     padding-top: 60px;
 }
 .sidenavDraw {
@@ -11,7 +13,7 @@
     width: 0%;
     top: 0;
     margin: 0;
-    background-color: #B6B7CF;
+    background-color: var(--AccentColor);
     padding-top: 60px;
 }
 .base{
@@ -52,11 +54,11 @@
 #myCanvas{
     /* height: 90vh;
     width: 55vw; */
-    background-color:#fff;
+    background-color:var(--White);
     margin-left: 0px;
     border-radius: 15px;
     position: absolute;
-    /* border: 3px dotted #000; */
+    /* border: 3px dotted var(--Black); */
 }
 #myCanvas:hover{
     /* cursor: crosshair; */
@@ -80,6 +82,28 @@
     margin-left: 3.5rem;
     transition: 0.3s; 
     transform: rotate(180deg);
+}
+
+.BTNFile:hover {
+    cursor: pointer;
+}
+
+.BTNFile {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0%;
+}
+
+#btnFile{
+    height:2.5rem;
+    width: auto;
+    margin-top: 1.25rem;
+    margin-left: 0.75rem;
+}
+
+input[type="file"] {
+    display: none;
 }
 
 /* #btnDraw:hover{

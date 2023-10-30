@@ -1,14 +1,14 @@
 <!-- Inicio do menu lateral -->
     <!-- calculadora (praticamente pronta) -->
-    <div class="rounded-pill base pill" id="btnMyCalc" style="top: 45vh; background-color: #322c40;" onmousedown='openCalc()'>
-        <svg xmlns="http://www.w3.org/2000/svg" id="btnCalc" width="16" height="16" fill="#B6B7CF" class="bi bi-chevron-compact-left" viewBox="0 0 16 16">
+    <div class="rounded-pill base pill" id="btnMyCalc" style="top: 45vh; background-color: var(--BaseColor);" onmousedown='openCalc()'>
+        <svg xmlns="http://www.w3.org/2000/svg" id="btnCalc" width="16" height="16" fill="var(--AccentColor)" class="bi bi-chevron-compact-left" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M9.224 1.553a.5.5 0 0 1 .223.67L6.56 8l2.888 5.776a.5.5 0 1 1-.894.448l-3-6a.5.5 0 0 1 0-.448l3-6a.5.5 0 0 1 .67-.223z"/>
         </svg>
     </div>
         <div id="myCalc" class="sidenavCalc base" style="z-index: 9995; height: 100%; width: 40%; left: -40%; border-top-right-radius: 25px; border-bottom-right-radius: 25px;">
             <div class="shadow" style="height:94%; top: 3%; width:90%; margin-left: 5%; border-radius: 15px; position: absolute;">
                 <!-- div de resposta -->
-                <div style="background-color:#605869; height:30%; width:100%; position: absolute; border-top-left-radius: 15px; border-top-right-radius: 15px;">
+                <div style="background-color:var(--SecondAccentColor); height:30%; width:100%; position: absolute; border-top-left-radius: 15px; border-top-right-radius: 15px;">
                     <form name="calculator">
                         <input type="text" id="answer" name="ans" value="" onkeydown="return TriggeredKey(this);" onkeyup="{
                                 if(window.event.keyCode == 13){
@@ -17,11 +17,11 @@
                             }" autocomplete="off">
                         <input type="text" id="preAns" name="preAns" value="" autocomplete="off" disabled> <!-- caixa de texto da pergunta caso precise: disabled-->
                     </form>
-                    <p class="noCopy" id="switch2" style="font-size: xx-large; color: #f2f2f2; padding-left: 3%; top: 0%; position:absolute">DEG</p>
-                    <p class="noCopy" style="font-size: xx-large; color: #f2f2f2; cursor: pointer; position:absolute; top:0%; right:3%;" onmousedown="document.calculator.ans.value=''; document.calculator.preAns.value=''; i = 0; f = 0; ">CE</p>
+                    <p class="noCopy" id="switch2" style="font-size: xx-large; color: var(--WhiteGray); padding-left: 3%; top: 0%; position:absolute">DEG</p>
+                    <p class="noCopy" style="font-size: xx-large; color: var(--WhiteGray); cursor: pointer; position:absolute; top:0%; right:3%;" onmousedown="document.calculator.ans.value=''; document.calculator.preAns.value=''; i = 0; f = 0; ">CE</p>
                 </div>
                 <!-- div dos numeros -->
-                <div class="grid-container" style="grid-template-columns: auto auto auto; background-color:#1f1926; top:30%; height:70%; width:70%; position: absolute; border-bottom-left-radius: 15px;">
+                <div class="grid-container" style="grid-template-columns: auto auto auto; background-color:var(--RealDarkBlue); top:30%; height:70%; width:70%; position: absolute; border-bottom-left-radius: 15px;">
                         <input type="button" value="1" class="grid-item-number" onmousedown="document.calculator.ans.value+='1'; f = 0; ">
                         <input type="button" value="2" class="grid-item-number" onmousedown="document.calculator.ans.value+='2'; f = 0; ">
                         <input type="button" value="3" class="grid-item-number" onmousedown="document.calculator.ans.value+='3'; f = 0; ">
@@ -45,8 +45,8 @@
                         }">
                     </div>
                 <!-- div de operaçoes -->
-                <div style="background-color:#605869; top:30%; left: 70%; height:68%; width:3px; position: absolute; z-index: 9996;"></div> <!-- this is the border separating the two divs -->
-                <div class="grid-container" style="background-color:#1f1926; color: #B6B7CF; top:30%; left: 70%; height:70%; width:25%; position: absolute;">
+                <div style="background-color:var(--SecondAccentColor); top:30%; left: 70%; height:68%; width:3px; position: absolute; z-index: 9996;"></div> <!-- this is the border separating the two divs -->
+                <div class="grid-container" style="background-color:var(--RealDarkBlue); color: var(--AccentColor); top:30%; left: 70%; height:70%; width:25%; position: absolute;">
                     <p class="grid-item-operandos noCopy" style="position: relative; cursor: pointer; font-size: 3rem;" onmousedown="document.calculator.ans.value = document.calculator.ans.value.substring(0, document.calculator.ans.value.length - 1); i = 0; f = 0;">
                     C</p>
                     <p class="grid-item-operandos noCopy" style="position: relative; cursor: pointer;" onmousedown="{
@@ -81,12 +81,12 @@
                     }">+</p>
                 </div>
                 <!-- div de operaçoes extras -->
-                <div style="background-color:#322c40; top: 95%; left: 95%; height: 5%; width: 5%; position: absolute; z-index: 9999;"></div>
-                <div id="corner" style="background-color:#B6B7CF; top: 95%; left: 95%; height: 5%; width: 5%; position: absolute; z-index: 9999; border-bottom-right-radius: 15px; cursor: pointer;" onmousedown="if(openExt == 0){openExtra();}"></div>
-                <div id="myExtra" style="background-color:#B6B7CF; top:30%; left: 95%; height:70%; width:55%; position: absolute; transition: 0.5s; z-index: 9997;">
+                <div style="background-color:var(--BaseColor); top: 95%; left: 95%; height: 5%; width: 5%; position: absolute; z-index: 9999;"></div>
+                <div id="corner" style="background-color:var(--AccentColor); top: 95%; left: 95%; height: 5%; width: 5%; position: absolute; z-index: 9999; border-bottom-right-radius: 15px; cursor: pointer;" onmousedown="if(openExt == 0){openExtra();}"></div>
+                <div id="myExtra" style="background-color:var(--AccentColor); top:30%; left: 95%; height:70%; width:55%; position: absolute; transition: 0.5s; z-index: 9997;">
                     <div class="grid-container" style="grid-template-columns: 10% auto; padding: 0%;">
                         <div style="height: 115%; width: 100%; margin-bottom: 0%; cursor: pointer;" onmousedown="openExtra()">
-                            <svg id="rotate" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#1f1926" class="bi bi-chevron-compact-left" viewBox="0 0 16 16" style="height: 2rem; width:2rem; margin-top:30vh;">
+                            <svg id="rotate" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="var(--RealDarkBlue)" class="bi bi-chevron-compact-left" viewBox="0 0 16 16" style="height: 2rem; width:2rem; margin-top:30vh;">
                                 <path fill-rule="evenodd" d="M9.224 1.553a.5.5 0 0 1 .223.67L6.56 8l2.888 5.776a.5.5 0 1 1-.894.448l-3-6a.5.5 0 0 1 0-.448l3-6a.5.5 0 0 1 .67-.223z"/>
                             </svg>
                         </div>
@@ -122,18 +122,18 @@
                     </div>
                 </div>
             </div>
-            <div style="background-color:#322c40; top:30%; left: 95%; height:70%; width:65%; position: absolute; z-index: 99999;"></div>
+            <div style="background-color:var(--BaseColor); top:30%; left: 95%; height:70%; width:65%; position: absolute; z-index: 99999;"></div>
         </div>
     <!-- desenho -->
-    <div class="rounded-pill base pill" id="btnMyDraw" style="top: calc(45vh + 5rem); background-color: #B6B7CF;" onmousedown='openDraw()'>
-        <svg xmlns="http://www.w3.org/2000/svg" id="btnDraw" width="16" height="16" fill="#322c40" class="bi bi-chevron-compact-left" viewBox="0 0 16 16">
+    <div class="rounded-pill base pill" id="btnMyDraw" style="top: calc(45vh + 5rem); background-color: var(--AccentColor);" onmousedown='openDraw()'>
+        <svg xmlns="http://www.w3.org/2000/svg" id="btnDraw" width="16" height="16" fill="var(--BaseColor)" class="bi bi-chevron-compact-left" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M9.224 1.553a.5.5 0 0 1 .223.67L6.56 8l2.888 5.776a.5.5 0 1 1-.894.448l-3-6a.5.5 0 0 1 0-.448l3-6a.5.5 0 0 1 .67-.223z"/>
         </svg>
     </div>
         <div id="myDraw" class="sidenavDraw base" style="z-index: 9995; height: 100vh; max-height: 100vh; width: 70%; left: -70%; border-top-right-radius: 25px; border-bottom-right-radius: 25px;">
             <!-- menu para configuraçoes da caneta -->
             <!-- div de canetas de desenho -->
-            <div class="shadow" style="background-color:#f2f2f2; height:90vh; width:20vw; left: -8%; top: 5vh; border: 5px; border-radius: 15px; position: absolute; overflow: hidden;">
+            <div class="shadow" style="background-color:var(--WhiteGray); height:90vh; width:20vw; left: -8%; top: 5vh; border: 5px; border-radius: 15px; position: absolute; overflow: hidden;">
                 <!-- div eraser -->
                 <div>
                     <!-- empty -->
@@ -191,16 +191,16 @@
                 <div style="display: grid; grid-template-columns: auto auto auto; grid-template-rows: auto auto auto; gap: 5px; width: 13vw; height: 100px; right: 1vw; top:45vh; position: absolute;">
                     <!-- width -->
                     <input type="range" id="sizeRange" min="1" max="140" value="5" style="margin: 0px; height: 30px; grid-column-start: 1; grid-column-end: 5; width: 13vw;" oninput="changeSize(this.value); document.getElementById('sizeText').value = myCanvas.getContext('2d').lineWidth;">
-                    <input type="text" id="sizeText" autocomplete="false" style="width: 3vw; height: 70px; margin: 0px; background-color:#fff; grid-column-start: 1;grid-row-start: 2; grid-row-end: 4;" onkeydown="return TriggeredKey(this);" onkeyup="myCanvas.getContext('2d').lineWidth = this.value;">
+                    <input type="text" id="sizeText" autocomplete="false" style="width: 3vw; height: 70px; margin: 0px; background-color:var(--White); grid-column-start: 1;grid-row-start: 2; grid-row-end: 4;" onkeydown="return TriggeredKey(this);" onkeyup="myCanvas.getContext('2d').lineWidth = this.value;">
                     
                     <button onmousedown="increaseSize(true);" style="width: 2vw; height: 32.5px;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#000" class="bi bi-chevron-up" viewBox="0 0 16 16" style="height:auto; width: auto; transform: rotate(360deg);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="var(--Black)" class="bi bi-chevron-up" viewBox="0 0 16 16" style="height:auto; width: auto; transform: rotate(360deg);">
                             <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
                         </svg>
                     </button>
                     
                     <button style="grid-row-start: 3; grid-row-end: 4; width: 2vw; height: 32.5px;" onmousedown="increaseSize(false)">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#000" class="bi bi-chevron-up" viewBox="0 0 16 16" style="height: auto; width: auto; transform: rotate(180deg);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="var(--Black)" class="bi bi-chevron-up" viewBox="0 0 16 16" style="height: auto; width: auto; transform: rotate(180deg);">
                             <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
                         </svg>
                     </button>
@@ -228,7 +228,7 @@
             </div>
 
             <!-- confirm('Limpar a tela?'); -->
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#322c40" class="bi bi-x" viewBox="0 0 16 16" style="height: 2.5rem; width:2.5rem; top: 5vh; right: 1vw; cursor: pointer; float: right; position: absolute;" onmousedown="clearCanvas();"> 
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="var(--BaseColor)" class="bi bi-x" viewBox="0 0 16 16" style="height: 2.5rem; width:2.5rem; top: 5vh; right: 1vw; cursor: pointer; float: right; position: absolute;" onmousedown="clearCanvas();"> 
                 <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
             </svg>
 
@@ -242,11 +242,17 @@
         </div>
 <!-- Acaba menu lateral -->
 
-<div class="rounded-pill base pill" id="btnMyCalc" style="top: 50vh; left: calc(100vw - 3.5rem); background-color: #228bb4;">
+<div class="rounded-pill base pill" id="btnMyCalc" style="top: 50vh; left: calc(100vw - 3.5rem); background-color: var(--BaseColor);">
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="var(--AccentColor)" class="bi bi-file-earmark-plus" viewBox="0 0 16 16" id="btnFile">
+        <path d="M8 6.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 .5-.5z"/>
+        <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
+    </svg>
 
     <input type="hidden" name="MAX_FILE_SIZE" value="20971520" />
-    <input type="file" accept="image/*" onchange="uploadImg(this.files[0])">
-    <!-- <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffffff" class="bi bi-chevron-compact-left" viewBox="0 0 16 16">
+    <label for="file-upload" class="BTNFile"></label>
+    <input id="file-upload" type="file" accept="image/*" onchange="uploadImg(this.files[0])">
+    <!-- <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="var(--White)" class="bi bi-chevron-compact-left" viewBox="0 0 16 16">
         <path fill-rule="evenodd" d="M9.224 1.553a.5.5 0 0 1 .223.67L6.56 8l2.888 5.776a.5.5 0 1 1-.894.448l-3-6a.5.5 0 0 1 0-.448l3-6a.5.5 0 0 1 .67-.223z"/>
     </svg> -->
 
