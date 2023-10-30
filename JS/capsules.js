@@ -42,9 +42,39 @@ function createDiv(nomeForm, actualName, inputForm) { // Bhaskhara, bhaskara, 3
         var inputElements = [];
 
         for (let index = 0; index < inputForm; index++) {
+            // cria o input
             var input = $('<input>').attr('type', 'text').attr('placeholder', 'Enter text').attr('id', "input"+divCount+index);
             inputElements.push(input); // Armazena a referência do elemento no array
+            input.css("display", "inline-block");
+            input.css("height", "2.2rem");
+            
+
+            // cria as setas
+            var seta = $("<div>").addClass("arrow right").css("position", "absolute").attr('id', "seta"+divCount+index);
+            var linha = $('<div>').addClass("line").css("position", "absolute").attr('id', "linha"+divCount+index); // linha q completa a seta
+            linha.css("left", "calc(100% - 60px)");
+            seta.css("left", "calc(100% - 60px)");
+
+
+            // em ordem: posiçao do index + margin-bottom do index + metade tamanho do index + padding da div mae - metade do tamanho da seta - metade do padding do index
+            var valor = String(index)+"*2.2rem + "+String(index)+"*5px + 1.1rem + 60px - 2px - 2.5px";
+            seta.css("top", "calc("+valor+")"); // - 2.7px
+            linha.css("top", "calc("+valor+")");
+
+            seta.draggable({
+                drag: function(event, ui) {
+                    // Quando a primeira div for arrastada, obtenha sua posição e ajuste a segunda div
+                    ui.thisLeft = ui.position.left;
+                    $("#linha"+divCount+index).css("width", "calc("+ui.thisLeft+"px - 251px)");
+                }
+            });
+            linha.resizable();
+
+
+            // add ao form
             form.append(input);
+            form.append(seta);
+            form.append(linha);
         }
         var icon = $('<div>').addClass('icon').html('&#128515;'); // Unicode emoji for smiling face 
         icon.css("overflow", "hidden");       
@@ -107,6 +137,7 @@ function createDiv(nomeForm, actualName, inputForm) { // Bhaskhara, bhaskara, 3
         },
         minHeight: 300,
         minWidth: 300,
+
         resize: function(event, ui) {
             var actualWidth = ui.size.width;
             var actualHeight = ui.size.height;
@@ -119,6 +150,15 @@ function createDiv(nomeForm, actualName, inputForm) { // Bhaskhara, bhaskara, 3
             ActualResizeHandle3.css('height', actualHeight);
             tstDiv.css('width', actualWidth);
             tstDiv.css('height', actualHeight);
+
+            var widthDiff = actualWidth - ui.originalSize.width;
+
+            for(let index = 0; index < inputForm; index++){
+                var linha = $("#linha"+divCount+index);
+            var newWidth = parseFloat(linha.css("width")) - widthDiff;
+            linha.css("width", newWidth + "px");
+            }
+            
         }
     });
 

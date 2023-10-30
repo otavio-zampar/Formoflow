@@ -3,8 +3,6 @@
   --divLeft: 200px;
 }
 
-@value --AccentColor from "./root.css";
-
 .BtnCreateDiv{
     position: absolute;
     top: 30%;
@@ -125,3 +123,22 @@
     cursor: sw-resize;
     left: 0px;
   }
+
+  .arrow{
+    border: solid black;
+    height: 4px;
+    width: 4px;
+    border-width: 0 4px 4px 0;
+    padding: 3px;
+ }
+
+ .line{
+  width: 8px;
+  height: 4px;
+  background-color: var(--Black);
+ }
+
+ .right{
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+ }
