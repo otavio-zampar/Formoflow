@@ -14,6 +14,13 @@
   100% {opacity: 1;}
 }
 
+.line {
+  position: absolute;
+  z-index: 9984;
+  stroke-width: 20px;
+  stroke: var(--Black);
+}
+
 .ActualDiv {
   animation: fade-In 0.05s;
   -webkit-animation: fade-In 0.05s;
@@ -132,7 +139,7 @@
     padding: 3px;
  }
 
- .line{
+ .linha{
   width: 8px;
   height: 4px;
   background-color: var(--Black);

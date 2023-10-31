@@ -1,4 +1,8 @@
 var divCount = 0;
+var isDrawing = false; // Indica se você está atualmente desenhando uma seta
+var selectedArrow = null; // Armazena a seta selecionada
+var inputID = null; // Armazena o input de destino selecionado
+
 
 function getColor(){
     var color = Math.floor(Math.random()*16777215).toString(16);
@@ -13,6 +17,7 @@ function createDiv(nomeForm, actualName, inputForm) { // Bhaskhara, bhaskara, 3
     var ActualDiv = $('<div>').attr('id', randomId).addClass('ActualDiv');
     var DraggableDiv = $('<div>').attr('id', 'draggable' + randomId).addClass('DraggableDiv');
     var minimize = $('<div>').addClass('minimize');
+    var svg = $('#svgContainer');
     {
     var CloseR = $('<div>').addClass('CloseR');
     CloseR.append(
@@ -24,6 +29,8 @@ function createDiv(nomeForm, actualName, inputForm) { // Bhaskhara, bhaskara, 3
     );
     
     }
+
+
     var tstDiv = $('<div>').addClass('tstDiv');
     tstDiv.css("background-color", getColor());
     var ActualResizeHandle = $('<div>').addClass('resize-handle s ui-resizable-s'); // S
@@ -48,34 +55,72 @@ function createDiv(nomeForm, actualName, inputForm) { // Bhaskhara, bhaskara, 3
             input.css("display", "inline-block");
             input.css("height", "2.2rem");
             
+            var line = $('<line id="line'+divCount+index+'" class="line" x1="0" y1="0" x2="0" y2="0"/>');
 
             // cria as setas
             var seta = $("<div>").addClass("arrow right").css("position", "absolute").attr('id', "seta"+divCount+index);
-            var linha = $('<div>').addClass("line").css("position", "absolute").attr('id', "linha"+divCount+index); // linha q completa a seta
+            var linha = $('<div>').addClass("linha").css("position", "absolute").attr('id', "linha"+divCount+index); // linha q completa a seta
             linha.css("left", "calc(100% - 60px)");
+            linha.css("pointer-events", "none");
             seta.css("left", "calc(100% - 60px)");
 
 
             // em ordem: posiçao do index + margin-bottom do index + metade tamanho do index + padding da div mae - metade do tamanho da seta - metade do padding do index
-            var valor = String(index)+"*2.2rem + "+String(index)+"*5px + 1.1rem + 60px - 2px - 2.5px";
+            var raiz = Math.sqrt(2)*2;
+            var valor = String(index)+"*2.2rem + "+String(index)+"*5px + 1.1rem + 60px - "+ raiz +"px - 2.5px";
             seta.css("top", "calc("+valor+")"); // - 2.7px
-            linha.css("top", "calc("+valor+")");
+            linha.css("top", "calc("+valor+" + "+raiz+"px)");
 
             seta.draggable({
                 drag: function(event, ui) {
-                    // Quando a primeira div for arrastada, obtenha sua posição e ajuste a segunda div
-                    ui.thisLeft = ui.position.left;
-                    $("#linha"+divCount+index).css("width", "calc("+ui.thisLeft+"px - 251px)");
-                }
+                    isDrawing = true;
+                    selectedArrow = this; // Armazena a seta atualmente selecionada
+                    // A partir da seta, encontre o input associado com base no ID
+                    arrowId = $(selectedArrow).attr('id');
+                    inputId = $('#' + arrowId.replace('seta', 'input'));
+                    
+                    // apaga a linha inicial
+                    $('#' + arrowId.replace('seta', 'linha')).css("display", "none"); 
+
+                    var lineId = "line"+divCount+index;
+                    $("#"+lineId).attr("x1", inputId.offset().left);
+                    $("#"+lineId).attr("y1", inputId.offset().top);
+                    $("#"+lineId).attr("x2", $("#"+arrowId).offset().left);
+                    $("#"+lineId).attr("y2", $("#"+arrowId).offset().top);
+
+                    console.log("x1:", $("#"+lineId).attr("x1"));
+                    console.log("y1:", $("#"+lineId).attr("y1"));
+                    console.log("x2:", $("#"+lineId).attr("x2"));
+                    console.log("y2:", $("#"+lineId).attr("y2"));
+
+
+                },
+                stop: function() {
+
+                    isDrawing = false;
+                    selectedArrow = null;
+                    inputId = null;
+                },
             });
-            linha.resizable();
+            
+
+            // seta.draggable({
+            //     drag: function(event, ui) {
+            //         // Quando a primeira div for arrastada, obtenha sua posição e ajuste a segunda div
+            //         ui.thisLeft = ui.position.left;
+            //         $("#linha"+divCount+index).css("width", "calc("+ui.thisLeft+"px - 251px)");
+            //     }
+            // });
+            // linha.resizable();
 
 
             // add ao form
             form.append(input);
             form.append(seta);
             form.append(linha);
+            svg.append(line);
         }
+
         var icon = $('<div>').addClass('icon').html('&#128515;'); // Unicode emoji for smiling face 
         icon.css("overflow", "hidden");       
 
@@ -153,11 +198,11 @@ function createDiv(nomeForm, actualName, inputForm) { // Bhaskhara, bhaskara, 3
 
             var widthDiff = actualWidth - ui.originalSize.width;
 
-            for(let index = 0; index < inputForm; index++){
-                var linha = $("#linha"+divCount+index);
-            var newWidth = parseFloat(linha.css("width")) - widthDiff;
-            linha.css("width", newWidth + "px");
-            }
+            // for(let index = 0; index < inputForm; index++){
+            //     var linha = $("#linha"+divCount+index);
+            // var newWidth = parseFloat(linha.css("width")) - widthDiff;
+            // linha.css("width", newWidth + "px");
+            // }
             
         }
     });
@@ -192,7 +237,7 @@ function createDiv(nomeForm, actualName, inputForm) { // Bhaskhara, bhaskara, 3
         $(this).css('z-index', highestZIndex + 1);
         ActualDiv.css('z-index', highestZIndex + 1);
     });
-    CloseR.on('mousedown', function(){
+    CloseR.on('mousedown', function(){ 
 
         $("#"+DraggableDiv.attr("id")).remove();
         $("#"+ActualDiv.attr("id")).remove();

@@ -23,11 +23,12 @@
 
 
     <div id="container">
-        
         <!-- Linhas horizontais -->
         <script>
             criaBckgnd();
         </script>
+
+        <svg id="svgContainer" width="100vw" height="100vh" xmlns="http://www.w3.org/2000/svg"></svg>
 
         <input type="text" id="searchBar" placeholder="Pesquisar...">
         <!-- when clicking, the fisrt result should be selected -->
