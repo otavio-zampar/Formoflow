@@ -1,6 +1,6 @@
 function bhaskara(a, b, c){ // 1, 3, -4 = [1, -4]
     var delta = (b*b) - (4 * a * c);
-    console.log("delta = "+ delta);
+    // console.log("delta = "+ delta);
     if (delta < 0) {
         // return "delta deu negativo, x' e x'' não existem";
         return "NaN";
@@ -18,3 +18,5 @@ function bhaskara(a, b, c){ // 1, 3, -4 = [1, -4]
         //Vértice v = (Xv, Yv) = (-b/2a , -delta/4a )
     }
 }
+
+
