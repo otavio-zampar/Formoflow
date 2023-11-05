@@ -28,7 +28,7 @@ function searchQuery(query, resultsList){
                     const listItem = $("<li>").text(result.option);
                     listItem.addClass("resposta noCopy");
                     listItem.click(() => {
-                        createDiv(result.option, result.form, result.qnt);
+                        createDiv(result.option, result.form, result.qnt, result.exit);
                         $("#searchBar").val("");
                         $("#pesquisa").hide();
                         $("#searchBar").css("border-radius", "1rem");

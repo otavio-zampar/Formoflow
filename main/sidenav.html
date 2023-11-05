@@ -47,7 +47,7 @@
                 <!-- div de operaçoes -->
                 <div style="background-color:var(--SecondAccentColor); top:30%; left: 70%; height:68%; width:3px; position: absolute; z-index: 9996;"></div> <!-- this is the border separating the two divs -->
                 <div class="grid-container" style="background-color:var(--RealDarkBlue); color: var(--AccentColor); top:30%; left: 70%; height:70%; width:25%; position: absolute;">
-                    <p class="grid-item-operandos noCopy" style="position: relative; cursor: pointer; font-size: 3rem;" onmousedown="document.calculator.ans.value = document.calculator.ans.value.substring(0, document.calculator.ans.value.length - 1); i = 0; f = 0;">
+                    <p class="grid-item-operandos noCopy" style="position: relative; cursor: pointer;" onmousedown="document.calculator.ans.value = document.calculator.ans.value.substring(0, document.calculator.ans.value.length - 1); i = 0; f = 0;">
                     C</p>
                     <p class="grid-item-operandos noCopy" style="position: relative; cursor: pointer;" onmousedown="{
                         if(f == 0){
@@ -247,7 +247,7 @@
 <!-- Acaba menu lateral -->
 
 <!-- esse daqui é o botao de upload de imagens -->
-<div class="rounded-pill base pill" id="btnMyCalc" style="top: 50vh; left: calc(100vw - 3.5rem); background-color: var(--BaseColor);">
+<div class="rounded-pill base pill" id="btnMyCalc" style="top: 50vh; left: calc(100vw - 3.5rem); background-color: var(--BaseColor); z-index: 9983;">
 
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="var(--AccentColor)" class="bi bi-file-earmark-plus" viewBox="0 0 16 16" id="btnFile">
         <path d="M8 6.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 .5-.5z"/>

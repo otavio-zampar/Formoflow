@@ -1,5 +1,5 @@
 function mudaTema(dark) {
-    if(!dark){
+    if(dark){
         document.documentElement.style.setProperty('--AccentColor', '#343434');
         document.documentElement.style.setProperty('--SecondAccentColor', '#575757');
         document.documentElement.style.setProperty('--BaseColor', '#111111');

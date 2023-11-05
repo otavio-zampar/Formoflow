@@ -32,10 +32,12 @@
     <div id="container">
         <!-- Linhas horizontais -->
         <script>
-            criaBckgnd();
+            criaBckgnd(200);
         </script>
 
-        <svg id="svgContainer" width="100vw" height="100vh" xmlns="http://www.w3.org/2000/svg"></svg>
+        <!-- <svg id="svgContainer" width="100vw" height="100vh">
+            <line x1="0" y1="0" x2="200" y2="200" style="stroke:rgb(255,0,0);stroke-width:2" />
+        </svg> -->
 
         <input type="text" id="searchBar" placeholder="Pesquisar...">
         <!-- when clicking, the fisrt result should be selected -->
@@ -44,7 +46,7 @@
             const query = $('#searchBar').val().toLowerCase().trim();
             const filteredResults = data.filter(item => item.option.toLowerCase().includes(query));
             if (filteredResults.length > 0) {
-                createDiv(filteredResults[0].option, filteredResults[0].form, filteredResults[0].qnt);
+                createDiv(filteredResults[0].option, filteredResults[0].form, filteredResults[0].qnt, filteredResults[0].exit);
             }
         }">
             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>

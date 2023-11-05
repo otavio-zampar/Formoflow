@@ -78,22 +78,28 @@ div.sticky{
     padding: 5%;
     align-content: center;
 }
+.contato{
+    margin:0px; 
+    top:10px;
+}
 .grid-item-number {
     background-color: var(--RealDarkBlue);
     border: 0px;
     padding-left: 10%;
     padding-right: 10%;
-    font-size: 4rem;
+    font-size: 10vh;
     text-align: center;
     color: var(--LightGray); 
 }
 .grid-item-operandos{
+    position: relative;
+     cursor: pointer;
     border: 0px;
     padding: 5%;
     color: var(--AccentColor);
     margin-bottom: 0%;
-    font-size: 4rem;
-    line-height: 4.5rem;
+    font-size: 10vh;
+    line-height: 10vh;
     text-align: center;
 }
 .grid-item-extra{
