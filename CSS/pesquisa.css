@@ -12,15 +12,15 @@
     width: calc(100vw - 2px);
     left: 0px;
     top: 4rem;
-    border: 1px solid black;
+    border: 1px solid var(--Black);
     border-radius: 5px;
-    background-color: white;
+    background-color: var(--White);
     z-index: 3;
 }
 
 .resposta{
     padding: 10px;
-    background-color: white;
+    background-color: var(--White);
     z-index: 3;
     width: 90vw;
 }
@@ -29,7 +29,7 @@
 }
 .resposta:nth-child(even){
     padding: 10px;
-    background-color: var(--WhiteGray);
+    background-color: var(--LightGray);
 }
 
 #lista {
@@ -51,6 +51,7 @@
     top: 1.5rem;
     left: 5vw;
     padding-left: 2vw;
+    background-color: var(--White);
     border: 0px;
     border-radius: 1rem;
     z-index: 2;
@@ -61,7 +62,8 @@
 
 #searchBar:focus{
     transition: 100ms;
-    outline: var(--WhiteHover) solid 3px;
+    background-color: var(--WhiteFocus);
+    /* outline: var(--WhiteFocus) solid 3px; */
 }
 
 #searchBar:hover{

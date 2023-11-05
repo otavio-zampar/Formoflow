@@ -3,11 +3,15 @@
 <div class="shadow p-1 text-center topMenu">
     <h1 class="noCopy">FORMOFLOW</h1>
     <button id="list" onmousedown="{
-        if(document.getElementById('contato').style.top == '100vh'){
+        if(isSet == false){
             document.getElementById('contato').style.top = '70vh';
+            isSet = true;
             
         }else{
             document.getElementById('contato').style.top = '100vh';
+            isSet = false;
         }
     }">Contato</button>
+
+    <div id="tema" onclick="mudaTema(dark); dark = !dark;"></div>
 </div>

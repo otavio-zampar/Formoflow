@@ -15,7 +15,7 @@
     height: 1px;
     margin: 5px;
     width: 1px;
-    background-color: black;
+    background-color: var(--Black);;
     position: absolute;
 }
 
@@ -36,23 +36,23 @@
 .linha-horizontal:nth-child(4n) {
     border-width: 1px;
     z-index: 1;
-    border-color: black;
+    border-color: var(--Black);
 }
 
 .linha-vertical:nth-child(4n) {
     border-width: 1px;
     z-index: 1;
-    border-color: black;
+    border-color: var(--Black);;
 }
 
 .linha-horizontal:nth-child(16n) {
     border-width: 1px;
     z-index: 1;
-    border-color: rgb(207, 0, 0);
+    border-color: var(--Red);
 }
 
 .linha-vertical:nth-child(16n) {
     border-width: 1px;
     z-index: 1;
-    border-color: rgb(207, 0, 0);
+    border-color: var(--Red);
 }

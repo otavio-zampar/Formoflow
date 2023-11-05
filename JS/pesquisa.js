@@ -2,7 +2,7 @@ function removeAccents(str) {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/([^\w]+|\s+)/g, "");
 }
 
-function dostuff(query, resultsList){
+function searchQuery(query, resultsList){
     resultsList.empty();
 
         if (query.length === 0) {
@@ -50,7 +50,7 @@ $(document).ready(function () {
         const query = $(this).val().toLowerCase().trim();
         const resultsList = $("#lista");
         
-        dostuff(query, resultsList);
+        searchQuery(query, resultsList);
     });
 
     $("#searchBar").focus(function () {
@@ -61,9 +61,7 @@ $(document).ready(function () {
         const query = $(this).val().toLowerCase().trim();
         const resultsList = $("#lista");
         
-        dostuff(query, resultsList);
-        
-        
+        searchQuery(query, resultsList);
     });
 
     $("#searchBar").blur(function () {

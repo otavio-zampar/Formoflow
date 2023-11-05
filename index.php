@@ -12,6 +12,13 @@
         include("./main/sidenavHead.html");
     ?>
 
+    <script>
+        var isSet = false;
+        var dark = false;
+        mudaTema(dark);
+        dark = !dark; // falso = tema claro; verdadeiro = tema escuro;
+    </script>
+
 </head>
 <body style="background-color: var(--AlmostWhite); overflow-y: hidden;"> <!-- overflow: hidden; -->
 
@@ -33,7 +40,7 @@
         <input type="text" id="searchBar" placeholder="Pesquisar...">
         <!-- when clicking, the fisrt result should be selected -->
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16" id="lupa" onclick="{
-            
+
             const query = $('#searchBar').val().toLowerCase().trim();
             const filteredResults = data.filter(item => item.option.toLowerCase().includes(query));
             if (filteredResults.length > 0) {

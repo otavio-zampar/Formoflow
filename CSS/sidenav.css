@@ -68,7 +68,7 @@
 #mouseFollower {
     position: absolute;
     opacity: 0;
-    border: 1px solid black;
+    border: 1px solid var(--Black);
     height: 5px;
     width: 5px;
     border-radius: 50%;

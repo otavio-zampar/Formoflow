@@ -1,20 +1,23 @@
 :root{
-    --AccentColor: #B6B7CF;
-    --SecondAccentColor: #605869;
-    --BaseColor: #322c40;
-    --WhiteGray: #f2f2f2;
-    --OtherWhiteGray: #e2e2e2;
-    --LightGray: #dddddd;
-    --White: #ffffff;
-    --Black: #000000;
-    --AzulClaroBkg: #80b9e0; 
-    --RealDarkBlue: #1f1926;
-    --TransparentDarkBlue: #1f19269f;
-    --ExtremelyTransparentDarkBlue: #1f192600;
-    --LightGrayBlue: #6c6e8c;
-    --AlmostWhite: #f0f0f0;
-    --AlmostTransparent: #0000001f;
-    --WhiteHover: #d1d1d1;
-    --WhiteFocus: #fdfdfd;
-
+    --Black: #000000; /* background */
+    --RealDarkBlue: #1f1926; /* usado especialmente nos numeros da calculadora sidenav */
+    --AlmostTransparent: #0000001f; /* sombra da lista de pesquisa */
+    --BaseColor: #322c40; /*primeira principal cor do app */
+    --AzulClaroBkg: #80b9e0; /* background */
+    --Red: #cf0000; /* background */
+    --SecondAccentColor: #605869; /* terceira cor principal do app, contraste com ambas */
+    --AccentColor: #B6B7CF; /* segunda cor principal do app, contraste com a base */
+    --LightGray: #dddddd; /* usado na caluladora, lista da barra de pesquisa */
+    --AlmostWhite: #f0f0f0; /* plano de fundo atras do bkgd, borda da barra de pesquisa */
+    --WhiteFocus: #fdfdfd; /* focus na barra de pesquisa */
+    --White: #ffffff; /* background */
 }
+
+    /* 000000
+    111111
+    232323
+    343434
+    464646
+    575757
+    696969
+    7A7A7A */
