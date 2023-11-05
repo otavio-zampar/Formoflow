@@ -139,7 +139,7 @@ function changeSize(value){
         mouseFollower.style.height = ctx.lineWidth + "px";
         mouseFollower.style.width = ctx.lineWidth + "px";
 }
-function download_img(yrn){ // yrn = yourname?
+function download_img(yrn){ // yrn = fundo transparente ou n
         // ainda esta baixando com nomes estranhos, seria bom mudar
         var image = myCanvas.toDataURL("image/png");
         var link = document.createElement('a');
@@ -150,6 +150,23 @@ function download_img(yrn){ // yrn = yourname?
                 link.click();
         }
 }
+
+function send_img(yrn){ // yrn = fundo transparente ou n
+        // ainda esta baixando com nomes estranhos, seria bom mudar
+        // Criar um Blob a partir de uma string
+        var byteCharacters = atob(myCanvas.toDataURL("image/png").split(',')[1]);
+        var byteNumbers = new Array(byteCharacters.length);
+        for (var i = 0; i < byteCharacters.length; i++) {
+        byteNumbers[i] = byteCharacters.charCodeAt(i);
+        }
+        var byteArray = new Uint8Array(byteNumbers);
+        var blob = new Blob([byteArray], { type: 'image/png' });
+
+        // Atualize o atributo 'src' do elemento <img> com a imagem do Blob
+        uploadImg(URL.createObjectURL(blob));
+
+}
+
 function historySave(){
         arrCanvas.push(myCanvas.toDataURL());
         // for(let i = 0; i < arrCanvas.length; i++)

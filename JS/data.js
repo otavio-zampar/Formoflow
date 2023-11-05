@@ -17,5 +17,14 @@ const data = [
     { option: "Volume esfera", form: "Vesfera", qnt: 1 },
     { option: "Volume cone", form: "Vcone", qnt: 2 },
     { option: "Volume prisma", form: "Vprisma", qnt: 2 },
+    { option: "Soma", form: "soma", qnt: 2 },
+    { option: "Subtração", form: "subtracao", qnt: 2 },
+    { option: "Exponencial", form: "Math.pow", qnt: 2 },
+    { option: "Raiz", form: "raizQ", qnt: 2 },
+    { option: "Módulo", form: "modulo", qnt: 1 },
+    { option: "Seno", form: "Math.sin", qnt: 1 },
+    { option: "Coseno", form: "Math.cos", qnt: 1 },
+    { option: "Tangente", form: "Math.tan", qnt: 1 },
+    { option: "Aleatório", form: "aleatorio", qnt: 2},
     // Adicione outras opções com mensagens personalizadas aqui
 ];

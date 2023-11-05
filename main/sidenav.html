@@ -211,18 +211,22 @@
 
                 <div style="display: grid; grid-template-columns: auto auto; grid-column-start: 1; grid-column-end: 5; grid-row-start: 5; gap: 1vh; width: 13vw; right: 1vw; bottom: 3vh; position: absolute;">
                     <!-- arrCanvas -->
-                    <button style="margin: 0px;" onclick="und();">kinda Undo</button>
+                    <!-- <button style="margin: 0px;" onclick="und();">kinda Undo</button> -->
             
                     <!-- redo -->
-                    <button style="margin: 0px;" onclick="red();">kinda Redo</button>
+                    <!-- <button style="margin: 0px;" onclick="red();">kinda Redo</button> -->
                     
                     <!-- save -->
-                <button style="margin: 0px; grid-column-start: 1; grid-column-end: 3;" onclick="{
-                    
+                    <button style="margin: 0px; grid-column-start: 1; grid-column-end: 3;" onclick="{
                     // perguntar se quer fundo transparente
                     download_img();
-
                 }">Save</button>
+                <!-- mandar para a area de trabalho -->
+                <button style="margin: 0px; grid-column-start: 1; grid-column-end: 3;" onclick="{
+                    // perguntar se quer fundo transparente
+                    send_img();
+                }">Mandar para a àrea de Trabalho</button>
+
                 </div>
 
             </div>
@@ -242,6 +246,7 @@
         </div>
 <!-- Acaba menu lateral -->
 
+<!-- esse daqui é o botao de upload de imagens -->
 <div class="rounded-pill base pill" id="btnMyCalc" style="top: 50vh; left: calc(100vw - 3.5rem); background-color: var(--BaseColor);">
 
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="var(--AccentColor)" class="bi bi-file-earmark-plus" viewBox="0 0 16 16" id="btnFile">
@@ -251,7 +256,18 @@
 
     <input type="hidden" name="MAX_FILE_SIZE" value="20971520" />
     <label for="file-upload" class="BTNFile"></label>
-    <input id="file-upload" type="file" accept="image/*" onchange="uploadImg(this.files[0])">
+    <input id="file-upload" type="file" accept="image/*" onchange="{
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = new Image();
+            img.src = e.target.result;
+            img.onload = function() {
+                uploadImg(e.target.result, img.naturalHeight, img.naturalWidth);
+            };
+        };
+        reader.readAsDataURL(this.files[0]);
+
+        }">
     <!-- <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="var(--White)" class="bi bi-chevron-compact-left" viewBox="0 0 16 16">
         <path fill-rule="evenodd" d="M9.224 1.553a.5.5 0 0 1 .223.67L6.56 8l2.888 5.776a.5.5 0 1 1-.894.448l-3-6a.5.5 0 0 1 0-.448l3-6a.5.5 0 0 1 .67-.223z"/>
     </svg> -->

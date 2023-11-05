@@ -271,8 +271,10 @@ function createDiv(nomeForm, actualName, inputForm) { // Bhaskhara, bhaskara, 3
 
 }
 
-function uploadImg(selectedFile){
+function uploadImg(selectedFile, naturalHeight, naturalWidth){
     if (selectedFile) {
+
+        var ar = 0;
 
         var randomId = 'div' + divCount++;
         var mini = 0;
@@ -286,8 +288,6 @@ function uploadImg(selectedFile){
         tstDiv.css("padding", "0px");
         tstDiv.css("padding-top", "30px");
         tstDiv.css("background-color", getColor());
-        tstDiv.css("width", img);
-        tstDiv.css("height", );
 
 
         var ActualResizeHandle = $('<div>').addClass('resize-handle s ui-resizable-s'); // S
@@ -296,18 +296,47 @@ function uploadImg(selectedFile){
         var ActualResizeHandle4 = $('<div>').addClass('resize-handle se ui-resizable-se'); // SE
         var ActualResizeHandle5 = $('<div>').addClass('resize-handle sw ui-resizable-sw'); // SW
 
+        if(naturalHeight > naturalWidth){
+            ar = naturalHeight/naturalWidth;
+            tstDiv.css({
+                height:290*ar+"px",
+                width: '320px'
+            });
+            ActualDiv.css({
+                height:290*ar+"px",
+                width: '320px'
+            });
+            DraggableDiv.css({
+                width: '320px'
+            });
+            ActualResizeHandle2.css("height", 290*ar+"px");
+            ActualResizeHandle3.css("height", 290*ar+"px");
+            
+        }else{
+            ar = naturalWidth/naturalHeight;
+            tstDiv.css({
+                height:"320px",
+                width: 290*ar+"px"
+            });
+            ActualDiv.css({
+                height:"320px",
+                width: 290*ar+"px"
+            });
+            DraggableDiv.css({
+                width: 290*ar+"px"
+            });
+            ActualResizeHandle.css("width", 290*ar+"px");
+            ActualResizeHandle4.css("width", 290*ar+"px");
+        }
+
+
         var imgElement = $("<img>", {
             id: "previewImage",
-            src: "",
+            src: selectedFile,
             alt: "Imagem selecionada",
-            style: "max-width: 100%; max-height: 100%; position: relative;"
+            style: "min-width: 290px; min-height: 290px; max-width:100%; max-height:100%; position: relative;"
         });
 
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            imgElement.attr('src', e.target.result);
-        };
-        
 
         $('body').append(ActualDiv);
         $('body').append(DraggableDiv);
@@ -407,12 +436,6 @@ function uploadImg(selectedFile){
                 ActualDiv.css('z-index', highestZIndex + 1);
             }
         });
-
-
-        reader.readAsDataURL(selectedFile);
-
-        // var ar = imgElement.naturalWidth / imgElement.naturalHeight;
-        alert(imgElement.height);
 
     } else {
         alert('Nenhum arquivo selecionado.');

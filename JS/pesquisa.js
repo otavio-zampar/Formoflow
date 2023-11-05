@@ -2,16 +2,11 @@ function removeAccents(str) {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/([^\w]+|\s+)/g, "");
 }
 
-$(document).ready(function () {  
-
-    $("#searchBar").on("input", function () {
-        const query = $(this).val().toLowerCase().trim();
-        const resultsList = $("#lista");
-        
-        resultsList.empty();
+function dostuff(query, resultsList){
+    resultsList.empty();
 
         if (query.length === 0) {
-            $(".pesquisa").hide();
+            $("#pesquisa").hide();
             $("#searchBar").css("border-radius", "1rem");
             return;
         }
@@ -31,31 +26,49 @@ $(document).ready(function () {
                 $("#searchBar").css("border-radius", "1rem 1rem 0rem 0rem");
                 setTimeout(() => {
                     const listItem = $("<li>").text(result.option);
-                    listItem.addClass("resposta");
+                    listItem.addClass("resposta noCopy");
                     listItem.click(() => {
                         createDiv(result.option, result.form, result.qnt);
+                        $("#searchBar").val("");
+                        $("#pesquisa").hide();
+                        $("#searchBar").css("border-radius", "1rem");
                     });
                     // listItem.on("click", alert());
                     resultsList.append(listItem);
                     // resultsList
                 }, 1 * index); // Atraso de 100ms para cada item
             });
-            $(".pesquisa").show();
+            $("#pesquisa").show();
         } else {
-            $(".pesquisa").hide();
+            $("#pesquisa").hide();
         }
+}
+
+$(document).ready(function () {  
+
+    $("#searchBar").on("input", function () {
+        const query = $(this).val().toLowerCase().trim();
+        const resultsList = $("#lista");
+        
+        dostuff(query, resultsList);
     });
 
     $("#searchBar").focus(function () {
         if ($("#searchBar").val().toLowerCase().trim().length != 0) {
             $("#lista").css("outline", "#d1d1d1 solid 3px");
+            $("#lista").show();
         }
+        const query = $(this).val().toLowerCase().trim();
+        const resultsList = $("#lista");
+        
+        dostuff(query, resultsList);
+        
+        
     });
 
     $("#searchBar").blur(function () {
-        if ($("#searchBar").val().toLowerCase().trim().length == 0) {
-            $("#lista").css("outline", "#f0f0f0 solid 3px");
-        }
-        
+        $("#lista").css("outline", "#f0f0f0 solid 3px");
     });
 });
+
+
