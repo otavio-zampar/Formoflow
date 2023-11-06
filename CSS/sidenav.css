@@ -39,17 +39,24 @@
 } */
 
 .basic_instruments{
-    height: 2.7rem;
-    width: 2.7rem;
+    min-height: 2rem;
+    min-width: 2rem;
+    height: 10vh;
+    width: 10vh;
     cursor: pointer;
     position: absolute;
-    left: 43%;
     top:2vh;
     transition: .1s transform, .1s -webkit-transform;
 }
-/* .basic_instruments:hover{
+.eraser{
+    left: 2.5vh;
+}
+.pen{
+    left: calc(2.5vh + 4rem);
+}
+.basic_instruments:hover{
     transform: scale(1.02);
-} */
+}
 
 #myCanvas{
     /* height: 90vh;
@@ -126,5 +133,47 @@ input[type="file"] {
 } */
 
 #sizeRange{
+    position: absolute;
+    top: 0vh;
+    left: 0vh;
     width: 96.5%;
+    margin: 0px;
+    min-height: 20px;
+    height: 5vh;
+    width: 12vw;
+    margin-left: 1vw;
+    margin-right: 1vw;
+}
+#sizeText{
+    position: absolute;
+    width: 5vh; 
+    min-height: 20px; 
+    text-align: center;
+    height: 5vh;
+    margin: 0px; 
+    background-color:var(--White);
+    top:6vh;
+    left: 1vw;
+}
+.BTNIncrease{
+    width: 5vh; 
+    height: 2.5vh;
+    min-width: 30px; 
+    /* min-height: 10px;  */
+    position: absolute;
+    /* border: 0px; */
+    top:6vh;
+    left: calc(6vh + 1vw);
+}
+#ColPck{
+    position: absolute;
+    margin: 0px;
+    height: 5vh;
+    width: calc(12vw - 12vh);
+    min-width: 30px;
+    top: 6vh;
+    left: calc(12vh + 1vw);
+    border: 0px;
+    padding: 3px;
+    background-color: var(--AccentColor);
 }

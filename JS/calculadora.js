@@ -120,6 +120,11 @@ function doEval(ansDoc){
             ansDoc = ansDoc.substring(0, ansDoc.indexOf('(')) + "*" + ansDoc.substring(ansDoc.indexOf('('));
         }
     }
+    if(ansDoc.includes(')')){
+        if(multiply(ansDoc[parseFloat(ansDoc.indexOf(')')+1)])){
+            ansDoc = ansDoc.substring(0, ansDoc.indexOf(')')+1) + "*" + ansDoc.substring(ansDoc.indexOf(')')+1);
+        }
+    }
     if(ansDoc.includes('÷')){
         ansDoc = ansDoc.replaceAll('÷', '/');
     }
@@ -225,6 +230,6 @@ function doEval(ansDoc){
     } */
 
     //imprime na tela
-    document.calculator.ans.value = ansDoc;
+    return ansDoc;
     // alert(document.calculator.ans.value); /para testar depois de resolver
 }

@@ -35,7 +35,7 @@ function openDraw() {
 }
 function openExtra(){
   if(openExt == 0){
-    document.getElementById("myExtra").style.left = "45%";
+    document.getElementById("myExtra").style.left = "30%";
     document.getElementById("rotate").style.transform = "rotate(180deg)";
     openExt = 1;
   }else{
