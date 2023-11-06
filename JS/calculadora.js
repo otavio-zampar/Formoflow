@@ -115,6 +115,11 @@ function doEval(ansDoc){
         }
         ansDoc = ansDoc.replaceAll('%', '/100');
     }
+    if(ansDoc.includes('(')){
+        if(multiply(ansDoc[parseFloat(ansDoc.indexOf('(')-1)])){
+            ansDoc = ansDoc.substring(0, ansDoc.indexOf('(')) + "*" + ansDoc.substring(ansDoc.indexOf('('));
+        }
+    }
     if(ansDoc.includes('÷')){
         ansDoc = ansDoc.replaceAll('÷', '/');
     }

@@ -126,6 +126,8 @@ function changeSize(value){
         for (let i = 0; i < value; i++) {
                 arr[i] = Math.round(0.02 * (i + 20) * (i + 20) - 8);        
         }
+
+
         // alert(arr + "\n" +arr.length);
         var ctx = myCanvas.getContext("2d");
         if(value <= 1){
@@ -151,8 +153,7 @@ function download_img(yrn){ // yrn = fundo transparente ou n
         }
 }
 
-function send_img(yrn){ // yrn = fundo transparente ou n
-        // ainda esta baixando com nomes estranhos, seria bom mudar
+function send_img(){
         // Criar um Blob a partir de uma string
         var byteCharacters = atob(myCanvas.toDataURL("image/png").split(',')[1]);
         var byteNumbers = new Array(byteCharacters.length);
@@ -163,7 +164,7 @@ function send_img(yrn){ // yrn = fundo transparente ou n
         var blob = new Blob([byteArray], { type: 'image/png' });
 
         // Atualize o atributo 'src' do elemento <img> com a imagem do Blob
-        uploadImg(URL.createObjectURL(blob));
+        uploadImg(URL.createObjectURL(blob), "290px", "290px");
 
 }
 
