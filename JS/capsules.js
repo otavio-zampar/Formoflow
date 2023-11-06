@@ -355,46 +355,63 @@ function uploadImg(selectedFile, naturalHeight, naturalWidth){
         var ActualResizeHandle4 = $('<div>').addClass('resize-handle se ui-resizable-se'); // SE
         var ActualResizeHandle5 = $('<div>').addClass('resize-handle sw ui-resizable-sw'); // SW
 
-        if(naturalHeight > naturalWidth){
-            ar = naturalHeight/naturalWidth;
-            tstDiv.css({
-                height:290*ar+"px",
-                width: '320px'
-            });
-            ActualDiv.css({
-                height:290*ar+"px",
-                width: '320px'
-            });
-            DraggableDiv.css({
-                width: '320px'
-            });
-            ActualResizeHandle2.css("height", 290*ar+"px");
-            ActualResizeHandle3.css("height", 290*ar+"px");
-            
-        }else{
-            ar = naturalWidth/naturalHeight;
-            tstDiv.css({
-                height:"320px",
-                width: 290*ar+"px"
-            });
-            ActualDiv.css({
-                height:"320px",
-                width: 290*ar+"px"
-            });
-            DraggableDiv.css({
-                width: 290*ar+"px"
-            });
-            ActualResizeHandle.css("width", 290*ar+"px");
-            ActualResizeHandle4.css("width", 290*ar+"px");
-        }
-
-
         var imgElement = $("<img>", {
             id: "previewImage",
             src: selectedFile,
             alt: "Imagem selecionada",
             style: "min-width: 290px; min-height: 290px; max-width:100%; max-height:100%; position: relative;"
         });
+
+        if(naturalHeight > naturalWidth){
+            ar = naturalHeight/naturalWidth;
+            tstDiv.css({
+                height:320*ar+"px",
+                'min-height': 320*ar+"px",
+                'min-width': "320px",
+                width: '320px'
+            });
+            ActualDiv.css({
+                height:320*ar+"px",
+                'min-height': 320*ar+"px",
+                'min-width': "320px",
+                width: '320px'
+            });
+            DraggableDiv.css({
+                'min-width': "320px",
+                width: '320px'
+            });
+            ActualResizeHandle.css("min-width", "320px");
+            ActualResizeHandle2.css("height", 320*ar+"px");
+            ActualResizeHandle3.css("height", 320*ar+"px");
+            ActualResizeHandle2.css("min-height", 320*ar+"px");
+            ActualResizeHandle3.css("min-height", 320*ar+"px");
+            imgElement.css("min-height", 290*ar+"px");
+            
+        }else{
+            ar = naturalWidth/naturalHeight;
+            tstDiv.css({
+                height:"320px",
+                'min-height': "320px",
+                'min-width': 290*ar+"px",
+                width: 290*ar+"px"
+            });
+            ActualDiv.css({
+                height:"320px",
+                'min-height': "320px",
+                'min-width': 290*ar+"px",
+                width: 290*ar+"px"
+            });
+            DraggableDiv.css({
+                'min-width': 290*ar+"px",
+                width: 290*ar+"px"
+            });
+            ActualResizeHandle.css("width", 290*ar+"px");
+            ActualResizeHandle.css("min-width", 290*ar+"px");
+            imgElement.css("min-width", 290*ar+"px");
+        }
+
+
+        
 
 
         $('body').append(ActualDiv);
