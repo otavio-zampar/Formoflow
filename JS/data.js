@@ -19,6 +19,8 @@ const data = [
     { option: "Volume prisma", form: "Vprisma", qnt: 2, exit: 1 },
     { option: "Soma", form: "soma", qnt: 2, exit: 1 },
     { option: "Subtração", form: "subtracao", qnt: 2, exit: 1 },
+    { option: "Multiplicação", form: "multiplicacao", qnt: 2, exit: 1 },
+    { option: "Divisão", form: "divisao", qnt: 2, exit: 1 },
     { option: "Exponencial", form: "Math.pow", qnt: 2, exit: 1 },
     { option: "Raiz", form: "raizQ", qnt: 2, exit: 1 },
     { option: "Módulo", form: "modulo", qnt: 1, exit: 1 },

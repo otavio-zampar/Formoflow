@@ -20,23 +20,23 @@
 
 
     <!-- links para a sidenav & fatoracao-->
-    <script src="js/mudaTema.js"></script>
-    <script src="js/sidenav.js"></script>
-    <script src="js/calculadora.js"></script>
-    <script src="js/desenho.js"></script>
-    <script src="js/math/fatoracao.js"></script>
-    <script src="js/math/bhaskara.js"></script>
-    <script src="js/math/areas2d.js"></script>
+    <script src="./js/mudaTema.js"></script>
+    <script src="./js/sidenav.js"></script>
+    <script src="./js/calculadora.js"></script>
+    <script src="./js/desenho.js"></script>
+    <script src="./js/math/fatoracao.js"></script>
+    <script src="./js/math/bhaskara.js"></script>
+    <script src="./js/math/areas2d.js"></script>
     <script src="./js/math/hipotenusa.js"></script>
     <script src="./js/math/perimetro.js"></script>
     <script src="./js/math/volumes.js"></script>
     <script src="./js/math/modificadores.js"></script>
 
     <!-- coisa das janelas/capsulas -->
-    <script src="js/capsules.js"></script>
-    <script src="js/pesquisa.js"></script>
-    <script src="js/data.js"></script>
-    <script src="js/background.js"></script>
+    <script src="./js/capsules.js"></script>
+    <script src="./js/pesquisa.js"></script>
+    <script src="./js/data.js"></script>
+    <script src="./js/background.js"></script>
 
 
     <!-- coisa da calculadora -->
