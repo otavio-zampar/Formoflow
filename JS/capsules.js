@@ -20,7 +20,7 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
     {
     var CloseR = $('<div>').addClass('CloseR');
     // CloseR.append(
-    //     $('<svg xmlns="http://www.w3.org/2000/svg"'+
+    //     $('<svg xmlns="https://www.w3.org/2000/svg"'+
     //         'width="16" height="16" fill="black" '+
     //         'class="bi bi-x" viewBox="0 0 16 16" '+
     //         'style="height: 30px; width: 30px; cursor: pointer; color: var(--Black);">')
