@@ -1,0 +1,129 @@
+<div class="rounded-pill base pill" id="btnMyCalc" style="top: 45vh; background-color: var(--BaseColor);" onmousedown='openCalc()'>
+    <svg xmlns="http://www.w3.org/2000/svg" id="btnCalc" width="16" height="16" fill="var(--AccentColor)" class="bi bi-chevron-compact-left" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M9.224 1.553a.5.5 0 0 1 .223.67L6.56 8l2.888 5.776a.5.5 0 1 1-.894.448l-3-6a.5.5 0 0 1 0-.448l3-6a.5.5 0 0 1 .67-.223z"/>
+    </svg>
+</div>
+<div id="myCalc" class="sidenavCalc base" style="z-index: 9995; height: 100%; width: 40%; left: -40%; border-top-right-radius: 25px; border-bottom-right-radius: 25px;">
+    <div class="shadow" style="height:94%; top: 3%; width:90%; margin-left: 5%; border-radius: 15px; position: absolute;">
+        <!-- div de resposta -->
+        <div style="background-color:var(--SecondAccentColor); height:30%; width:100%; position: absolute; border-top-left-radius: 15px; border-top-right-radius: 15px;">
+            <form name="calculator">
+                <input type="text" id="answer" name="ans" value="" autocomplete="off">
+                <input type="text" id="preAns" name="preAns" value="" autocomplete="off" disabled> <!-- caixa de texto da pergunta caso precise: disabled-->
+            </form>
+            <p class="noCopy" id="switch2" style="font-size: 6vh; color: var(--LightGray); padding-left: 3%; top: 0%; position:absolute">DEG</p>
+            <p class="noCopy" style="font-size: 6vh; color: var(--LightGray); cursor: pointer; position:absolute; top:0%; right:3%;" onmousedown="document.calculator.ans.value=''; document.calculator.preAns.value=''; i = 0; f = 0; ">CE</p>
+        </div>
+        <!-- div dos numeros -->
+        <div class="grid-container" style="grid-template-columns: auto auto auto; background-color:var(--RealDarkBlue); top:30%; height:70%; width:70%; position: absolute; border-bottom-left-radius: 15px;">
+                <input type="button" value="1" class="grid-item-number" onmousedown="document.calculator.ans.value+='1'; f = 0; ">
+                <input type="button" value="2" class="grid-item-number" onmousedown="document.calculator.ans.value+='2'; f = 0; ">
+                <input type="button" value="3" class="grid-item-number" onmousedown="document.calculator.ans.value+='3'; f = 0; ">
+                <input type="button" value="4" class="grid-item-number" onmousedown="document.calculator.ans.value+='4'; f = 0; ">
+                <input type="button" value="5" class="grid-item-number" onmousedown="document.calculator.ans.value+='5'; f = 0; ">
+                <input type="button" value="6" class="grid-item-number" onmousedown="document.calculator.ans.value+='6'; f = 0; ">
+                <input type="button" value="7" class="grid-item-number" onmousedown="document.calculator.ans.value+='7'; f = 0; ">
+                <input type="button" value="8" class="grid-item-number" onmousedown="document.calculator.ans.value+='8'; f = 0; ">
+                <input type="button" value="9" class="grid-item-number" onmousedown="document.calculator.ans.value+='9'; f = 0; ">
+                <input type="button" value="0" class="grid-item-number" onmousedown="document.calculator.ans.value+='0'; f = 0; ">
+                <input type="button" value="." class="grid-item-number" onmousedown="{
+                    if(i == 0){
+                        document.calculator.ans.value+='.';
+                        i = 1;
+                    }
+                }">
+                <!-- ao apertar o botao '.' ele muda uma variavel de valor por exemplo 1, nao se pode colocar outro '.' enquanto esta variavel for 1, a variavel so muda de valor depois de colocar um operando como + - / ou * -->
+                <input id="eval" type="button" value="=" class="grid-item-number" onmousedown="{
+                    document.calculator.preAns.value = document.calculator.ans.value;
+                    document.calculator.ans.value = doEval(document.calculator.ans.value);
+                }">
+            </div>
+        <!-- div de operaçoes -->
+        <div style="background-color:var(--SecondAccentColor); top:30%; left: 70%; height:68%; width:3px; position: absolute; z-index: 9996;"></div> <!-- this is the border separating the two divs -->
+        <div class="grid-container" style="background-color:var(--RealDarkBlue); color: var(--AccentColor); top:30%; left: 70%; height:70%; width:25%; position: absolute; padding: 5%;">
+            <p class="grid-item-operandos noCopy" style="position: relative; cursor: pointer;" onmousedown="document.calculator.ans.value = document.calculator.ans.value.substring(0, document.calculator.ans.value.length - 1); i = 0; f = 0;">
+            C</p>
+            <p class="grid-item-operandos noCopy" style="position: relative; cursor: pointer;" onmousedown="{
+                if(f == 0){
+                    document.calculator.ans.value+='÷';
+                    
+                    f = 1;
+                }
+                i = 0;
+            }">÷</p>
+            <p class="grid-item-operandos noCopy" style="position: relative; cursor: pointer;" onmousedown="{
+                if(f == 0){
+                    document.calculator.ans.value+='×';
+                    
+                    f = 1;
+                }
+                i = 0;
+            }" >×</p>
+            <p class="grid-item-operandos noCopy" style="position: relative; cursor: pointer;" onmousedown="{
+                    document.calculator.ans.value+='-';
+                    
+                    f = 1;
+                    i = 0;
+            }">-</p>
+            <p class="grid-item-operandos noCopy" style="position: relative; cursor: pointer;" onmousedown="{
+                if(f == 0){
+                    document.calculator.ans.value+='+';
+                    
+                    f = 1;
+                }
+                i = 0;
+            }">+</p>
+        </div>
+        <!-- div de operaçoes extras -->
+        <div style="background-color:var(--BaseColor); top: 95%; left: 95%; height: 5%; width: 10%; position: absolute; z-index: 9999;"></div>
+        <div id="corner" style="background-color:var(--AccentColor); top: 95%; left: 95%; height: 5%; width: 5.1%; position: absolute; z-index: 9999; border-bottom-right-radius: 15px; cursor: pointer;" onmousedown="if(openExt == 0){openExtra();}"></div>
+        <div id="myExtra" style="background-color:var(--AccentColor); top:30%; left: 95%; height:70%; width:70%; position: absolute; transition: 0.5s; z-index: 9997;">
+            <div style="height: 100%; height: 100%; width: 10%; cursor: pointer;" onmousedown="openExtra()">
+                <svg id="rotate" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="var(--RealDarkBlue)" class="bi bi-chevron-compact-left" viewBox="0 0 16 16" style="width:100%; margin-top:30vh; pointer-events:none;">
+                    <path fill-rule="evenodd" d="M9.224 1.553a.5.5 0 0 1 .223.67L6.56 8l2.888 5.776a.5.5 0 1 1-.894.448l-3-6a.5.5 0 0 1 0-.448l3-6a.5.5 0 0 1 .67-.223z"/>
+                </svg>
+            </div>
+            <div class="grid-container" style="grid-template-columns: 33% 33% 33%; padding: 5%; grid-template-rows: auto auto auto auto; left: 10%; top: 0%; position: absolute; width: 90%; height: 100%;">
+                <!-- estao funcionando: '(', ')', 'π', 'e', 'log' e '√' (com exessoes) -->
+                <input type="button" value="(" class="grid-item-extra" onmousedown="document.calculator.ans.value+='('; f = 0; ">
+                <input type="button" value=")" class="grid-item-extra" onmousedown="document.calculator.ans.value+=')'; f = 0; ">
+                <input type="button" id="switch" value="RAD" class="grid-item-extra" onmousedown="{
+                    if(document.getElementById('switch').value != 'DEG'){
+                        document.getElementById('switch').value = 'DEG';
+                        document.getElementById('switch2').innerHTML = 'RAD';
+                    }else{
+                        document.getElementById('switch').value = 'RAD';
+                        document.getElementById('switch2').innerHTML = 'DEG';
+                    }
+                    f = 0;
+                }">
+
+                <!-- switches DEG for RAD on top left corner -->
+                
+                
+                <input type="button" value="π" class="grid-item-extra" onmousedown="document.calculator.ans.value+='π'; f = 0; ">
+                <input type="button" value="E" class="grid-item-extra" onmousedown="document.calculator.ans.value+='E'; f = 0; ">
+                <input type="button" value="%" class="grid-item-extra" onmousedown="document.calculator.ans.value+='%'; f = 0; ">
+                <input type="button" value="^" class="grid-item-extra" onmousedown="document.calculator.ans.value+='^'; f = 0; ">
+                <input type="button" value="Log" class="grid-item-extra" onmousedown="document.calculator.ans.value+=log; f = 0; ">
+                <input type="button" value="√" class="grid-item-extra" onmousedown="document.calculator.ans.value+='√'; f = 0; ">
+                <input type="button" value="sin" class="grid-item-extra" onmousedown="document.calculator.ans.value+=sin; f = 0; ">
+                <input type="button" value="cos" class="grid-item-extra" onmousedown="document.calculator.ans.value+=cos; f = 0; ">
+                <input type="button" value="tan" class="grid-item-extra" onmousedown="document.calculator.ans.value+=tan; f = 0; ">
+                <input type="button" value="!" class="grid-item-extra" onmousedown="document.calculator.ans.value+='!'; f = 0; ">
+            </div>
+        </div>
+    </div>
+    <div style="background-color:var(--BaseColor); top:30%; left: 95%; height:70%; width:65%; position: absolute; z-index: 99999;"></div>
+</div>
+
+<!-- script pra #answer enviar quando apertar enter -->
+<script>
+    $("#answer").keyup(function(event) {
+            if (event.which === 13) {
+                // O código 13 corresponde à tecla "Enter"
+                document.calculator.preAns.value = document.calculator.ans.value;
+                document.calculator.ans.value = doEval(document.calculator.ans.value);
+            }
+        });
+</script>

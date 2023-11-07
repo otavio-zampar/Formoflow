@@ -2,8 +2,7 @@ var arrCanvas = []; //empty var
 var img = new Image;
 var dec = inc = 0;
 
-window.onload = function(){
-        
+window.onload = function () {
     document.getElementById("sizeText").value = 5;
     document.getElementById("sizeRange").value = 5;
     document.getElementById("ColPck").value = '#000000';
@@ -13,6 +12,7 @@ window.onload = function(){
     const vh = document.documentElement.clientHeight / 100;
     var myCanvas = document.getElementById("myCanvas");
     var curColor = document.getElementById("ColPck").value;
+    
     if(myCanvas){
             var isDown  = false;
             var ctx = myCanvas.getContext("2d");
@@ -101,7 +101,7 @@ window.onload = function(){
             curColor = document.getElementById("ColPck").value;
     });
     
-};
+}
 
 window.onresize = function(){
     vw = document.documentElement.clientWidth / 100;
