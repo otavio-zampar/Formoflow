@@ -9,55 +9,53 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
 
-    <!-- ADICIONAR SCRIPTS E CSS EM SIDENAVHEAD.HTML, OBRIGADO -->
-
     <!--Link bootstrap, jquery & CSS-->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
-<link rel="stylesheet" type="text/css" href="css/main.css">
-<link rel="stylesheet" type="text/css" href="css/sidenav.css">
-<link rel="stylesheet" type="text/css" href="css/index.css">
-<link rel="stylesheet" type="text/css" href="css/capsules.css">
-<link rel="stylesheet" type="text/css" href="css/pesquisa.css">
-
-
-<!-- links para a sidenav & fatoracao-->
-<script src="js\mudaTema.js"></script>
-<script src="js\sidenav.js"></script>
-<script src="js\calculadora.js"></script>
-<script src="js\desenho.js"></script>
-<script src="js\math\fatoracao.js"></script>
-<script src="js\math\bhaskara.js"></script>
-<script src="js\math\areas2d.js"></script>
-<script src="./js/math/hipotenusa.js"></script>
-<script src="./js/math/perimetro.js"></script>
-<script src="./js/math/volumes.js"></script>
-<script src="./js/math/modificadores.js"></script>
-
-<!-- coisa das janelas/capsulas -->
-<script src="js\capsules.js"></script>
-<script src="js\pesquisa.js"></script>
-<script src="js\data.js"></script>
-<script src="js\background.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/sidenav.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/capsules.css">
+    <link rel="stylesheet" type="text/css" href="css/pesquisa.css">
 
 
-<!-- coisa da calculadora -->
-<script lang="JavaScript">  
+    <!-- links para a sidenav & fatoracao-->
+    <script src="js\mudaTema.js"></script>
+    <script src="js\sidenav.js"></script>
+    <script src="js\calculadora.js"></script>
+    <script src="js\desenho.js"></script>
+    <script src="js\math\fatoracao.js"></script>
+    <script src="js\math\bhaskara.js"></script>
+    <script src="js\math\areas2d.js"></script>
+    <script src="./js/math/hipotenusa.js"></script>
+    <script src="./js/math/perimetro.js"></script>
+    <script src="./js/math/volumes.js"></script>
+    <script src="./js/math/modificadores.js"></script>
 
-    //usada na calculadora pra nao dar erro na pontuaçao (i) e na operaçao (f)
-    var i = 0;
-    var f = 0;
+    <!-- coisa das janelas/capsulas -->
+    <script src="js\capsules.js"></script>
+    <script src="js\pesquisa.js"></script>
+    <script src="js\data.js"></script>
+    <script src="js\background.js"></script>
 
-    //usado para alternar entre abrir e fechar os menus laterais
-    var openCal = 0;
-    var openDra = 0;
-    var openExt = 0;
-    var MathDeg = '(Math.PI/180)*';
-    var sin = 'Sin(';
-    var cos = 'Cos(';
-    var tan = 'Tan(';
-    var log = 'Log(';
-</script>
+
+    <!-- coisa da calculadora -->
+    <script lang="JavaScript">  
+
+        //usada na calculadora pra nao dar erro na pontuaçao (i) e na operaçao (f)
+        var i = 0;
+        var f = 0;
+
+        //usado para alternar entre abrir e fechar os menus laterais
+        var openCal = 0;
+        var openDra = 0;
+        var openExt = 0;
+        var MathDeg = '(Math.PI/180)*';
+        var sin = 'Sin(';
+        var cos = 'Cos(';
+        var tan = 'Tan(';
+        var log = 'Log(';
+    </script>
 
     <script>
         var isSet = false;
