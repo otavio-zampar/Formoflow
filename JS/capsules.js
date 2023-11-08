@@ -57,6 +57,7 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
             input.css("height", "2.2rem");   
             var valor = "10% + 30px + "+ index +" * (min(2rem, 2vh) + 2.2rem - 1px)";
             input.css("top", "calc("+valor+")");
+            // input.css("outline-color", document.querySelector('#div1').querySelector(".tstDiv").style.backgroundColor);
             
             // cria as setas
             var seta = $("<div>").addClass("arrow right").attr('id', "seta"+divCount+index);
@@ -118,7 +119,7 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
             linha.css("left", "calc(100% - 60px)");
             linha.css("pointer-events", "none");
             seta.css("left", "calc(100% - 60px)");
-            
+
             // var valor = String(inputForm+index)+"*2.2rem + "+String(inputForm+index)+"*5px + 1.1rem + 60px - "+ raiz +"px - 2.5px";
             // seta.css("top", "calc("+valor+")"); // - 2.7px
             // linha.css("top", "calc("+valor+" + "+raiz+"px)");
