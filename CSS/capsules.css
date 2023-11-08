@@ -42,20 +42,23 @@
     width: 320px;
     height: 320px;
     justify-content: center;
-    padding: 60px;
+    /* padding: 60px; */
     background-color: aliceblue;
     min-width: 290px; min-height: 290px;
   }
-  .tstDiv form {
+  /* .tstDiv form {
     margin-bottom: 10px;
-  }
+  } */
   .tstDiv input[type="text"] {
-    width: 100%;
+    width: 80%;
     padding: 5px;
-    margin-bottom: 5px;
+    left: 10%;
+    position: absolute;
+    /* display: inline-block; */
+    outline: var(--Black) solid min(1rem, 1vh);
   }
   .tstDiv .icon {
-    font-size: 30px;
+    font-size: 2rem;
     margin-bottom: 10px;
   }
   
@@ -139,13 +142,18 @@
     height: 4px;
     width: 4px;
     border-width: 0 4px 4px 0;
+    display: inline-block;
     padding: 3px;
+    left: calc(100% - 60px + min(1rem, 1vh));
  }
 
  .linha{
-  width: 8px;
-  height: 4px;
-  background-color: var(--Black);
+    width: 8px;
+    height: 4px;
+    background-color: var(--Black);
+    position: absolute;
+    left: calc(100% - 60px + min(1rem, 1vh));
+    pointer-events: none;
  }
 
  .right{

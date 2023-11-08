@@ -1,6 +1,8 @@
 var divCount = 0;
 var selectedArrow = null; // Armazena a seta selecionada
+var selectedArrowX = selectedArrowY = null;
 var inputId = null; // Armazena o input de destino selecionado
+var highestZIndex = 11;
 
 
 function getColor(){
@@ -51,48 +53,52 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
             // cria o input
             var input = $('<input>').attr('type', 'text').attr('placeholder', 'Enter text').attr('id', "input"+divCount+index).addClass("teste");
             inputElements.push(input); // Armazena a referência do elemento no array
-            input.css("display", "inline-block");
-            input.css("height", "2.2rem");
+            // input.css("display", "inline-block");
+            input.css("height", "2.2rem");   
+            var valor = "10% + 30px + "+ index +" * (min(2rem, 2vh) + 2.2rem - 1px)";
+            input.css("top", "calc("+valor+")");
             
             // cria as setas
-            var seta = $("<div>").addClass("arrow right").css("position", "absolute").attr('id', "seta"+divCount+index);
-            var linha = $('<div>').addClass("linha").css("position", "absolute").attr('id', "linha"+divCount+index); // linha q completa a seta
-            linha.css("left", "calc(100% - 60px)");
-            linha.css("pointer-events", "none");
-            seta.css("left", "calc(100% - 60px)");
+            var seta = $("<div>").addClass("arrow right").attr('id', "seta"+divCount+index);
+            var linha = $('<div>').addClass("linha").attr('id', "linha"+divCount+index); // linha q completa a seta
 
 
             // em ordem: posiçao do index + margin-bottom do index + metade tamanho do index + padding da div mae - metade do tamanho da seta - metade do padding do index
-            var valor = String(index)+"*2.2rem + "+String(index)+"*5px + 1.1rem + 60px - "+ raiz +"px - 2.5px";
+            // var valor = String(index)+"*2.2rem + "+String(index)+"*5px + 1.1rem + 60px - "+ raiz +"px - 2.5px + min(1rem, 1vh)/2";
             seta.css("top", "calc("+valor+")"); // - 2.7px
             linha.css("top", "calc("+valor+" + "+raiz+"px)");
 
             seta.draggable({
-                drag: function() {
-                    // A partir da seta, encontre o input associado com base no ID
+                start: function(){
                     selectedArrow = $(this);
+                    selectedArrowX = selectedArrow.css("left");
+                    selectedArrowY = selectedArrow.css("top");
                     arrowId = selectedArrow.attr('id');
                     inputId = $('#' + arrowId.replace('seta', 'input'));
                     
                     // apaga a linha inicial
                     $('#' + arrowId.replace('seta', 'linha')).css("display", "none"); 
 
+                    $('.ActualDiv').each(function() {
+                        var zIndex = parseInt(selectedArrow.css('z-index'));
+                        if (!isNaN(zIndex) && zIndex > highestZIndex) {
+                            highestZIndex = zIndex;
+                        }
+                    });
+                    selectedArrow.css('z-index', highestZIndex + 1);
+                    console.log(selectedArrow.css('z-index'));
                 },
+                // drag: function() {},
                 stop: function() {
                     // selectedArrow = null;
                     // inputId = null;
+                    // alert(selectedArrowX+", "+selectedArrowY);
+                    selectedArrow.css({
+                        "top": selectedArrowY,
+                        "left": selectedArrowX
+                    });
+                    $('#' + arrowId.replace('seta', 'linha')).css("display", "inherit"); 
                 },
-            });
-
-            seta.on('dragstart', function(){
-                var highestZIndex = 10;
-                $('.ActualDiv').each(function() {
-                    var zIndex = parseInt($(this).css('z-index'));
-                    if (!isNaN(zIndex) && zIndex > highestZIndex) {
-                        highestZIndex = zIndex;
-                    }
-                });
-                $(this).css('z-index', highestZIndex + 1);
             });
             // add ao form
             form.append(input);
@@ -112,32 +118,43 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
             linha.css("left", "calc(100% - 60px)");
             linha.css("pointer-events", "none");
             seta.css("left", "calc(100% - 60px)");
-            var valor = String(inputForm+index)+"*2.2rem + "+String(inputForm+index)+"*5px + 1.1rem + 60px - "+ raiz +"px - 2.5px";
-            seta.css("top", "calc("+valor+")"); // - 2.7px
-            linha.css("top", "calc("+valor+" + "+raiz+"px)");
+            
+            // var valor = String(inputForm+index)+"*2.2rem + "+String(inputForm+index)+"*5px + 1.1rem + 60px - "+ raiz +"px - 2.5px";
+            // seta.css("top", "calc("+valor+")"); // - 2.7px
+            // linha.css("top", "calc("+valor+" + "+raiz+"px)");
             seta.draggable({
-                drag: function() {
-                    // A partir da seta, encontre o input associado com base no ID
+                start: function(){
                     selectedArrow = $(this);
+                    selectedArrowX = selectedArrow.css("left");
+                    selectedArrowY = selectedArrow.css("top");
                     arrowId = selectedArrow.attr('id');
                     inputId = $('#' + arrowId.replace('seta', 'icon'));
                     
                     // apaga a linha inicial
                     $('#' + arrowId.replace('seta', 'linha')).css("display", "none"); 
 
+                    var highestZIndex = 10;
+                    $('.ActualDiv').each(function() {
+                        var zIndex = parseInt($(this).css('z-index'));
+                        if (!isNaN(zIndex) && zIndex > highestZIndex) {
+                            highestZIndex = zIndex;
+                        }
+                    });
+                    $(this).css('z-index', highestZIndex + 1);
+                },
+                // drag: function() {},
+                stop: function() {
+                    // selectedArrow = null;
+                    // inputId = null;
+                    // alert(selectedArrowX+", "+selectedArrowY);
+                    selectedArrow.css({
+                        "top": selectedArrowY,
+                        "left": selectedArrowX
+                    });
+                    $('#' + arrowId.replace('seta', 'linha')).css("display", "inherit"); 
                 },
             });
 
-            seta.on('dragstart', function(){
-                var highestZIndex = 10;
-                $('.ActualDiv').each(function() {
-                    var zIndex = parseInt($(this).css('z-index'));
-                    if (!isNaN(zIndex) && zIndex > highestZIndex) {
-                        highestZIndex = zIndex;
-                    }
-                });
-                $(this).css('z-index', highestZIndex + 1);
-            });
             tstDiv.append(icon);
             tstDiv.append(linha);
             tstDiv.append(seta);

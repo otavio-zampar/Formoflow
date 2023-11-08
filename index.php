@@ -20,6 +20,7 @@
 
 
     <!-- links para a sidenav & fatoracao-->
+    <script src="./JS/checkTouch.js"></script>
     <script src="./JS/mudaTema.js"></script>
     <script src="./JS/sidenav.js"></script>
     <script src="./JS/calculadora.js"></script>
@@ -208,10 +209,6 @@
         <script>
             criaBckgnd(200);
         </script>
-
-        <!-- <svg id="svgContainer" width="100vw" height="100vh">
-            <line x1="0" y1="0" x2="200" y2="200" style="stroke:rgb(255,0,0);stroke-width:2" />
-        </svg> -->
 
         <input type="text" id="searchBar" placeholder="Pesquisar...">
         <!-- when clicking, the fisrt result should be selected -->

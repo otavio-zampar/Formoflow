@@ -12,7 +12,7 @@
     width: calc(100vw - 2px);
     left: 0px;
     top: 4rem;
-    border: 1px solid var(--Black);
+    /* border: 1px solid var(--Black); */
     border-radius: 5px;
     background-color: var(--White);
     z-index: 3;
@@ -56,14 +56,14 @@
     border-radius: 1rem;
     z-index: 2;
     font-size: 1.5rem;
-    outline: var(--AlmostWhite) solid 3px;
+    /* outline: var(--AlmostWhite) solid 3px; */
     box-shadow: 6px 5px 7px var(--AlmostTransparent);
 }
 
 #searchBar:focus{
-    /* transition: 100ms;
-    background-color: var(--WhiteFocus); */
-    outline: var(--AlmostTransparent) solid 3px;
+    /* transition: 100ms; */
+    background-color: var(--WhiteFocus);
+  outline: var(--AlmostTransparent) solid 0px;
 }
 
 #searchBar:hover{
@@ -76,7 +76,7 @@
     width: 1.5rem;
     z-index: 2;
     position: absolute;
-    left: calc(93vw - 1rem);
+    right: calc(1.5rem + 5vw);
     top: 2.25rem;
     cursor: pointer;
 }

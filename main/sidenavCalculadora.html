@@ -41,9 +41,9 @@
         <!-- div de operaçoes -->
         <div style="background-color:var(--SecondAccentColor); top:30%; left: 70%; height:68%; width:3px; position: absolute; z-index: 9996;"></div> <!-- this is the border separating the two divs -->
         <div class="grid-container" style="background-color:var(--RealDarkBlue); color: var(--AccentColor); top:30%; left: 70%; height:70%; width:25%; position: absolute; padding: 5%;">
-            <p class="grid-item-operandos noCopy" style="position: relative; cursor: pointer;" onmousedown="document.calculator.ans.value = document.calculator.ans.value.substring(0, document.calculator.ans.value.length - 1); i = 0; f = 0;">
+            <p class="grid-item-operandos noCopy"  onmousedown="document.calculator.ans.value = document.calculator.ans.value.substring(0, document.calculator.ans.value.length - 1); i = 0; f = 0;">
             C</p>
-            <p class="grid-item-operandos noCopy" style="position: relative; cursor: pointer;" onmousedown="{
+            <p class="grid-item-operandos noCopy" onmousedown="{
                 if(f == 0){
                     document.calculator.ans.value+='÷';
                     
@@ -51,7 +51,7 @@
                 }
                 i = 0;
             }">÷</p>
-            <p class="grid-item-operandos noCopy" style="position: relative; cursor: pointer;" onmousedown="{
+            <p class="grid-item-operandos noCopy" onmousedown="{
                 if(f == 0){
                     document.calculator.ans.value+='×';
                     
@@ -59,13 +59,13 @@
                 }
                 i = 0;
             }" >×</p>
-            <p class="grid-item-operandos noCopy" style="position: relative; cursor: pointer;" onmousedown="{
+            <p class="grid-item-operandos noCopy" onmousedown="{
                     document.calculator.ans.value+='-';
                     
                     f = 1;
                     i = 0;
             }">-</p>
-            <p class="grid-item-operandos noCopy" style="position: relative; cursor: pointer;" onmousedown="{
+            <p class="grid-item-operandos noCopy" onmousedown="{
                 if(f == 0){
                     document.calculator.ans.value+='+';
                     
