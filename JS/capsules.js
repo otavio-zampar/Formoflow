@@ -170,10 +170,10 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
 
             try{
                 var x = [];
-                x = eval(avaliacao);
+                x = eval(avaliacao).split(" ");
                 if (x[inputForm-1] != null) {
-                    for (let index = 0; index < inputForm; index++) {
-                        // icon.text(x[index]);
+                    for (let index = 0; index < exit; index++) {
+                        document.getElementById("icon"+(index+inputForm)).text(x[index]);
                         alert(x[index]);
                     }   
                 }else{
