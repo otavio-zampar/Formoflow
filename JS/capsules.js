@@ -58,7 +58,7 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
     divCount++;
     var randomId = 'div' + divCount;
     var mini = 0;
-    var ActualDiv = $('<div>').attr('id', randomId).addClass('ActualDiv').attr("actualName", actualName);
+    var ActualDiv = $('<div>').attr('id', randomId).addClass('ActualDiv nocopy').attr("actualName", actualName);
     ActualDiv.attr("exit", exit);
     var DraggableDiv = $('<div>').attr('id', 'draggable' + randomId).addClass('DraggableDiv');
     var minimize = $('<div>').addClass('minimize');
@@ -79,13 +79,16 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
 
     {
         // cria o formulario
-        var nome = $('<p>').text(nomeForm);
+        var nome = $('<p>').text(nomeForm).css("margin", "0px").addClass("nocopy");
+        nome.css("height", "30px");
+        nome.css("padding", "2px");
         var form = $('<form>');
 
         for (let index = 0; index < inputForm; index++) {
             // cria o input
             var input = $('<input>').attr('type', 'text').attr('placeholder', 'Enter text...').attr('id', "input"+divCount+index).addClass("teste");
             input.css("height", "2.2rem");   
+            input.css("outline-color", "transparent");
             // input.attr("type", "number");
             var valor = "10% + 30px + "+ index +" * (min(2rem, 2vh) + 2.2rem - 1px)";
             input.css("top", "calc("+valor+")");
@@ -136,9 +139,14 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
 
         for (let index = 0; index < exit; index++) {
         
-            var icon = $('<div>').addClass('icon').html('&#128515;').attr('id', "icon"+divCount+(inputForm+index)); // Unicode emoji for smiling face 
+            var icon = $('<div>').addClass('icon nocopy').html('&#128515;').attr('id', "icon"+divCount+(inputForm+index)); // Unicode emoji for smiling face 
             icon.css("position", "absolute");
-            icon.css("outline-color", tstDiv.backgroundColor);
+            icon.css("outline-color", "transparent");
+            icon.on("click", function(){
+                var copyText = document.getElementById("icon"+divCount+(inputForm+index));
+                navigator.clipboard.writeText(copyText.innerHTML); // copy to clipboard
+                alert("copiado!");
+            });
 
             var valor = "10% + 30px + "+ (index+inputForm) +" * (min(2rem, 2vh) + 2.2rem - 1px)";
             icon.css("top", "calc("+valor+")");
@@ -162,7 +170,6 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
                     // apaga a linha inicial
                     $('#' + arrowId.replace('seta', 'linha')).css("display", "none"); 
 
-                    var highestZIndex = 10;
                     $('.ActualDiv').each(function() {
                         var zIndex = parseInt($(this).css('z-index'));
                         if (!isNaN(zIndex) && zIndex > highestZIndex) {
@@ -251,8 +258,6 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
     });
 
     DraggableDiv.on('dragstart', function() {
-        // Aumente o z-index da div ao clicar nela
-        var highestZIndex = 10;
 
         // Encontre o maior z-index entre todas as divs visíveis
         $('.ActualDiv').each(function() {
@@ -281,8 +286,6 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
         }else{  
             ActualDiv.children().show();
             mini = 0;
-            // Aumente o z-index da div ao clicar nela
-            var highestZIndex = 10;
 
             // Encontre o maior z-index entre todas as divs visíveis
             $('.ActualDiv').each(function() {
@@ -455,7 +458,6 @@ function uploadImg(selectedFile, naturalHeight, naturalWidth){
 
         DraggableDiv.on('dragstart', function() {
             // Aumente o z-index da div ao clicar nela
-            var highestZIndex = 10;
 
             // Encontre o maior z-index entre todas as divs visíveis
             $('.ActualDiv').each(function() {
@@ -483,8 +485,6 @@ function uploadImg(selectedFile, naturalHeight, naturalWidth){
             }else{  
                 ActualDiv.children().show();
                 mini = 0;
-                // Aumente o z-index da div ao clicar nela
-                var highestZIndex = 10;
 
                 // Encontre o maior z-index entre todas as divs visíveis
                 $('.ActualDiv').each(function() {

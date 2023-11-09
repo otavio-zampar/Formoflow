@@ -1,9 +1,21 @@
 html{
     scroll-behavior: smooth;
+    font-size: 16px;
+    color: var(--Black);
 }
 p{
     font-size: 1rem;
 }
+::placeholder {
+    color: var(--Black);
+    opacity: 0.7; /* Firefox */
+  }
+  
+  ::-ms-input-placeholder { /* Edge 12 -18 */
+    color: var(--Black);
+    opacity: 0.5;
+  }
+
 .topMenu{
     position: fixed;
     height: 100px;

@@ -79,7 +79,7 @@
     </script>
 
 </head>
-<body style="background-color: var(--AlmostWhite); overflow-y: hidden;"> <!-- overflow: hidden; -->
+<body style="color:var(--Black); background-color: var(--AlmostWhite); overflow-y: hidden;"> <!-- overflow: hidden; -->
 
     <div id="whereHeader"></div>
     <div id="whereSidenavC"></div>
@@ -151,7 +151,7 @@
                     </svg>
                 </div>
 
-                <div style="width: 13vw; height: 100px; right: 1vw; top:45vh; position: absolute; padding-left: 1vw;">
+                <div style="width: 13vw; height: 12vh; right: 1vw; bottom: calc(max(3vw, 1rem) + max(4vw, 1rem) + 5vh); position: absolute; padding-left: 1vw;">
                     <!-- width -->
                     <input type="range" id="sizeRange" min="1" max="140" value="5" oninput="changeSize(this.value); document.getElementById('sizeText').value = myCanvas.getContext('2d').lineWidth;">
                     <input type="text" id="sizeText" value="5" autocomplete="false" onkeydown="return TriggeredKey(this);" onkeyup="myCanvas.getContext('2d').lineWidth = this.value;">
@@ -172,7 +172,7 @@
                     <input id="ColPck" type="color"/>
                 </div>
 
-                <div style="width: 12vw; right: 1vw; bottom: 3vh; position: absolute;">
+                <div style="width: 12vw; right: 1vw; bottom: 5vh; position: absolute;">
                     <!-- undo -->
                     <!-- <button style="margin: 0px;" onclick="und();">kinda Undo</button> -->
             
@@ -180,12 +180,12 @@
                     <!-- <button style="margin: 0px;" onclick="red();">kinda Redo</button> -->
                     
                     <!-- save -->
-                    <button style="margin: 0px; width: 10vh;" onclick="{
+                    <button style="margin: 0px; width: 100%; height: max(3vw, 1rem); font-size: max(1.1vw, 1rem);" onclick="{
                     // perguntar se quer fundo transparente
                         download_img();
                     }">Save</button>
                     <!-- mandar para a area de trabalho -->
-                    <button style="margin: 0px;" onclick="{
+                    <button style="margin: 0px; width: 100%; height: max(4vw, 1rem); font-size: max(1.1vw, 1rem);" onclick="{
                         // perguntar se quer fundo transparente
                         send_img();
                     }">Mandar para a àrea de Trabalho</button>

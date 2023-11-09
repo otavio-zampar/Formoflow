@@ -43,7 +43,7 @@
     width: max(5vw, 2rem);
     cursor: pointer;
     position: absolute;
-    top:2vh;
+    top:5vh;
     transition: .1s transform, .1s -webkit-transform;
 }
 .eraser{

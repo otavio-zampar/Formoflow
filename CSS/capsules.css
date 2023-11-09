@@ -51,11 +51,17 @@
   } */
   .tstDiv input[type="text"] {
     width: 80%;
-    padding: 5px;
+    padding-left: 10px;
     left: 10%;
     position: absolute;
-    /* display: inline-block; */
     outline: var(--Black) solid min(1rem, 1vh);
+    border: 0px solid var(--Black);
+    border-radius: 10px;
+    box-shadow: -3px 3px var(--Black);
+    background-color: var(--White);
+  }
+  .nocopy{
+    user-select: none;
   }
   .tstDiv .icon {
     outline: var(--Black) solid min(1rem, 1vh);
@@ -64,6 +70,9 @@
     height: 2.2rem;
     padding: 5px;
     left: 10%;
+    border: 0px solid var(--Black);
+    box-shadow: -4px 4px var(--Black);
+    border-radius: 10px;
   }
   
   .DraggableDiv {
