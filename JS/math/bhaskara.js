@@ -5,14 +5,14 @@ function bhaskara(a, b, c){ // 1, 3, -4 = [1, -4]
         // return "delta deu negativo, x' e x'' não existem";
         return "NaN";
     }else{
-        var xi = ((-b) + Math.sqrt(delta))/2 * a;
-        var xii = ((-b) - Math.sqrt(delta))/2 * a;
+        var x = [];
+        x[0] = ((-b) + Math.sqrt(delta))/2 * a;
+        x[1] = ((-b) - Math.sqrt(delta))/2 * a;
         if (delta == 0) {
             //x' = x''
-
-            return [xi, xii];
+            return x;
         }else{
-            return [xi, xii];
+            return x;
         }
 
         //Vértice v = (Xv, Yv) = (-b/2a , -delta/4a )

@@ -21,17 +21,8 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
     // var svg = $('#svgContainer'); // nao funciona pq jquery não sabe oq os elementos como PATH significam
     {
     var CloseR = $('<div>').addClass('CloseR');
-    // CloseR.append(
-    //     $('<svg xmlns="https://www.w3.org/2000/svg"'+
-    //         'width="16" height="16" fill="black" '+
-    //         'class="bi bi-x" viewBox="0 0 16 16" '+
-    //         'style="height: 30px; width: 30px; cursor: pointer; color: var(--Black);">')
-    //     .append('<path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>')
-    // );
-    
     }
 
-    var raiz = Math.sqrt(2)*2;
     var tstDiv = $('<div>').addClass('tstDiv');
     tstDiv.css("background-color", getColor());
     var ActualResizeHandle = $('<div>').addClass('resize-handle s ui-resizable-s'); // S
@@ -51,23 +42,19 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
 
         for (let index = 0; index < inputForm; index++) {
             // cria o input
-            var input = $('<input>').attr('type', 'text').attr('placeholder', 'Enter text').attr('id', "input"+divCount+index).addClass("teste");
+            var input = $('<input>').attr('type', 'text').attr('placeholder', 'Enter text...').attr('id', "input"+divCount+index).addClass("teste");
             inputElements.push(input); // Armazena a referência do elemento no array
-            // input.css("display", "inline-block");
             input.css("height", "2.2rem");   
+            // input.attr("type", "number");
             var valor = "10% + 30px + "+ index +" * (min(2rem, 2vh) + 2.2rem - 1px)";
             input.css("top", "calc("+valor+")");
-            // input.css("outline-color", document.querySelector('#div1').querySelector(".tstDiv").style.backgroundColor);
             
             // cria as setas
-            var seta = $("<div>").addClass("arrow right").attr('id', "seta"+divCount+index);
+            var seta = $("<div>").addClass("arrow right").attr('id', "seta"+divCount+index).css("position", "absolute");
             var linha = $('<div>').addClass("linha").attr('id', "linha"+divCount+index); // linha q completa a seta
 
-
-            // em ordem: posiçao do index + margin-bottom do index + metade tamanho do index + padding da div mae - metade do tamanho da seta - metade do padding do index
-            // var valor = String(index)+"*2.2rem + "+String(index)+"*5px + 1.1rem + 60px - "+ raiz +"px - 2.5px + min(1rem, 1vh)/2";
-            seta.css("top", "calc("+valor+")"); // - 2.7px
-            linha.css("top", "calc("+valor+" + "+raiz+"px)");
+            seta.css("top", "calc("+valor+" - 5px + 1.1rem)");
+            linha.css("top", "calc("+valor+" - 2px + 1.1rem)");
 
             seta.draggable({
                 start: function(){
@@ -87,13 +74,10 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
                         }
                     });
                     selectedArrow.css('z-index', highestZIndex + 1);
-                    console.log(selectedArrow.css('z-index'));
+                    // console.log(selectedArrow.css('z-index'));
                 },
                 // drag: function() {},
                 stop: function() {
-                    // selectedArrow = null;
-                    // inputId = null;
-                    // alert(selectedArrowX+", "+selectedArrowY);
                     selectedArrow.css({
                         "top": selectedArrowY,
                         "left": selectedArrowX
@@ -111,18 +95,23 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
 
         for (let index = 0; index < exit; index++) {
         
-            var icon = $('<div>').addClass('icon').html('&#128515;').attr('id', "icon"+divCount+inputForm+index); // Unicode emoji for smiling face 
-            icon.css("overflow", "hidden");   
+            var icon = $('<div>').addClass('icon').html('&#128515;').attr('id', "icon"+divCount+(inputForm+index)); // Unicode emoji for smiling face 
+            icon.css("height", "2.2rem");
+            icon.css("position", "absolute");
+            icon.css("left", "10%");
 
-            var seta = $("<div>").addClass("arrow right").css("position", "absolute").attr('id', "seta"+divCount+inputForm+index);
-            var linha = $('<div>').addClass("linha").css("position", "absolute").attr('id', "linha"+divCount+inputForm+index); // linha q completa a seta
-            linha.css("left", "calc(100% - 60px)");
-            linha.css("pointer-events", "none");
-            seta.css("left", "calc(100% - 60px)");
 
-            // var valor = String(inputForm+index)+"*2.2rem + "+String(inputForm+index)+"*5px + 1.1rem + 60px - "+ raiz +"px - 2.5px";
-            // seta.css("top", "calc("+valor+")"); // - 2.7px
-            // linha.css("top", "calc("+valor+" + "+raiz+"px)");
+            var valor = "10% + 30px + "+ (index+inputForm) +" * (min(2rem, 2vh) + 2.2rem - 1px)";
+            icon.css("top", "calc("+valor+")");
+            
+            
+            var seta = $("<div>").addClass("arrow right").attr('id', "seta"+divCount+(inputForm+index)).css("position", "absolute");
+            var linha = $('<div>').addClass("linha").attr('id', "linha"+divCount+(inputForm+index)); // linha q completa a seta
+
+            seta.css("top", "calc("+valor+" - 5px + 1.1rem)");
+            linha.css("top", "calc("+valor+" - 2px + 1.1rem)");
+
+            
             seta.draggable({
                 start: function(){
                     selectedArrow = $(this);
@@ -160,8 +149,9 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
             tstDiv.append(linha);
             tstDiv.append(seta);
         }
+
         form.on('input', function(event){
-            event.preventDefault();
+            // event.preventDefault();
             
             var avaliacao = actualName+"(";
             for (let index = 0; index < inputForm; index++) {
@@ -179,8 +169,16 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
             // var resultado = eval(avaliacao);
 
             try{
-                
-                icon.text(eval(avaliacao));
+                var x = [];
+                x = eval(avaliacao);
+                if (x[inputForm-1] != null) {
+                    for (let index = 0; index < inputForm; index++) {
+                        // icon.text(x[index]);
+                        alert(x[index]);
+                    }   
+                }else{
+                    icon.text(x);
+                }
 
             } catch(e){
                 if (e instanceof SyntaxError) {
@@ -231,14 +229,6 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
             ActualResizeHandle3.css('height', actualHeight);
             tstDiv.css('width', actualWidth);
             tstDiv.css('height', actualHeight);
-
-            var widthDiff = actualWidth - ui.originalSize.width;
-
-            // for(let index = 0; index < inputForm; index++){
-            //     var linha = $("#linha"+divCount+index);
-            // var newWidth = parseFloat(linha.css("width")) - widthDiff;
-            // linha.css("width", newWidth + "px");
-            // }
             
         }
     });
@@ -311,9 +301,14 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
         drop: function() {
             if (String(inputId.attr("id")).includes("icon")) {
                 $(this).val(inputId.text()); // caso a seta venha de um div
+                $(this).css("outline-color", document.getElementById(inputId.attr("id")).parentElement.style.backgroundColor);
+                $(this).attr("teste", document.getElementById(inputId.attr("id")).parentElement.parentElement.parentElement.id);
             } else {
                 $(this).val(inputId.val()); // caso a seta venha de um input
+                $(this).css("outline-color", document.getElementById(inputId.attr("id")).parentElement.parentElement.style.backgroundColor);
+                $(this).attr("teste", document.getElementById(inputId.attr("id")).parentElement.parentElement.id);
             }
+            // console.log(this.id);
             
         }
     });
