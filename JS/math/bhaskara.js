@@ -10,9 +10,9 @@ function bhaskara(a, b, c){ // 1, 3, -4 = [1, -4]
         x[1] = ((-b) - Math.sqrt(delta))/2 * a;
         if (delta == 0) {
             //x' = x''
-            return x;
+            return x[0] + " " + x[1];
         }else{
-            return x;
+            return x[0] + " " + x[1];
         }
 
         //Vértice v = (Xv, Yv) = (-b/2a , -delta/4a )
