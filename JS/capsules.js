@@ -7,7 +7,50 @@ var highestZIndex = 11;
 
 function getColor(){
     var color = Math.floor(Math.random()*16777215).toString(16);
+    var regex = /[0-5]/ig;
+    color = color.replace(regex, "a"); // substitui as cores mais baixas pelo 'a'
+    if(color.length == 5) color = color.concat('f'); 
     return "#"+color;
+}
+
+function avaliaJanela(a){
+    var inputElements = a.querySelectorAll('input');
+    inputForm = inputElements.length;
+    divCount = String(a.parentElement.parentElement.id).replace("div", ""); // form, tstDiv, ActualDiv
+    var actualName = $("#div"+divCount).attr("actualname");
+    var exit = $("#div"+divCount).attr("exit");
+    var avaliacao = actualName+"(";
+    for (let index = 0; index < inputForm; index++) {
+        if (inputElements[index].value == "") {
+            avaliacao += "0";
+        }else{
+            avaliacao += inputElements[index].value;
+        }
+        if (index < inputForm-1) {
+            avaliacao += ", ";
+        }
+    }
+    avaliacao += ")";
+
+    try{
+        var x = [];
+        x = String(eval(avaliacao)).split(" "); 
+        for (let index = 0; index < exit; index++) {
+            if (String(x[index]) == "undefined") {
+                x[index] = "NaN";
+            }
+            document.getElementById("icon"+divCount+(inputForm+index)).innerHTML = x[index];
+        }
+
+    } catch(e){
+        if (e instanceof SyntaxError) {
+            console.log("Erro de sintaxe (esperado)");
+            // Faça algo para lidar com o erro de sintaxe, se necessário
+        } else {
+            // Outros tipos de erros que não são de sintaxe
+            console.error("Erro:", e);
+        }
+    }
 }
 
 // para criar uma div sem o onclick é so colocar o inputForm como 0
@@ -16,6 +59,7 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
     var randomId = 'div' + divCount;
     var mini = 0;
     var ActualDiv = $('<div>').attr('id', randomId).addClass('ActualDiv').attr("actualName", actualName);
+    ActualDiv.attr("exit", exit);
     var DraggableDiv = $('<div>').attr('id', 'draggable' + randomId).addClass('DraggableDiv');
     var minimize = $('<div>').addClass('minimize');
     // var svg = $('#svgContainer'); // nao funciona pq jquery não sabe oq os elementos como PATH significam
@@ -37,18 +81,15 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
         // cria o formulario
         var nome = $('<p>').text(nomeForm);
         var form = $('<form>');
-        
-        var inputElements = [];
 
         for (let index = 0; index < inputForm; index++) {
             // cria o input
             var input = $('<input>').attr('type', 'text').attr('placeholder', 'Enter text...').attr('id', "input"+divCount+index).addClass("teste");
-            inputElements.push(input); // Armazena a referência do elemento no array
             input.css("height", "2.2rem");   
             // input.attr("type", "number");
             var valor = "10% + 30px + "+ index +" * (min(2rem, 2vh) + 2.2rem - 1px)";
             input.css("top", "calc("+valor+")");
-            
+
             // cria as setas
             var seta = $("<div>").addClass("arrow right").attr('id', "seta"+divCount+index).css("position", "absolute");
             var linha = $('<div>').addClass("linha").attr('id', "linha"+divCount+index); // linha q completa a seta
@@ -96,10 +137,8 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
         for (let index = 0; index < exit; index++) {
         
             var icon = $('<div>').addClass('icon').html('&#128515;').attr('id', "icon"+divCount+(inputForm+index)); // Unicode emoji for smiling face 
-            icon.css("height", "2.2rem");
             icon.css("position", "absolute");
-            icon.css("left", "10%");
-
+            icon.css("outline-color", tstDiv.backgroundColor);
 
             var valor = "10% + 30px + "+ (index+inputForm) +" * (min(2rem, 2vh) + 2.2rem - 1px)";
             icon.css("top", "calc("+valor+")");
@@ -152,43 +191,7 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
 
         form.on('input', function(event){
             // event.preventDefault();
-            
-            var avaliacao = actualName+"(";
-            for (let index = 0; index < inputForm; index++) {
-                if (inputElements[index].val() == "") {
-                    avaliacao += "0";
-                }else{
-                    avaliacao += inputElements[index].val();
-                }
-                if (index < inputForm-1) {
-                    avaliacao += ", ";
-                }
-            }
-            avaliacao += ")";
-
-            // var resultado = eval(avaliacao);
-
-            try{
-                var x = [];
-                x = eval(avaliacao).split(" ");
-                if (x[inputForm-1] != null) {
-                    for (let index = 0; index < exit; index++) {
-                        document.getElementById("icon"+(index+inputForm)).text(x[index]);
-                        alert(x[index]);
-                    }   
-                }else{
-                    icon.text(x);
-                }
-
-            } catch(e){
-                if (e instanceof SyntaxError) {
-                    console.log("Erro de sintaxe (esperado)");
-                    // Faça algo para lidar com o erro de sintaxe, se necessário
-                } else {
-                    // Outros tipos de erros que não são de sintaxe
-                    console.error("Erro:", e);
-                }
-            }
+            avaliaJanela(this);
         });
         
     }
@@ -308,39 +311,10 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
                 $(this).css("outline-color", document.getElementById(inputId.attr("id")).parentElement.parentElement.style.backgroundColor);
                 $(this).attr("teste", document.getElementById(inputId.attr("id")).parentElement.parentElement.id);
             }
-            // console.log(this.id);
-            
+            avaliaJanela(this.parentElement);
         }
     });
 
-
-    // essa parte do código seria responsável por atualizar todas as janelas quando uma atualiza
-
-    // $('input.teste').on('input', function () {
-    //     var exemplo = String(this.id).slice(0, -1).replace("input", "div");
-    //     var avaliacao = $("#"+exemplo).attr("actualname") + "(";
-    //     $("#"+exemplo+" input").each(function(){
-    //         if (this.value == "") {
-    //             avaliacao += "0";
-    //         }else{
-    //             avaliacao += this.value;
-    //         }
-    //         avaliacao += ",";
-    //     });
-    //     avaliacao = eval(avaliacao.slice(0, -1) + ")");
-
-    //     try{
-    //         var ico = String(this.id).slice(0, -1).replace("input", "icon")+"0";
-    //         $("#"+ico).text(avaliacao);
-
-    //     } catch(e){
-    //         if (e instanceof SyntaxError) {
-    //             console.log("Erro de sintaxe (esperado)");
-    //             } else {
-    //             console.error("Erro:", e);
-    //             }
-    //     } 
-    // });
 }
 
 function uploadImg(selectedFile, naturalHeight, naturalWidth){

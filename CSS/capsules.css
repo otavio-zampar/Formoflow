@@ -58,8 +58,12 @@
     outline: var(--Black) solid min(1rem, 1vh);
   }
   .tstDiv .icon {
-    font-size: 2rem;
-    margin-bottom: 10px;
+    outline: var(--Black) solid min(1rem, 1vh);
+    background-color: var(--White);
+    width: 80%;
+    height: 2.2rem;
+    padding: 5px;
+    left: 10%;
   }
   
   .DraggableDiv {
@@ -144,7 +148,7 @@
     border-width: 0 4px 4px 0;
     display: inline-block;
     padding: 3px;
-    left: calc(100% - 60px + min(1rem, 1vh));
+    left: calc(90% + min(1rem, 1vh));
  }
 
  .linha{
@@ -152,7 +156,7 @@
     height: 4px;
     background-color: var(--Black);
     position: absolute;
-    left: calc(100% - 60px + min(1rem, 1vh));
+    left: calc(90% + min(1rem, 1vh));
     pointer-events: none;
  }
 
