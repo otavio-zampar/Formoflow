@@ -39,20 +39,18 @@
 } */
 
 .basic_instruments{
-    min-height: 2rem;
-    min-width: 2rem;
-    height: 10vh;
-    width: 10vh;
+    height: max(5vw, 2rem);
+    width: max(5vw, 2rem);
     cursor: pointer;
     position: absolute;
     top:2vh;
     transition: .1s transform, .1s -webkit-transform;
 }
 .eraser{
-    left: 2.5vh;
+    left: 2vw;
 }
 .pen{
-    left: calc(2.5vh + 4rem);
+    left: calc(2vw + max(5vw, 2rem));
 }
 .basic_instruments:hover{
     transform: scale(1.02);

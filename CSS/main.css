@@ -107,7 +107,7 @@ div.sticky{
     border: 0px;
     padding-left: 10%;
     padding-right: 10%;
-    font-size: max(1rem, 10vh);
+    font-size: min(10vh, max(10vw, 1rem));
     text-align: center;
     color: var(--LightGray); 
 }
@@ -117,14 +117,14 @@ div.sticky{
     border: 0px;
     color: var(--AccentColor);
     margin: 0%;
-    font-size: max(1rem, 8vh);
+    font-size: min(8vh, max(8vw, 1rem));
     text-align: center;
 }
 .grid-item-extra{
     background-color: var(--AccentColor);
     border: 0px;
     color: var(--RealDarkBlue); 
-    font-size: max(1rem, 6vh);
+    font-size: min(6vh, max(6vw, 1rem));
     text-align: center;
     height: 13vh;
 }
