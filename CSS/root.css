@@ -1,5 +1,6 @@
 :root{
     --Black: #000000;                    /* background */
+    --BlackFocus: #020202;                    /* nao usa */
     --RealDarkBlue: #1f1926;             /* usado especialmente nos numeros da calculadora sidenav */
     --AlmostTransparent: #0000001f;      /* sombra da lista de pesquisa */
     --BaseColor: #322c40;                /*primeira cor principal do app */

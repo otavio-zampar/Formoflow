@@ -20,7 +20,7 @@
 
 .resposta{
     padding: 10px;
-    background-color: var(--White);
+    background-color: var(--WhiteFocus);
     z-index: 3;
     width: 90vw;
 }
@@ -40,7 +40,6 @@
     margin: 0px;
     padding: 0px;
     z-index: 3;
-    outline: var(--AlmostWhite) solid 3px;
     box-shadow: -6px 5px 7px var(--AlmostTransparent);
 }
 
@@ -58,6 +57,8 @@
     font-size: 1.5rem;
     /* outline: var(--AlmostWhite) solid 3px; */
     box-shadow: -6px 5px 7px var(--AlmostTransparent);
+    caret-color: var(--Black);
+    color: var(--Black);
 }
 
 #searchBar:focus{
