@@ -57,7 +57,7 @@
     outline: var(--Black) solid min(1rem, 1vh);
     border: 0px solid var(--Black);
     border-radius: 10px;
-    box-shadow: -3px 3px var(--Black);
+    box-shadow: -3px 3px var(--LightGray);
     background-color: var(--White);
   }
   .nocopy{
