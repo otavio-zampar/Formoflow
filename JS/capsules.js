@@ -286,10 +286,10 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
 
     minimize.on('mousedown', function(){
         if(mini == 0){
-            ActualDiv.children().hide();
+            ActualDiv.css('display', 'none');
             mini = 1;
         }else{  
-            ActualDiv.children().show();
+            ActualDiv.css('display', 'initial');
             mini = 0;
 
             // Encontre o maior z-index entre todas as divs visíveis
