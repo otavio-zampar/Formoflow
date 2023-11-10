@@ -117,9 +117,10 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
                             highestZIndex = zIndex;
                         }
                     });
-                    selectedArrow.css('z-index', highestZIndex + 1);
+                    selectedArrow.css('z-index', highestZIndex + 1);    
                     // console.log(selectedArrow.css('z-index'));
                 },
+
                 // drag: function() {},
                 stop: function() {
                     selectedArrow.css({
