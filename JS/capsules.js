@@ -309,15 +309,43 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
             if (String(inputId.attr("id")).includes("icon")) {
                 $(this).val(inputId.text()); // caso a seta venha de um div
                 $(this).css("outline-color", document.getElementById(inputId.attr("id")).parentElement.style.backgroundColor);
-                $(this).attr("teste", document.getElementById(inputId.attr("id")).parentElement.parentElement.parentElement.id);
+                $(this).attr("InputPai", inputId.attr("id"));
             } else {
                 $(this).val(inputId.val()); // caso a seta venha de um input
                 $(this).css("outline-color", document.getElementById(inputId.attr("id")).parentElement.parentElement.style.backgroundColor);
-                $(this).attr("teste", document.getElementById(inputId.attr("id")).parentElement.parentElement.id);
+                $(this).attr("InputPai", inputId.attr("id"));
             }
             avaliaJanela(this.parentElement);
         }
     });
+
+    $('.teste').on('input', function(){
+        var InputMudado = $(this);
+        $('.teste').each(function(){
+            if (InputMudado.attr("id") == $(this).attr("InputPai")) {
+                console.log("De "+ InputMudado.attr("id") + ", para " + $(this).attr("id"));
+                $(this).val(InputMudado.val());
+            }
+        });
+    });
+    $('.icon').on('DOMSubtreeModified', function(){
+        var InputMudado = this;
+        // console.log(InputMudado.id);
+        $('.teste').each(function(){
+            if (InputMudado.id == $(this).attr("InputPai")) {
+                console.log("De "+ InputMudado.id + ", para " + $(this).attr("id"));
+                $(this).val(InputMudado.innerHTML);
+            }
+        });
+      });
+
+    // $('.icon').each(function(){
+    //     if (String(this.id)) {
+            
+    //     }
+    //     console.log(this.id);
+    // });
+    // $('div[class="icon"]').on('input', alert());
 
 }
 
