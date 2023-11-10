@@ -12,6 +12,11 @@ function mudaTema(dark) {
         document.documentElement.style.setProperty('--AlmostWhite', '#232323');
         document.documentElement.style.setProperty('--AlmostTransparent', '#0000001f');
         document.documentElement.style.setProperty('--WhiteFocus', '#252525');
+
+        var github = document.getElementById('github');
+        github.firstElementChild.style.display = 'none';
+        github.lastElementChild.style.display = 'initial';
+
     }else{
         document.documentElement.style.setProperty('--AccentColor', '#B6B7CF');
         document.documentElement.style.setProperty('--SecondAccentColor', '#605869');
@@ -25,5 +30,9 @@ function mudaTema(dark) {
         document.documentElement.style.setProperty('--AlmostWhite', '#f0f0f0');
         document.documentElement.style.setProperty('--AlmostTransparent', '#0000001f');
         document.documentElement.style.setProperty('--WhiteFocus', '#fdfdfd');
+
+        var github = document.getElementById('github');
+        github.firstElementChild.style.display = 'initial';
+        github.lastElementChild.style.display = 'none';
     }
 }
