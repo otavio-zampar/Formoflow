@@ -36,7 +36,7 @@
   justify-content: center;
   color: var(--Black);
   font-family: Arial, sans-serif;
-  min-width: 290px; min-height: 290px;
+  min-width: 290px;
   }
   .tstDiv {
     width: 320px;
@@ -44,7 +44,7 @@
     justify-content: center;
     /* padding: 60px; */
     background-color: aliceblue;
-    min-width: 290px; min-height: 290px;
+    min-width: 290px;
   }
   /* .tstDiv form {
     margin-bottom: 10px;
@@ -129,14 +129,12 @@
     height: 320px;
     cursor: e-resize;
     right: 0px;
-    min-height: 290px;
   }
   .w {
     width: 5px;
     height: 320px;
     cursor: w-resize;
     left: 0px;
-    min-height: 290px;
   }
   .se {
     width: 5px;

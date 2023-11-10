@@ -225,7 +225,6 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
             se: ".se",
             sw: ".sw",
         },
-        minHeight: 300,
         minWidth: 300,
 
         resize: function(event, ui) {
@@ -243,6 +242,11 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
             
         }
     });
+    var minHeight = "calc("+icon.css('top')+" + "+ icon.css('height') +" + 30px)";
+    ActualDiv.css('min-height', minHeight);
+    tstDiv.css('min-height', minHeight);
+    ActualResizeHandle2.css('min-height', minHeight);
+    ActualResizeHandle3.css('min-height', minHeight);
 
     DraggableDiv.draggable({
         containment: "#container",
