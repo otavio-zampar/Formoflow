@@ -324,7 +324,7 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
         $('.teste').each(function(){
             if (InputMudado.attr("id") == $(this).attr("InputPai")) {
                 console.log("De "+ InputMudado.attr("id") + ", para " + $(this).attr("id"));
-                $(this).val(InputMudado.val());
+                $(this).val(InputMudado.val()).trigger('input');
             }
         });
     });
@@ -334,7 +334,7 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
         $('.teste').each(function(){
             if (InputMudado.id == $(this).attr("InputPai")) {
                 console.log("De "+ InputMudado.id + ", para " + $(this).attr("id"));
-                $(this).val(InputMudado.innerHTML);
+                $(this).val(InputMudado.innerHTML).trigger('input');
             }
         });
       });
