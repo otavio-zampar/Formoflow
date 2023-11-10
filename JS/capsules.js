@@ -41,7 +41,6 @@ function avaliaJanela(a){
             }
             document.getElementById("icon"+divCount+(inputForm+index)).innerHTML = x[index];
         }
-
     } catch(e){
         if (e instanceof SyntaxError) {
             console.log("Erro de sintaxe (esperado)");
@@ -197,8 +196,7 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
             tstDiv.append(seta);
         }
 
-        form.on('input', function(event){
-            // event.preventDefault();
+        form.on('input', function(){
             avaliaJanela(this);
         });
         
@@ -227,7 +225,7 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
         },
         minWidth: 300,
 
-        resize: function(event, ui) {
+        resize: function(ui) {
             var actualWidth = ui.size.width;
             var actualHeight = ui.size.height;
             ui.originalLeft = ui.position.left;
@@ -250,7 +248,7 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
 
     DraggableDiv.draggable({
         containment: "#container",
-        drag: function(event, ui) {
+        drag: function(ui) {
             var offset = ui.offset;
             var left = offset.left;
             var top = offset.top;
@@ -323,6 +321,7 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
         }
     });
 
+
     $('.teste').on('input', function(){
         var InputMudado = $(this);
         $('.teste').each(function(){
@@ -341,15 +340,7 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
                 $(this).val(InputMudado.innerHTML).trigger('input');
             }
         });
-      });
-
-    // $('.icon').each(function(){
-    //     if (String(this.id)) {
-            
-    //     }
-    //     console.log(this.id);
-    // });
-    // $('div[class="icon"]').on('input', alert());
+    });
 
 }
 
