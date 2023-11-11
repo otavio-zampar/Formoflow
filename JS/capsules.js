@@ -143,9 +143,11 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
             icon.css("position", "absolute");
             icon.css("outline-color", "transparent");
             icon.on("click", function(){
-                var copyText = document.getElementById("icon"+divCount+(inputForm+index));
-                navigator.clipboard.writeText(copyText.innerHTML); // copy to clipboard
-                alert("copiado!");
+                // var copyText = document.getElementById("icon"+divCount+(inputForm+index));
+                // navigator.clipboard.writeText(copyText.innerHTML); // copy to clipboard
+                navigator.clipboard.writeText($(this).val());
+                console.log($(this).val());
+                // alert("copiado!");
             });
 
             var valor = "10% + 30px + "+ (index+inputForm) +" * (min(2rem, 2vh) + 2.2rem - 1px)";
