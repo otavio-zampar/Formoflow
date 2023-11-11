@@ -227,7 +227,7 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
         },
         minWidth: 300,
 
-        resize: function(ui) {
+        resize: function(event, ui) {
             var actualWidth = ui.size.width;
             var actualHeight = ui.size.height;
             ui.originalLeft = ui.position.left;
@@ -250,7 +250,7 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
 
     DraggableDiv.draggable({
         containment: "#container",
-        drag: function(ui) {
+        drag: function(event, ui) {
             var offset = ui.offset;
             var left = offset.left;
             var top = offset.top;

@@ -65,7 +65,6 @@
     <script>
         var isSet = false;
         var dark = false;
-        mudaTema(dark);
         dark = !dark; // falso = tema claro; verdadeiro = tema escuro;
     </script>
 
@@ -81,13 +80,13 @@
 </head>
 <body style="color:var(--Black); background-color: var(--AlmostWhite); overflow-y: hidden;"> <!-- overflow: hidden; -->
 
-    <div id="whereHeader"></div>
-    <div id="whereSidenavC"></div>
-    <div id="whereSidenavU"></div>
+    <div id="whereHeader" class="nocopy"></div>
+    <div id="whereSidenavC" class="nocopy"></div>
+    <div id="whereSidenavU" class="nocopy"></div>
 
     <!-- basicamente eu tive que incluir a sidenav de desenho no index pq o JS depende do canvas criado aqui, 
     e o JS estava sendo chamado primeiro -->
-    <div id="whereSidenavD">
+    <div id="whereSidenavD" class="nocopy">
         <div class="rounded-pill base pill" id="btnMyDraw" style="top: calc(45vh + 5rem); background-color: var(--AccentColor);" onmousedown='openDraw()'>
             <svg xmlns="https://www.w3.org/2000/svg" id="btnDraw" width="16" height="16" fill="var(--BaseColor)" class="bi bi-chevron-compact-left" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M9.224 1.553a.5.5 0 0 1 .223.67L6.56 8l2.888 5.776a.5.5 0 1 1-.894.448l-3-6a.5.5 0 0 1 0-.448l3-6a.5.5 0 0 1 .67-.223z"/>
@@ -237,22 +236,18 @@
         
     </div>
 
-    <div id="whereFooter">
+    <div id="whereFooter" class="nocopy">
         <div id="contato">
-            <p>Otavio custódio Zampar</p>
-            <p class="contato">CONTATO</p>
-            <p class="contato">AAA</p>
-            <p class="contato">tavicozampar@gmail.com</p>
-            <p class="contato">otavio.zampar@fatec.sp.gov.br</p>
-            <div>
-            <a href="" target="_blank" rel="noopener"><img src=""></a>
-            <a href="" target="_blank" rel="noopener"><img src=""></a>
-            </div>
-            <p style="width:400px;" class="contato">© Otavio Zampar</p>
+            <p class="contato" style="margin-left: calc(1.5rem + 20px);">CONTATO</p>
             <br>
-
-            <!--Bootstrap JS-->
-            <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script> -->
+            <p>Contato: <a href="mailto:contato@formoflow.com.br" class="contato">contato@formoflow.com.br</a></p>
+            <p>Suporte: <a href="mailto:suporte@formoflow.com.br" class="contato">suporte@formoflow.com.br</a></p>
+            <p>SAC: <a href="mailto:sac@formoflow.com.br" class="contato">sac@formoflow.com.br</a></p>
+            <p class="contato">© Otávio Custódio Zampar</p>
+            <div style="position: absolute; top: 0%; left: 20px; top: 20px;" id="github">
+                <a href="https://github.com/otavio-zampar" rel="noopener" class="noCopy" style="display: initial;"><img src="./src/github-mark.svg" style="height: 1.5rem;"></a>
+                <a href="https://github.com/otavio-zampar" rel="noopener" class="noCopy" style="display: none;"><img src="./src/github-mark-white.svg" style="height: 1.5rem; left: calc(50vw - 1.5rem);"></a>
+            </div>
         </div>
     </div>
 
