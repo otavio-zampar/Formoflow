@@ -143,8 +143,8 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
             icon.css("position", "absolute");
             icon.css("outline-color", "transparent");
             icon.on("click", function(){
-                var copyText = document.getElementById("icon"+divCount+(inputForm+index));
-                navigator.clipboard.writeText(copyText.innerHTML); // copy to clipboard
+                var copyText = $(this);
+                navigator.clipboard.writeText(copyText.val()); // copy to clipboard
                 alert("copiado!");
             });
 
