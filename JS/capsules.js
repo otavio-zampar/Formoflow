@@ -3,6 +3,7 @@ var selectedArrow = null; // Armazena a seta selecionada
 var selectedArrowX = selectedArrowY = null;
 var inputId = null; // Armazena o input de destino selecionado
 var highestZIndex = 11;
+var varTeste = 20;
 
 
 function getColor(){
@@ -145,7 +146,10 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
             icon.on("click", function(){
                 var copyText = document.getElementById("icon"+divCount+(inputForm+index));
                 navigator.clipboard.writeText(copyText.innerHTML); // copy to clipboard
-                alert("copiado!");
+                document.getElementById('BTNAlerta').style.display = "initial";
+                setTimeout(() => {
+                document.getElementById('BTNAlerta').style.display = "none";
+                }, 1000);
             });
 
             var valor = "10% + 30px + "+ (index+inputForm) +" * (min(2rem, 2vh) + 2.2rem - 1px)";
@@ -326,8 +330,15 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
         var InputMudado = $(this);
         $('.teste').each(function(){
             if (InputMudado.attr("id") == $(this).attr("InputPai")) {
-                console.log("De "+ InputMudado.attr("id") + ", para " + $(this).attr("id"));
-                $(this).val(InputMudado.val()).trigger('input');
+                if(varTeste > 0){
+                    // console.log("De "+ InputMudado.attr("id") + ", para " + $(this).attr("id"));
+                    $(this).val(InputMudado.val()).trigger('input');
+                    console.log("VarTeste (.teste): "+varTeste);
+                    varTeste--;
+                }else{
+                    // console.log("De "+ InputMudado.attr("id") + ", para " + $(this).attr("id"));
+                    // $(this).val(InputMudado.val());
+                }
             }
         });
     });
@@ -336,8 +347,15 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
         // console.log(InputMudado.id);
         $('.teste').each(function(){
             if (InputMudado.id == $(this).attr("InputPai")) {
-                console.log("De "+ InputMudado.id + ", para " + $(this).attr("id"));
-                $(this).val(InputMudado.innerHTML).trigger('input');
+                if(varTeste < 0){
+                    // console.log("De "+ InputMudado.id + ", para " + $(this).attr("id"));
+                    $(this).val(InputMudado.innerHTML).trigger('input');
+                    console.log("VarTeste (.icon): "+varTeste);
+                    varTeste--;
+                }else{
+                    // console.log("De "+ InputMudado.id + ", para " + $(this).attr("id"));
+                    // $(this).val(InputMudado.innerHTML);
+                }
             }
         });
     });

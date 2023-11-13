@@ -60,6 +60,15 @@
     box-shadow: -3px 3px var(--LightGray);
     background-color: var(--White);
   }
+  #BTNAlerta{
+    position: absolute; 
+    padding-left: 10vw; 
+    padding-right: 10vw; 
+    width: 100vw; 
+    bottom: 10px; 
+    z-index: 9999; 
+    display: none;
+  }
   .nocopy{
     user-select: none;
   }
