@@ -3,7 +3,6 @@ var selectedArrow = null; // Armazena a seta selecionada
 var selectedArrowX = selectedArrowY = null;
 var inputId = null; // Armazena o input de destino selecionado
 var highestZIndex = 11;
-var varTeste = 20;
 
 
 function getColor(){
@@ -328,36 +327,24 @@ function createDiv(nomeForm, actualName, inputForm, exit) { // Bhaskhara, bhaska
 
     $('.teste').on('input', function(){
         var InputMudado = $(this);
-        $('.teste').each(function(){
-            if (InputMudado.attr("id") == $(this).attr("InputPai")) {
-                if(varTeste > 0){
-                    // console.log("De "+ InputMudado.attr("id") + ", para " + $(this).attr("id"));
-                    $(this).val(InputMudado.val()).trigger('input');
-                    console.log("VarTeste (.teste): "+varTeste);
-                    varTeste--;
-                }else{
-                    // console.log("De "+ InputMudado.attr("id") + ", para " + $(this).attr("id"));
-                    // $(this).val(InputMudado.val());
-                }
+        for (var i = 0; i < $('.teste').length; i++) {
+            var $element = $($('.teste')[i]);
+            if (InputMudado.attr("id") == $element.attr("InputPai")) {
+                console.log("(input) De "+ InputMudado.attr("id") + ", para " + $element.attr("id"));
+                $element.val(InputMudado.val()).trigger('input');
             }
-        });
+        }
     });
     $('.icon').on('DOMSubtreeModified', function(){
         var InputMudado = this;
-        // console.log(InputMudado.id);
-        $('.teste').each(function(){
-            if (InputMudado.id == $(this).attr("InputPai")) {
-                if(varTeste < 0){
-                    // console.log("De "+ InputMudado.id + ", para " + $(this).attr("id"));
-                    $(this).val(InputMudado.innerHTML).trigger('input');
-                    console.log("VarTeste (.icon): "+varTeste);
-                    varTeste--;
-                }else{
-                    // console.log("De "+ InputMudado.id + ", para " + $(this).attr("id"));
-                    // $(this).val(InputMudado.innerHTML);
-                }
+        for (var i = 0; i < $('.teste').length; i++) {
+            var $element = $($('.teste')[i]);
+            if (InputMudado.id == $element.attr("InputPai")) {
+                console.log("(icon) De "+ InputMudado.id + ", para " + $element.attr("id"));
+                $element.val(InputMudado.innerHTML).trigger('input');
+                break;  // Isso interrompe a iteração do loop
             }
-        });
+        }
     });
 
 }
