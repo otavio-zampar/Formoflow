@@ -32,6 +32,7 @@
     <script src="./JS/math/perimetro.js"></script>
     <script src="./JS/math/volumes.js"></script>
     <script src="./JS/math/modificadores.js"></script>
+    <script src="./JS/math/algebra.js"></script>
 
     <!-- coisa das janelas/capsulas -->
     <script src="./JS/capsules.js"></script>
@@ -226,7 +227,11 @@
             const query = $('#searchBar').val().toLowerCase().trim();
             const filteredResults = data.filter(item => item.option.toLowerCase().includes(query));
             if (filteredResults.length > 0) {
-                createDiv(filteredResults[0].option, filteredResults[0].form, filteredResults[0].qnt, filteredResults[0].exit);
+                if(filteredResults[0].type == 'range' || filteredResults[0].form == 'textarea'){
+                    createEntradaDiv(filteredResults[0]);
+                }else{
+                    createDiv(filteredResults[0]);
+                }
             }
         }">
             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
