@@ -96,7 +96,7 @@ function createDiv(AA) {
             if (AA.placeholder[index] != undefined) {
                 input.attr("placeholder", AA.placeholder[index]);
             }else{
-                input.attr("placeholder", "Digite o texto...");
+                input.attr("placeholder", "Digite o texto");
             }
 
             input.css("height", "2.2rem");   
@@ -152,7 +152,7 @@ function createDiv(AA) {
 
         for (let index = 0; index < exit; index++) {
         
-            var icon = $('<div>').addClass('icon nocopy').html('&#128515;').attr('id', "icon"+divCount+(inputForm+index)); // Unicode emoji for smiling face 
+            var icon = $('<div>').addClass('icon nocopy').attr('id', "icon"+divCount+(inputForm+index)); // Unicode emoji for smiling face 
             icon.css("position", "absolute");
             icon.css("outline-color", "transparent");
             icon.on("click", function(){
@@ -414,7 +414,7 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
         tstDiv.append(form);
 
         if(exit != 0){
-            var icon = $('<div>').addClass('icon nocopy').html('&#128515;').attr('id', "icon"+divCount+(inputForm+1)); // Unicode emoji for smiling face 
+            var icon = $('<div>').addClass('icon nocopy').attr('id', "icon"+divCount+(inputForm+1)); // Unicode emoji for smiling face 
             icon.css("position", "absolute");
             icon.css("left", "10%");
             icon.css("outline-color", "transparent");
