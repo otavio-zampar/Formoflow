@@ -73,6 +73,7 @@
     user-select: none;
   }
   .tstDiv .icon {
+    overflow-x: hidden;
     outline: var(--Black) solid min(1rem, 1vh);
     background-color: var(--White);
     width: 80%;
