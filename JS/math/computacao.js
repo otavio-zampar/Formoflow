@@ -30,6 +30,10 @@ function binario(x){
     return x.toString(2);
 }
 
+function basePraDecimal(x, base){
+    return parseInt(x, base);
+}
+
 function hexadecimal(x){
     return x.toString(16);
 }
