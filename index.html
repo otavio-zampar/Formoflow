@@ -88,6 +88,14 @@
 
     <script src="./JS/checkTouch.js"></script>
 
+    <script>
+        document.getElementById('BTNAlerta').firstElementChild.innerHTML = "Ei, só para avisar. Esse site tem um bug interessante onde se vc fizer um loop com as fórmulas vc crasha o navegador. O nosso time está trabalhando duro para consertar o problema, por enquanto só tome cuidado.";
+        document.getElementById('BTNAlerta').style.display = "initial";
+        setTimeout(() => {
+        document.getElementById('BTNAlerta').style.display = "none";
+        }, 10000);
+    </script>
+
     <div id="whereHeader" class="nocopy"></div>
     <div id="whereSidenavC" class="nocopy"></div>
     <div id="whereSidenavU" class="nocopy"></div>
