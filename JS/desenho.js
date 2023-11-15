@@ -183,7 +183,6 @@ function und(){ //undo
         if(dec > 0){
                 dec--;
         }
-        console.log(dec);
         inc = dec;
 }
 

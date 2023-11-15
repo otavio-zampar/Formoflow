@@ -32,6 +32,8 @@
     <script src="./JS/math/perimetro.js"></script>
     <script src="./JS/math/volumes.js"></script>
     <script src="./JS/math/modificadores.js"></script>
+    <script src="./JS/math/computacao.js"></script>
+    <script src="./JS/math/algebra.js"></script>
 
     <!-- coisa das janelas/capsulas -->
     <script src="./JS/capsules.js"></script>
@@ -79,6 +81,12 @@
 
 </head>
 <body style="color:var(--Black); background-color: var(--AlmostWhite); overflow-y: hidden;"> <!-- overflow: hidden; -->
+
+    <div id="BTNAlerta">
+        <div class="alert alert-dark fade show" role="alert">
+            <strong>Copiado!</strong>
+        </div>
+    </div>
 
     <div id="whereHeader" class="nocopy"></div>
     <div id="whereSidenavC" class="nocopy"></div>
@@ -211,29 +219,47 @@
         <!-- Linhas horizontais -->
         <script>
             criaBckgnd(200);
-        </script>
 
-        <!-- <svg id="svgContainer" width="100vw" height="100vh">
-            <line x1="0" y1="0" x2="200" y2="200" style="stroke:rgb(255,0,0);stroke-width:2" />
-        </svg> -->
+            function pesquisa(meuQuery){
+                const query = meuQuery.toLowerCase().trim();
+                const filteredResults = data.filter(item => item.option.toLowerCase().includes(query));
+                if (filteredResults.length > 0) {
+                    if(filteredResults[0].type == 'range' || filteredResults[0].form == 'textarea'){
+                        createEntradaDiv(filteredResults[0]);
+                    }else{
+                        createDiv(filteredResults[0]);
+                    }
+                }
+                $('#searchBar').val("");
+                $('#searchBar').blur();
+                $("#searchBar").css("border-radius", "1rem");
+                $('#pesquisa').hide();
+            }
+
+        </script>
 
         <input type="text" id="searchBar" placeholder="Pesquisar...">
         <!-- when clicking, the fisrt result should be selected -->
-        <svg xmlns="https://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16" id="lupa" onclick="{
-
-            const query = $('#searchBar').val().toLowerCase().trim();
-            const filteredResults = data.filter(item => item.option.toLowerCase().includes(query));
-            if (filteredResults.length >= 0) {
-                createDiv(filteredResults[0].option, filteredResults[0].form, filteredResults[0].qnt, filteredResults[0].exit);
-            }
-        }">
+        <svg xmlns="https://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16" id="lupa" onclick="{pesquisa($('#searchBar').val())}">
             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
         </svg>
+
+        <script>
+            $('#searchBar').on('keydown', function(event){
+                if (event.which == '13') {
+                    pesquisa($('#searchBar').val());
+                }
+            });
+        </script>
 
         <div id="pesquisa">
             <ul id="lista" class="absolute" style="overflow:auto;"></ul>
         </div>
         
+    </div>
+
+    <div class="alert alert-dark alert-dismissible fade show" role="alert" id="aa">
+        <strong>Copiado!</strong>
     </div>
 
     <div id="whereFooter" class="nocopy">

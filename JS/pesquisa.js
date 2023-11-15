@@ -27,7 +27,11 @@ function searchQuery(query, resultsList){
                     const listItem = $("<li>").text(result.option);
                     listItem.addClass("resposta noCopy");
                     listItem.click(() => {
-                        createDiv(result.option, result.form, result.qnt, result.exit);
+                        if(result.type == 'range' || result.form == 'textarea'){
+                            createEntradaDiv(result);
+                        }else{
+                            createDiv(result);
+                        }
                         $("#searchBar").val("");
                         $("#pesquisa").hide();
                         $("#searchBar").css("border-radius", "1rem");

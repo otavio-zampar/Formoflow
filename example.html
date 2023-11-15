@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arrastar Elementos</title>
+  <style>
+    .draggable {
+      width: 100px;
+      height: 100px;
+      background-color: #3498db;
+      position: absolute;
+      cursor: grab;
+    }
+  </style>
+</head>
+<body>
+
+<div class="draggable" id="draggableElement">Arraste-me!</div>
+
+<script>
+  // Adiciona um listener de evento de carga para garantir que a página foi completamente carregada
+  document.addEventListener('DOMContentLoaded', function () {
+    var draggableElement = document.getElementById('draggableElement');
+
+    var offsetX, offsetY, isDragging = false;
+
+    // Adiciona um listener para o evento touchstart
+    draggableElement.addEventListener('touchstart', function (e) {
+      var touch = e.touches[0];
+      offsetX = touch.clientX - draggableElement.getBoundingClientRect().left;
+      offsetY = touch.clientY - draggableElement.getBoundingClientRect().top;
+      isDragging = true;
+      draggableElement.style.cursor = 'grabbing';
+    });
+
+    // Adiciona um listener para o evento touchmove
+    draggableElement.addEventListener('touchmove', function (e) {
+      if (isDragging) {
+        var touch = e.touches[0];
+        var x = touch.clientX - offsetX;
+        var y = touch.clientY - offsetY;
+
+        // Define as novas coordenadas do elemento arrastável
+        draggableElement.style.left = x + 'px';
+        draggableElement.style.top = y + 'px';
+      }
+    });
+
+    // Adiciona um listener para o evento touchend
+    draggableElement.addEventListener('touchend', function () {
+      isDragging = false;
+      draggableElement.style.cursor = 'grab';
+    });
+  });
+</script>
+
+</body>
+</html>
