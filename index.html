@@ -20,7 +20,6 @@
 
 
     <!-- links para a sidenav & fatoracao-->
-    <script src="./JS/checkTouch.js"></script>
     <script src="./JS/mudaTema.js"></script>
     <script src="./JS/sidenav.js"></script>
     <script src="./JS/calculadora.js"></script>
@@ -82,11 +81,12 @@
 </head>
 <body style="color:var(--Black); background-color: var(--AlmostWhite); overflow-y: hidden;"> <!-- overflow: hidden; -->
 
-    <div id="BTNAlerta">
+    <div id="BTNAlerta" style="display: none;">
         <div class="alert alert-dark fade show" role="alert">
-            <strong>Copiado!</strong>
         </div>
     </div>
+
+    <script src="./JS/checkTouch.js"></script>
 
     <div id="whereHeader" class="nocopy"></div>
     <div id="whereSidenavC" class="nocopy"></div>
@@ -256,10 +256,6 @@
             <ul id="lista" class="absolute" style="overflow:auto;"></ul>
         </div>
         
-    </div>
-
-    <div class="alert alert-dark alert-dismissible fade show" role="alert" id="aa">
-        <strong>Copiado!</strong>
     </div>
 
     <div id="whereFooter" class="nocopy">
