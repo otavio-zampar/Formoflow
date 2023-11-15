@@ -105,6 +105,13 @@ function createDiv(AA) {
             var valor = "10% + 30px + "+ index +" * (min(2rem, 2vh) + 2.2rem - 1px)";
             input.css("top", "calc("+valor+")");
 
+            input.keydown(function(event) {
+                if (event.which === 13) {
+                    event.preventDefault();
+                    avaliaJanela(this.parentElement);
+                }
+            });
+
             // cria as setas
             var seta = $("<div>").addClass("arrow right").attr('id', "seta"+divCount+index).css("position", "absolute");
             var linha = $('<div>').addClass("linha").attr('id', "linha"+divCount+index); // linha q completa a seta
@@ -406,6 +413,12 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
             input.css("height", "calc(80% - 30px)");
             input.css("max-height", "calc(80% - 30px)");
         }
+
+        input.keydown(function(event) {
+            if (event.which === 13) {
+                event.preventDefault();
+            }
+        });
 
         var valor = "10% + 30px";
         input.css("top", "calc("+valor+")");
