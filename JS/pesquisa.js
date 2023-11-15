@@ -60,8 +60,8 @@ $(document).ready(function () {
     });
 
     $(document).mousedown(function(e){
-        if (!$('#lista, #searchBar, .resposta').is(e.target)) {
-            $('#lista').hide();
+        if (!($('#lista, #searchBar, .resposta, #lupa, #pesquisa').is(e.target))) {
+            $('#pesquisa').hide();
             $("#searchBar").css("border-radius", "1rem");
         }
     });

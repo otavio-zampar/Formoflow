@@ -223,7 +223,7 @@
 
             const query = $('#searchBar').val().toLowerCase().trim();
             const filteredResults = data.filter(item => item.option.toLowerCase().includes(query));
-            if (filteredResults.length > 0) {
+            if (filteredResults.length >= 0) {
                 createDiv(filteredResults[0].option, filteredResults[0].form, filteredResults[0].qnt, filteredResults[0].exit);
             }
         }">
