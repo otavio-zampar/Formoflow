@@ -6,7 +6,7 @@ function searchQuery(query, resultsList){
     resultsList.empty();
 
         if (query.length === 0) {
-            $("#pesquisa").hide();
+            $("#lista").hide();
             $("#searchBar").css("border-radius", "1rem");
             return;
         }
@@ -33,14 +33,15 @@ function searchQuery(query, resultsList){
                             createDiv(result);
                         }
                         $("#searchBar").val("");
-                        $("#pesquisa").hide();
+                        $("#lista").hide();
                         $("#searchBar").css("border-radius", "1rem");
                     });
                     resultsList.append(listItem);
                 });
-            $("#pesquisa").show();
+            $("#lista").show();
+            $("#lista").css("z-index", "9983");
         } else {
-            $("#pesquisa").hide();
+            $("#lista").hide();
         }
 }
 
@@ -59,13 +60,13 @@ $(document).ready(function () {
         }
         const query = $(this).val().toLowerCase().trim();
         const resultsList = $("#lista");
-        
+        console.log(document.getElementById("div1").style.zIndex);
         searchQuery(query, resultsList);
     });
 
     $(document).mousedown(function(e){
-        if (!($('#lista, #searchBar, .resposta, #lupa, #pesquisa').is(e.target))) {
-            $('#pesquisa').hide();
+        if (!($('#lista, #searchBar, .resposta, #lupa, #lista').is(e.target))) {
+            $('#lista').hide();
             $("#searchBar").css("border-radius", "1rem");
         }
     });

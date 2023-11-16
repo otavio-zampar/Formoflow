@@ -5,11 +5,11 @@
     margin: 0px;
 }
 
-#pesquisa {
+#lista {
     text-align: center;
     display: none;
     padding: 0px;
-    width: calc(100vw - 2px);
+    width: calc(90vw);
     left: 0px;
     top: 4rem;
     /* border: 1px solid var(--Black); */
@@ -64,7 +64,7 @@
 #searchBar:focus{
     /* transition: 100ms; */
     background-color: var(--WhiteFocus);
-  outline: var(--AlmostTransparent) solid 0px;
+    outline: var(--AlmostTransparent) solid 0px;
 }
 
 #searchBar:hover{

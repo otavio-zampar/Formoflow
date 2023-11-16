@@ -61,7 +61,6 @@ function avaliaJanela(a){
 
 // para criar uma div sem o onclick é so colocar o inputForm como 0
 function createDiv(AA) {    
-
     var nomeForm = AA.option;
     var actualName = AA.form;
     var inputForm = AA.qnt;
@@ -72,7 +71,6 @@ function createDiv(AA) {
     var ActualDiv = $('<div>').attr('id', randomId).addClass('ActualDiv nocopy').attr("actualName", actualName);
     ActualDiv.attr("exit", exit);
     var DraggableDiv = $('<div>').attr('id', 'draggable' + randomId).addClass('DraggableDiv');
-    console.log(DraggableDiv.attr("id"));
     var minimize = $('<div>').addClass('minimize');
     // var svg = $('#svgContainer'); // nao funciona pq jquery não sabe oq os elementos como PATH significam
     {
@@ -138,7 +136,8 @@ function createDiv(AA) {
                     $('#' + arrowId.replace('seta', 'linha')).css("display", "none"); 
 
                     findZindex();
-                    $(this).css('z-index', highestZIndex + 2);
+                    highestZIndex += 2;
+                    $(this).css('z-index', highestZIndex+200);
                 },
                 stop: function() {
                     selectedArrow.css({
@@ -192,13 +191,9 @@ function createDiv(AA) {
                     // apaga a linha inicial
                     $('#' + arrowId.replace('seta', 'linha')).css("display", "none"); 
 
-                    $('.ActualDiv').each(function() {
-                        var zIndex = parseInt($(this).css('z-index'));
-                        if (!isNaN(zIndex) && zIndex > highestZIndex) {
-                            highestZIndex = zIndex;
-                        }
-                    });
-                    $(this).css('z-index', highestZIndex + 2);
+                    findZindex();
+                    highestZIndex += 2;
+                    $(this).css('z-index', highestZIndex+200);
                 },
                 // drag: function() {},
                 stop: function() {
@@ -233,7 +228,6 @@ function createDiv(AA) {
     ActualDiv.append(ActualResizeHandle);
     ActualDiv.append(ActualResizeHandle2);
     ActualDiv.append(ActualResizeHandle3);
-
     ActualDiv.append(ActualResizeHandle4);
     ActualDiv.append(ActualResizeHandle5);
 
@@ -263,10 +257,18 @@ function createDiv(AA) {
         }
     });
     var minHeight = "calc("+icon.css('top')+" + "+ icon.css('height') +" + 30px)";
-    ActualDiv.css('min-height', minHeight);
+    ActualDiv.css({
+        minHeight: minHeight,
+        zIndex: highestZIndex + 1,
+        left: "calc(5vw + "+50 * divCount+"px)",
+        top: "calc(20vh + "+50 * divCount+"px)"
+    });
     tstDiv.css('min-height', minHeight);
-    DraggableDiv.css('z-index', highestZIndex + 1);
-    ActualDiv.css('z-index', highestZIndex + 1);
+    DraggableDiv.css({
+        zIndex: highestZIndex + 1,
+        left: "calc(5vw + "+50 * divCount+"px)",
+        top: "calc(20vh + "+50 * divCount+"px)"
+    });
     ActualResizeHandle2.css('min-height', minHeight);
     ActualResizeHandle3.css('min-height', minHeight);
 
@@ -283,16 +285,6 @@ function createDiv(AA) {
         }
     });
 
-    DraggableDiv.on('dragstart', function() {
-
-        // Encontre o maior z-index entre todas as divs visíveis
-        findZindex();
-
-        // Defina o z-index da div atual como o maior z-index + 1
-        $(this).css('z-index', highestZIndex + 1);
-        ActualDiv.css('z-index', highestZIndex + 1);
-    });
-
     CloseR.on('mousedown', function(){ 
 
         $("#"+DraggableDiv.attr("id")).remove();
@@ -307,13 +299,6 @@ function createDiv(AA) {
         }else{  
             ActualDiv.css('display', 'initial');
             mini = 0;
-
-            // Encontre o maior z-index entre todas as divs visíveis
-            findZindex();
-
-            // Defina o z-index da div atual como o maior z-index + 1
-            DraggableDiv.css('z-index', highestZIndex + 1);
-            ActualDiv.css('z-index', highestZIndex + 1);
         }
     });
 
@@ -354,6 +339,17 @@ function createDiv(AA) {
                 $element.val(InputMudado.innerHTML).trigger('input');
                 break;  // Isso interrompe a iteração do loop
             }
+        }
+    });
+
+    $(document).mousedown(function(e){
+        var string = String('#'+randomId+", #draggable"+randomId);
+        // console.log(string);    
+        if ($(string).children().is(e.target)) {
+            findZindex();
+            highestZIndex += 2;
+            $("#"+randomId).css("z-index", highestZIndex);
+            $("#draggable"+randomId).css("z-index", highestZIndex);
         }
     });
 
@@ -454,7 +450,8 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
                     $('#' + arrowId.replace('seta', 'linha')).css("display", "none"); 
 
                     findZindex();
-                    $(this).css('z-index', highestZIndex + 1);
+                    highestZIndex += 2;
+                    $(this).css('z-index', highestZIndex+200);
                 },
                 // drag: function() {},
                 stop: function() {
@@ -546,15 +543,6 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
         }
     });
 
-    DraggableDiv.on('dragstart', function() {
-
-        // Encontre o maior z-index entre todas as divs visíveis
-        findZindex();
-        // Defina o z-index da div atual como o maior z-index + 1
-        $(this).css('z-index', highestZIndex + 1);
-        ActualDiv.css('z-index', highestZIndex + 1);
-    });
-
     CloseR.on('mousedown', function(){ 
 
         $("#"+DraggableDiv.attr("id")).remove();
@@ -569,12 +557,6 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
         }else{  
             ActualDiv.css('display', 'initial');
             mini = 0;
-
-            // Encontre o maior z-index entre todas as divs visíveis
-            findZindex();
-            // Defina o z-index da div atual como o maior z-index + 1
-            DraggableDiv.css('z-index', highestZIndex + 1);
-            ActualDiv.css('z-index', highestZIndex + 1);
         }
     });
 
@@ -617,6 +599,16 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
         }
     });
 
+    $(document).mousedown(function(e){
+        var string = String('#'+randomId+", #draggable"+randomId);
+        // console.log(string);    
+        if ($(string).children().is(e.target)) {
+            findZindex();
+            highestZIndex += 2;
+            $("#"+randomId).css("z-index", highestZIndex);
+            $("#draggable"+randomId).css("z-index", highestZIndex);
+        }
+    });
 }
 
 function uploadImg(selectedFile, naturalHeight, naturalWidth){
@@ -754,16 +746,6 @@ function uploadImg(selectedFile, naturalHeight, naturalWidth){
                 });
             }
         });
-
-        DraggableDiv.on('dragstart', function() {
-            // Aumente o z-index da div ao clicar nela
-
-            // Encontre o maior z-index entre todas as divs visíveis
-            findZindex();
-            // Defina o z-index da div atual como o maior z-index + 1
-            $(this).css('z-index', highestZIndex + 1);
-            ActualDiv.css('z-index', highestZIndex + 1);
-        });
         CloseR.on('mousedown', function(){
 
             $("#"+DraggableDiv.attr("id")).remove();
@@ -778,12 +760,6 @@ function uploadImg(selectedFile, naturalHeight, naturalWidth){
             }else{  
                 ActualDiv.children().show();
                 mini = 0;
-
-                // Encontre o maior z-index entre todas as divs visíveis
-                findZindex();
-                // Defina o z-index da div atual como o maior z-index + 1
-                DraggableDiv.css('z-index', highestZIndex + 1);
-                ActualDiv.css('z-index', highestZIndex + 1);
             }
         });
 
