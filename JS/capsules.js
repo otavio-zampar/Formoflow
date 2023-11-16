@@ -105,6 +105,13 @@ function createDiv(AA) {
             var valor = "10% + 30px + "+ index +" * (min(2rem, 2vh) + 2.2rem - 1px)";
             input.css("top", "calc("+valor+")");
 
+            input.keydown(function(event) {
+                if (event.which === 13) {
+                    event.preventDefault();
+                    avaliaJanela(this.parentElement);
+                }
+            });
+
             // cria as setas
             var seta = $("<div>").addClass("arrow right").attr('id', "seta"+divCount+index).css("position", "absolute");
             var linha = $('<div>').addClass("linha").attr('id', "linha"+divCount+index); // linha q completa a seta
@@ -396,19 +403,25 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
 
         // cria o input
         var input = $('<'+inputInput+'>').attr('type', actualName).attr('id', "input"+divCount+1).attr("min", 0).attr("max", 100).attr("value", 0); // .addClass("teste")
-        input.css("height", "2.2rem");   
         input.css("position", "absolute");
-        input.css("left", "10%");
-        input.css("width", "80%");
+        input.css("left", "3vh");
+        input.css("width", "calc(100% - 6vh)");
         input.css("outline-color", "transparent");
-        // input.attr("type", "number");
+        var valor = "3vh + 30px";
+        input.css("top", "calc("+valor+")");
         if (exit == 0) { // somente p textarea
-            input.css("height", "calc(80% - 30px)");
-            input.css("max-height", "calc(80% - 30px)");
+            input.css("height", "calc(100% - 6vh - 30px)");
+            input.css("max-height", "calc(100% - 6vh - 30px)");
+        }else{
+            input.css("height", "2.2rem");   
         }
 
-        var valor = "10% + 30px";
-        input.css("top", "calc("+valor+")");
+        input.keydown(function(event) {
+            if (event.which === 13) {
+                event.preventDefault();
+            }
+        });
+
         // add ao form
         form.append(input);
         tstDiv.append(form);
@@ -421,6 +434,7 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
             icon.on("click", function(){
                 var copyText = document.getElementById("icon"+divCount+(inputForm+1));
                 navigator.clipboard.writeText(copyText.innerHTML); // copy to clipboard
+                document.getElementById('BTNAlerta').firstElementChild.innerHTML = "Copiado!";
                 document.getElementById('BTNAlerta').style.display = "initial";
                 setTimeout(() => {
                 document.getElementById('BTNAlerta').style.display = "none";

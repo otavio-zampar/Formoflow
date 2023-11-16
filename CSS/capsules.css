@@ -64,6 +64,7 @@
     position: absolute; 
     padding-left: 10vw; 
     padding-right: 10vw; 
+    font-weight:bolder;
     width: 100vw; 
     bottom: 10px; 
     z-index: 9999; 
@@ -182,3 +183,6 @@
   transform: rotate(-45deg);
   -webkit-transform: rotate(-45deg);
  }
+textarea:focus{
+  outline: 0px;
+}

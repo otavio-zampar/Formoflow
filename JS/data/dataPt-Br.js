@@ -1,4 +1,5 @@
 const data = [
+    { option: "Avaliação", form: "doEval", qnt: 1, exit: 1, placeholder: ["2 + 2"]},
     { option: "Bhaskara", form: "bhaskara", qnt: 3, exit: 2, placeholder: ["A", "B", "C"]},
     { option: "Área círculo", form: "Acirculo", qnt: 1, exit: 1, placeholder: ["Raio"]},
     { option: "Área retângulo", form: "Aretangulo", qnt: 2, exit: 1, placeholder: ["Base", "Altura"] },
