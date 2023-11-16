@@ -38,9 +38,10 @@ p{
 }
 
 #sun, #moon{
-    height: 5vh;
-    width: 5vh;
-    margin-top: 5vh;
+    height: 30px;
+    width: 30px;
+    margin-top: 20px;
+    margin-bottom: 5px;
 }
 
 #list{

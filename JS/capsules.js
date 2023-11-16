@@ -4,7 +4,14 @@ var selectedArrowX = selectedArrowY = null;
 var inputId = null; // Armazena o input de destino selecionado
 var highestZIndex = 11;
 
-
+function findZindex() {
+    $('.ActualDiv').each(function() {
+        var zIndex = parseInt($(this).css('z-index'));
+        if (!isNaN(zIndex) && zIndex > highestZIndex) {
+            highestZIndex = zIndex;
+        }
+    });
+}
 function getColor(){
     var color = Math.floor(Math.random()*16777215).toString(16);
     var regex = /[0-5]/ig;
@@ -16,9 +23,9 @@ function getColor(){
 function avaliaJanela(a){
     var inputElements = a.querySelectorAll('input');
     inputForm = inputElements.length;
-    divCount = String(a.parentElement.parentElement.id).replace("div", ""); // form, tstDiv, ActualDiv
-    var actualName = $("#div"+divCount).attr("actualname");
-    var exit = $("#div"+divCount).attr("exit");
+    var thisDivCount = String(a.parentElement.parentElement.id).replace("div", ""); // form, tstDiv, ActualDiv
+    var actualName = $("#div"+thisDivCount).attr("actualname");
+    var exit = $("#div"+thisDivCount).attr("exit");
     var avaliacao = actualName+"(";
     for (let index = 0; index < inputForm; index++) {
         if (inputElements[index].value == "") {
@@ -39,7 +46,7 @@ function avaliaJanela(a){
             if (String(x[index]) == "undefined") {
                 x[index] = "NaN";
             }
-            document.getElementById("icon"+divCount+(inputForm+index)).innerHTML = x[index];
+            document.getElementById("icon"+thisDivCount+(inputForm+index)).innerHTML = x[index];
         }
     } catch(e){
         if (e instanceof SyntaxError) {
@@ -53,19 +60,19 @@ function avaliaJanela(a){
 }
 
 // para criar uma div sem o onclick é so colocar o inputForm como 0
-function createDiv(AA) {
+function createDiv(AA) {    
 
     var nomeForm = AA.option;
     var actualName = AA.form;
     var inputForm = AA.qnt;
     var exit = AA.exit;
-
     divCount++;
     var randomId = 'div' + divCount;
     var mini = 0;
     var ActualDiv = $('<div>').attr('id', randomId).addClass('ActualDiv nocopy').attr("actualName", actualName);
     ActualDiv.attr("exit", exit);
     var DraggableDiv = $('<div>').attr('id', 'draggable' + randomId).addClass('DraggableDiv');
+    console.log(DraggableDiv.attr("id"));
     var minimize = $('<div>').addClass('minimize');
     // var svg = $('#svgContainer'); // nao funciona pq jquery não sabe oq os elementos como PATH significam
     {
@@ -130,17 +137,9 @@ function createDiv(AA) {
                     // apaga a linha inicial
                     $('#' + arrowId.replace('seta', 'linha')).css("display", "none"); 
 
-                    $('.ActualDiv').each(function() {
-                        var zIndex = parseInt(selectedArrow.css('z-index'));
-                        if (!isNaN(zIndex) && zIndex > highestZIndex) {
-                            highestZIndex = zIndex;
-                        }
-                    });
-                    selectedArrow.css('z-index', highestZIndex + 1);    
-                    // console.log(selectedArrow.css('z-index'));
+                    findZindex();
+                    $(this).css('z-index', highestZIndex + 2);
                 },
-
-                // drag: function() {},
                 stop: function() {
                     selectedArrow.css({
                         "top": selectedArrowY,
@@ -199,7 +198,7 @@ function createDiv(AA) {
                             highestZIndex = zIndex;
                         }
                     });
-                    $(this).css('z-index', highestZIndex + 1);
+                    $(this).css('z-index', highestZIndex + 2);
                 },
                 // drag: function() {},
                 stop: function() {
@@ -266,6 +265,8 @@ function createDiv(AA) {
     var minHeight = "calc("+icon.css('top')+" + "+ icon.css('height') +" + 30px)";
     ActualDiv.css('min-height', minHeight);
     tstDiv.css('min-height', minHeight);
+    DraggableDiv.css('z-index', highestZIndex + 1);
+    ActualDiv.css('z-index', highestZIndex + 1);
     ActualResizeHandle2.css('min-height', minHeight);
     ActualResizeHandle3.css('min-height', minHeight);
 
@@ -275,7 +276,6 @@ function createDiv(AA) {
             var offset = ui.offset;
             var left = offset.left;
             var top = offset.top;
-
             $("#" + randomId).css({
                 left: left,
                 top: top
@@ -286,12 +286,7 @@ function createDiv(AA) {
     DraggableDiv.on('dragstart', function() {
 
         // Encontre o maior z-index entre todas as divs visíveis
-        $('.ActualDiv').each(function() {
-            var zIndex = parseInt($(this).css('z-index'));
-            if (!isNaN(zIndex) && zIndex > highestZIndex) {
-                highestZIndex = zIndex;
-            }
-        });
+        findZindex();
 
         // Defina o z-index da div atual como o maior z-index + 1
         $(this).css('z-index', highestZIndex + 1);
@@ -314,12 +309,7 @@ function createDiv(AA) {
             mini = 0;
 
             // Encontre o maior z-index entre todas as divs visíveis
-            $('.ActualDiv').each(function() {
-                var zIndex = parseInt($(this).css('z-index'));
-                if (!isNaN(zIndex) && zIndex > highestZIndex) {
-                    highestZIndex = zIndex;
-                }
-            });
+            findZindex();
 
             // Defina o z-index da div atual como o maior z-index + 1
             DraggableDiv.css('z-index', highestZIndex + 1);
@@ -463,12 +453,7 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
                     // apaga a linha inicial
                     $('#' + arrowId.replace('seta', 'linha')).css("display", "none"); 
 
-                    $('.ActualDiv').each(function() {
-                        var zIndex = parseInt($(this).css('z-index'));
-                        if (!isNaN(zIndex) && zIndex > highestZIndex) {
-                            highestZIndex = zIndex;
-                        }
-                    });
+                    findZindex();
                     $(this).css('z-index', highestZIndex + 1);
                 },
                 // drag: function() {},
@@ -542,6 +527,8 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
     
     ActualDiv.css('min-height', minHeight);
     tstDiv.css('min-height', minHeight);
+    DraggableDiv.css('z-index', highestZIndex + 1);
+    ActualDiv.css('z-index', highestZIndex + 1);
     ActualResizeHandle2.css('min-height', minHeight);
     ActualResizeHandle3.css('min-height', minHeight);
 
@@ -562,13 +549,7 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
     DraggableDiv.on('dragstart', function() {
 
         // Encontre o maior z-index entre todas as divs visíveis
-        $('.ActualDiv').each(function() {
-            var zIndex = parseInt($(this).css('z-index'));
-            if (!isNaN(zIndex) && zIndex > highestZIndex) {
-                highestZIndex = zIndex;
-            }
-        });
-
+        findZindex();
         // Defina o z-index da div atual como o maior z-index + 1
         $(this).css('z-index', highestZIndex + 1);
         ActualDiv.css('z-index', highestZIndex + 1);
@@ -590,13 +571,7 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
             mini = 0;
 
             // Encontre o maior z-index entre todas as divs visíveis
-            $('.ActualDiv').each(function() {
-                var zIndex = parseInt($(this).css('z-index'));
-                if (!isNaN(zIndex) && zIndex > highestZIndex) {
-                    highestZIndex = zIndex;
-                }
-            });
-
+            findZindex();
             // Defina o z-index da div atual como o maior z-index + 1
             DraggableDiv.css('z-index', highestZIndex + 1);
             ActualDiv.css('z-index', highestZIndex + 1);
@@ -784,13 +759,7 @@ function uploadImg(selectedFile, naturalHeight, naturalWidth){
             // Aumente o z-index da div ao clicar nela
 
             // Encontre o maior z-index entre todas as divs visíveis
-            $('.ActualDiv').each(function() {
-                var zIndex = parseInt($(this).css('z-index'));
-                if (!isNaN(zIndex) && zIndex > highestZIndex) {
-                    highestZIndex = zIndex;
-                }
-            });
-
+            findZindex();
             // Defina o z-index da div atual como o maior z-index + 1
             $(this).css('z-index', highestZIndex + 1);
             ActualDiv.css('z-index', highestZIndex + 1);
@@ -811,13 +780,7 @@ function uploadImg(selectedFile, naturalHeight, naturalWidth){
                 mini = 0;
 
                 // Encontre o maior z-index entre todas as divs visíveis
-                $('.ActualDiv').each(function() {
-                    var zIndex = parseInt($(this).css('z-index'));
-                    if (!isNaN(zIndex) && zIndex > highestZIndex) {
-                        highestZIndex = zIndex;
-                    }
-                });
-
+                findZindex();
                 // Defina o z-index da div atual como o maior z-index + 1
                 DraggableDiv.css('z-index', highestZIndex + 1);
                 ActualDiv.css('z-index', highestZIndex + 1);
