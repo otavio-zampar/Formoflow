@@ -37,6 +37,12 @@ p{
     right: 0px;
 }
 
+#sun, #moon{
+    height: 5vh;
+    width: 5vh;
+    margin-top: 5vh;
+}
+
 #list{
     z-index:inherit;
     background-color: var(--SecondAccentColor);
