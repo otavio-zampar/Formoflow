@@ -3,7 +3,6 @@ var selectedArrow = null; // Armazena a seta selecionada
 var selectedArrowX = selectedArrowY = null;
 var inputId = null; // Armazena o input de destino selecionado
 var highestZIndex = 11;
-var parentList = [];
 
 function findZindex() {
     $('.ActualDiv').each(function() {
@@ -135,7 +134,6 @@ function createDiv(AA) {
                     
                     // apaga a linha inicial
                     $('#' + arrowId.replace('seta', 'linha')).css("display", "none"); 
-                    parentList = []; // reseta a lista das divs quando ele começa a fazer uma nova relaçao
 
                     findZindex();
                     highestZIndex += 2;
@@ -192,7 +190,6 @@ function createDiv(AA) {
                     
                     // apaga a linha inicial
                     $('#' + arrowId.replace('seta', 'linha')).css("display", "none"); 
-                    parentList = []; // reseta a lista das divs quando ele começa a fazer uma nova relaçao
 
                     findZindex();
                     highestZIndex += 2;
@@ -325,44 +322,29 @@ function createDiv(AA) {
 
     $('.teste').on('input', function(){
         var InputMudado = $(this);
-
-        $(".ActualDiv").each(function(){
-            // aqui tem q vir o check para recursão
-            if (!parentList.includes(this.id)) {
-                parentList.push(this.id);
-                for (var i = 0; i < $('.teste').length; i++) {
-                    var elementV = $($('.teste')[i]);
-                    if (InputMudado.attr("id") == elementV.attr("InputPai")) {
-                        console.log("(input) De "+ InputMudado.attr("id") + ", para " + elementV.attr("id"));
-                        elementV.val(InputMudado.val()).trigger('input');
-                    }
-                }
+        for (var i = 0; i < $('.teste').length; i++) {
+            var $element = $($('.teste')[i]);
+            if (InputMudado.attr("id") == $element.attr("InputPai")) {
+                console.log("(input) De "+ InputMudado.attr("id") + ", para " + $element.attr("id"));
+                $element.val(InputMudado.val()).trigger('input');
             }
-        });
+        }
     });
     $('.icon').on('DOMSubtreeModified', function(){
         var InputMudado = this;
-        // parentList = [];
-        
-        $(".ActualDiv").each(function(){
-            // aqui tem q vir o check para recursão
-            if (!parentList.includes(this.id)) {
-                parentList.push(this.id);
-
-                for (var i = 0; i < $('.teste').length; i++) {
-                    var elementV = $($('.teste')[i]);
-                    if (InputMudado.id == elementV.attr("InputPai")) {
-                        console.log("(icon) De "+ InputMudado.id + ", para " + elementV.attr("id"));
-                        elementV.val(InputMudado.innerHTML).trigger('input');
-                        break;  // Isso interrompe a iteração do loop
-                    }
-                }
+        for (var i = 0; i < $('.teste').length; i++) {
+            var $element = $($('.teste')[i]);
+            if (InputMudado.id == $element.attr("InputPai")) {
+                console.log("(icon) De "+ InputMudado.id + ", para " + $element.attr("id"));
+                $element.val(InputMudado.innerHTML).trigger('input');
+                break;  // Isso interrompe a iteração do loop
             }
-        });
+        }
     });
 
     $(document).mousedown(function(e){
         var string = String('#'+randomId+", #draggable"+randomId);
+        // console.log(string);    
         if ($(string).children().is(e.target)) {
             findZindex();
             highestZIndex += 2;
@@ -597,10 +579,10 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
     $('.teste').on('input', function(){
         var InputMudado = $(this);
         for (var i = 0; i < $('.teste').length; i++) {
-            var elementV = $($('.teste')[i]);
-            if (InputMudado.attr("id") == elementV.attr("InputPai")) {
-                console.log("(input) De "+ InputMudado.attr("id") + ", para " + elementV.attr("id"));
-                elementV.val(InputMudado.val()).trigger('input');
+            var $element = $($('.teste')[i]);
+            if (InputMudado.attr("id") == $element.attr("InputPai")) {
+                console.log("(input) De "+ InputMudado.attr("id") + ", para " + $element.attr("id"));
+                $element.val(InputMudado.val()).trigger('input');
             }
         }
     });
@@ -608,10 +590,10 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
     $('.icon').on('DOMSubtreeModified', function(){
         var InputMudado = this;
         for (var i = 0; i < $('.teste').length; i++) {
-            var elementV = $($('.teste')[i]);
-            if (InputMudado.id == elementV.attr("InputPai")) {
-                console.log("(icon) De "+ InputMudado.id + ", para " + elementV.attr("id"));
-                elementV.val(InputMudado.innerHTML).trigger('input');
+            var $element = $($('.teste')[i]);
+            if (InputMudado.id == $element.attr("InputPai")) {
+                console.log("(icon) De "+ InputMudado.id + ", para " + $element.attr("id"));
+                $element.val(InputMudado.innerHTML).trigger('input');
                 break;  // Isso interrompe a iteração do loop
             }
         }
@@ -619,6 +601,7 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
 
     $(document).mousedown(function(e){
         var string = String('#'+randomId+", #draggable"+randomId);
+        // console.log(string);    
         if ($(string).children().is(e.target)) {
             findZindex();
             highestZIndex += 2;
