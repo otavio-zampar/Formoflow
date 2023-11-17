@@ -363,7 +363,6 @@ function createDiv(AA) {
 
     $(document).mousedown(function(e){
         var string = String('#'+randomId+", #draggable"+randomId);
-        // console.log(string);    
         if ($(string).children().is(e.target)) {
             findZindex();
             highestZIndex += 2;
@@ -620,7 +619,6 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
 
     $(document).mousedown(function(e){
         var string = String('#'+randomId+", #draggable"+randomId);
-        // console.log(string);    
         if ($(string).children().is(e.target)) {
             findZindex();
             highestZIndex += 2;
