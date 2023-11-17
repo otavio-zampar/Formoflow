@@ -60,7 +60,6 @@ $(document).ready(function () {
         }
         const query = $(this).val().toLowerCase().trim();
         const resultsList = $("#lista");
-        console.log(document.getElementById("div1").style.zIndex);
         searchQuery(query, resultsList);
     });
 

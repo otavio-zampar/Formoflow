@@ -91,8 +91,6 @@ function multiply(CharAnsDoc){
 
 	//add um verificador antes de fazer o doEval(), pra garantir que por exemplo 'Sin(' nao vai virar 'Math.sin(' caso de algum erro
 function doEval(ansDoc){
-// console.log(ansDoc);
-// console.log(typeof(ansDoc));
 if (typeof(ansDoc) == 'number') {
     ansDoc = String(ansDoc);
 }

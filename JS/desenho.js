@@ -170,10 +170,7 @@ function send_img(){
 
 function historySave(){
         arrCanvas.push(myCanvas.toDataURL());
-        // for(let i = 0; i < arrCanvas.length; i++)
-        //         console.log(arrCanvas[i]);
         dec = arrCanvas.length;
-        // console.log(dec);
 }
 function und(){ //undo
         
