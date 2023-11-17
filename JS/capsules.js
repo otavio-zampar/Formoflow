@@ -593,7 +593,7 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
     $('.icon').on('DOMSubtreeModified', function(){
         var mudado = this;
         $('.teste').each(function() {
-            if (mudado.id == $(this).attr("InputPai"))) {
+            if (mudado.id == $(this).attr("InputPai")) {
                 // console.log("(input) De "+ mudado.attr("id") + ", para " + $(this).attr("id"));
                 $(this).val(mudado.innerHTML);
                 $(this).trigger('inputDiferente');
