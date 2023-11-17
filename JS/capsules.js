@@ -113,7 +113,6 @@ function createDiv(AA) {
             input.keydown(function(event) {
                 if (event.which === 13) {
                     event.preventDefault();
-                    avaliaJanela(this.parentElement);
                 }
             });
 
@@ -151,6 +150,16 @@ function createDiv(AA) {
             form.append(input);
             form.append(seta);
             form.append(linha);
+
+            input.on('input', function(){
+                avaliaJanela(this.parentElement);
+            });
+            
+            input.on('inputDiferente', function(){
+                console.log(this.parentElement);
+                avaliaJanela(this.parentElement);
+            });
+
         }
 
         tstDiv.append(form);
@@ -212,11 +221,6 @@ function createDiv(AA) {
             tstDiv.append(linha);
             tstDiv.append(seta);
         }
-
-        form.on('input', function(){
-            avaliaJanela(this);
-        });
-        
     }
 
     $('body').append(ActualDiv);
@@ -321,30 +325,29 @@ function createDiv(AA) {
 
 
     $('.teste').on('input', function(){
-        var InputMudado = $(this);
-        for (var i = 0; i < $('.teste').length; i++) {
-            var $element = $($('.teste')[i]);
-            if (InputMudado.attr("id") == $element.attr("InputPai")) {
-                console.log("(input) De "+ InputMudado.attr("id") + ", para " + $element.attr("id"));
-                $element.val(InputMudado.val()).trigger('input');
+        var mudado = $(this);
+
+        $('.teste').each(function() {
+            if (mudado.attr("id") == $(this).attr("InputPai")) {
+                // console.log("(input) De "+ mudado.attr("id") + ", para " + $(this).attr("id"));
+                $(this).val(mudado.val());
+                $(this).trigger('inputDiferente');
             }
-        }
+        });
     });
     $('.icon').on('DOMSubtreeModified', function(){
-        var InputMudado = this;
-        for (var i = 0; i < $('.teste').length; i++) {
-            var $element = $($('.teste')[i]);
-            if (InputMudado.id == $element.attr("InputPai")) {
-                console.log("(icon) De "+ InputMudado.id + ", para " + $element.attr("id"));
-                $element.val(InputMudado.innerHTML).trigger('input');
-                break;  // Isso interrompe a iteração do loop
+        var mudado = this;
+        $('.teste').each(function() {
+            if (mudado.id == $(this).attr("InputPai")) {
+                // console.log("(input) De "+ mudado.attr("id") + ", para " + $(this).attr("id"));
+                $(this).val(mudado.innerHTML);
+                $(this).trigger('inputDiferente');
             }
-        }
+        });
     });
 
     $(document).mousedown(function(e){
         var string = String('#'+randomId+", #draggable"+randomId);
-        // console.log(string);    
         if ($(string).children().is(e.target)) {
             findZindex();
             highestZIndex += 2;
@@ -420,7 +423,7 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
             icon.on("click", function(){
                 var copyText = document.getElementById("icon"+divCount+(inputForm+1));
                 navigator.clipboard.writeText(copyText.innerHTML); // copy to clipboard
-                document.getElementById('BTNAlerta').firstElementChild.innerHTML = "Copiado!";
+                
                 document.getElementById('BTNAlerta').style.display = "initial";
                 setTimeout(() => {
                 document.getElementById('BTNAlerta').style.display = "none";
@@ -577,31 +580,29 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
     });
 
     $('.teste').on('input', function(){
-        var InputMudado = $(this);
-        for (var i = 0; i < $('.teste').length; i++) {
-            var $element = $($('.teste')[i]);
-            if (InputMudado.attr("id") == $element.attr("InputPai")) {
-                console.log("(input) De "+ InputMudado.attr("id") + ", para " + $element.attr("id"));
-                $element.val(InputMudado.val()).trigger('input');
+        var mudado = $(this);
+        $('.teste').each(function() {
+            if (mudado.attr("id") == $(this).attr("InputPai")) {
+                // console.log("(input) De "+ mudado.attr("id") + ", para " + $(this).attr("id"));
+                $(this).val(mudado.val());
+                $(this).trigger('inputDiferente');
             }
-        }
+        });
     });
 
     $('.icon').on('DOMSubtreeModified', function(){
-        var InputMudado = this;
-        for (var i = 0; i < $('.teste').length; i++) {
-            var $element = $($('.teste')[i]);
-            if (InputMudado.id == $element.attr("InputPai")) {
-                console.log("(icon) De "+ InputMudado.id + ", para " + $element.attr("id"));
-                $element.val(InputMudado.innerHTML).trigger('input');
-                break;  // Isso interrompe a iteração do loop
+        var mudado = this;
+        $('.teste').each(function() {
+            if (mudado.id == $(this).attr("InputPai"))) {
+                // console.log("(input) De "+ mudado.attr("id") + ", para " + $(this).attr("id"));
+                $(this).val(mudado.innerHTML);
+                $(this).trigger('inputDiferente');
             }
-        }
+        });
     });
 
     $(document).mousedown(function(e){
         var string = String('#'+randomId+", #draggable"+randomId);
-        // console.log(string);    
         if ($(string).children().is(e.target)) {
             findZindex();
             highestZIndex += 2;

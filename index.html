@@ -82,8 +82,7 @@
 <body style="color:var(--Black); background-color: var(--AlmostWhite); overflow-y: hidden;"> <!-- overflow: hidden; -->
 
     <div id="BTNAlerta" style="display: none;">
-        <div class="alert alert-dark fade show" role="alert">
-        </div>
+        <div class="alert alert-dark fade show" role="alert">Copiado!</div>
     </div>
 
     <script src="./JS/checkTouch.js"></script>
@@ -92,8 +91,10 @@
         document.getElementById('BTNAlerta').firstElementChild.innerHTML = "Ei, só para avisar. Esse site tem um bug interessante onde se vc fizer um loop com as fórmulas vc crasha o navegador. O nosso time está trabalhando duro para consertar o problema, por enquanto só tome cuidado.";
         document.getElementById('BTNAlerta').style.display = "initial";
         setTimeout(() => {
+        document.getElementById('BTNAlerta').firstElementChild.innerHTML = "Copiado!";
         document.getElementById('BTNAlerta').style.display = "none";
-        }, 10000);
+        }, 2000);
+        
     </script>
 
     <div id="whereHeader" class="nocopy"></div>
