@@ -35,7 +35,7 @@ function basePraDecimal(x, base){
 }
 
 function hexadecimal(x){
-    return x.toString(16);
+    return x.toString(16).toUpperCase();
 }
 
 function octal(x){
@@ -44,7 +44,7 @@ function octal(x){
 
 function base(x, y){
     if (y <= 36 && y > 1 ) {
-        return x.toString(y);
+        return x.toString(y).toUpperCase();
     }else{
         if(y == 1){
             return String(1).repeat(x);
