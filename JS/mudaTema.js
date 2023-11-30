@@ -36,6 +36,9 @@ function mudaTema(dark) {
         document.getElementById("sun").style.display = 'none';
         document.getElementById("pTema").innerHTML = 'DARK';
 
+        document.getElementById("ColPck").value = "#FFFFFF";
+        $("#ColPck").trigger("change");
+
     }else{
         document.documentElement.style.setProperty('--Black', '#000000');
         document.documentElement.style.setProperty('--BlackFocus', '#020202');
@@ -58,5 +61,8 @@ function mudaTema(dark) {
         document.getElementById("moon").style.display = 'none';
         document.getElementById("sun").style.display = 'initial';
         document.getElementById("pTema").innerHTML = 'LIGHT';
+        
+        document.getElementById("ColPck").value = "#000000";
+        $("#ColPck").trigger("change");
     }
 }
