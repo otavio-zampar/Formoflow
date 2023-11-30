@@ -39,15 +39,15 @@
     <script src="./JS/pesquisa.js"></script>
     <script src="./JS/background.js"></script>
 
-    <!-- hey, muda esse negocio para instantâneamente colocar as fórmulas em inglês -->
-    <!-- <script src="./JS/data/dataPt-Br.js"></script> -->
-    <!-- <script src="./JS/data/dataEn-Us.js"></script> -->
-    <script src="./JS/data/dataSp-Mx.js"></script>
+    <script src="./JS/idiomas/data.js"></script>
+    <script src="./JS/idiomas/traduzir.js"></script>
     
 
 
     <!-- coisa da calculadora -->
     <script lang="JavaScript">  
+
+        var data = dataPtBr(); // coloca tds as janelas em PT-BR
 
         //usada na calculadora pra nao dar erro na pontuaçao (i) e na operaçao (f)
         var i = 0;
@@ -83,7 +83,7 @@
 <body style="color:var(--Black); background-color: var(--AlmostWhite); overflow-y: hidden;"> <!-- overflow: hidden; -->
 
     <div id="BTNAlerta" style="display: none;">
-        <div class="alert alert-dark fade show" role="alert">Copiado!</div>
+        <div class="alert alert-dark fade show traduzir" role="alert">Copiado!</div>
     </div>
 
     <script src="./JS/checkTouch.js"></script>
@@ -200,12 +200,12 @@
                     <button style="margin: 0px; width: 100%; height: max(3vw, 1rem); font-size: max(1.1vw, 1rem);" onclick="{
                     // perguntar se quer fundo transparente
                         download_img();
-                    }">Salvar</button>
+                    }" class="traduzir">Salvar</button>
                     <!-- mandar para a area de trabalho -->
                     <button style="margin: 0px; width: 100%; height: max(4vw, 1rem); font-size: max(1.1vw, 1rem);" onclick="{
                         // perguntar se quer fundo transparente
                         send_img();
-                    }">Mandar para a àrea de Trabalho</button>
+                    }" class="traduzir">Mandar para a àrea de Trabalho</button>
                 </div>
 
             </div>
@@ -223,6 +223,21 @@
                 <div id="mouseFollower"></div>
             </div>
         </div>
+    </div>
+
+    <div style="z-index: 9984; padding: 10px; position: absolute; left: 10px; top: 18px; width: 210px; height: 62px; background-color: var(--SecondAccentColor); border-radius: 10px;">
+        <img src="./src/br.svg" style="width: 59px; top: calc();" onclick="{
+            var array = Array.from(document.getElementsByClassName('traduzir')).concat(Array.from(document.getElementsByClassName('traduzirPlaceholder')));
+            traducao(array, traducaoPtBr());
+        }">
+        <img src="./src/mx.svg" style="width: 59px;" onclick="{
+            var array = Array.from(document.getElementsByClassName('traduzir')).concat(Array.from(document.getElementsByClassName('traduzirPlaceholder')));
+            traducao(array, traducaoSpMx());
+        }">
+        <img src="./src/us.svg" style="width: 59px;" onclick="{
+            var array = Array.from(document.getElementsByClassName('traduzir')).concat(Array.from(document.getElementsByClassName('traduzirPlaceholder')));
+            traducao(array, traducaoEnUs());
+        }">
     </div>
 
     <div id="container">
@@ -249,7 +264,7 @@
 
         </script>
 
-    <input type="text" id="searchBar" placeholder="Pesquisar...">
+    <input type="text" id="searchBar" placeholder="Pesquisar..." class="traduzirPlaceholder">
         <!-- when clicking, the fisrt result should be selected -->
         <svg xmlns="https://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16" id="lupa" onclick="{pesquisa($('#searchBar').val())}">
             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
@@ -271,11 +286,11 @@
 
     <div id="whereFooter" class="nocopy">
         <div id="contato">
-            <p class="contato" style="margin-left: calc(1.5rem + 20px);">CONTATO</p>
+            <p class="contato traduzir" style="margin-left: calc(1.5rem + 20px);">CONTATO</p>
             <br>
-            <p>Elogios? <a href="mailto:contato@formoflow.com.br" class="contato">contato@formoflow.com.br</a></p>
-            <p>Dúvidas? <a href="mailto:suporte@formoflow.com.br" class="contato">suporte@formoflow.com.br</a></p>
-            <p>SAC: <a href="mailto:sac@formoflow.com.br" class="contato">sac@formoflow.com.br</a></p>
+            <p class="traduzir">Elogios? <a href="mailto:contato@formoflow.com.br" class="contato">contato@formoflow.com.br</a></p>
+            <p class="traduzir">Dúvidas? <a href="mailto:suporte@formoflow.com.br" class="contato">suporte@formoflow.com.br</a></p>
+            <p class="traduzir">SAC: <a href="mailto:sac@formoflow.com.br" class="contato">sac@formoflow.com.br</a></p>
             <p class="contato">© Otávio Custódio Zampar</p>
             <div style="position: absolute; top: 0%; left: 20px; top: 20px;" id="github">
                 <a href="https://github.com/otavio-zampar" rel="noopener" class="noCopy" style="display: initial;"><img src="./src/github-mark.svg" style="height: 1.5rem;"></a>
