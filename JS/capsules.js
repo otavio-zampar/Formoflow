@@ -71,10 +71,19 @@ function createDiv(AA) {
     var ActualDiv = $('<div>').attr('id', randomId).addClass('ActualDiv nocopy').attr("actualName", actualName);
     ActualDiv.attr("exit", exit);
     var DraggableDiv = $('<div>').attr('id', 'draggable' + randomId).addClass('DraggableDiv');
-    var minimize = $('<div>').addClass('minimize');
-    // var svg = $('#svgContainer'); // nao funciona pq jquery não sabe oq os elementos como PATH significam
+    var minimize = $('<div>').addClass('minimize').html('&#128469').css({
+        "cursor": "pointer",
+        "text-align": "center",
+        "font-size": "1.3rem",
+        "color": "var(--BaseColor)",
+    });
     {
-    var CloseR = $('<div>').addClass('CloseR');
+    var CloseR = $('<div>').addClass('CloseR').html('&#10006').css({
+        "cursor": "pointer",
+        "text-align": "center",
+        "font-size": "1.3rem",
+        "color": "var(--BaseColor)"
+    });
     }
 
     var tstDiv = $('<div>').addClass('tstDiv');
@@ -381,8 +390,20 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
     var ActualDiv = $('<div>').attr('id', randomId).addClass('ActualDiv nocopy'); // .attr("actualName", actualName)
     ActualDiv.attr("exit", exit);
     var DraggableDiv = $('<div>').attr('id', 'draggable' + randomId).addClass('DraggableDiv');
-    var minimize = $('<div>').addClass('minimize');
-    var CloseR = $('<div>').addClass('CloseR');
+    var minimize = $('<div>').addClass('minimize').html('&#128469').css({
+        "cursor": "pointer",
+        "text-align": "center",
+        "font-size": "1.3rem",
+        "color": "var(--BaseColor)",
+    });
+    {
+    var CloseR = $('<div>').addClass('CloseR').html('&#10006').css({
+        "cursor": "pointer",
+        "text-align": "center",
+        "font-size": "1.3rem",
+        "color": "var(--BaseColor)"
+    });
+    }
     var tstDiv = $('<div>').addClass('tstDiv');
     tstDiv.css("background-color", getColor());
     var ActualResizeHandle = $('<div>').addClass('resize-handle s ui-resizable-s'); // S
@@ -630,9 +651,19 @@ function uploadImg(selectedFile, naturalHeight, naturalWidth){
         var mini = 0;
         var ActualDiv = $('<div>').attr('id', randomId).addClass('ActualDiv');
         var DraggableDiv = $('<div>').attr('id', 'draggable' + randomId).addClass('DraggableDiv');
-        var minimize = $('<div>').addClass('minimize');
+        var minimize = $('<div>').addClass('minimize').html('&#128469').css({
+            "cursor": "pointer",
+            "text-align": "center",
+            "font-size": "1.3rem",
+            "color": "var(--BaseColor)",
+        });
         {
-        var CloseR = $('<div>').addClass('CloseR');
+        var CloseR = $('<div>').addClass('CloseR').html('&#10006').css({
+            "cursor": "pointer",
+            "text-align": "center",
+            "font-size": "1.3rem",
+            "color": "var(--BaseColor)"
+        });
         }
         var tstDiv = $('<div>').addClass('tstDiv');
         tstDiv.css("padding", "0px");
@@ -640,9 +671,9 @@ function uploadImg(selectedFile, naturalHeight, naturalWidth){
         tstDiv.css("background-color", getColor());
 
 
-        var ActualResizeHandle = $('<div>').addClass('resize-handle s ui-resizable-s'); // S
-        var ActualResizeHandle2 = $('<div>').addClass('resize-handle e ui-resizable-e') // E
-        var ActualResizeHandle3 = $('<div>').addClass('resize-handle w ui-resizable-w'); //.css('z-index', '0px'); // W
+        var ActualResizeHandle = $('<div>').addClass('resize-handle s ui-resizable-s').css('min-width', '320px'); // S
+        var ActualResizeHandle2 = $('<div>').addClass('resize-handle e ui-resizable-e').css('min-height', '320px'); // E
+        var ActualResizeHandle3 = $('<div>').addClass('resize-handle w ui-resizable-w').css('min-height', '320px'); //.css('z-index', '0px'); // W
         var ActualResizeHandle4 = $('<div>').addClass('resize-handle se ui-resizable-se'); // SE
         var ActualResizeHandle5 = $('<div>').addClass('resize-handle sw ui-resizable-sw'); // SW
 

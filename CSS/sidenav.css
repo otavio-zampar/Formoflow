@@ -107,7 +107,13 @@
 }
 
 input[type="file"] {
-    display: none;
+    opacity: 0;
+    height: 5rem;
+    width: 7rem;
+    top: 0%;
+    position: absolute;
+    left: 0px;
+    cursor: pointer;
 }
 
 #btnCalc{
