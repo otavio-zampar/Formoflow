@@ -19,9 +19,14 @@
 .base{
     position: fixed;
     overflow-x: hidden;
-    transition: 0.5s;
+    transition: left 0.5s;
+    -webkit-transition: left 0.5s;
     margin-top: 0%;
     margin-bottom: 100%;
+}
+.sla{
+    transition: background-color 0.5s;
+    -webkit-transition: background-color 0.5s;
 }
 .pill{
     height: 5rem;
@@ -31,12 +36,6 @@
     top: 45%; 
     left: -3.5rem;
 }
-
-/* .pill:hover{
-    transition: 0.3;
-    left: -2.5rem;
-
-} */
 
 .basic_instruments{
     height: max(5vw, 2rem);
@@ -85,7 +84,7 @@
     width: auto;
     margin-top: 1.25rem;
     margin-left: 3.5rem;
-    transition: 0.3s; 
+    transition: transform 0.3s; 
     transform: rotate(180deg);
 }
 
@@ -111,24 +110,14 @@ input[type="file"] {
     display: none;
 }
 
-/* #btnDraw:hover{
-    transition: 0.3s;
-    margin-left: 4rem;
-} */
-
 #btnCalc{
     height:2.5rem;
     width: auto;
     margin-top: 1.25rem;
     margin-left: 3.5rem;
-    transition: 0.3s; 
+    transition: transform 0.3s; 
     transform: rotate(180deg);
 }
-
-/* #btnCalc:hover{
-    transition: 0.3;
-    margin-left: 4rem;
-} */
 
 #sizeRange{
     position: absolute;

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="#"> 
+    <link rel="shortcut icon" href="./src/calculator-fill.svg"> 
     <title>Formoflow: Esboços Matemáticos Dinâmicos</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
@@ -234,16 +234,19 @@
         <img id="flagBr" src="./src/br.svg" style="width: 59px; top: calc();" onclick="{
             var array = Array.from(document.getElementsByClassName('traduzir')).concat(Array.from(document.getElementsByClassName('traduzirPlaceholder')));
             traducao(array, traducaoPtBr());
+            data = dataPtBr();
         }">
         <label for="flagMx" hidden>México</label>
         <img id="flagMx" src="./src/mx.svg" style="width: 59px;" onclick="{
             var array = Array.from(document.getElementsByClassName('traduzir')).concat(Array.from(document.getElementsByClassName('traduzirPlaceholder')));
             traducao(array, traducaoSpMx());
+            data = dataSpMx();
         }">
         <label for="flagUs" hidden>Estados Unidos da América</label>
         <img id="flagUs" src="./src/us.svg" style="width: 59px;" onclick="{
             var array = Array.from(document.getElementsByClassName('traduzir')).concat(Array.from(document.getElementsByClassName('traduzirPlaceholder')));
             traducao(array, traducaoEnUs());
+            data = dataEnUs();
         }">
     </div>
 

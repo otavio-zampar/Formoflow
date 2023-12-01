@@ -62,7 +62,6 @@
 }
 
 #searchBar:focus{
-    /* transition: 100ms; */
     background-color: var(--WhiteFocus);
     outline: var(--AlmostTransparent) solid 0px;
 }
