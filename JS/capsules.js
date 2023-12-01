@@ -96,12 +96,19 @@ function createDiv(AA) {
 
         for (let index = 0; index < inputForm; index++) {
             // cria o input
+            var label = $('<label>').attr({
+                "for": "input"+divCount+index,
+                "hidden" : ""
+            });
             var input = $('<input>').attr('type', 'text').attr('id', "input"+divCount+index).addClass("teste");
             
             if (AA.placeholder[index] != undefined) {
                 input.attr("placeholder", AA.placeholder[index]);
+                label.empty();
+                label.html(AA.placeholder[index]);
             }else{
                 input.attr("placeholder", "Digite o texto");
+                label.html("Digite o texto");
             }
 
             input.css("height", "2.2rem");   
@@ -147,6 +154,7 @@ function createDiv(AA) {
                 },
             });
             // add ao form
+            form.append(label);
             form.append(input);
             form.append(seta);
             form.append(linha);
@@ -391,6 +399,10 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
         var form = $('<form>');
 
         // cria o input
+        var label = $('<label>').attr({
+            "for": "input"+divCount+1,
+            "hidden" : ""
+        }).html(nomeForm);
         var input = $('<'+inputInput+'>').attr('type', actualName).attr('id', "input"+divCount+1).attr("min", 0).attr("max", 100).attr("value", 0); // .addClass("teste")
         input.css("position", "absolute");
         input.css("left", "3vh");
@@ -412,6 +424,7 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
         });
 
         // add ao form
+        form.append(label);
         form.append(input);
         tstDiv.append(form);
 
@@ -456,11 +469,7 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
                     highestZIndex += 2;
                     $(this).css('z-index', highestZIndex+200);
                 },
-                // drag: function() {},
                 stop: function() {
-                    // selectedArrow = null;
-                    // inputId = null;
-                    // alert(selectedArrowX+", "+selectedArrowY);
                     selectedArrow.css({
                         "top": selectedArrowY,
                         "left": selectedArrowX
@@ -637,6 +646,10 @@ function uploadImg(selectedFile, naturalHeight, naturalWidth){
         var ActualResizeHandle4 = $('<div>').addClass('resize-handle se ui-resizable-se'); // SE
         var ActualResizeHandle5 = $('<div>').addClass('resize-handle sw ui-resizable-sw'); // SW
 
+        var label = $('<label>').attr({
+            "for": "previewImage",
+            "hidden" : ""
+        });
         var imgElement = $("<img>", {
             id: "previewImage",
             src: selectedFile,
@@ -700,6 +713,7 @@ function uploadImg(selectedFile, naturalHeight, naturalWidth){
         $('body').append(DraggableDiv);
         DraggableDiv.append(minimize);
         DraggableDiv.append(CloseR);
+        tstDiv.append(label);
         tstDiv.append(imgElement);
         ActualDiv.append(tstDiv);
         ActualDiv.append(ActualResizeHandle);

@@ -105,6 +105,7 @@
     <!-- basicamente eu tive que incluir a sidenav de desenho no index pq o JS depende do canvas criado aqui, 
     e o JS estava sendo chamado primeiro -->
     <div id="whereSidenavD" class="nocopy">
+        <label for="btnMyDraw" class="traduzir" hidden>Área de desenho</label>
         <div class="rounded-pill base pill" id="btnMyDraw" style="top: calc(45vh + 5rem); background-color: var(--AccentColor);" onmousedown='openDraw()'>
             <svg xmlns="https://www.w3.org/2000/svg" id="btnDraw" width="16" height="16" fill="var(--BaseColor)" class="bi bi-chevron-compact-left" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M9.224 1.553a.5.5 0 0 1 .223.67L6.56 8l2.888 5.776a.5.5 0 1 1-.894.448l-3-6a.5.5 0 0 1 0-.448l3-6a.5.5 0 0 1 .67-.223z"/>
@@ -170,7 +171,9 @@
 
                 <div style="width: 13vw; height: 12vh; right: 1vw; bottom: calc(max(3vw, 1rem) + max(4vw, 1rem) + 5vh); position: absolute; padding-left: 1vw;">
                     <!-- width -->
+                    <label for="sizeRange" hidden class="traduzir">Range da Caneta</label>
                     <input type="range" id="sizeRange" min="1" max="140" value="5" oninput="changeSize(this.value); document.getElementById('sizeText').value = myCanvas.getContext('2d').lineWidth;">
+                    <label for="sizeText" hidden class="traduzir">Text da Caneta</label>
                     <input type="text" id="sizeText" value="5" autocomplete="false" onkeydown="return TriggeredKey(this);" onkeyup="myCanvas.getContext('2d').lineWidth = this.value;">
                     
                     <button onmousedown="increaseSize(true);" class="BTNIncrease">
@@ -186,6 +189,7 @@
                     </button>
                 
                     <!-- color -->
+                    <label for="ColPck" hidden class="traduzir">Cor da Caneta</label>
                     <input id="ColPck" type="color"/>
                 </div>
 
@@ -226,15 +230,18 @@
     </div>
 
     <div style="z-index: 9984; padding: 10px; position: absolute; left: 10px; top: 18px; width: 210px; height: 62px; background-color: var(--SecondAccentColor); border-radius: 10px;">
-        <img src="./src/br.svg" style="width: 59px; top: calc();" onclick="{
+        <label for="" hidden>Brasil</label>
+        <img id="flagBr" src="./src/br.svg" style="width: 59px; top: calc();" onclick="{
             var array = Array.from(document.getElementsByClassName('traduzir')).concat(Array.from(document.getElementsByClassName('traduzirPlaceholder')));
             traducao(array, traducaoPtBr());
         }">
-        <img src="./src/mx.svg" style="width: 59px;" onclick="{
+        <label for="flagMx" hidden>México</label>
+        <img id="flagMx" src="./src/mx.svg" style="width: 59px;" onclick="{
             var array = Array.from(document.getElementsByClassName('traduzir')).concat(Array.from(document.getElementsByClassName('traduzirPlaceholder')));
             traducao(array, traducaoSpMx());
         }">
-        <img src="./src/us.svg" style="width: 59px;" onclick="{
+        <label for="flagUs" hidden>Estados Unidos da América</label>
+        <img id="flagUs" src="./src/us.svg" style="width: 59px;" onclick="{
             var array = Array.from(document.getElementsByClassName('traduzir')).concat(Array.from(document.getElementsByClassName('traduzirPlaceholder')));
             traducao(array, traducaoEnUs());
         }">
@@ -264,6 +271,7 @@
 
         </script>
 
+    <label for="searchBar" hidden class="traduzir">Barra de pesquisa para fórmulas</label>
     <input type="text" id="searchBar" placeholder="Pesquisar..." class="traduzirPlaceholder">
         <!-- when clicking, the fisrt result should be selected -->
         <svg xmlns="https://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16" id="lupa" onclick="{pesquisa($('#searchBar').val())}">

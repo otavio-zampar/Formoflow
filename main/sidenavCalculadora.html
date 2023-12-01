@@ -1,3 +1,4 @@
+<label for="btnMyCalc" class="traduzir" hidden>calculadora</label>
 <div class="rounded-pill base pill" id="btnMyCalc" style="top: 45vh; background-color: var(--BaseColor);" onmousedown='openCalc()'>
     <svg xmlns="https://www.w3.org/2000/svg" id="btnCalc" width="16" height="16" fill="var(--AccentColor)" class="bi bi-chevron-compact-left" viewBox="0 0 16 16">
         <path fill-rule="evenodd" d="M9.224 1.553a.5.5 0 0 1 .223.67L6.56 8l2.888 5.776a.5.5 0 1 1-.894.448l-3-6a.5.5 0 0 1 0-.448l3-6a.5.5 0 0 1 .67-.223z"/>
@@ -8,7 +9,9 @@
         <!-- div de resposta -->
         <div style="background-color:var(--SecondAccentColor); height:30%; width:100%; position: absolute; border-top-left-radius: 15px; border-top-right-radius: 15px;">
             <form name="calculator">
+                <label for="answer" hidden class="traduzir">Resposta da calculadora</label>
                 <input type="text" id="answer" name="ans" value="" autocomplete="off">
+                <label for="preAns" hidden class="traduzir">Histórico da calculadora</label>
                 <input type="text" id="preAns" name="preAns" value="" autocomplete="off" disabled> <!-- caixa de texto da pergunta caso precise: disabled-->
             </form>
             <p class="noCopy" id="switch2" style="font-size: 6vh; color: var(--LightGray); padding-left: 3%; top: 0%; position:absolute">DEG</p>
@@ -16,23 +19,35 @@
         </div>
         <!-- div dos numeros -->
         <div class="grid-container" style="grid-template-columns: auto auto auto; background-color:var(--RealDarkBlue); top:30%; height:70%; width:70%; position: absolute; border-bottom-left-radius: 15px;">
-                <input type="button" value="1" class="grid-item-number" onmousedown="document.calculator.ans.value+='1'; f = 0; ">
-                <input type="button" value="2" class="grid-item-number" onmousedown="document.calculator.ans.value+='2'; f = 0; ">
-                <input type="button" value="3" class="grid-item-number" onmousedown="document.calculator.ans.value+='3'; f = 0; ">
-                <input type="button" value="4" class="grid-item-number" onmousedown="document.calculator.ans.value+='4'; f = 0; ">
-                <input type="button" value="5" class="grid-item-number" onmousedown="document.calculator.ans.value+='5'; f = 0; ">
-                <input type="button" value="6" class="grid-item-number" onmousedown="document.calculator.ans.value+='6'; f = 0; ">
-                <input type="button" value="7" class="grid-item-number" onmousedown="document.calculator.ans.value+='7'; f = 0; ">
-                <input type="button" value="8" class="grid-item-number" onmousedown="document.calculator.ans.value+='8'; f = 0; ">
-                <input type="button" value="9" class="grid-item-number" onmousedown="document.calculator.ans.value+='9'; f = 0; ">
-                <input type="button" value="0" class="grid-item-number" onmousedown="document.calculator.ans.value+='0'; f = 0; ">
-                <input type="button" value="." class="grid-item-number" onmousedown="{
+            <label for="btn1" hidden>1</label>    
+            <input id="btn1" type="button" value="1" class="grid-item-number" onmousedown="document.calculator.ans.value+='1'; f = 0; ">
+            <label for="btn2" hidden>1</label>        
+            <input id="btn2" type="button" value="2" class="grid-item-number" onmousedown="document.calculator.ans.value+='2'; f = 0; ">
+            <label for="btn3" hidden>1</label>     
+            <input id="btn3" type="button" value="3" class="grid-item-number" onmousedown="document.calculator.ans.value+='3'; f = 0; ">
+            <label for="btn4" hidden>1</label>    
+            <input id="btn4" type="button" value="4" class="grid-item-number" onmousedown="document.calculator.ans.value+='4'; f = 0; ">
+            <label for="btn5" hidden>1</label>    
+            <input id="btn5" type="button" value="5" class="grid-item-number" onmousedown="document.calculator.ans.value+='5'; f = 0; ">
+            <label for="btn6" hidden>1</label>    
+            <input id="btn6" type="button" value="6" class="grid-item-number" onmousedown="document.calculator.ans.value+='6'; f = 0; ">
+            <label for="btn7" hidden>1</label>    
+            <input id="btn7" type="button" value="7" class="grid-item-number" onmousedown="document.calculator.ans.value+='7'; f = 0; ">
+            <label for="btn8" hidden>1</label>    
+            <input id="btn8" type="button" value="8" class="grid-item-number" onmousedown="document.calculator.ans.value+='8'; f = 0; ">
+            <label for="btn9" hidden>1</label>    
+            <input id="btn9" type="button" value="9" class="grid-item-number" onmousedown="document.calculator.ans.value+='9'; f = 0; ">
+            <label for="btn0" hidden>1</label>    
+            <input id="btn0" type="button" value="0" class="grid-item-number" onmousedown="document.calculator.ans.value+='0'; f = 0; ">
+            <label for="btnPoint" hidden>1</label>    
+            <input id="btnPoint" type="button" value="." class="grid-item-number" onmousedown="{
                     if(i == 0){
                         document.calculator.ans.value+='.';
                         i = 1;
                     }
                 }">
                 <!-- ao apertar o botao '.' ele muda uma variavel de valor por exemplo 1, nao se pode colocar outro '.' enquanto esta variavel for 1, a variavel so muda de valor depois de colocar um operando como + - / ou * -->
+                <label for="eval" hidden class="traduzir">Igual</label>
                 <input id="eval" type="button" value="=" class="grid-item-number" onmousedown="{
                     document.calculator.preAns.value = document.calculator.ans.value;
                     document.calculator.ans.value = doEval(document.calculator.ans.value);
@@ -85,14 +100,19 @@
             </div>
             <div class="grid-container" style="grid-template-columns: 33% 33% 33%; padding: 5%; grid-template-rows: auto auto auto auto; left: 10%; top: 0%; position: absolute; width: 90%; height: 100%;">
                 <!-- estao funcionando: '(', ')', 'π', 'e', 'log' e '√' (com exessoes) -->
-                <input type="button" value="(" class="grid-item-extra" onmousedown="document.calculator.ans.value+='('; f = 0; ">
-                <input type="button" value=")" class="grid-item-extra" onmousedown="document.calculator.ans.value+=')'; f = 0; ">
+                <label for="btnLB" hidden class="traduzir">Parêntesis Esquerdo</label>
+                <input id="bntLB" type="button" value="(" class="grid-item-extra" onmousedown="document.calculator.ans.value+='('; f = 0; ">
+                <label for="btnRB" hidden class="traduzir">Parêntesis Direito</label>
+                <input id="btnRB" type="button" value=")" class="grid-item-extra" onmousedown="document.calculator.ans.value+=')'; f = 0; ">
+                <label for="switch" id="labelRAD" hidden class="traduzir">Radiano</label>
                 <input type="button" id="switch" value="RAD" class="grid-item-extra" onmousedown="{
                     if(document.getElementById('switch').value != 'DEG'){
                         document.getElementById('switch').value = 'DEG';
+                        document.getElementById('labrlRAD').innerHTML = 'Graus';
                         document.getElementById('switch2').innerHTML = 'RAD';
                     }else{
                         document.getElementById('switch').value = 'RAD';
+                        document.getElementById('labrlRAD').innerHTML = 'Radiano';
                         document.getElementById('switch2').innerHTML = 'DEG';
                     }
                     f = 0;
@@ -101,16 +121,26 @@
                 <!-- switches DEG for RAD on top left corner -->
                 
                 
-                <input type="button" value="π" class="grid-item-extra" onmousedown="document.calculator.ans.value+='π'; f = 0; ">
-                <input type="button" value="E" class="grid-item-extra" onmousedown="document.calculator.ans.value+='E'; f = 0; ">
-                <input type="button" value="%" class="grid-item-extra" onmousedown="document.calculator.ans.value+='%'; f = 0; ">
-                <input type="button" value="^" class="grid-item-extra" onmousedown="document.calculator.ans.value+='^'; f = 0; ">
-                <input type="button" value="Log" class="grid-item-extra" onmousedown="document.calculator.ans.value+=log; f = 0; ">
-                <input type="button" value="√" class="grid-item-extra" onmousedown="document.calculator.ans.value+='√'; f = 0; ">
-                <input type="button" value="sin" class="grid-item-extra" onmousedown="document.calculator.ans.value+=sin; f = 0; ">
-                <input type="button" value="cos" class="grid-item-extra" onmousedown="document.calculator.ans.value+=cos; f = 0; ">
-                <input type="button" value="tan" class="grid-item-extra" onmousedown="document.calculator.ans.value+=tan; f = 0; ">
-                <input type="button" value="!" class="grid-item-extra" onmousedown="document.calculator.ans.value+='!'; f = 0; ">
+                <label for="btnPi" hidden class="traduzir">Pi</label>
+                <input id="btnPi" type="button" value="π" class="grid-item-extra" onmousedown="document.calculator.ans.value+='π'; f = 0; ">
+                <label for="btnE" hidden class="traduzir">Euler</label>
+                <input id="btnE" type="button" value="E" class="grid-item-extra" onmousedown="document.calculator.ans.value+='E'; f = 0; ">
+                <label for="btnPercent" hidden class="traduzir">Porcentagem</label>
+                <input id="btnPercent" type="button" value="%" class="grid-item-extra" onmousedown="document.calculator.ans.value+='%'; f = 0; ">
+                <label for="btnExpo" hidden class="traduzir">Exponencial</label>
+                <input id="btnExpo" type="button" value="^" class="grid-item-extra" onmousedown="document.calculator.ans.value+='^'; f = 0; ">
+                <label for="btnLog" hidden class="traduzir">Logarímico</label>
+                <input id="btnLog" type="button" value="Log" class="grid-item-extra" onmousedown="document.calculator.ans.value+=log; f = 0; ">
+                <label for="btnSqrt" hidden class="traduzir">Raíz quadrada</label>
+                <input id="btnSqrt" type="button" value="√" class="grid-item-extra" onmousedown="document.calculator.ans.value+='√'; f = 0; ">
+                <label for="btnSin" hidden class="traduzir">Seno</label>
+                <input id="btnSin" type="button" value="sin" class="grid-item-extra" onmousedown="document.calculator.ans.value+=sin; f = 0; ">
+                <label for="btnCos" hidden class="traduzir">Cosseno</label>
+                <input id="btnCos" type="button" value="cos" class="grid-item-extra" onmousedown="document.calculator.ans.value+=cos; f = 0; ">
+                <label for="btnTan" hidden class="traduzir">Tangente</label>
+                <input id="btnTan" type="button" value="tan" class="grid-item-extra" onmousedown="document.calculator.ans.value+=tan; f = 0; ">
+                <label for="btnFat" hidden class="traduzir">Fatoral</label>
+                <input id="btnFat" type="button" value="!" class="grid-item-extra" onmousedown="document.calculator.ans.value+='!'; f = 0; ">
             </div>
         </div>
     </div>
