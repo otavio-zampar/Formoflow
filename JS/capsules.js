@@ -1,5 +1,4 @@
 var divCount = 0;
-var selectedArrow = null; // Armazena a seta selecionada
 var selectedArrowX = selectedArrowY = null;
 var inputId = null; // Armazena o input de destino selecionado
 var highestZIndex = 11;
@@ -112,7 +111,6 @@ function createDiv(AA) {
 
             input.css("height", "2.2rem");   
             input.css("outline-color", "transparent");
-            // input.attr("type", "number");
             var valor = "10% + 30px + "+ index +" * (min(2rem, 2vh) + 2.2rem - 1px)";
             input.css("top", "calc("+valor+")");
 
@@ -131,10 +129,9 @@ function createDiv(AA) {
 
             seta.draggable({
                 start: function(){
-                    selectedArrow = $(this);
-                    selectedArrowX = selectedArrow.css("left");
-                    selectedArrowY = selectedArrow.css("top");
-                    arrowId = selectedArrow.attr('id');
+                    selectedArrowX = $(this).css("left");
+                    selectedArrowY = $(this).css("top");
+                    arrowId = $(this).attr('id');
                     inputId = $('#' + arrowId.replace('seta', 'input'));
                     
                     // apaga a linha inicial
@@ -145,7 +142,7 @@ function createDiv(AA) {
                     $(this).css('z-index', highestZIndex+200);
                 },
                 stop: function() {
-                    selectedArrow.css({
+                    $(this).css({
                         "top": selectedArrowY,
                         "left": selectedArrowX
                     });
@@ -198,10 +195,9 @@ function createDiv(AA) {
             
             seta.draggable({
                 start: function(){
-                    selectedArrow = $(this);
-                    selectedArrowX = selectedArrow.css("left");
-                    selectedArrowY = selectedArrow.css("top");
-                    arrowId = selectedArrow.attr('id');
+                    selectedArrowX = $(this).css("left");
+                    selectedArrowY = $(this).css("top");
+                    arrowId = $(this).attr('id');
                     inputId = $('#' + arrowId.replace('seta', 'icon'));
                     
                     // apaga a linha inicial
@@ -211,12 +207,8 @@ function createDiv(AA) {
                     highestZIndex += 2;
                     $(this).css('z-index', highestZIndex+200);
                 },
-                // drag: function() {},
                 stop: function() {
-                    // selectedArrow = null;
-                    // inputId = null;
-                    // alert(selectedArrowX+", "+selectedArrowY);
-                    selectedArrow.css({
+                    $(this).css({
                         "top": selectedArrowY,
                         "left": selectedArrowX
                     });
@@ -336,7 +328,6 @@ function createDiv(AA) {
 
         $('.teste').each(function() {
             if (mudado.attr("id") == $(this).attr("InputPai")) {
-                // console.log("(input) De "+ mudado.attr("id") + ", para " + $(this).attr("id"));
                 $(this).val(mudado.val());
                 $(this).trigger('inputDiferente');
             }
@@ -346,7 +337,6 @@ function createDiv(AA) {
         var mudado = this;
         $('.teste').each(function() {
             if (mudado.id == $(this).attr("InputPai")) {
-                // console.log("(input) De "+ mudado.attr("id") + ", para " + $(this).attr("id"));
                 $(this).val(mudado.innerHTML);
                 $(this).trigger('inputDiferente');
             }
@@ -388,7 +378,7 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
     tstDiv.css("background-color", getColor());
     var ActualResizeHandle = $('<div>').addClass('resize-handle s ui-resizable-s'); // S
     var ActualResizeHandle2 = $('<div>').addClass('resize-handle e ui-resizable-e') // E
-    var ActualResizeHandle3 = $('<div>').addClass('resize-handle w ui-resizable-w'); //.css('z-index', '0px'); // W
+    var ActualResizeHandle3 = $('<div>').addClass('resize-handle w ui-resizable-w'); // W
     var ActualResizeHandle4 = $('<div>').addClass('resize-handle se ui-resizable-se'); // SE
     var ActualResizeHandle5 = $('<div>').addClass('resize-handle sw ui-resizable-sw'); // SW
 
@@ -457,10 +447,10 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
             
             seta.draggable({
                 start: function(){
-                    selectedArrow = $(this);
-                    selectedArrowX = selectedArrow.css("left");
-                    selectedArrowY = selectedArrow.css("top");
-                    arrowId = selectedArrow.attr('id');
+                    // $(this) = $(this);
+                    selectedArrowX = $(this).css("left");
+                    selectedArrowY = $(this).css("top");
+                    arrowId = $(this).attr('id');
                     inputId = $('#' + arrowId.replace('seta', 'icon'));
                     
                     // apaga a linha inicial
@@ -471,7 +461,7 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
                     $(this).css('z-index', highestZIndex+200);
                 },
                 stop: function() {
-                    selectedArrow.css({
+                    $(this).css({
                         "top": selectedArrowY,
                         "left": selectedArrowX
                     });
@@ -593,7 +583,6 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
         var mudado = $(this);
         $('.teste').each(function() {
             if (mudado.attr("id") == $(this).attr("InputPai")) {
-                // console.log("(input) De "+ mudado.attr("id") + ", para " + $(this).attr("id"));
                 $(this).val(mudado.val());
                 $(this).trigger('inputDiferente');
             }
@@ -604,7 +593,6 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
         var mudado = this;
         $('.teste').each(function() {
             if (mudado.id == $(this).attr("InputPai")) {
-                // console.log("(input) De "+ mudado.attr("id") + ", para " + $(this).attr("id"));
                 $(this).val(mudado.innerHTML);
                 $(this).trigger('inputDiferente');
             }
@@ -644,7 +632,7 @@ function uploadImg(selectedFile, naturalHeight, naturalWidth){
 
         var ActualResizeHandle = $('<div>').addClass('resize-handle s ui-resizable-s').css('min-width', '320px'); // S
         var ActualResizeHandle2 = $('<div>').addClass('resize-handle e ui-resizable-e').css('min-height', '320px'); // E
-        var ActualResizeHandle3 = $('<div>').addClass('resize-handle w ui-resizable-w').css('min-height', '320px'); //.css('z-index', '0px'); // W
+        var ActualResizeHandle3 = $('<div>').addClass('resize-handle w ui-resizable-w').css('min-height', '320px'); // W
         var ActualResizeHandle4 = $('<div>').addClass('resize-handle se ui-resizable-se'); // SE
         var ActualResizeHandle5 = $('<div>').addClass('resize-handle sw ui-resizable-sw'); // SW
 
