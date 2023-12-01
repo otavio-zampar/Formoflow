@@ -111,6 +111,10 @@
     top: 0px;
     background-color: green;
     opacity: 1;
+    cursor: pointer;
+    text-align: center;
+    font-size: 1.3rem;
+    color: var(--BaseColor);
   } 
   .CloseR{
     position: absolute;
@@ -120,6 +124,10 @@
     top: 0px;
     background-color: red;
     opacity: 1;
+    cursor: pointer;
+    text-align: center;
+    font-size: 1.3rem;
+    color: var(--BaseColor);
   }
   
   .resize-handle {

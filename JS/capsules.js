@@ -71,19 +71,9 @@ function createDiv(AA) {
     var ActualDiv = $('<div>').attr('id', randomId).addClass('ActualDiv nocopy').attr("actualName", actualName);
     ActualDiv.attr("exit", exit);
     var DraggableDiv = $('<div>').attr('id', 'draggable' + randomId).addClass('DraggableDiv');
-    var minimize = $('<div>').addClass('minimize').html('&#128469').css({
-        "cursor": "pointer",
-        "text-align": "center",
-        "font-size": "1.3rem",
-        "color": "var(--BaseColor)",
-    });
+    var minimize = $('<div>').addClass('minimize').html('&#128469');
     {
-    var CloseR = $('<div>').addClass('CloseR').html('&#10006').css({
-        "cursor": "pointer",
-        "text-align": "center",
-        "font-size": "1.3rem",
-        "color": "var(--BaseColor)"
-    });
+    var CloseR = $('<div>').addClass('CloseR').html('&#10006');
     }
 
     var tstDiv = $('<div>').addClass('tstDiv');
@@ -390,19 +380,9 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
     var ActualDiv = $('<div>').attr('id', randomId).addClass('ActualDiv nocopy'); // .attr("actualName", actualName)
     ActualDiv.attr("exit", exit);
     var DraggableDiv = $('<div>').attr('id', 'draggable' + randomId).addClass('DraggableDiv');
-    var minimize = $('<div>').addClass('minimize').html('&#128469').css({
-        "cursor": "pointer",
-        "text-align": "center",
-        "font-size": "1.3rem",
-        "color": "var(--BaseColor)",
-    });
+    var minimize = $('<div>').addClass('minimize').html('&#128469');
     {
-    var CloseR = $('<div>').addClass('CloseR').html('&#10006').css({
-        "cursor": "pointer",
-        "text-align": "center",
-        "font-size": "1.3rem",
-        "color": "var(--BaseColor)"
-    });
+    var CloseR = $('<div>').addClass('CloseR').html('&#10006');
     }
     var tstDiv = $('<div>').addClass('tstDiv');
     tstDiv.css("background-color", getColor());
@@ -647,23 +627,14 @@ function uploadImg(selectedFile, naturalHeight, naturalWidth){
 
         var ar = 0;
 
-        var randomId = 'div' + divCount++;
+        divCount++;
+        var randomId = 'div' + divCount;
         var mini = 0;
         var ActualDiv = $('<div>').attr('id', randomId).addClass('ActualDiv');
         var DraggableDiv = $('<div>').attr('id', 'draggable' + randomId).addClass('DraggableDiv');
-        var minimize = $('<div>').addClass('minimize').html('&#128469').css({
-            "cursor": "pointer",
-            "text-align": "center",
-            "font-size": "1.3rem",
-            "color": "var(--BaseColor)",
-        });
+        var minimize = $('<div>').addClass('minimize').html('&#128469');
         {
-        var CloseR = $('<div>').addClass('CloseR').html('&#10006').css({
-            "cursor": "pointer",
-            "text-align": "center",
-            "font-size": "1.3rem",
-            "color": "var(--BaseColor)"
-        });
+        var CloseR = $('<div>').addClass('CloseR').html('&#10006');
         }
         var tstDiv = $('<div>').addClass('tstDiv');
         tstDiv.css("padding", "0px");
