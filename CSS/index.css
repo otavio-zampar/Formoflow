@@ -21,15 +21,7 @@
 
 .linha-horizontal {
     border: 1px solid var(--AzulClaroBkg);
-    /* transform: rotate(1deg); */
     width: 100vw;
-    position: absolute;
-}
-
-.linha-vertical {
-    border: 1px solid var(--AzulClaroBkg);
-    /* transform: rotate(1deg); */
-    height: 100vh;
     position: absolute;
 }
 
@@ -39,16 +31,23 @@
     border-color: var(--Black);
 }
 
-.linha-vertical:nth-child(4n) {
-    border-width: 1px;
-    z-index: 1;
-    border-color: var(--Black);;
-}
-
 .linha-horizontal:nth-child(16n) {
     border-width: 1px;
     z-index: 1;
     border-color: var(--Red);
+}
+
+.linha-vertical {
+    border: 1px solid var(--AzulClaroBkg);
+    /* transform: rotate(1deg); */
+    height: 100vh;
+    position: absolute;
+}
+
+.linha-vertical:nth-child(4n) {
+    border-width: 1px;
+    z-index: 1;
+    border-color: var(--Black);;
 }
 
 .linha-vertical:nth-child(16n) {

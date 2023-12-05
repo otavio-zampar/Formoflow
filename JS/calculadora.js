@@ -37,8 +37,6 @@ function sepPare(input){
   return result;
 }
 
-// (3+3!)*3 = 27, ok
-// (3+3)! = 720, not ok
 function doFat(expression) {
     // Regular expression pattern to match numbers followed by an exclamation mark
     const pattern = /(\d+!)/g;
@@ -213,6 +211,7 @@ if (typeof(ansDoc) == 'number') {
     if(ansDoc != ""){
         ansDoc = Function('"use strict"; return '+ ansDoc)(); 
     }
+    
     //casos especiais
     if(hasSin > 0){
         if(ansDoc <= 0.000000000000001 && ansDoc >= -0.000000000000001){
