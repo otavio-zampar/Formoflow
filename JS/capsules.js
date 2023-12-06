@@ -2,6 +2,7 @@ var divCount = 0;
 var selectedArrowX = selectedArrowY = null;
 var inputId = null; // Armazena o input de destino selecionado
 var highestZIndex = 11;
+var ActualTop = ActualLeft = 0;
 
 function findZindex() {
     $('.ActualDiv').each(function() {
@@ -65,6 +66,8 @@ function createDiv(AA) {
     var inputForm = AA.qnt;
     var exit = AA.exit;
     divCount++;
+    ActualTop = divCount;
+    ActualLeft = divCount;
     var randomId = 'div' + divCount;
     var mini = 0;
     var ActualDiv = $('<div>').attr('id', randomId).addClass('ActualDiv nocopy').attr("actualName", actualName);
@@ -263,8 +266,8 @@ function createDiv(AA) {
     ActualDiv.css({
         minHeight: minHeight,
         zIndex: highestZIndex + 1,
-        left: "calc(5vw + "+50 * divCount+"px)",
-        top: "calc(20vh + "+50 * divCount+"px)"
+        left: "calc(5vw + "+50 * ActualLeft+"px)",
+        top: "calc(20vh + "+50 * ActualTop+"px)"
     });
     tstDiv.css('min-height', minHeight);
     DraggableDiv.css({
