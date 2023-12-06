@@ -9,8 +9,6 @@ function findZindex() {
         var zIndex = parseInt($(this).css('z-index'));
         if (!isNaN(zIndex) && zIndex > highestZIndex) {
             highestZIndex = zIndex;
-            ActualTop = 0;
-            ActualLeft = 0;
         }
     });
 }
@@ -351,6 +349,8 @@ function createDiv(AA) {
     $(document).mousedown(function(e){
         var string = String('#'+randomId+", #draggable"+randomId);
         if ($(string).children().is(e.target)) {
+            ActualTop = 0;
+            ActualLeft = 0;
             findZindex();
             highestZIndex += 2;
             $("#"+randomId).css("z-index", highestZIndex);
@@ -615,6 +615,8 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
         var string = String('#'+randomId+", #draggable"+randomId);
         if ($(string).children().is(e.target)) {
             findZindex();
+            ActualTop = 0;
+            ActualLeft = 0;
             highestZIndex += 2;
             $("#"+randomId).css("z-index", highestZIndex);
             $("#draggable"+randomId).css("z-index", highestZIndex);
