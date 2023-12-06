@@ -2,7 +2,7 @@ var divCount = 0;
 var selectedArrowX = selectedArrowY = null;
 var inputId = null; // Armazena o input de destino selecionado
 var highestZIndex = 11;
-var ActualTop = ActualLeft = 0;
+var ActualTop = 0;
 
 function findZindex() {
     $('.ActualDiv').each(function() {
@@ -66,17 +66,14 @@ function createDiv(AA) {
     var inputForm = AA.qnt;
     var exit = AA.exit;
     divCount++;
-    ActualTop = divCount;
-    ActualLeft = divCount;
+    ActualTop++;
     var randomId = 'div' + divCount;
     var mini = 0;
     var ActualDiv = $('<div>').attr('id', randomId).addClass('ActualDiv nocopy').attr("actualName", actualName);
     ActualDiv.attr("exit", exit);
     var DraggableDiv = $('<div>').attr('id', 'draggable' + randomId).addClass('DraggableDiv');
     var minimize = $('<div>').addClass('minimize').html('&#128469');
-    {
     var CloseR = $('<div>').addClass('CloseR').html('&#10006');
-    }
 
     var tstDiv = $('<div>').addClass('tstDiv');
     tstDiv.css("background-color", getColor());
@@ -136,6 +133,7 @@ function createDiv(AA) {
                     selectedArrowY = $(this).css("top");
                     arrowId = $(this).attr('id');
                     inputId = $('#' + arrowId.replace('seta', 'input'));
+                    ActualTop = 0;
                     
                     // apaga a linha inicial
                     $('#' + arrowId.replace('seta', 'linha')).css("display", "none"); 
@@ -180,6 +178,7 @@ function createDiv(AA) {
                 var copyText = document.getElementById("icon"+divCount+(inputForm+index));
                 navigator.clipboard.writeText(copyText.innerHTML); // copy to clipboard
                 document.getElementById('BTNAlerta').style.display = "initial";
+                ActualTop = 0;
                 setTimeout(() => {
                 document.getElementById('BTNAlerta').style.display = "none";
                 }, 1000);
@@ -202,6 +201,7 @@ function createDiv(AA) {
                     selectedArrowY = $(this).css("top");
                     arrowId = $(this).attr('id');
                     inputId = $('#' + arrowId.replace('seta', 'icon'));
+                    ActualTop = 0;
                     
                     // apaga a linha inicial
                     $('#' + arrowId.replace('seta', 'linha')).css("display", "none"); 
@@ -266,14 +266,15 @@ function createDiv(AA) {
     ActualDiv.css({
         minHeight: minHeight,
         zIndex: highestZIndex + 1,
-        left: "calc(5vw + "+50 * ActualLeft+"px)",
-        top: "calc(20vh + "+50 * ActualTop+"px)"
+        left: "calc(5vw + "+50 * ActualTop +"px)",
+        top: "calc(20vh + "+50 * ActualTop +"px)"
     });
+    console.log("Top: "+ActualTop);
     tstDiv.css('min-height', minHeight);
     DraggableDiv.css({
         zIndex: highestZIndex + 1,
-        left: "calc(5vw + "+50 * divCount+"px)",
-        top: "calc(20vh + "+50 * divCount+"px)"
+        left: "calc(5vw + "+50 * ActualTop +"px)",
+        top: "calc(20vh + "+50 * ActualTop +"px)"
     });
     ActualResizeHandle2.css('min-height', minHeight);
     ActualResizeHandle3.css('min-height', minHeight);
@@ -350,7 +351,7 @@ function createDiv(AA) {
         var string = String('#'+randomId+", #draggable"+randomId);
         if ($(string).children().is(e.target)) {
             ActualTop = 0;
-            ActualLeft = 0;
+            console.log("Top zerado: "+ActualTop);
             findZindex();
             highestZIndex += 2;
             $("#"+randomId).css("z-index", highestZIndex);
@@ -370,8 +371,7 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
     var exit = AA.exit;
 
     divCount++;
-    ActualTop = divCount;
-    ActualLeft = divCount;
+    ActualTop++;
     var randomId = 'div' + divCount;
     var mini = 0;
     var ActualDiv = $('<div>').attr('id', randomId).addClass('ActualDiv nocopy'); // .attr("actualName", actualName)
@@ -434,7 +434,7 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
             icon.on("click", function(){
                 var copyText = document.getElementById("icon"+divCount+(inputForm+1));
                 navigator.clipboard.writeText(copyText.innerHTML); // copy to clipboard
-                
+                ActualTop = 0;
                 document.getElementById('BTNAlerta').style.display = "initial";
                 setTimeout(() => {
                 document.getElementById('BTNAlerta').style.display = "none";
@@ -459,6 +459,7 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
                     selectedArrowY = $(this).css("top");
                     arrowId = $(this).attr('id');
                     inputId = $('#' + arrowId.replace('seta', 'icon'));
+                    ActualTop = 0;
                     
                     // apaga a linha inicial
                     $('#' + arrowId.replace('seta', 'linha')).css("display", "none"); 
@@ -535,8 +536,8 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
     ActualDiv.css({
         minHeight: minHeight,
         zIndex: highestZIndex + 1,
-        left: "calc(5vw + "+50 * ActualLeft+"px)",
-        top: "calc(20vh + "+50 * ActualTop+"px)"
+        left: "calc(5vw + "+50 * ActualTop +"px)",
+        top: "calc(20vh + "+50 * ActualTop +"px)"
     });
     tstDiv.css('min-height', minHeight);
     DraggableDiv.css('z-index', highestZIndex + 1);
@@ -616,7 +617,6 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
         if ($(string).children().is(e.target)) {
             findZindex();
             ActualTop = 0;
-            ActualLeft = 0;
             highestZIndex += 2;
             $("#"+randomId).css("z-index", highestZIndex);
             $("#draggable"+randomId).css("z-index", highestZIndex);
