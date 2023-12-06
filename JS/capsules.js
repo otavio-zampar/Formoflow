@@ -9,6 +9,8 @@ function findZindex() {
         var zIndex = parseInt($(this).css('z-index'));
         if (!isNaN(zIndex) && zIndex > highestZIndex) {
             highestZIndex = zIndex;
+            ActualTop = 0;
+            ActualLeft = 0;
         }
     });
 }
@@ -368,6 +370,8 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
     var exit = AA.exit;
 
     divCount++;
+    ActualTop = divCount;
+    ActualLeft = divCount;
     var randomId = 'div' + divCount;
     var mini = 0;
     var ActualDiv = $('<div>').attr('id', randomId).addClass('ActualDiv nocopy'); // .attr("actualName", actualName)
@@ -528,7 +532,12 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
         var minHeight = "calc(10% + 30px)";
     }
     
-    ActualDiv.css('min-height', minHeight);
+    ActualDiv.css({
+        minHeight: minHeight,
+        zIndex: highestZIndex + 1,
+        left: "calc(5vw + "+50 * ActualLeft+"px)",
+        top: "calc(20vh + "+50 * ActualTop+"px)"
+    });
     tstDiv.css('min-height', minHeight);
     DraggableDiv.css('z-index', highestZIndex + 1);
     ActualDiv.css('z-index', highestZIndex + 1);
