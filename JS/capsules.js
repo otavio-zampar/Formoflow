@@ -134,7 +134,7 @@ function createDiv(AA) {
                     selectedArrowY = $(this).css("top");
                     arrowId = $(this).attr('id');
                     inputId = $('#' + arrowId.replace('seta', 'input'));
-                    ActualTop = 0;
+                    ActualTop = 1;
                     leftOffset = 0;
                     
                     // apaga a linha inicial
@@ -180,7 +180,7 @@ function createDiv(AA) {
                 var copyText = document.getElementById("icon"+divCount+(inputForm+index));
                 navigator.clipboard.writeText(copyText.innerHTML); // copy to clipboard
                 document.getElementById('BTNAlerta').style.display = "initial";
-                ActualTop = 0;
+                ActualTop = 1;
                 leftOffset = 0;
                 setTimeout(() => {
                 document.getElementById('BTNAlerta').style.display = "none";
@@ -204,7 +204,7 @@ function createDiv(AA) {
                     selectedArrowY = $(this).css("top");
                     arrowId = $(this).attr('id');
                     inputId = $('#' + arrowId.replace('seta', 'icon'));
-                    ActualTop = 0;
+                    ActualTop = 1;
                     leftOffset = 0;
                     
                     // apaga a linha inicial
@@ -268,26 +268,25 @@ function createDiv(AA) {
     });
     var minHeight = "calc("+icon.css('top')+" + "+ icon.css('height') +" + 30px)";
     if (ActualTop >= 9) {
-        ActualTop = 0;
+        ActualTop = 1;
         leftOffset++;
-        console.log("calc(20vh + "+ 50 * ActualTop +"px + "+ 20 * leftOffset +"px)");
     }
     ActualDiv.css({
         minHeight: minHeight,
         zIndex: highestZIndex + 1,
-        left: "calc(5vw + "+ 50 * ActualTop +"px + "+ 320 * leftOffset +"px)",
-        top: "calc(20vh + "+ 50 * ActualTop +"px + "+ 20 * leftOffset +"px)"
+        left: "calc(5vw + "+ 50 * ActualTop +"px + "+ 50 * leftOffset +"px)",
+        top: "calc(20vh + "+ 50 * ActualTop +"px + "+ 30 * leftOffset +"px)"
     });
     // console.log("Top: "+ActualTop);
     tstDiv.css('min-height', minHeight);
     if (ActualTop >= 9) {
-        ActualTop = 0;
+        ActualTop = 1;
         leftOffset++;
     }
     DraggableDiv.css({
         zIndex: highestZIndex + 1,
-        left: "calc(5vw + "+50 * ActualTop +"px + "+ 320 * leftOffset +"px)",
-        top: "calc(20vh + "+50 * ActualTop +"px + "+ 20 * leftOffset +"px)"
+        left: "calc(5vw + "+ 50 * ActualTop +"px + "+ 50 * leftOffset +"px)",
+        top: "calc(20vh + "+ 50 * ActualTop +"px + "+ 30 * leftOffset +"px)"
     });
     ActualResizeHandle2.css('min-height', minHeight);
     ActualResizeHandle3.css('min-height', minHeight);
@@ -363,7 +362,7 @@ function createDiv(AA) {
     $(document).mousedown(function(e){
         var string = String('#'+randomId+", #draggable"+randomId);
         if ($(string).children().is(e.target)) {
-            ActualTop = 0;
+            ActualTop = 1;
             leftOffset = 0;
             // console.log("Top zerado: "+ActualTop);
             findZindex();
@@ -448,7 +447,7 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
             icon.on("click", function(){
                 var copyText = document.getElementById("icon"+divCount+(inputForm+1));
                 navigator.clipboard.writeText(copyText.innerHTML); // copy to clipboard
-                ActualTop = 0;
+                ActualTop = 1;
                 leftOffset = 0;
                 document.getElementById('BTNAlerta').style.display = "initial";
                 setTimeout(() => {
@@ -474,7 +473,7 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
                     selectedArrowY = $(this).css("top");
                     arrowId = $(this).attr('id');
                     inputId = $('#' + arrowId.replace('seta', 'icon'));
-                    ActualTop = 0;
+                    ActualTop = 1;
                     leftOffset = 0;
                     
                     // apaga a linha inicial
@@ -549,14 +548,14 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
         var minHeight = "calc(10% + 30px)";
     }
     if (ActualTop >= 9) {
-        ActualTop = 0;
+        ActualTop = 1;
         leftOffset++;
     }
     ActualDiv.css({
         minHeight: minHeight,
         zIndex: highestZIndex + 1,
-        left: "calc(5vw + "+50 * ActualTop +"px + "+ 20 * leftOffset +"px)",
-        top: "calc(20vh + "+50 * ActualTop +"px + "+ 20 * leftOffset +"px)"
+        left: "calc(5vw + "+ 50 * ActualTop +"px + "+ 50 * leftOffset +"px)",
+        top: "calc(20vh + "+ 50 * ActualTop +"px + "+ 30 * leftOffset +"px)"
     });
     tstDiv.css('min-height', minHeight);
     DraggableDiv.css('z-index', highestZIndex + 1);
@@ -635,7 +634,7 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
         var string = String('#'+randomId+", #draggable"+randomId);
         if ($(string).children().is(e.target)) {
             findZindex();
-            ActualTop = 0;
+            ActualTop = 1;
             leftOffset = 0;
             highestZIndex += 2;
             $("#"+randomId).css("z-index", highestZIndex);
