@@ -23,6 +23,7 @@
     border: 1px solid var(--AzulClaroBkg);
     width: 100vw;
     position: absolute;
+    pointer-events: none;
 }
 
 .linha-horizontal:nth-child(4n) {
