@@ -1,24 +1,24 @@
 <label for="btnMyCalc" class="traduzir" hidden>calculadora</label>
-<div class="rounded-pill base pill" id="btnMyCalc" style="top: 45vh; background-color: var(--BaseColor);" onmousedown='openCalc()'>
+<div class="rounded-pill base pill" id="btnMyCalc" onmousedown='openCalc()'>
     <svg xmlns="https://www.w3.org/2000/svg" id="btnCalc" width="16" height="16" fill="var(--AccentColor)" class="bi bi-chevron-compact-left" viewBox="0 0 16 16">
         <path fill-rule="evenodd" d="M9.224 1.553a.5.5 0 0 1 .223.67L6.56 8l2.888 5.776a.5.5 0 1 1-.894.448l-3-6a.5.5 0 0 1 0-.448l3-6a.5.5 0 0 1 .67-.223z"/>
     </svg>
 </div>
-<div id="myCalc" class="sidenavCalc base" style="z-index: 9995; height: 100%; width: max(40vw, min(100vh, 40rem)); left: min(-40vw, max(-100vh, -40rem)); border-top-right-radius: 25px; border-bottom-right-radius: 25px;">
-    <div class="shadow" style="height:94%; top: 3%; width:90%; margin-left: 5%; border-radius: 15px; position: absolute;">
+<div id="myCalc" class="sidenavCalc base">
+    <div class="shadow calcShadow">
         <!-- div de resposta -->
-        <div style="background-color:var(--SecondAccentColor); height:30%; width:100%; position: absolute; border-top-left-radius: 15px; border-top-right-radius: 15px;">
+        <div style="background-color:var(--SecondAccentColor); height:30vh; width:36vw; position: absolute; border-top-left-radius: 15px; border-top-right-radius: 15px;">
             <form name="calculator">
                 <label for="answer" hidden class="traduzir">Resposta da calculadora</label>
                 <input type="text" id="answer" name="ans" value="" autocomplete="off">
                 <label for="preAns" hidden class="traduzir">Histórico da calculadora</label>
                 <input type="text" id="preAns" name="preAns" value="" autocomplete="off" disabled> <!-- caixa de texto da pergunta caso precise: disabled-->
             </form>
-            <p class="noCopy" id="switch2" style="font-size: 6vh; color: var(--LightGray); padding-left: 3%; top: 0%; position:absolute">DEG</p>
-            <p class="noCopy" style="font-size: 6vh; color: var(--LightGray); cursor: pointer; position:absolute; top:0%; right:3%;" onmousedown="document.calculator.ans.value=''; document.calculator.preAns.value=''; i = 0; f = 0; ">CE</p>
+            <p class="noCopy" id="switch2" style="font-size: 6vh; color: var(--LightGray); left: 1.5vw; top: 0%; position:absolute">DEG</p>
+            <p class="noCopy" style="font-size: 6vh; color: var(--LightGray); cursor: pointer; position:absolute; top:0%; right:1.5vw;" onmousedown="document.calculator.ans.value=''; document.calculator.preAns.value=''; i = 0; f = 0; ">CE</p>
         </div>
         <!-- div dos numeros -->
-        <div class="grid-container" style="grid-template-columns: auto auto auto; background-color:var(--RealDarkBlue); top:30%; height:70%; width:70%; position: absolute; border-bottom-left-radius: 15px;">
+        <div class="grid-container divNumeros">
             <label for="btn1" hidden>1</label>    
             <input id="btn1" type="button" value="1" class="grid-item-number" onmousedown="document.calculator.ans.value+='1'; f = 0; ">
             <label for="btn2" hidden>1</label>        
@@ -54,8 +54,8 @@
                 }">
             </div>
         <!-- div de operaçoes -->
-        <div style="background-color:var(--SecondAccentColor); top:30%; left: 70%; height:68%; width:3px; position: absolute; z-index: 9996;"></div> <!-- this is the border separating the two divs -->
-        <div class="grid-container" style="background-color:var(--RealDarkBlue); color: var(--AccentColor); top:30%; left: 70%; height:70%; width:25%; position: absolute; padding: 5%;">
+        <div style="background-color:var(--SecondAccentColor); top:30vh; left: 24vw; height:64vh; width:3px; position: absolute; z-index: 9996;"></div> <!-- this is the border separating the two divs -->
+        <div class="grid-container" style="background-color:var(--RealDarkBlue); color: var(--AccentColor); top:30vh; left: 28vw; height:64vh; width:8vw; position: absolute;">
             <p class="grid-item-operandos noCopy"  onmousedown="document.calculator.ans.value = document.calculator.ans.value.substring(0, document.calculator.ans.value.length - 1); i = 0; f = 0;">
             C</p>
             <p class="grid-item-operandos noCopy" onmousedown="{
@@ -92,13 +92,13 @@
         <!-- div de operaçoes extras -->
         <div style="background-color:var(--BaseColor); top: 95%; left: 95%; height: 5%; width: 10%; position: absolute; z-index: 9999;"></div>
         <div id="corner" style="background-color:var(--AccentColor); top: 95%; left: 95%; height: 5%; width: 5.1%; position: absolute; z-index: 9999; border-bottom-right-radius: 15px; cursor: pointer;" onmousedown="if(openExt == 0){openExtra();}"></div>
-        <div id="myExtra" style="background-color:var(--AccentColor); top:30%; left: 95%; height:70%; width:70%; position: absolute; transition: 0.5s; z-index: 9997;">
-            <div style="height: 100%; height: 100%; width: 10%; cursor: pointer;" onmousedown="openExtra()">
+        <div id="myExtra" style="background-color:var(--AccentColor); top:30vh; left: 32vw; height:64vh; width:24vw; position: absolute; transition: 0.5s; z-index: 9997;">
+            <div style="height: 64vh; width: 4vw; cursor: pointer;" onmousedown="openExtra()">
                 <svg id="rotate" xmlns="https://www.w3.org/2000/svg" width="16" height="16" fill="var(--RealDarkBlue)" class="bi bi-chevron-compact-left" viewBox="0 0 16 16" style="width:100%; margin-top:30vh; pointer-events:none;">
                     <path fill-rule="evenodd" d="M9.224 1.553a.5.5 0 0 1 .223.67L6.56 8l2.888 5.776a.5.5 0 1 1-.894.448l-3-6a.5.5 0 0 1 0-.448l3-6a.5.5 0 0 1 .67-.223z"/>
                 </svg>
             </div>
-            <div class="grid-container" style="grid-template-columns: 33% 33% 33%; padding: 5%; grid-template-rows: auto auto auto auto; left: 10%; top: 0%; position: absolute; width: 90%; height: 100%;">
+            <div class="grid-container" style="grid-template-columns: 33% 33% 33%; padding: 5%; grid-template-rows: auto auto auto auto; left: 4vw; top: 0%; position: absolute; width: 90%; height: 100%;">
                 <!-- estao funcionando: '(', ')', 'π', 'e', 'log' e '√' (com exessoes) -->
                 <label for="btnLB" hidden class="traduzir">Parêntesis Esquerdo</label>
                 <input id="bntLB" type="button" value="(" class="grid-item-extra" onmousedown="document.calculator.ans.value+='('; f = 0; ">
@@ -144,7 +144,7 @@
             </div>
         </div>
     </div>
-    <div style="background-color:var(--BaseColor); top:30%; left: 95%; height:70%; width:65%; position: absolute; z-index: 99999;"></div>
+    <div id="hideCalcRight"></div>
 </div>
 
 <!-- script pra #answer enviar quando apertar enter -->

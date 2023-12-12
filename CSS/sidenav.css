@@ -1,13 +1,46 @@
 @import "./root.css";
 
 .sidenavCalc {
-    height: 100%;
-    width: 0%;
-    top: 0;
-    margin: 0;
+    height: 100vh;
+    top: 0px;
+    margin: 0px;
     background-color: var(--BaseColor);
-    padding-top: 60px;
+    z-index: 9995;
+    width: 40vw; 
+    left: -40vw; 
+    border-top-right-radius: 25px; 
+    border-bottom-right-radius: 25px;
 }
+
+.calcShadow{
+    height: 94vh; 
+    top: 3vh;
+    width: 36vw; 
+    margin-left: 2vw; 
+    border-radius: 15px; 
+    position: absolute;
+    background-color: blue;
+}
+
+#hideCalcRight{
+    background-color:var(--BaseColor); 
+    right: 0px;
+    height: 100vh; 
+    width:2vw; 
+    position: absolute; 
+    z-index: 99999;
+}
+
+.divNumeros{
+    grid-template-columns: auto auto auto; 
+    background-color:var(--RealDarkBlue); 
+    top: 30vh; 
+    height:64vh; 
+    width:24vw; 
+    position: absolute; 
+    border-bottom-left-radius: 15px;
+}
+
 .sidenavDraw {
     height: 100%;
     width: 0%;
@@ -16,6 +49,18 @@
     background-color: var(--AccentColor);
     padding-top: 60px;
 }
+
+#btnMyUp{
+    top: 50vh; 
+    left: calc(100vw - 3.5rem); 
+    background-color: var(--BaseColor); 
+    z-index: 9983;
+}
+#btnMyCalc{
+    top: 45vh; 
+    background-color: var(--BaseColor);
+}
+
 .base{
     position: fixed;
     overflow-x: hidden;
@@ -27,6 +72,11 @@
 .sla{
     transition: background-color 0.5s;
     -webkit-transition: background-color 0.5s;
+
+    width: 100vw; 
+    height: 100vh; 
+    z-index: 9984; 
+    pointer-events: none;
 }
 .pill{
     height: 5rem;
@@ -45,6 +95,16 @@
     top:5vh;
     transition: .1s transform, .1s -webkit-transform;
 }
+
+.index7{
+    z-index: 7;
+}
+
+.index6{
+    z-index: 6;
+    opacity: 0;
+}
+
 .eraser{
     left: 2vw;
 }
@@ -99,6 +159,85 @@
     left: 0%;
 }
 
+#btnMyDraw{
+    top: calc(45vh + 5rem); 
+    background-color: var(--AccentColor);
+}
+
+#myDraw{
+    z-index: 9995; 
+    height: 100vh; 
+    max-height: 100vh; 
+    width: max(70%, 20rem); 
+    left: min(-70%, -20rem); 
+    border-top-right-radius: 25px; 
+    border-bottom-right-radius: 25px; 
+    overflow-y: hidden;
+}
+
+.up{
+    height: 2.5vh; 
+    min-height: 10px;
+    width: 100%;  
+    position: absolute; 
+    top: 0vh; 
+    left: 0px;
+    
+}
+
+.down{
+    height:2.5vh; 
+    width: 100%; 
+    transform: rotate(180deg); 
+    position: absolute; 
+    top: 0vh; 
+    left: 0px;
+}
+
+#divSave{
+    width: 12vw; 
+    right: 1vw; 
+    bottom: 5vh; 
+    position: absolute;
+}
+
+.BTNsave{
+    margin: 0px; 
+    width: 100%; 
+    height: max(3vw, 1rem); 
+    font-size: max(1.1vw, 1rem);
+    background-color: var(--BaseColor);
+    color: var(--White);
+    border: 0px;
+    border-radius: 15px;
+}
+
+
+#BTNDesktop{
+    height: max(4vw, 1rem);
+    margin-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.trash{
+    height: 2rem; 
+    width:2rem; 
+    top: calc(5vh + 0.5rem); 
+    right: calc(2vw - 1rem); 
+    cursor: pointer; 
+    float: right; 
+    position: absolute;
+}
+
+#divDrawBoxes{
+    width: 13vw; 
+    height: 12vh; 
+    min-height: 45px;
+    bottom: calc(max(3vw, 1rem) + max(4vw, 1rem) + 5vh + 20px); 
+    position: absolute;
+}
+
 #btnFile{
     height:2.5rem;
     width: auto;
@@ -127,10 +266,9 @@ input[type="file"] {
 
 #sizeRange{
     position: absolute;
-    top: 0vh;
     left: 0vh;
     width: 96.5%;
-    margin: 0px;
+    top: 0px;
     min-height: 20px;
     height: 5vh;
     width: 12vw;
@@ -139,33 +277,42 @@ input[type="file"] {
 }
 #sizeText{
     position: absolute;
-    width: 5vh; 
+    width: 40px; 
     min-height: 20px; 
     text-align: center;
     height: 5vh;
     margin: 0px; 
     background-color:var(--White);
-    top:6vh;
+    bottom:0px;
     left: 1vw;
 }
+
+#drawBoxDown{
+    /* margin-top: max(calc(2.5vh + 1px), 11px); */
+    bottom: 0px;
+}
+
 .BTNIncrease{
-    width: 5vh; 
-    height: 2.5vh;
+    width: 1vw; 
+    height: calc(2.5vh - 1px);
     min-width: 30px; 
-    /* min-height: 10px;  */
+    min-height: 10px; 
     position: absolute;
-    /* border: 0px; */
-    top:6vh;
-    left: calc(6vh + 1vw);
+    bottom: max(calc(2.5vh + 1px), 11px);
+    left: calc(45px + 1vw);
+    border-radius: 15px;
+    border: 0px;
+    background-color: var(--AccentColor);
 }
 #ColPck{
     position: absolute;
     margin: 0px;
     height: 5vh;
-    width: calc(12vw - 12vh);
+    width: calc(12vw - 50px - 2vw);
     min-width: 30px;
-    top: 6vh;
-    left: calc(12vh + 1vw);
+    min-height: 20px;
+    bottom: 0px;
+    left: calc(50px + 3vw);
     border: 0px;
     padding: 3px;
     background-color: var(--AccentColor);

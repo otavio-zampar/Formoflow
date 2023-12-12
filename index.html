@@ -80,9 +80,9 @@
     </script>
 
 </head>
-<body style="color:var(--Black); background-color: var(--AlmostWhite); overflow: auto;"> <!-- overflow: hidden; -->
+<body> <!-- overflow: hidden; -->
 
-    <div id="BTNAlerta" style="display: none;">
+    <div id="BTNAlerta">
         <div class="alert alert-dark fade show traduzir" role="alert">Copiado!</div>
     </div>
 
@@ -106,19 +106,19 @@
     e o JS estava sendo chamado primeiro -->
     <div id="whereSidenavD" class="nocopy">
         <label for="btnMyDraw" class="traduzir" hidden>Área de desenho</label>
-        <div class="rounded-pill base pill" id="btnMyDraw" style="top: calc(45vh + 5rem); background-color: var(--AccentColor);" onmousedown='openDraw()'>
+        <div class="rounded-pill base pill" id="btnMyDraw" onmousedown='openDraw()'>
             <svg xmlns="https://www.w3.org/2000/svg" id="btnDraw" width="16" height="16" fill="var(--BaseColor)" class="bi bi-chevron-compact-left" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M9.224 1.553a.5.5 0 0 1 .223.67L6.56 8l2.888 5.776a.5.5 0 1 1-.894.448l-3-6a.5.5 0 0 1 0-.448l3-6a.5.5 0 0 1 .67-.223z"/>
             </svg>
         </div>
-        <div id="myDraw" class="sidenavDraw base" style="z-index: 9995; height: 100vh; max-height: 100vh; width: max(70%, 20rem); left: min(-70%, -20rem); border-top-right-radius: 25px; border-bottom-right-radius: 25px; overflow-y: hidden;">
+        <div id="myDraw" class="sidenavDraw base">
             <!-- menu para configuraçoes da caneta -->
             <!-- div de canetas de desenho -->
             <div class="shadow" id="caneta">
                 <!-- div eraser -->
                 <div>
                     <!-- empty -->
-                    <svg id="eraserMT" xmlns="https://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="basic_instruments bi bi-eraser eraser" viewBox="0 0 16 16" style="z-index:7;" onmousedown="{
+                    <svg id="eraserMT" xmlns="https://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="basic_instruments bi bi-eraser eraser index7" viewBox="0 0 16 16" onmousedown="{
                         document.getElementById('eraserMT').style.opacity = '0';
                         document.getElementById('eraserFull').style.opacity = '1';
                         document.getElementById('eraserFull').style.zIndex = '7';
@@ -132,7 +132,7 @@
                         <path d="M8.086 2.207a2 2 0 0 1 2.828 0l3.879 3.879a2 2 0 0 1 0 2.828l-5.5 5.5A2 2 0 0 1 7.879 15H5.12a2 2 0 0 1-1.414-.586l-2.5-2.5a2 2 0 0 1 0-2.828l6.879-6.879zm2.121.707a1 1 0 0 0-1.414 0L4.16 7.547l5.293 5.293 4.633-4.633a1 1 0 0 0 0-1.414l-3.879-3.879zM8.746 13.547 3.453 8.254 1.914 9.793a1 1 0 0 0 0 1.414l2.5 2.5a1 1 0 0 0 .707.293H7.88a1 1 0 0 0 .707-.293l.16-.16z"/>
                     </svg>
                     <!-- full -->
-                    <svg id="eraserFull" xmlns="https://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="basic_instruments bi bi-eraser-fill eraser" viewBox="0 0 16 16" style="z-index:6; opacity: 0;" onmousedown="{
+                    <svg id="eraserFull" xmlns="https://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="basic_instruments bi bi-eraser-fill eraser index6" viewBox="0 0 16 16" onmousedown="{
                         document.getElementById('eraserMT').style.opacity = '1';
                         document.getElementById('eraserFull').style.opacity = '0';
                         document.getElementById('eraserFull').style.zIndex = '6';
@@ -145,7 +145,7 @@
                 <!-- div pen -->
                 <div>
                     <!-- empty -->
-                    <svg id="penMT" xmlns="https://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="basic_instruments bi bi-pen pen" viewBox="0 0 16 16" style="z-index:7;" onmousedown="{
+                    <svg id="penMT" xmlns="https://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="basic_instruments bi bi-pen pen index7" viewBox="0 0 16 16" onmousedown="{
                         document.getElementById('penMT').style.opacity = '0';
                         document.getElementById('penFull').style.opacity = '1';
                         document.getElementById('penFull').style.zIndex = '7';
@@ -159,7 +159,7 @@
                         <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/> 
                     </svg>
                     <!-- full -->
-                    <svg id="penFull" xmlns="https://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="basic_instruments bi bi-pen-fill pen" viewBox="0 0 16 16" style="z-index:6; opacity: 0;" onmousedown="{
+                    <svg id="penFull" xmlns="https://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="basic_instruments bi bi-pen-fill pen index6" viewBox="0 0 16 16"onmousedown="{
                         document.getElementById('penMT').style.opacity = '1';
                         document.getElementById('penFull').style.opacity = '0';
                         document.getElementById('penFull').style.zIndex = '6';
@@ -169,7 +169,7 @@
                     </svg>
                 </div>
 
-                <div style="width: 13vw; height: 12vh; right: 1vw; bottom: calc(max(3vw, 1rem) + max(4vw, 1rem) + 5vh); position: absolute; padding-left: 1vw;">
+                <div id="divDrawBoxes">
                     <!-- width -->
                     <label for="sizeRange" hidden class="traduzir">Range da Caneta</label>
                     <input type="range" id="sizeRange" min="1" max="140" value="5" oninput="changeSize(this.value); document.getElementById('sizeText').value = myCanvas.getContext('2d').lineWidth;">
@@ -177,13 +177,13 @@
                     <input type="text" id="sizeText" value="5" autocomplete="false" onkeydown="return TriggeredKey(this);" onkeyup="myCanvas.getContext('2d').lineWidth = this.value;">
                     
                     <button onmousedown="increaseSize(true);" class="BTNIncrease">
-                        <svg xmlns="https://www.w3.org/2000/svg" width="16" height="16" fill="var(--Black)" class="bi bi-chevron-up" viewBox="0 0 16 16" style="height:2.5vh; width: 2.5vh; transform: rotate(360deg); position: absolute; top: 0vh; left: 0.625vw;">
+                        <svg xmlns="https://www.w3.org/2000/svg" width="16" height="16" fill="var(--Black)" class="bi bi-chevron-up up" viewBox="0 0 16 16" >
                             <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
                         </svg>
                     </button>
                     
-                    <button style="top: 8.5vh;" onmousedown="increaseSize(false)" class="BTNIncrease">
-                        <svg xmlns="https://www.w3.org/2000/svg" width="16" height="16" fill="var(--Black)" class="bi bi-chevron-up" viewBox="0 0 16 16" style="height: 2.5vh; width: 2.5vh; transform: rotate(180deg); position: absolute; top: 0vh; left: 0.625vw;">
+                    <button onmousedown="increaseSize(false)" class="BTNIncrease" id="drawBoxDown">
+                        <svg xmlns="https://www.w3.org/2000/svg" width="16" height="16" fill="var(--Black)" class="bi bi-chevron-up down" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
                         </svg>
                     </button>
@@ -193,34 +193,34 @@
                     <input id="ColPck" type="color"/>
                 </div>
 
-                <div style="width: 12vw; right: 1vw; bottom: 5vh; position: absolute;">
+                <div id="divSave">
                     <!-- undo -->
-                    <!-- <button style="margin: 0px;" onclick="und();">kinda Undo</button> -->
+                    <!-- <button class="margin0" onclick="und();">kinda Undo</button> -->
             
                     <!-- redo -->
-                    <!-- <button style="margin: 0px;" onclick="red();">kinda Redo</button> -->
+                    <!-- <button class="margin0" onclick="red();">kinda Redo</button> -->
                     
                     <!-- save -->
-                    <button style="margin: 0px; width: 100%; height: max(3vw, 1rem); font-size: max(1.1vw, 1rem);" onclick="{
+                    <button class="BTNsave traduzir" onclick="{
                     // perguntar se quer fundo transparente
                         download_img();
-                    }" class="traduzir">Salvar</button>
+                    }">Salvar</button>
                     <!-- mandar para a area de trabalho -->
-                    <button style="margin: 0px; width: 100%; height: max(4vw, 1rem); font-size: max(1.1vw, 1rem);" onclick="{
+                    <button id="BTNDesktop" class="BTNsave traduzir" onclick="{
                         // perguntar se quer fundo transparente
                         send_img();
-                    }" class="traduzir">Mandar para a àrea de Trabalho</button>
+                    }">Mandar para a àrea de Trabalho</button>
                 </div>
 
             </div>
 
             <!-- confirm('Limpar a tela?'); -->
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="var(--BaseColor)" class="bi bi-trash3" viewBox="0 0 16 16" style="height: 2rem; width:2rem; top: calc(5vh + 0.5rem); right: calc(2vw - 1rem); cursor: pointer; float: right; position: absolute;" onmousedown="clearCanvas();">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="var(--BaseColor)" class="bi bi-trash3 trash" viewBox="0 0 16 16" onmousedown="clearCanvas();">
                 <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
-              </svg>
+            </svg>
 
             <!-- aqui é realmente a area de desenhar -->
-            <div style="height:90vh; width: 50vw; left: 16vw;  top: 5vh; border-radius: 15px; position: absolute;">
+            <div id="divCanvas">
                 <canvas id="myCanvas" class="shadow" onload="">
                     Sorry, your browser doesn't support canvas technology.
                 </canvas>
@@ -229,21 +229,21 @@
         </div>
     </div>
 
-    <div style="z-index: 4; padding: 10px; position: fixed; left: 10px; top: 18px; width: 210px; height: 62px; background-color: var(--SecondAccentColor); border-radius: 10px;">
-        <label for="" hidden>Brasil</label>
-        <img id="flagBr" src="./src/br.svg" style="width: 59px; top: calc();" onclick="{
+    <div id="flags">
+        <label for="flagBr" class="traduzir" hidden>Brasil</label>
+        <img id="flagBr" src="./src/br.svg" onclick="{
             var array = Array.from(document.getElementsByClassName('traduzir')).concat(Array.from(document.getElementsByClassName('traduzirPlaceholder')));
             traducao(array, traducaoPtBr());
             data = dataPtBr();
         }">
-        <label for="flagMx" hidden>México</label>
-        <img id="flagMx" src="./src/mx.svg" style="width: 59px;" onclick="{
+        <label for="flagMx" class="traduzir" hidden>México</label>
+        <img id="flagMx" src="./src/mx.svg" onclick="{
             var array = Array.from(document.getElementsByClassName('traduzir')).concat(Array.from(document.getElementsByClassName('traduzirPlaceholder')));
             traducao(array, traducaoSpMx());
             data = dataSpMx();
         }">
-        <label for="flagUs" hidden>Estados Unidos da América</label>
-        <img id="flagUs" src="./src/us.svg" style="width: 59px;" onclick="{
+        <label for="flagUs" class="traduzir" hidden>Estados Unidos da América</label>
+        <img id="flagUs" src="./src/us.svg" onclick="{
             var array = Array.from(document.getElementsByClassName('traduzir')).concat(Array.from(document.getElementsByClassName('traduzirPlaceholder')));
             traducao(array, traducaoEnUs());
             data = dataEnUs();
@@ -288,23 +288,24 @@
                     }
                 });
             </script>
-            <ul id="lista" class="absolute" style="overflow:auto;"></ul>
+            <ul id="lista" class="absolute"></ul>
     </div>
-        
+    
+    <div id=""></div>
         
     </div>
 
     <div id="whereFooter" class="nocopy">
         <div id="contato">
-            <p class="contato traduzir" style="margin-left: calc(1.5rem + 20px);">CONTATO</p>
+            <p class="contato traduzir">CONTATO</p>
             <br>
             <p class="traduzir">Elogios? <a href="mailto:contato@formoflow.com.br" class="contato">contato@formoflow.com.br</a></p>
             <p class="traduzir">Dúvidas? <a href="mailto:suporte@formoflow.com.br" class="contato">suporte@formoflow.com.br</a></p>
             <p class="traduzir">SAC: <a href="mailto:sac@formoflow.com.br" class="contato">sac@formoflow.com.br</a></p>
             <p class="contato">© Otávio Custódio Zampar</p>
-            <div style="position: absolute; top: 0%; left: 20px; top: 20px;" id="github">
-                <a href="https://github.com/otavio-zampar" rel="noopener" class="noCopy" style="display: initial;"><img src="./src/github-mark.svg" style="height: 1.5rem;"></a>
-                <a href="https://github.com/otavio-zampar" rel="noopener" class="noCopy" style="display: none;"><img src="./src/github-mark-white.svg" style="height: 1.5rem; left: calc(50vw - 1.5rem);"></a>
+            <div id="github">
+                <a href="https://github.com/otavio-zampar" rel="noopener" class="noCopy"><img src="./src/github-mark.svg"></a>
+                <a href="https://github.com/otavio-zampar" rel="noopener" class="noCopy"><img src="./src/github-mark-white.svg"></a>
             </div>
         </div>
     </div>

@@ -6,8 +6,42 @@
     top:100px; 
     left:0px;
 }
+body{
+    color:var(--Black); 
+    background-color: var(--AlmostWhite); 
+    overflow: auto;
+}
 .opaque{
     opacity: 0.1;
+}
+
+.margin0{
+    margin: 0px;
+}
+
+#divCanvas{
+    height:90vh; 
+    width: 50vw; 
+    left: 16vw;  
+    top: 5vh; 
+    border-radius: 15px; 
+    position: absolute;
+}
+
+#flags{
+    z-index: 4; 
+    padding: 10px; 
+    position: fixed; 
+    left: 10px; 
+    top: 18px; 
+    width: 210px; 
+    height: 62px; 
+    background-color: var(--SecondAccentColor); 
+    border-radius: 10px;
+}
+
+#flags > img{
+    width: 59px;
 }
 
 .dot {

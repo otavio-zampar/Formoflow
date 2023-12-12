@@ -35,6 +35,16 @@ p{
     height: 100%;
     width: 70px;
     right: 0px;
+    font-weight: bold;
+}
+
+#tema > svg:first-child { /* minha teoria é que a primeira criança do id é um elemento escondido*/
+    display:none;
+}
+
+#tema > svg{
+    pointer-events: none; 
+    fill: var(--Black);
 }
 
 #sun, #moon{
@@ -119,9 +129,27 @@ div.sticky{
     align-content: center;
 }
 .contato{
-    margin:0px; 
-    top:10px;
+    margin: 0px; 
+    top: 10px;
 }
+.contato:first-child{
+    margin-left: calc(1.5rem + 20px);
+}
+
+#github{
+    position: absolute; 
+    left: 20px; 
+    top: 20px;
+}
+#github > a > img{
+    height: 1.5rem;
+    display: initial;
+}
+#github > a:last-child{
+    display: none;
+    left: calc(50vw - 1.5rem);
+}
+
 .grid-item-number {
     background-color: var(--RealDarkBlue);
     border: 0px;
@@ -130,6 +158,7 @@ div.sticky{
     font-size: min(10vh, max(10vw, 1rem));
     text-align: center;
     color: var(--LightGray); 
+    border-radius: 15px;
 }
 .grid-item-operandos{
     position: relative;

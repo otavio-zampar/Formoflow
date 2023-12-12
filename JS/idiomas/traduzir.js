@@ -1,10 +1,12 @@
 function traducao(elementos, lingua){
     elementos.forEach((element, index) => {
+
         if (element.classList.contains('traduzir')) { // tds os elementos q usam innerHTML
-            // console.log(element.innerHTML);
             element.innerHTML = lingua[index];
+            // console.log(element.innerHTML);
         } else { //placeholder
             element.placeholder = lingua[index];
+            // console.log(element.placeholder);
         }
     });
 }
@@ -12,38 +14,41 @@ function traducao(elementos, lingua){
 function traducaoPtBr(){
 
     return [
-        'Copiado!',
-        'Contato',
-        'calculadora',
-        'Resposta da calculadora ',
-        'Histórico da calculadora',
-        'Igual',
-        'Parêntesis Esquerdo',
-        'Parêntesis Direito',
-        'Radiano',
-        'Pi',
-        'Euler',
-        'Porcentagem',
-        'Exponencial',
-        'Logarímico',
-        'Raíz quadrada',
-        'Seno',
-        'Cosseno',
-        'Tangente',
-        'Fatoral',
-        'Upload de Imagem',
-        'Área de desenho',
-        'Range da Caneta',
-        'Text da Caneta',
-        'Cor da Caneta',
-        'Salvar',
-        'Mandar para a àrea de Trabalho',
-        'Barra de pesquisa para fórmulas',
-        'CONTATO',
-        'Elogios? <a href="mailto:contato@formoflow.com.br" class="contato">contato@formoflow.com.br</a>',
-        'Dúvidas? <a href="mailto:suporte@formoflow.com.br" class="contato">suporte@formoflow.com.br</a>',
-        'SAC: <a href="mailto:sac@formoflow.com.br" class="contato">sac@formoflow.com.br</a>',
-        'Pesquisar...'
+    'Copiado!',
+    'Contato',
+    'calculadora',
+    'Resposta da calculadora',
+    'Histórico da calculadora',
+    'Igual',
+    'Parêntesis Esquerdo',
+    'Parêntesis Direito',
+    'Radiano',
+    'Pi',
+    'Euler',
+    'Porcentagem',
+    'Exponencial',
+    'Logarímico',
+    'Raíz quadrada',
+    'Seno',
+    'Cosseno',
+    'Tangente',
+    'Fatoral',
+    'Upload de Imagem',
+    'Área de desenho',
+    'Range da Caneta',
+    'Text da Caneta',
+    'Cor da Caneta',
+    'Salvar',
+    'Mandar para a àrea de Trabalho',
+    'Brasil',
+    'México',
+    'Estados Unidos da América', 
+    'Barra de pesquisa para fórmulas',
+    'CONTATO',
+    'Elogios? <a href="mailto:contato@formoflow.com.br" class="contato">contato@formoflow.com.br</a>',
+    'Dúvidas? <a href="mailto:suporte@formoflow.com.br" class="contato">suporte@formoflow.com.br</a>',
+    'SAC: <a href="mailto:sac@formoflow.com.br" class="contato">sac@formoflow.com.br</a>',
+    'Pesquisar...'
     ];
 }
 
@@ -75,6 +80,9 @@ function traducaoEnUs(){
         'Pen Color',
         'Save',
         'Send to Desktop',
+        'Brazil',
+        'Mexico',
+        'USA', 
         'Formula Search Bar',
         'CONTACT',
         'Compliments? <a href="mailto:contato@formoflow.com.br" class="contato">contato@formoflow.com.br</a>',
@@ -113,6 +121,9 @@ function traducaoSpMx(){
         'Color del Bolígrafo',
         'Guardar',
         'Enviar al área de trabajo',
+        'Brasil',
+        'México',
+        'Estados Unidos de América',
         'Búsqueda de fórmulas',
         'CONTACTO',
         '¿Elogios? <a href="mailto:contato@formoflow.com.br" class="contato">contato@formoflow.com.br</a>',
