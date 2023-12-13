@@ -24,6 +24,7 @@ p{
     background-color: var(--AccentColor);
     z-index: 3;
 }
+
 .noCopy{
     user-select: none;
 }
@@ -60,11 +61,13 @@ p{
     color: var(--White);
     border-width: 0px;
     transition: color 0.05s;
+    -webkit-transition: color 0.05s;
 }
 #list:hover{
     /* background-color: var(--White); */
     color: antiquewhite;
     transition: color 0.2s;
+    -webkit-transition: color 0.2s;
 }
 
 div.sticky{
@@ -83,7 +86,8 @@ div.sticky{
     padding: 20px;
     background-color: var(--AccentColor);
     border-radius: 20px;
-    transition: 0.3s;
+    transition: top 0.3s;
+    -webkit-transition: top 0.3s;
     z-index: 999;
 }
 #answer:focus{
@@ -118,7 +122,7 @@ div.sticky{
     left: 0vw;
     top: 5vh;
     border: 5px;
-    border-radius: 15px;
+    border-radius: 1rem;
     border-bottom-left-radius: 0px;
     border-top-left-radius: 0px;
     position: absolute;
@@ -158,14 +162,14 @@ div.sticky{
     font-size: min(10vh, max(10vw, 1rem));
     text-align: center;
     color: var(--LightGray); 
-    border-radius: 15px;
+    border-radius: 1rem;
 }
 .grid-item-operandos{
     position: relative;
-     cursor: pointer;
+    cursor: pointer;
     border: 0px;
     color: var(--AccentColor);
-    margin: 0%;
+    margin: 0px;
     font-size: min(8vh, max(8vw, 1rem));
     text-align: center;
 }
@@ -173,7 +177,7 @@ div.sticky{
     background-color: var(--AccentColor);
     border: 0px;
     color: var(--RealDarkBlue); 
-    font-size: min(6vh, max(6vw, 1rem));
+    font-size: min(5.5vh, max(5.5vw, 1rem));
     text-align: center;
-    height: 13vh;
+    height: calc(64vh / 5);
 }

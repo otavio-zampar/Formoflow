@@ -52,3 +52,16 @@ function mudaTema(dark) {
         $("#ColPck").trigger("change");
     }
 }
+
+function abreLista(abertoLista){
+    abertoLista = !abertoLista;
+    if (abertoLista) {
+        document.getElementById("BTNoutraLista").style.backgroundColor = "var(--Black)";
+        document.getElementById("divOutraLista").style.display = "none";
+    } else {
+        document.getElementById("BTNoutraLista").style.backgroundColor = "var(--White)";
+        document.getElementById("divOutraLista").style.display = ""; // initial estava dando problema
+    }
+
+
+}

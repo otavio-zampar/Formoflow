@@ -32,7 +32,7 @@ function avaliaJanela(a){
         if (inputElements[index].value == "") {
             avaliacao += "0";
         }else{
-            avaliacao += inputElements[index].value;
+            avaliacao += "\"" + inputElements[index].value + "\"";
         }
         if (index < inputForm-1) {
             avaliacao += ", ";
@@ -50,8 +50,8 @@ function avaliaJanela(a){
             document.getElementById("icon"+thisDivCount+(inputForm+index)).innerHTML = x[index];
         }
     } catch(e){
-        if (e instanceof SyntaxError) {
-            console.log("Erro de sintaxe (esperado)");
+        if (e instanceof SyntaxError || ReferenceError) {
+            console.log("Erro esperado.");
             // Faça algo para lidar com o erro de sintaxe, se necessário
         } else {
             // Outros tipos de erros que não são de sintaxe
@@ -70,11 +70,11 @@ function createDiv(AA) {
     ActualTop++;
     var randomId = 'div' + divCount;
     var mini = 0;
-    var ActualDiv = $('<div>').attr('id', randomId).addClass('ActualDiv nocopy').attr("actualName", actualName);
+    var ActualDiv = $('<div>').attr('id', randomId).addClass('ActualDiv noCopy').attr("actualName", actualName);
     ActualDiv.attr("exit", exit);
     var DraggableDiv = $('<div>').attr('id', 'draggable' + randomId).addClass('DraggableDiv');
-    var minimize = $('<div>').addClass('minimize').html('&#128469');
-    var CloseR = $('<div>').addClass('CloseR').html('&#10006');
+    var minimize = $('<div>').addClass('minimize noCopy').html('&#128469');
+    var CloseR = $('<div>').addClass('CloseR  noCopy').html('&#10006');
 
     var tstDiv = $('<div>').addClass('tstDiv');
     tstDiv.css("background-color", getColor());
@@ -88,9 +88,12 @@ function createDiv(AA) {
 
     {
         // cria o formulario
-        var nome = $('<p>').text(nomeForm).css("margin", "0px").addClass("nocopy");
-        nome.css("height", "30px");
-        nome.css("padding", "2px");
+        var nome = $('<p>').text(nomeForm).css({
+            "margin": "0px",
+            "height": "30px",
+            "padding": "2px",
+            "color": "#FFFFFF"
+        }).addClass("nocopy");
         var form = $('<form>');
 
         for (let index = 0; index < inputForm; index++) {
@@ -173,7 +176,7 @@ function createDiv(AA) {
 
         for (let index = 0; index < exit; index++) {
         
-            var icon = $('<div>').addClass('icon nocopy').attr('id', "icon"+divCount+(inputForm+index)); // Unicode emoji for smiling face 
+            var icon = $('<div>').addClass('icon noCopy').attr('id', "icon"+divCount+(inputForm+index)); // Unicode emoji for smiling face 
             icon.css("position", "absolute");
             icon.css("outline-color", "transparent");
             icon.on("click", function(){
@@ -387,7 +390,7 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
     ActualTop++;
     var randomId = 'div' + divCount;
     var mini = 0;
-    var ActualDiv = $('<div>').attr('id', randomId).addClass('ActualDiv nocopy'); // .attr("actualName", actualName)
+    var ActualDiv = $('<div>').attr('id', randomId).addClass('ActualDiv noCopy'); // .attr("actualName", actualName)
     ActualDiv.attr("exit", exit);
     var DraggableDiv = $('<div>').attr('id', 'draggable' + randomId).addClass('DraggableDiv');
     var minimize = $('<div>').addClass('minimize').html('&#128469');
@@ -440,7 +443,7 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
         tstDiv.append(form);
 
         if(exit != 0){
-            var icon = $('<div>').addClass('icon nocopy').attr('id', "icon"+divCount+(inputForm+1)); // Unicode emoji for smiling face 
+            var icon = $('<div>').addClass('icon noCopy').attr('id', "icon"+divCount+(inputForm+1)); // Unicode emoji for smiling face 
             icon.css("position", "absolute");
             icon.css("left", "10%");
             icon.css("outline-color", "transparent");
@@ -557,9 +560,18 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
         left: "calc(5vw + "+ 50 * ActualTop +"px + "+ 50 * leftOffset +"px)",
         top: "calc(20vh + "+ 50 * ActualTop +"px + "+ 30 * leftOffset +"px)"
     });
+
+    if (exit == 0) {
+        var minHeight = "100%";
+    }
+
     tstDiv.css('min-height', minHeight);
-    DraggableDiv.css('z-index', highestZIndex + 1);
-    ActualDiv.css('z-index', highestZIndex + 1);
+    DraggableDiv.css({
+        'z-index': highestZIndex + 1,
+        left: "calc(5vw + "+ 50 * ActualTop +"px + "+ 50 * leftOffset +"px)",
+        top: "calc(20vh + "+ 50 * ActualTop +"px + "+ 30 * leftOffset +"px)"
+    });
+    // ActualDiv.css('z-index', highestZIndex + 1);
     ActualResizeHandle2.css('min-height', minHeight);
     ActualResizeHandle3.css('min-height', minHeight);
 
@@ -651,11 +663,11 @@ function uploadImg(selectedFile, naturalHeight, naturalWidth){
         divCount++;
         var randomId = 'div' + divCount;
         var mini = 0;
-        var ActualDiv = $('<div>').attr('id', randomId).addClass('ActualDiv');
+        var ActualDiv = $('<div>').attr('id', randomId).addClass('ActualDiv noCopy');
         var DraggableDiv = $('<div>').attr('id', 'draggable' + randomId).addClass('DraggableDiv');
-        var minimize = $('<div>').addClass('minimize').html('&#128469');
+        var minimize = $('<div>').addClass('minimize noCopy').html('&#128469');
         {
-        var CloseR = $('<div>').addClass('CloseR').html('&#10006');
+        var CloseR = $('<div>').addClass('CloseR noCopy').html('&#10006');
         }
         var tstDiv = $('<div>').addClass('tstDiv');
         tstDiv.css("padding", "0px");

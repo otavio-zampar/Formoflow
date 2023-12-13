@@ -17,18 +17,63 @@
     top: 3vh;
     width: 36vw; 
     margin-left: 2vw; 
-    border-radius: 15px; 
+    border-radius: 1rem; 
     position: absolute;
-    background-color: blue;
+    background-color: #00000000;
 }
 
 #hideCalcRight{
     background-color:var(--BaseColor); 
     right: 0px;
     height: 100vh; 
-    width:2vw; 
+    width: calc(2vw + 1px); 
     position: absolute; 
     z-index: 99999;
+}
+
+#resposta{
+    background-color:var(--SecondAccentColor); 
+    height:30vh; 
+    width:36vw; 
+    position: absolute; 
+    border-top-left-radius: 1rem; 
+    border-top-right-radius: 1rem;
+}
+
+#switch2{
+    font-size: 6vh; 
+    color: var(--LightGray); 
+    left: 1.5vw; 
+    top: 0px; 
+    position:absolute;
+}
+
+.clearAnswer{
+    font-size: 6vh; 
+    color: var(--LightGray); 
+    cursor: pointer; 
+    position:absolute; 
+    top:0px; 
+    right:1.5vw;
+}
+
+.gridOperandos{
+    background-color:var(--RealDarkBlue); 
+    color: var(--AccentColor); 
+    top:30vh; left: 24vw; 
+    height:64vh; 
+    width:8vw; 
+    position: absolute;
+}
+
+.divExtras{
+    background-color:var(--BaseColor); 
+    top: 95%; 
+    left: 95%; 
+    height: 5%; 
+    width: 10%; 
+    position: absolute; 
+    z-index: 9999;
 }
 
 .divNumeros{
@@ -38,16 +83,50 @@
     height:64vh; 
     width:24vw; 
     position: absolute; 
-    border-bottom-left-radius: 15px;
+    border-bottom-left-radius: 1rem;
+}
+
+#corner{
+    background-color:var(--AccentColor); 
+    bottom: 0px; 
+    right: 0px; 
+    height: 15px; 
+    width: 4vw;
+    position: absolute; 
+    z-index: 9999; 
+    border-bottom-right-radius: 1rem; 
+    cursor: pointer;
+}
+
+#otherCorner{
+    background-color:var(--BaseColor); 
+    position: absolute;
+    z-index: 9998;
+    bottom: 0px; 
+    right: 0px; 
+    height: 15px; 
+    width: 15px;
 }
 
 .sidenavDraw {
     height: 100%;
-    width: 0%;
-    top: 0;
-    margin: 0;
+    width: 0px;
+    top: 0px;
+    margin: 0px;
     background-color: var(--AccentColor);
     padding-top: 60px;
+}
+
+#myExtra{
+    background-color:var(--AccentColor); 
+    top:30vh; 
+    left: 32vw; 
+    height:64vh;
+    width:24vw; 
+    position: absolute; 
+    transition: left 0.5s;
+    -webkit-transition: left 0.5s;
+    z-index: 9997;
 }
 
 #btnMyUp{
@@ -66,7 +145,7 @@
     overflow-x: hidden;
     transition: left 0.5s;
     -webkit-transition: left 0.5s;
-    margin-top: 0%;
+    margin-top: 0px;
     margin-bottom: 100%;
 }
 .sla{
@@ -93,7 +172,8 @@
     cursor: pointer;
     position: absolute;
     top:5vh;
-    transition: .1s transform, .1s -webkit-transform;
+    transition: .1s transform;
+    -webkit-transition: .1s transform;
 }
 
 .index7{
@@ -120,13 +200,49 @@
     width: 55vw; */
     background-color:var(--White);
     margin-left: 0px;
-    border-radius: 15px;
+    border-radius: 1rem;
     position: absolute;
     /* border: 3px dotted var(--Black); */
 }
 #myCanvas:hover{
     /* cursor: crosshair; */
     cursor: none;
+}
+
+.borda{
+    background-color:var(--SecondAccentColor); 
+    top:30vh; 
+    left: 24vw; 
+    height:64vh; 
+    width:3px; 
+    position: absolute; 
+    z-index: 9996;
+}
+
+.openExtra{
+    height: 64vh; 
+    width: 4vw; 
+    cursor: pointer;
+}
+
+.chevronExtra{
+    width:4vw; 
+    height:4vw; 
+    margin-top:calc(32vh - 2vw); 
+    pointer-events:none; 
+    transition: transform 0.5s; 
+    -webkit-transition: transform 0.5s
+}
+
+.containerExtra{
+    grid-template-columns: 33% 33% 33%; 
+    /* grid-template-rows: auto auto auto auto;  */
+    padding: 1vw; 
+    left: 4vw; 
+    top: 0px; 
+    position: absolute; 
+    width: 20vw; 
+    height: 100%;
 }
 
 #mouseFollower {
@@ -145,7 +261,8 @@
     margin-top: 1.25rem;
     margin-left: 3.5rem;
     transition: transform 0.3s; 
-    transform: rotate(180deg);
+    -webkit-transition: transform 0.3s; 
+    transform: scaleX(-1);
 }
 
 .BTNFile:hover {
@@ -156,7 +273,7 @@
     position: absolute;
     height: 100%;
     width: 100%;
-    left: 0%;
+    left: 0px;
 }
 
 #btnMyDraw{
@@ -188,7 +305,7 @@
 .down{
     height:2.5vh; 
     width: 100%; 
-    transform: rotate(180deg); 
+    transform: scaleY(-1); 
     position: absolute; 
     top: 0vh; 
     left: 0px;
@@ -209,7 +326,7 @@
     background-color: var(--BaseColor);
     color: var(--White);
     border: 0px;
-    border-radius: 15px;
+    border-radius: 1rem;
 }
 
 
@@ -249,7 +366,7 @@ input[type="file"] {
     opacity: 0;
     height: 5rem;
     width: 7rem;
-    top: 0%;
+    top: 0px;
     position: absolute;
     left: 0px;
     cursor: pointer;
@@ -261,7 +378,8 @@ input[type="file"] {
     margin-top: 1.25rem;
     margin-left: 3.5rem;
     transition: transform 0.3s; 
-    transform: rotate(180deg);
+    -webkit-transition: transform 0.3s; 
+    transform: scaleX(-1);
 }
 
 #sizeRange{
@@ -300,7 +418,7 @@ input[type="file"] {
     position: absolute;
     bottom: max(calc(2.5vh + 1px), 11px);
     left: calc(45px + 1vw);
-    border-radius: 15px;
+    border-radius: 1rem;
     border: 0px;
     background-color: var(--AccentColor);
 }

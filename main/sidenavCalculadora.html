@@ -7,15 +7,15 @@
 <div id="myCalc" class="sidenavCalc base">
     <div class="shadow calcShadow">
         <!-- div de resposta -->
-        <div style="background-color:var(--SecondAccentColor); height:30vh; width:36vw; position: absolute; border-top-left-radius: 15px; border-top-right-radius: 15px;">
+        <div id="resposta">
             <form name="calculator">
                 <label for="answer" hidden class="traduzir">Resposta da calculadora</label>
                 <input type="text" id="answer" name="ans" value="" autocomplete="off">
                 <label for="preAns" hidden class="traduzir">Histórico da calculadora</label>
                 <input type="text" id="preAns" name="preAns" value="" autocomplete="off" disabled> <!-- caixa de texto da pergunta caso precise: disabled-->
             </form>
-            <p class="noCopy" id="switch2" style="font-size: 6vh; color: var(--LightGray); left: 1.5vw; top: 0%; position:absolute">DEG</p>
-            <p class="noCopy" style="font-size: 6vh; color: var(--LightGray); cursor: pointer; position:absolute; top:0%; right:1.5vw;" onmousedown="document.calculator.ans.value=''; document.calculator.preAns.value=''; i = 0; f = 0; ">CE</p>
+            <p class="noCopy" id="switch2">DEG</p>
+            <p class="noCopy clearAnswer" onmousedown="document.calculator.ans.value=''; document.calculator.preAns.value=''; i = 0; f = 0; ">CE</p>
         </div>
         <!-- div dos numeros -->
         <div class="grid-container divNumeros">
@@ -54,8 +54,8 @@
                 }">
             </div>
         <!-- div de operaçoes -->
-        <div style="background-color:var(--SecondAccentColor); top:30vh; left: 24vw; height:64vh; width:3px; position: absolute; z-index: 9996;"></div> <!-- this is the border separating the two divs -->
-        <div class="grid-container" style="background-color:var(--RealDarkBlue); color: var(--AccentColor); top:30vh; left: 28vw; height:64vh; width:8vw; position: absolute;">
+        <div class="borda"></div> <!-- this is the border separating the two divs -->
+        <div class="grid-container gridOperandos">
             <p class="grid-item-operandos noCopy"  onmousedown="document.calculator.ans.value = document.calculator.ans.value.substring(0, document.calculator.ans.value.length - 1); i = 0; f = 0;">
             C</p>
             <p class="grid-item-operandos noCopy" onmousedown="{
@@ -90,15 +90,16 @@
             }">+</p>
         </div>
         <!-- div de operaçoes extras -->
-        <div style="background-color:var(--BaseColor); top: 95%; left: 95%; height: 5%; width: 10%; position: absolute; z-index: 9999;"></div>
-        <div id="corner" style="background-color:var(--AccentColor); top: 95%; left: 95%; height: 5%; width: 5.1%; position: absolute; z-index: 9999; border-bottom-right-radius: 15px; cursor: pointer;" onmousedown="if(openExt == 0){openExtra();}"></div>
-        <div id="myExtra" style="background-color:var(--AccentColor); top:30vh; left: 32vw; height:64vh; width:24vw; position: absolute; transition: 0.5s; z-index: 9997;">
-            <div style="height: 64vh; width: 4vw; cursor: pointer;" onmousedown="openExtra()">
-                <svg id="rotate" xmlns="https://www.w3.org/2000/svg" width="16" height="16" fill="var(--RealDarkBlue)" class="bi bi-chevron-compact-left" viewBox="0 0 16 16" style="width:100%; margin-top:30vh; pointer-events:none;">
+        <div class="DivExtras"></div>
+        <div id="corner" onmousedown="if(openExt == 0){openExtra();}"></div>
+        <div id="otherCorner"></div>
+        <div id="myExtra">
+            <div class="openExtra" onmousedown="openExtra()">
+                <svg id="rotate" xmlns="https://www.w3.org/2000/svg" width="16" height="16" fill="var(--RealDarkBlue)" class="bi bi-chevron-compact-left chevronExtra" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M9.224 1.553a.5.5 0 0 1 .223.67L6.56 8l2.888 5.776a.5.5 0 1 1-.894.448l-3-6a.5.5 0 0 1 0-.448l3-6a.5.5 0 0 1 .67-.223z"/>
                 </svg>
             </div>
-            <div class="grid-container" style="grid-template-columns: 33% 33% 33%; padding: 5%; grid-template-rows: auto auto auto auto; left: 4vw; top: 0%; position: absolute; width: 90%; height: 100%;">
+            <div class="grid-container containerExtra">
                 <!-- estao funcionando: '(', ')', 'π', 'e', 'log' e '√' (com exessoes) -->
                 <label for="btnLB" hidden class="traduzir">Parêntesis Esquerdo</label>
                 <input id="bntLB" type="button" value="(" class="grid-item-extra" onmousedown="document.calculator.ans.value+='('; f = 0; ">
@@ -108,11 +109,11 @@
                 <input type="button" id="switch" value="RAD" class="grid-item-extra" onmousedown="{
                     if(document.getElementById('switch').value != 'DEG'){
                         document.getElementById('switch').value = 'DEG';
-                        document.getElementById('labrlRAD').innerHTML = 'Graus';
+                        document.getElementById('labelRAD').innerHTML = 'Graus';
                         document.getElementById('switch2').innerHTML = 'RAD';
                     }else{
                         document.getElementById('switch').value = 'RAD';
-                        document.getElementById('labrlRAD').innerHTML = 'Radiano';
+                        document.getElementById('labelRAD').innerHTML = 'Radiano';
                         document.getElementById('switch2').innerHTML = 'DEG';
                     }
                     f = 0;

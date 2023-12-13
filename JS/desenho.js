@@ -1,5 +1,6 @@
 var arrCanvas = []; //empty var
 var img = new Image;
+var counter; // botão rodar continuamente
 var dec = inc = 0;
 
 window.onload = function () {
@@ -77,22 +78,22 @@ window.onload = function () {
                 var mouseY = event.offsetY;
 
                 // Atualize a posição do círculo
-                mouseFollower.style.opacity = 1;
-                mouseFollower.style.left = mouseX - ctx.lineWidth/2 + "px"; // 10 é metade do tamanho do círculo
-                mouseFollower.style.top = mouseY - ctx.lineWidth/2 + "px";
+                document.getElementById("mouseFollower").style.opacity = 1;
+                document.getElementById("mouseFollower").style.left = mouseX - ctx.lineWidth/2 + "px"; // 10 é metade do tamanho do círculo
+                document.getElementById("mouseFollower").style.top = mouseY - ctx.lineWidth/2 + "px";
             }
 
             // Adicione um ouvinte de evento para capturar o movimento do mouse
             myCanvas.addEventListener("mousemove", seguirMouse);
             myCanvas.addEventListener("mouseleave", function () {
-                mouseFollower.style.display = "none";
+                document.getElementById("mouseFollower").style.display = "none";
                 isDown = false;
                 ctx.closePath();
             });
     
             // Adiciona um ouvinte de evento para mostrar o círculo quando o mouse entra no div
             myCanvas.addEventListener("mouseenter", function () {
-                mouseFollower.style.display = "block";
+                document.getElementById("mouseFollower").style.display = "block";
             });
 
     }
@@ -111,6 +112,9 @@ window.onresize = function(){
     ctx.canvas.width = 50 * vw;
     ctx.canvas.height = 90 * vh;
     ctx.lineWidth = 5;
+    document.getElementById("mouseFollower").style.height = ctx.lineWidth + "px";
+    document.getElementById("mouseFollower").style.width = ctx.lineWidth + "px";
+
 };
 
 function clearCanvas(){
@@ -137,9 +141,8 @@ function changeSize(value){
         }else{
                 ctx.lineWidth = arr[arr.length-1];
         }
-        var mouseFollower = document.getElementById("mouseFollower");
-        mouseFollower.style.height = ctx.lineWidth + "px";
-        mouseFollower.style.width = ctx.lineWidth + "px";
+        document.getElementById("mouseFollower").style.height = ctx.lineWidth + "px";
+        document.getElementById("mouseFollower").style.width = ctx.lineWidth + "px";
 }
 function download_img(yrn){ // yrn = fundo transparente ou n
         // ainda esta baixando com nomes estranhos, seria bom mudar
@@ -196,17 +199,23 @@ function red(){ //redo
 }
 // "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAvoAAADrCAYAAAAYCjLCAAACzUlEQVR4nO3BMQEAAADCoPVPbQZ/oAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4De95AAGZ4T0sAAAAAElFTkSuQmCC"
 
+function stopIncreasing(){
+        clearInterval(counter);
+}
+
 function increaseSize(dif){
         var ctx = myCanvas.getContext("2d");
-        if(dif == true){
-                ctx.lineWidth++;
-        }else{
-                ctx.lineWidth--;
-        }
-        document.getElementById('sizeText').value = ctx.lineWidth;
-        var mouseFollower = document.getElementById("mouseFollower");
-        mouseFollower.style.height = ctx.lineWidth + "px";
-        mouseFollower.style.width = ctx.lineWidth + "px";
+        counter = setInterval(function() {
+                if(dif == true){
+                        ctx.lineWidth++;
+                }else{
+                        ctx.lineWidth--;
+                }
+                document.getElementById('sizeText').value = ctx.lineWidth;
+                var mouseFollower = document.getElementById("mouseFollower");
+                document.getElementById("mouseFollower").style.height = ctx.lineWidth + "px";
+                document.getElementById("mouseFollower").style.width = ctx.lineWidth + "px";
+        }, 50);
 }
 
 function getOposite(y){

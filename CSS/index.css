@@ -24,7 +24,7 @@ body{
     width: 50vw; 
     left: 16vw;  
     top: 5vh; 
-    border-radius: 15px; 
+    border-radius: 1rem; 
     position: absolute;
 }
 
@@ -45,7 +45,6 @@ body{
 }
 
 .dot {
-    /* transform: rotate(1deg); */
     height: 1px;
     margin: 5px;
     width: 1px;
@@ -74,7 +73,6 @@ body{
 
 .linha-vertical {
     border: 1px solid var(--AzulClaroBkg);
-    /* transform: rotate(1deg); */
     height: 100vh;
     position: absolute;
 }

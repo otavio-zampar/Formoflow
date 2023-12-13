@@ -68,6 +68,7 @@
         var isSet = false;
         var dark = false;
         dark = !dark; // falso = tema claro; verdadeiro = tema escuro;
+        var abertoLista = false;
     </script>
 
     <script>
@@ -83,7 +84,7 @@
 <body> <!-- overflow: hidden; -->
 
     <div id="BTNAlerta">
-        <div class="alert alert-dark fade show traduzir" role="alert">Copiado!</div>
+        <div class="alert alert-dark fade show traduzir noCopy" role="alert">Copiado!</div>
     </div>
 
     <script src="./JS/checkTouch.js"></script>
@@ -174,15 +175,15 @@
                     <label for="sizeRange" hidden class="traduzir">Range da Caneta</label>
                     <input type="range" id="sizeRange" min="1" max="140" value="5" oninput="changeSize(this.value); document.getElementById('sizeText').value = myCanvas.getContext('2d').lineWidth;">
                     <label for="sizeText" hidden class="traduzir">Text da Caneta</label>
-                    <input type="text" id="sizeText" value="5" autocomplete="false" onkeydown="return TriggeredKey(this);" onkeyup="myCanvas.getContext('2d').lineWidth = this.value;">
+                    <input type="text" id="sizeText" value="5" autocomplete="false" onkeyup="myCanvas.getContext('2d').lineWidth = this.value; document.getElementById('mouseFollower').style.height = this.value+'px'; document.getElementById('mouseFollower').style.width = this.value+'px';">
                     
-                    <button onmousedown="increaseSize(true);" class="BTNIncrease">
+                    <button onmousedown="increaseSize(true);" onmouseup="stopIncreasing()" class="BTNIncrease">
                         <svg xmlns="https://www.w3.org/2000/svg" width="16" height="16" fill="var(--Black)" class="bi bi-chevron-up up" viewBox="0 0 16 16" >
                             <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
                         </svg>
                     </button>
                     
-                    <button onmousedown="increaseSize(false)" class="BTNIncrease" id="drawBoxDown">
+                    <button onmousedown="increaseSize(false)" onmouseup="stopIncreasing()" class="BTNIncrease" id="drawBoxDown">
                         <svg xmlns="https://www.w3.org/2000/svg" width="16" height="16" fill="var(--Black)" class="bi bi-chevron-up down" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
                         </svg>
@@ -229,21 +230,21 @@
         </div>
     </div>
 
-    <div id="flags">
+    <div id="flags" class="noCopy">
         <label for="flagBr" class="traduzir" hidden>Brasil</label>
-        <img id="flagBr" src="./src/br.svg" onclick="{
+        <img id="flagBr" class="noCopy" src="./src/br.svg" onclick="{
             var array = Array.from(document.getElementsByClassName('traduzir')).concat(Array.from(document.getElementsByClassName('traduzirPlaceholder')));
             traducao(array, traducaoPtBr());
             data = dataPtBr();
         }">
         <label for="flagMx" class="traduzir" hidden>México</label>
-        <img id="flagMx" src="./src/mx.svg" onclick="{
+        <img id="flagMx" class="noCopy" src="./src/mx.svg" onclick="{
             var array = Array.from(document.getElementsByClassName('traduzir')).concat(Array.from(document.getElementsByClassName('traduzirPlaceholder')));
             traducao(array, traducaoSpMx());
             data = dataSpMx();
         }">
         <label for="flagUs" class="traduzir" hidden>Estados Unidos da América</label>
-        <img id="flagUs" src="./src/us.svg" onclick="{
+        <img id="flagUs" class="noCopy" src="./src/us.svg" onclick="{
             var array = Array.from(document.getElementsByClassName('traduzir')).concat(Array.from(document.getElementsByClassName('traduzirPlaceholder')));
             traducao(array, traducaoEnUs());
             data = dataEnUs();
@@ -291,7 +292,19 @@
             <ul id="lista" class="absolute"></ul>
     </div>
     
-    <div id=""></div>
+    <div id="BTNoutraLista">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list outraListaIcon noCopy" viewBox="0 0 16 16" onclick="abreLista(abertoLista); abertoLista = !abertoLista;">
+            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+        </svg>
+        <div id="divOutraLista">
+            <ul id="outraLista" class="noCopy"></ul>
+        </div>
+        
+    </div>
+
+    <script>
+        criaListaCompleta(data);
+    </script>
         
     </div>
 
