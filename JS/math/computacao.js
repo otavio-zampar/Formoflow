@@ -11,6 +11,10 @@ function bitShiftSR(x, y){ // dropa o ultimo bit e duplica o bit a esquerda
 }
 
 function and(x, y){
+    if (condition) {
+        
+    }
+
     return x & y;
 }
 

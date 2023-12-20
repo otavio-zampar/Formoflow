@@ -1,12 +1,9 @@
 function traducao(elementos, lingua){
     elementos.forEach((element, index) => {
-
-        if (element.classList.contains('traduzir')) { // tds os elementos q usam innerHTML
+        if (element.classList.contains('traduzir')) {
             element.innerHTML = lingua[index];
-            // console.log(element.innerHTML);
-        } else { //placeholder
+        } else {
             element.placeholder = lingua[index];
-            // console.log(element.placeholder);
         }
     });
 }

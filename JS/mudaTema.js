@@ -54,13 +54,26 @@ function mudaTema(dark) {
 }
 
 function abreLista(abertoLista){
+
     abertoLista = !abertoLista;
     if (abertoLista) {
-        document.getElementById("BTNoutraLista").style.backgroundColor = "var(--Black)";
-        document.getElementById("divOutraLista").style.display = "none";
+        document.getElementById("BTNoutraLista").style.top = "2rem";
+
+        setTimeout(()=> {
+            document.getElementById("BTNoutraLista").style.borderBottomRightRadius = "0px";
+            document.getElementById("BTNoutraLista").style.borderBottomLeftRadius = "0px";
+
+            document.getElementById("divOutraLista").style.borderTopRightRadius = "0px";
+            document.getElementById("divOutraLista").style.display = "";
+        }, 150);
     } else {
-        document.getElementById("BTNoutraLista").style.backgroundColor = "var(--White)";
-        document.getElementById("divOutraLista").style.display = ""; // initial estava dando problema
+        document.getElementById("BTNoutraLista").style.top = "";
+        document.getElementById("BTNoutraLista").style.borderBottomLeftRadius = "";
+        document.getElementById("BTNoutraLista").style.borderBottomRightRadius = "";
+        // não precisa de timeout pq a divOutraLista desaparece em 0s
+
+        document.getElementById("divOutraLista").style.borderTopRightRadius = "";
+        document.getElementById("divOutraLista").style.display = "none"; // initial estava dando problema
     }
 
 

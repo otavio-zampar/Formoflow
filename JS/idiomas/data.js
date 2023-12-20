@@ -49,8 +49,8 @@ function dataPtBr() {
         { option: "Octal", form: "octal", qnt: 1, exit: 1, placeholder: [] },
         { option: "Base X", form: "base", qnt: 2, exit: 1, placeholder: ["X", "Base"] },
         { option: "Base X para Decimal", form: "basePraDecimal", qnt: 2, exit: 1, placeholder: ["X", "Base"] },
-        { option: "Range", form: "input", type: "range", qnt: 1, exit: 1 },
-        { option: "Text Area", form: "textarea", type: "", qnt: 0, exit: 0}
+        { option: "Faixa", form: "input", type: "range", qnt: 1, exit: 1 },
+        { option: "Caixa de Texto", form: "textarea", type: "", qnt: 0, exit: 0}
         // Adicione outras opções com mensagens personalizadas aqui
     ];
     return data;

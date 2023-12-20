@@ -84,11 +84,7 @@ function criaListaCompleta(data){
 
 function criaLiCompleto(data){
     data.forEach(result => {
-        console.log(result.option);
-        const listItem = $("<li>").text(result.option).css({
-            // "right": "0px",
-            // "position": "absolute",
-        });
+        const listItem = $("<li>").text(result.option);
         listItem.addClass("resposta2 noCopy");
         listItem.click(() => {
             if(result.type == 'range' || result.form == 'textarea'){
