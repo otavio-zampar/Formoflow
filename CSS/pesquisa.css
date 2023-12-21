@@ -37,9 +37,9 @@
     font-size: 1.2rem;
 }
 
-.resposta3:first-child{
+/* .resposta3:first-child{
     border-top: 0px;
-}
+} */
 
 .resposta:hover, .resposta2:hover{
     cursor: pointer;
