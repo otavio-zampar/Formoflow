@@ -25,8 +25,8 @@ window.onload = function () {
 
             $(myCanvas)
             .mousedown(function(event){
-                    if(document.getElementById("penFull").style.opacity == 1 || document.getElementById("eraserFull").style.opacity == 1){
-                        if(document.getElementById("eraserFull").style.opacity == 1){
+                    if(document.getElementById("penFull").style.display == "initial" || document.getElementById("eraserFull").style.display == "initial"){
+                        if(document.getElementById("eraserFull").style.display == "initial"){
                                 ctx.globalCompositeOperation = "destination-out";
                         }
                         isDown = true;
@@ -61,11 +61,11 @@ window.onload = function () {
                     }
                     isDown = false;
                     ctx.closePath();
-                    if(document.getElementById("penFull").style.opacity == 1){
+                    if(document.getElementById("penFull").style.display == "initial"){
                         historySave();
                     }
                     
-                    if(document.getElementById("eraserFull").style.opacity == 1){
+                    if(document.getElementById("eraserFull").style.display == "initial"){
                         ctx.globalCompositeOperation = "source-over";
                     }
 

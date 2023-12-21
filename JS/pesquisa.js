@@ -73,26 +73,38 @@ $(document).ready(function () {
 });
 
 function criaListaCompleta(data){
-
-    // data.forEach(result =>{
-    //     console.log(result.option);
-    // });
-
-    criaLiCompleto(data);
+    const dataAgrupado = data.reduce((grupos, data) => {
+        const group = data.group;
+        if (!grupos[group]) {
+            grupos[group] = [];
+        }
+        grupos[group].push(data);
+        return grupos;
+    }, {});
+    criaLiCompleto(dataAgrupado);
 }
 
 
 function criaLiCompleto(data){
-    data.forEach(result => {
-        const listItem = $("<li>").text(result.option);
-        listItem.addClass("resposta2 noCopy");
-        listItem.click(() => {
-            if(result.type == 'range' || result.form == 'textarea'){
-                createEntradaDiv(result);
-            }else{
-                createDiv(result);
-            }
+
+    
+
+    for (const [keys, value] of Object.entries(data)) {
+
+        const tituloList = $("<p>").text(keys).addClass("resposta3 noCopy");
+        $("#outraLista").append(tituloList);
+
+        value.forEach((r)=>{
+            const listItem = $("<li>").text(r.option);
+            listItem.addClass("resposta2 noCopy");
+            listItem.click(() => {
+                if(r.type == 'range' || r.form == 'textarea'){
+                    createEntradaDiv(r);
+                }else{
+                    createDiv(r);
+                }
+            });
+            $("#outraLista").append(listItem);
         });
-        $("#outraLista").append(listItem);
-    });
+      }
 }

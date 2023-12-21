@@ -35,7 +35,22 @@ function binario(x){
 }
 
 function basePraDecimal(x, base){
+    
+    // var soma = 0;
+    // Array.from(x).forEach((element, index) => {
+    //     var t = null;
+    //     if ((x.charCodeAt(index) >= 97 && x.charCodeAt(index) <= 122) || (x.charCodeAt(index) >= 65 && x.charCodeAt(index) <= 90)) { // do a ao z na tabela ascii
+    //         x = x.toLowerCase();
+    //         t = x.charCodeAt(index) - 87; // offset 97 - 10 caracteres já existentes [0 a 9]
+    //     }else{
+    //         t = parseInt(x[index]);
+    //     }
+    //     soma += t * Math.pow(base, (x.length-1) - index);
+    // });
+    // return soma;
+    
     return parseInt(x, base);
+
 }
 
 function hexadecimal(x){

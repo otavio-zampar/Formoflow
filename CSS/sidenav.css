@@ -176,13 +176,8 @@
     -webkit-transition: .1s transform;
 }
 
-.index7{
-    z-index: 7;
-}
-
 .index6{
-    z-index: 6;
-    opacity: 0;
+    display: none;
 }
 
 .eraser{

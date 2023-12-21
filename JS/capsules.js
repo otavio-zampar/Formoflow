@@ -28,11 +28,12 @@ function avaliaJanela(a){
     var actualName = $("#div"+thisDivCount).attr("actualname");
     var exit = $("#div"+thisDivCount).attr("exit");
     var avaliacao = actualName+"(";
+
     for (let index = 0; index < inputForm; index++) {
         if (inputElements[index].value == "") {
             avaliacao += "0";
         }else{
-            avaliacao += "\"" + inputElements[index].value + "\"";
+            avaliacao += inputElements[index].value;
         }
         if (index < inputForm-1) {
             avaliacao += ", ";
@@ -152,7 +153,7 @@ function createDiv(AA) {
                         "top": selectedArrowY,
                         "left": selectedArrowX
                     });
-                    $('#' + arrowId.replace('seta', 'linha')).css("display", "inherit"); 
+                    $('#' + arrowId.replace('seta', 'linha')).css("display", "initial"); 
                 },
             });
             // add ao form
@@ -166,7 +167,6 @@ function createDiv(AA) {
             });
             
             input.on('inputDiferente', function(){
-                console.log(this.parentElement);
                 avaliaJanela(this.parentElement);
             });
 
@@ -215,14 +215,15 @@ function createDiv(AA) {
 
                     findZindex();
                     highestZIndex += 2;
-                    $(this).css('z-index', highestZIndex+200);
+                    $(this).css('z-index', highestZIndex+9999);
+                    console.log(highestZIndex +", "+ $(this).css('z-index'));
                 },
                 stop: function() {
                     $(this).css({
                         "top": selectedArrowY,
                         "left": selectedArrowX
                     });
-                    $('#' + arrowId.replace('seta', 'linha')).css("display", "inherit"); 
+                    $('#' + arrowId.replace('seta', 'linha')).css("display", "initial"); 
                 },
             });
 
@@ -491,7 +492,7 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
                         "top": selectedArrowY,
                         "left": selectedArrowX
                     });
-                    $('#' + arrowId.replace('seta', 'linha')).css("display", "inherit"); 
+                    $('#' + arrowId.replace('seta', 'linha')).css("display", "initial"); 
                 },
             });
 

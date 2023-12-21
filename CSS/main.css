@@ -56,7 +56,7 @@ p{
 }
 
 #list{
-    z-index:inherit;
+    z-index:initial;
     background-color: var(--SecondAccentColor);
     color: var(--White);
     border-width: 0px;
