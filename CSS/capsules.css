@@ -58,6 +58,8 @@
     border: 0px solid var(--Black);
     border-radius: 10px;
     box-shadow: -4px 4px var(--LightGray);
+    caret-color: var(--Black);
+    color: var(--Black);
     background-color: var(--White);
   }
   #BTNAlerta{

@@ -16,9 +16,20 @@ function findZindex() {
 function getColor(){
     var color = Math.floor(Math.random()*16777215).toString(16);
     var regex = /[0-5]/ig;
-    color = color.replace(regex, "a"); // substitui as cores mais baixas pelo 'a'
+    color = color.replace(regex, function(char, index){
+        return Math.floor(color[index] * 1.6);
+    });
     if(color.length == 5) color = color.concat('f'); 
     return "#"+color;
+}
+
+function getGrayColor(){
+    var color = Math.floor(Math.random() * 255).toString(16);
+    var regex = /[a-f]/ig;
+    color = color.replace(regex, function(char, index){
+        return Math.floor((color.charCodeAt(index) - 97) * 1.6);
+    });
+    return "#"+color+color+color;
 }
 
 function avaliaJanela(a){
@@ -78,7 +89,16 @@ function createDiv(AA) {
     var CloseR = $('<div>').addClass('CloseR  noCopy').html('&#10006');
 
     var tstDiv = $('<div>').addClass('tstDiv');
-    tstDiv.css("background-color", getColor());
+    const grayC = getGrayColor();
+    const colorC = getColor();
+    tstDiv.attr("ActualColor", colorC);
+    tstDiv.attr("GrayColor", grayC);
+    if (!dark) {
+        tstDiv.css("background-color", grayC);
+    }else{
+        tstDiv.css("background-color", colorC);
+    }
+    
     var ActualResizeHandle = $('<div>').addClass('resize-handle s ui-resizable-s'); // S
     var ActualResizeHandle2 = $('<div>').addClass('resize-handle e ui-resizable-e') // E
     var ActualResizeHandle3 = $('<div>').addClass('resize-handle w ui-resizable-w'); //.css('z-index', '0px'); // W
@@ -103,7 +123,7 @@ function createDiv(AA) {
                 "for": "input"+divCount+index,
                 "hidden" : ""
             });
-            var input = $('<input>').attr('type', 'text').attr('id', "input"+divCount+index).addClass("teste");
+            var input = $('<input>').attr('type', 'text').attr('id', "input"+divCount+index).addClass("inputFormula");
             
             if (AA.placeholder[index] != undefined) {
                 input.attr("placeholder", AA.placeholder[index]);
@@ -216,7 +236,7 @@ function createDiv(AA) {
                     findZindex();
                     highestZIndex += 2;
                     $(this).css('z-index', highestZIndex+9999);
-                    console.log(highestZIndex +", "+ $(this).css('z-index'));
+                    // console.log(highestZIndex +", "+ $(this).css('z-index'));
                 },
                 stop: function() {
                     $(this).css({
@@ -268,6 +288,18 @@ function createDiv(AA) {
             tstDiv.css('width', actualWidth);
             tstDiv.css('height', actualHeight);
             
+            $(".tstDiv > .arrow").each(function (element) {
+                linhaId = $(this).attr("id").replace("seta", "linha");
+                $(this).css({
+                    "top": $("#"+linhaId).css("top")+" - 3px",
+                    "right": "calc(90% + min(1rem, 1vh) + 8px)"
+                });
+                // selectedArrowX = 0;
+
+                console.log($(this).attr("id"));
+                console.log($(this).css("left"));
+            });
+
         }
     });
     var minHeight = "calc("+icon.css('top')+" + "+ icon.css('height') +" + 30px)";
@@ -277,11 +309,12 @@ function createDiv(AA) {
     }
     ActualDiv.css({
         minHeight: minHeight,
+        height:minHeight,
         zIndex: highestZIndex + 1,
         left: "calc(5vw + "+ 50 * ActualTop +"px + "+ 50 * leftOffset +"px)",
         top: "calc(20vh + "+ 50 * ActualTop +"px + "+ 30 * leftOffset +"px)"
     });
-    // console.log("Top: "+ActualTop);
+    
     tstDiv.css('min-height', minHeight);
     if (ActualTop >= 9) {
         ActualTop = 1;
@@ -292,8 +325,14 @@ function createDiv(AA) {
         left: "calc(5vw + "+ 50 * ActualTop +"px + "+ 50 * leftOffset +"px)",
         top: "calc(20vh + "+ 50 * ActualTop +"px + "+ 30 * leftOffset +"px)"
     });
-    ActualResizeHandle2.css('min-height', minHeight);
-    ActualResizeHandle3.css('min-height', minHeight);
+    ActualResizeHandle2.css({
+        'min-height': minHeight,
+        'height': minHeight
+    });
+    ActualResizeHandle3.css({
+        'min-height': minHeight,
+        'height': minHeight
+    });
 
     DraggableDiv.draggable({
         containment: "#container",
@@ -326,7 +365,7 @@ function createDiv(AA) {
     });
 
 
-    $('input[class="teste"]').droppable({
+    $('input[class="inputFormula"]').droppable({
         accept: '.arrow',
         drop: function() {
             if (String(inputId.attr("id")).includes("icon")) {
@@ -343,10 +382,10 @@ function createDiv(AA) {
     });
 
 
-    $('.teste').on('input', function(){
+    $('.inputFormula').on('input', function(){
         var mudado = $(this);
 
-        $('.teste').each(function() {
+        $('.inputFormula').each(function() {
             if (mudado.attr("id") == $(this).attr("InputPai")) {
                 $(this).val(mudado.val());
                 $(this).trigger('inputDiferente');
@@ -355,7 +394,7 @@ function createDiv(AA) {
     });
     $('.icon').on('DOMSubtreeModified', function(){
         var mudado = this;
-        $('.teste').each(function() {
+        $('.inputFormula').each(function() {
             if (mudado.id == $(this).attr("InputPai")) {
                 $(this).val(mudado.innerHTML);
                 $(this).trigger('inputDiferente');
@@ -399,7 +438,7 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
     var CloseR = $('<div>').addClass('CloseR').html('&#10006');
     }
     var tstDiv = $('<div>').addClass('tstDiv');
-    tstDiv.css("background-color", getColor());
+    tstDiv.css("background-color", getGrayColor());
     var ActualResizeHandle = $('<div>').addClass('resize-handle s ui-resizable-s'); // S
     var ActualResizeHandle2 = $('<div>').addClass('resize-handle e ui-resizable-e') // E
     var ActualResizeHandle3 = $('<div>').addClass('resize-handle w ui-resizable-w'); // W
@@ -418,7 +457,7 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
             "for": "input"+divCount+1,
             "hidden" : ""
         }).html(nomeForm);
-        var input = $('<'+inputInput+'>').attr('type', actualName).attr('id', "input"+divCount+1).attr("min", 0).attr("max", 100).attr("value", 0); // .addClass("teste")
+        var input = $('<'+inputInput+'>').attr('type', actualName).attr('id', "input"+divCount+1).attr("min", 0).attr("max", 100).attr("value", 0); // .addClass("inputFormula")
         input.css("position", "absolute");
         input.css("left", "3vh");
         input.css("width", "calc(100% - 6vh)");
@@ -607,7 +646,7 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
         }
     });
 
-    $('input[class="teste"]').droppable({
+    $('input[class="inputFormula"]').droppable({
         accept: '.arrow',
         drop: function() {
             if (String(inputId.attr("id")).includes("icon")) {
@@ -623,9 +662,9 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
         }
     });
 
-    $('.teste').on('input', function(){
+    $('.inputFormula').on('input', function(){
         var mudado = $(this);
-        $('.teste').each(function() {
+        $('.inputFormula').each(function() {
             if (mudado.attr("id") == $(this).attr("InputPai")) {
                 $(this).val(mudado.val());
                 $(this).trigger('inputDiferente');
@@ -635,7 +674,7 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
 
     $('.icon').on('DOMSubtreeModified', function(){
         var mudado = this;
-        $('.teste').each(function() {
+        $('.inputFormula').each(function() {
             if (mudado.id == $(this).attr("InputPai")) {
                 $(this).val(mudado.innerHTML);
                 $(this).trigger('inputDiferente');
@@ -673,7 +712,7 @@ function uploadImg(selectedFile, naturalHeight, naturalWidth){
         var tstDiv = $('<div>').addClass('tstDiv');
         tstDiv.css("padding", "0px");
         tstDiv.css("padding-top", "30px");
-        tstDiv.css("background-color", getColor());
+        tstDiv.css("background-color", getGrayColor());
 
 
         var ActualResizeHandle = $('<div>').addClass('resize-handle s ui-resizable-s').css('min-width', '320px'); // S

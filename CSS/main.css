@@ -96,6 +96,7 @@ div.sticky{
 #answer{
     color:var(--LightGray);
     background-color: var(--SecondAccentColor);
+    caret-color: var(--LightGray);
     border-width: 0px;
     height: 10vh;
     width: 95%;

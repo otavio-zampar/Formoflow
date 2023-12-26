@@ -27,7 +27,7 @@ function searchQuery(query, resultsList){
                     const listItem = $("<li>").text(result.option);
                     listItem.addClass("resposta noCopy");
                     listItem.click(() => {
-                        if(result.type == 'range' || result.form == 'textarea'){
+                        if(result.type == "range" || result.form == "textarea"){
                             createEntradaDiv(result);
                         }else{
                             createDiv(result);
@@ -64,8 +64,8 @@ $(document).ready(function () {
     });
 
     $(document).mousedown(function(e){
-        if (!($('#lista, #searchBar, .resposta, #lupa, #lista').is(e.target))) {
-            $('#lista').hide();
+        if (!($("#lista, #searchBar, .resposta, #lupa, #lista").is(e.target))) {
+            $("#lista").hide();
             $("#searchBar").css("border-radius", "1rem");
         }
     });
@@ -98,7 +98,7 @@ function criaLiCompleto(data){
             const listItem = $("<li>").text(r.option);
             listItem.addClass("resposta2 noCopy");
             listItem.click(() => {
-                if(r.type == 'range' || r.form == 'textarea'){
+                if(r.type == "range" || r.form == "textarea"){
                     createEntradaDiv(r);
                 }else{
                     createDiv(r);
