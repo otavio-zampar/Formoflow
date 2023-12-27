@@ -2,16 +2,28 @@
     --Black: #000000;                    /* background */
     --BlackFocus: #020202;                    /* nao usa */
     --RealDarkBlue: #1f1926;             /* usado especialmente nos numeros da calculadora sidenav */
+    --RealDarkBlueCalc: #1f1926;             /* usado especialmente nos numeros da calculadora sidenav */
+    --RealDarkBlueBTN: #1f1926;             /* usado especialmente nos numeros da calculadora sidenav */
     --AlmostTransparent: #0000001f;      /* sombra da lista de pesquisa */
     --BaseColor: #322c40;                /*primeira cor principal do app */
+    --BaseColorBTN: #322c40;                /*primeira cor principal do app */
     --AzulClaroBkg: #80b9e0;             /* background */
     --Red: #cf0000;                      /* background */
     --SecondAccentColor: #605869;        /* terceira cor principal do app, contraste com ambas */
+    --SecondAccentColorFlags: #605869;        /* terceira cor principal do app, contraste com ambas */
     --AccentColor: #B6B7CF;              /* segunda cor principal do app, contraste com a base */
+    --AccentColorExtra: #B6B7CF;              /* segunda cor principal do app, contraste com a base */
+    --AccentColorPick: #B6B7CF;              /* segunda cor principal do app, contraste com a base */
+    --AccentColorBTN: #B6B7CF;              /* segunda cor principal do app, contraste com a base */
     --LightGray: #dddddd;                /* usado na caluladora, lista da barra de pesquisa */
+    --LightGrayBTN: #dddddd;                /* usado na caluladora, lista da barra de pesquisa */
     --AlmostWhite: #f0f0f0;              /* plano de fundo atras do bkgd, borda da barra de pesquisa */
     --WhiteFocus: #fdfdfd;               /* focus na barra de pesquisa */
     --White: #ffffff;                    /* background */
+    --White2: #ffffff;                    /* background */
+    --WhiteBTN: #ffffff;                    /* background */
+    --AlmostBlack: #fdfdfd;
+    --SecondAccentColorCalc: #605869;
 }
 
     /* 000000

@@ -32,7 +32,7 @@
 }
 
 #resposta{
-    background-color:var(--SecondAccentColor); 
+    background-color:var(--SecondAccentColorCalc); 
     height:30vh; 
     width:36vw; 
     position: absolute; 
@@ -58,7 +58,7 @@
 }
 
 .gridOperandos{
-    background-color:var(--RealDarkBlue); 
+    background-color:var(--RealDarkBlueCalc); 
     color: var(--AccentColor); 
     top:30vh; left: 24vw; 
     height:64vh; 
@@ -78,7 +78,7 @@
 
 .divNumeros{
     grid-template-columns: auto auto auto; 
-    background-color:var(--RealDarkBlue); 
+    background-color:var(--RealDarkBlueCalc); 
     top: 30vh; 
     height:64vh; 
     width:24vw; 
@@ -87,7 +87,7 @@
 }
 
 #corner{
-    background-color:var(--AccentColor); 
+    background-color:var(--AccentColorExtra); 
     bottom: 0px; 
     right: 0px; 
     height: 15px; 
@@ -118,7 +118,7 @@
 }
 
 #myExtra{
-    background-color:var(--AccentColor); 
+    background-color:var(--AccentColorExtra); 
     top:30vh; 
     left: 32vw; 
     height:64vh;
@@ -205,7 +205,7 @@
 }
 
 .borda{
-    background-color:var(--SecondAccentColor); 
+    background-color:var(--SecondAccentColorCalc); 
     top:30vh; 
     left: 24vw; 
     height:64vh; 
@@ -318,8 +318,8 @@
     width: 100%; 
     height: max(3vw, 1rem); 
     font-size: max(1.1vw, 1rem);
-    background-color: var(--BaseColor);
-    color: var(--White);
+    background-color: var(--BaseColorBTN);
+    color: var(--AlmostBlack);
     border: 0px;
     border-radius: 1rem;
 }
@@ -395,7 +395,10 @@ input[type="file"] {
     text-align: center;
     height: 5vh;
     margin: 0px; 
-    background-color:var(--White);
+    background-color:var(--White2);
+    color: var(--Black);
+    border: 0px;
+    /* outline: 1px solid var(--Black); */
     bottom:0px;
     left: 1vw;
 }
@@ -415,7 +418,7 @@ input[type="file"] {
     left: calc(45px + 1vw);
     border-radius: 1rem;
     border: 0px;
-    background-color: var(--AccentColor);
+    background-color: var(--AccentColorPick);
 }
 #ColPck{
     position: absolute;
@@ -428,5 +431,5 @@ input[type="file"] {
     left: calc(50px + 3vw);
     border: 0px;
     padding: 3px;
-    background-color: var(--AccentColor);
+    background-color: var(--AccentColorPick);
 }

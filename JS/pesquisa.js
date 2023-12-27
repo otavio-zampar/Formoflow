@@ -68,6 +68,10 @@ $(document).ready(function () {
             $("#lista").hide();
             $("#searchBar").css("border-radius", "1rem");
         }
+        if (!($("#divOutraLista, .DivOutraListaBoogaloo, .outraLista, .outraListaIcon, .filler, .resposta2, .resposta3").is(e.target)) && abertoLista) {
+            abreLista(abertoLista); 
+            abertoLista = !abertoLista;
+        }
     });
 
 });

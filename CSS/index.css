@@ -36,7 +36,7 @@ body{
     top: 18px; 
     width: 210px; 
     height: 62px; 
-    background-color: var(--SecondAccentColor); 
+    background-color: var(--SecondAccentColorFlags); 
     border-radius: 10px;
 }
 

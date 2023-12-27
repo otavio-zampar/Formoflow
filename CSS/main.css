@@ -58,7 +58,7 @@ p{
 #list{
     z-index:initial;
     background-color: var(--SecondAccentColor);
-    color: var(--White);
+    color: var(--WhiteBTN);
     border-width: 0px;
     transition: color 0.05s;
     -webkit-transition: color 0.05s;
@@ -94,8 +94,8 @@ div.sticky{
     outline: 0px;
 }
 #answer{
-    color:var(--LightGray);
-    background-color: var(--SecondAccentColor);
+    color:var(--LightGrayBTN);
+    background-color: var(--SecondAccentColorCalc);
     caret-color: var(--LightGray);
     border-width: 0px;
     height: 10vh;
@@ -106,8 +106,8 @@ div.sticky{
     position: absolute;
 }
 #preAns{
-    color:var(--LightGray);
-    background-color: var(--SecondAccentColor);
+    color: var(--LightGrayBTN);
+    background-color: var(--SecondAccentColorCalc);
     border-width: 0px;
     height: 7vh;
     width: 92%;
@@ -156,28 +156,28 @@ div.sticky{
 }
 
 .grid-item-number {
-    background-color: var(--RealDarkBlue);
+    background-color: var(--RealDarkBlueCalc);
     border: 0px;
     padding-left: 10%;
     padding-right: 10%;
     font-size: min(10vh, max(10vw, 1rem));
     text-align: center;
-    color: var(--LightGray); 
+    color: var(--LightGrayBTN); 
     border-radius: 1rem;
 }
 .grid-item-operandos{
     position: relative;
     cursor: pointer;
     border: 0px;
-    color: var(--AccentColor);
+    color: var(--AccentColorBTN);
     margin: 0px;
     font-size: min(8vh, max(8vw, 1rem));
     text-align: center;
 }
 .grid-item-extra{
-    background-color: var(--AccentColor);
+    background-color: var(--AccentColorExtra);
     border: 0px;
-    color: var(--RealDarkBlue); 
+    color: var(--RealDarkBlueBTN); 
     font-size: min(5.5vh, max(5.5vw, 1rem));
     text-align: center;
     height: calc(64vh / 5);

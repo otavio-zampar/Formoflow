@@ -4,6 +4,7 @@ var inputId = null; // Armazena o input de destino selecionado
 var highestZIndex = 11;
 var ActualTop = 0;
 var leftOffset = 0;
+var b = 200;
 
 function findZindex() {
     $('.ActualDiv').each(function() {
@@ -32,44 +33,47 @@ function getGrayColor(){
     return "#"+color+color+color;
 }
 
-function avaliaJanela(a){
-    var inputElements = a.querySelectorAll('input');
-    inputForm = inputElements.length;
-    var thisDivCount = String(a.parentElement.parentElement.id).replace("div", ""); // form, tstDiv, ActualDiv
-    var actualName = $("#div"+thisDivCount).attr("actualname");
-    var exit = $("#div"+thisDivCount).attr("exit");
-    var avaliacao = actualName+"(";
+function avaliaJanela(a, c){
+    if(c >= 0){
+        var inputElements = a.querySelectorAll('input');
+        inputForm = inputElements.length;
+        var thisDivCount = String(a.parentElement.parentElement.id).replace("div", ""); // form, tstDiv, ActualDiv
+        var actualName = $("#div"+thisDivCount).attr("actualname");
+        var exit = $("#div"+thisDivCount).attr("exit");
+        var avaliacao = actualName+"(";
 
-    for (let index = 0; index < inputForm; index++) {
-        if (inputElements[index].value == "") {
-            avaliacao += "0";
-        }else{
-            avaliacao += inputElements[index].value;
-        }
-        if (index < inputForm-1) {
-            avaliacao += ", ";
-        }
-    }
-    avaliacao += ")";
-
-    try{
-        var x = [];
-        x = String(eval(avaliacao)).split(" "); 
-        for (let index = 0; index < exit; index++) {
-            if (String(x[index]) == "undefined") {
-                x[index] = "NaN";
+        for (let index = 0; index < inputForm; index++) {
+            if (inputElements[index].value == "") {
+                avaliacao += "0";
+            }else{
+                avaliacao += inputElements[index].value;
             }
-            document.getElementById("icon"+thisDivCount+(inputForm+index)).innerHTML = x[index];
+            if (index < inputForm-1) {
+                avaliacao += ", ";
+            }
         }
-    } catch(e){
-        if (e instanceof SyntaxError || ReferenceError) {
-            console.log("Erro esperado.");
-            // Faça algo para lidar com o erro de sintaxe, se necessário
-        } else {
-            // Outros tipos de erros que não são de sintaxe
-            console.error("Erro:", e);
+        avaliacao += ")";
+
+        try{
+            var x = [];
+            x = String(eval(avaliacao)).split(" "); 
+            for (let index = 0; index < exit; index++) {
+                if (String(x[index]) == "undefined") {
+                    x[index] = "NaN";
+                }
+                document.getElementById("icon"+thisDivCount+(inputForm+index)).innerHTML = x[index];
+            }
+        } catch(e){
+            if (e instanceof SyntaxError || ReferenceError) {
+                console.log("Erro esperado, fórmula não concluída.");
+                // Faça algo para lidar com o erro de sintaxe, se necessário
+            } else {
+                // Outros tipos de erros que não são de sintaxe
+                console.error("Erro:", e);
+            }
         }
     }
+    b--;
 }
 
 // para criar uma div sem o onclick é so colocar o inputForm como 0
@@ -183,11 +187,11 @@ function createDiv(AA) {
             form.append(linha);
 
             input.on('input', function(){
-                avaliaJanela(this.parentElement);
+                avaliaJanela(this.parentElement, b);
             });
             
             input.on('inputDiferente', function(){
-                avaliaJanela(this.parentElement);
+                avaliaJanela(this.parentElement, b);
             });
 
         }
@@ -236,7 +240,6 @@ function createDiv(AA) {
                     findZindex();
                     highestZIndex += 2;
                     $(this).css('z-index', highestZIndex+9999);
-                    // console.log(highestZIndex +", "+ $(this).css('z-index'));
                 },
                 stop: function() {
                     $(this).css({
@@ -288,18 +291,13 @@ function createDiv(AA) {
             tstDiv.css('width', actualWidth);
             tstDiv.css('height', actualHeight);
             
-            $(".tstDiv > .arrow").each(function (element) {
-                linhaId = $(this).attr("id").replace("seta", "linha");
+            $(".tstDiv > .arrow").each(function () {
+                linhaId = this.id.replace("seta", "linha");
                 $(this).css({
-                    "top": $("#"+linhaId).css("top")+" - 3px",
-                    "right": "calc(90% + min(1rem, 1vh) + 8px)"
+                    "top": "calc("+$("#"+linhaId).css("top")+" - 3px)",
+                    "left": ""
                 });
-                // selectedArrowX = 0;
-
-                console.log($(this).attr("id"));
-                console.log($(this).css("left"));
             });
-
         }
     });
     var minHeight = "calc("+icon.css('top')+" + "+ icon.css('height') +" + 30px)";
@@ -377,7 +375,7 @@ function createDiv(AA) {
                 $(this).css("outline-color", document.getElementById(inputId.attr("id")).parentElement.parentElement.style.backgroundColor);
                 $(this).attr("InputPai", inputId.attr("id"));
             }
-            avaliaJanela(this.parentElement);
+            avaliaJanela(this.parentElement, b);
         }
     });
 
@@ -407,7 +405,6 @@ function createDiv(AA) {
         if ($(string).children().is(e.target)) {
             ActualTop = 1;
             leftOffset = 0;
-            // console.log("Top zerado: "+ActualTop);
             findZindex();
             highestZIndex += 2;
             $("#"+randomId).css("z-index", highestZIndex);
@@ -583,6 +580,14 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
             tstDiv.css('height', actualHeight);
             input.css("max-height", "calc("+tstDiv.css("height")+" - 20% - 30px)");
             
+            $(".tstDiv > .arrow").each(function () {
+                linhaId = this.id.replace("seta", "linha");
+                $(this).css({
+                    "top": "calc("+$("#"+linhaId).css("top")+" - 3px)",
+                    "left": ""
+                });
+            });
+
         }
     });
     if (exit != 0) {
@@ -596,6 +601,7 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
     }
     ActualDiv.css({
         minHeight: minHeight,
+        height: minHeight,
         zIndex: highestZIndex + 1,
         left: "calc(5vw + "+ 50 * ActualTop +"px + "+ 50 * leftOffset +"px)",
         top: "calc(20vh + "+ 50 * ActualTop +"px + "+ 30 * leftOffset +"px)"
@@ -611,9 +617,14 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
         left: "calc(5vw + "+ 50 * ActualTop +"px + "+ 50 * leftOffset +"px)",
         top: "calc(20vh + "+ 50 * ActualTop +"px + "+ 30 * leftOffset +"px)"
     });
-    // ActualDiv.css('z-index', highestZIndex + 1);
-    ActualResizeHandle2.css('min-height', minHeight);
-    ActualResizeHandle3.css('min-height', minHeight);
+    ActualResizeHandle2.css({
+        'min-height': minHeight,
+        'height': minHeight
+    });
+    ActualResizeHandle3.css({
+        'min-height': minHeight,
+        'height': minHeight
+    });
 
     DraggableDiv.draggable({
         containment: "#container",
@@ -658,7 +669,7 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
                 $(this).css("outline-color", document.getElementById(inputId.attr("id")).parentElement.parentElement.style.backgroundColor);
                 $(this).attr("InputPai", inputId.attr("id"));
             }
-            avaliaJanela(this.parentElement);
+            avaliaJanela(this.parentElement, b);
         }
     });
 
@@ -857,3 +868,23 @@ function uploadImg(selectedFile, naturalHeight, naturalWidth){
         alert('Nenhum arquivo selecionado.');
     }
 }
+
+
+window.onresize = function(){
+    $(".tstDiv > .arrow").each(function () {
+        linhaId = this.id.replace("seta", "linha");
+        $(this).css({
+            "top": "calc("+$("#"+linhaId).css("top")+" - 3px)",
+            "left": ""
+        });
+    });
+}
+
+$(document).mousedown(function (){
+    b = 200; // ACABA A PORCARIA DO BUG GRAÇADEUS
+});
+
+$(document).on("input", function (){
+    b = 200;
+    console.log (b);
+});
