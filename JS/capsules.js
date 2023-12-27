@@ -366,14 +366,26 @@ function createDiv(AA) {
     $('input[class="inputFormula"]').droppable({
         accept: '.arrow',
         drop: function() {
+            console.log(inputId.attr("InputPai"));
             if (String(inputId.attr("id")).includes("icon")) {
                 $(this).val(inputId.text()); // caso a seta venha de um div
-                $(this).css("outline-color", document.getElementById(inputId.attr("id")).parentElement.style.backgroundColor);
-                $(this).attr("InputPai", inputId.attr("id"));
+                if(inputId.attr("InputPai")){
+                    $(this).attr("InputPai", inputId.attr("InputPai"));
+                    $(this).css("outline-color", document.getElementById(inputId.attr("InputPai")).parentElement.style.backgroundColor);
+                    // console.log(+document.getElementById(inputId.attr("InputPai"))+", "+document.getElementById(inputId.attr("InputPai")).parentElement.style.backgroundColor);
+                }else{
+                    $(this).attr("InputPai", inputId.attr("id"));
+                    $(this).css("outline-color", document.getElementById(inputId.attr("id")).parentElement.style.backgroundColor);
+                }
             } else {
                 $(this).val(inputId.val()); // caso a seta venha de um input
-                $(this).css("outline-color", document.getElementById(inputId.attr("id")).parentElement.parentElement.style.backgroundColor);
-                $(this).attr("InputPai", inputId.attr("id"));
+                if(inputId.attr("InputPai")){
+                    $(this).attr("InputPai", inputId.attr("InputPai"));
+                    $(this).css("outline-color", document.getElementById(inputId.attr("InputPai")).parentElement.parentElement.style.backgroundColor);
+                }else{
+                    $(this).attr("InputPai", inputId.attr("id"));
+                    $(this).css("outline-color", document.getElementById(inputId.attr("id")).parentElement.parentElement.style.backgroundColor);
+                }
             }
             avaliaJanela(this.parentElement, b);
         }
@@ -662,12 +674,22 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
         drop: function() {
             if (String(inputId.attr("id")).includes("icon")) {
                 $(this).val(inputId.text()); // caso a seta venha de um div
-                $(this).css("outline-color", document.getElementById(inputId.attr("id")).parentElement.style.backgroundColor);
-                $(this).attr("InputPai", inputId.attr("id"));
+                if(inputId.attr("InputPai")){
+                    $(this).attr("InputPai", inputId.attr("InputPai"));
+                    $(this).css("outline-color", document.getElementById(inputId.attr("InputPai")).parentElement.style.backgroundColor);
+                }else{
+                    $(this).attr("InputPai", inputId.attr("id"));
+                    $(this).css("outline-color", document.getElementById(inputId.attr("id")).parentElement.style.backgroundColor);
+                }
             } else {
                 $(this).val(inputId.val()); // caso a seta venha de um input
-                $(this).css("outline-color", document.getElementById(inputId.attr("id")).parentElement.parentElement.style.backgroundColor);
-                $(this).attr("InputPai", inputId.attr("id"));
+                if(inputId.attr("InputPai")){
+                    $(this).attr("InputPai", inputId.attr("InputPai"));
+                    $(this).css("outline-color", document.getElementById(inputId.attr("InputPai")).parentElement.parentElement.style.backgroundColor);
+                }else{
+                    $(this).attr("InputPai", inputId.attr("id"));
+                    $(this).css("outline-color", document.getElementById(inputId.attr("id")).parentElement.parentElement.style.backgroundColor);
+                }
             }
             avaliaJanela(this.parentElement, b);
         }
@@ -886,5 +908,4 @@ $(document).mousedown(function (){
 
 $(document).on("input", function (){
     b = 200;
-    console.log (b);
 });
