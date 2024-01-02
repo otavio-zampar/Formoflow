@@ -290,6 +290,22 @@
 
     <script>
         criaListaCompleta(data);
+
+        createEntradaDiv({option: "TUTORIAL", form: "textarea", qnt: 0, exit: 0});
+        const texo = "Bem vindo ao FORMOFLOW!\nPara utilizar números não decimais siga o padrão:\nDecimal: 15,\nBinário: 0b1111,\nOctal: 0o17,\nHexadecimal: 0xF."; 
+        setTimeout(() => {
+            document.getElementById("input11").value = texo;
+            document.getElementById("input11").style.fontSize = "1rem";
+            document.getElementById("input11").style.overflowY = "auto";
+            document.getElementById("div1").style.height = "290px";
+            document.getElementById("div1").style.left = "calc(90vw - 15rem)";
+            document.getElementById("div1").style.top = "calc(90vh - 15rem)";
+
+            document.getElementById("draggablediv1").style.left = "calc(90vw - 15rem)";
+            document.getElementById("draggablediv1").style.top = "calc(90vh - 15rem)";
+            document.getElementById("draggablediv1").style.color = "#FFFFFF";
+
+        }, 0);
     </script>
         
     </div>

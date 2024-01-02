@@ -42,7 +42,7 @@
 
 #switch2{
     font-size: 6vh; 
-    color: var(--LightGray); 
+    color: var(--LightGrayBTN); 
     left: 1.5vw; 
     top: 0px; 
     position:absolute;
@@ -50,7 +50,7 @@
 
 .clearAnswer{
     font-size: 6vh; 
-    color: var(--LightGray); 
+    color: var(--LightGrayBTN); 
     cursor: pointer; 
     position:absolute; 
     top:0px; 

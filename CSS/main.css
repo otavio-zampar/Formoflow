@@ -10,9 +10,8 @@ p{
 ::placeholder {
     color: var(--Black);
     opacity: 0.7; /* Firefox */
-  }
-  
-  ::-ms-input-placeholder { /* Edge 12 -18 */
+  }  
+::-ms-input-placeholder { /* Edge 12 -18 */
     color: var(--Black);
     opacity: 0.5;
   }

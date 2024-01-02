@@ -366,7 +366,6 @@ function createDiv(AA) {
     $('input[class="inputFormula"]').droppable({
         accept: '.arrow',
         drop: function() {
-            console.log(inputId.attr("InputPai"));
             if (String(inputId.attr("id")).includes("icon")) {
                 $(this).val(inputId.text()); // caso a seta venha de um div
                 if(inputId.attr("InputPai")){
@@ -443,11 +442,17 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
     ActualDiv.attr("exit", exit);
     var DraggableDiv = $('<div>').attr('id', 'draggable' + randomId).addClass('DraggableDiv');
     var minimize = $('<div>').addClass('minimize').html('&#128469');
-    {
     var CloseR = $('<div>').addClass('CloseR').html('&#10006');
-    }
     var tstDiv = $('<div>').addClass('tstDiv');
-    tstDiv.css("background-color", getGrayColor());
+    const grayC = getGrayColor();
+    const colorC = getColor();
+    tstDiv.attr("ActualColor", colorC);
+    tstDiv.attr("GrayColor", grayC);
+    if (!dark) {
+        tstDiv.css("background-color", grayC);
+    }else{
+        tstDiv.css("background-color", colorC);
+    }
     var ActualResizeHandle = $('<div>').addClass('resize-handle s ui-resizable-s'); // S
     var ActualResizeHandle2 = $('<div>').addClass('resize-handle e ui-resizable-e') // E
     var ActualResizeHandle3 = $('<div>').addClass('resize-handle w ui-resizable-w'); // W
@@ -474,17 +479,16 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
         var valor = "3vh + 30px";
         input.css("top", "calc("+valor+")");
         if (exit == 0) { // somente p textarea
-            input.css("height", "calc(100% - 6vh - 30px)");
-            input.css("max-height", "calc(100% - 6vh - 30px)");
+            input.css({
+                "height": "calc(100% - (6vh + 30px))",
+                "max-height": "calc(100% - (6vh + 30px))",
+                "padding": "1rem",
+                "font-size": "18px",
+                "font-weight": "bold"
+            });
         }else{
             input.css("height", "2.2rem");   
         }
-
-        input.keydown(function(event) {
-            if (event.which === 13) {
-                event.preventDefault();
-            }
-        });
 
         // add ao form
         form.append(label);
@@ -605,7 +609,7 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
     if (exit != 0) {
         var minHeight = "calc("+icon.css('top')+" + "+ icon.css('height') +" + 30px)";    
     }else{
-        var minHeight = "calc(10% + 30px)";
+        var minHeight = "calc(20% + 30px)";
     }
     if (ActualTop >= 9) {
         ActualTop = 1;

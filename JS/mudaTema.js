@@ -71,7 +71,7 @@ function mudaTema(dark) {
         document.documentElement.style.setProperty("--AccentColorBTN", "#B6B7CF");
         document.documentElement.style.setProperty("--LightGray", "#dddddd");
         document.documentElement.style.setProperty("--LightGrayBTN", "#dddddd");
-        document.documentElement.style.setProperty("--AlmostWhite", "#f0f0f0");
+        document.documentElement.style.setProperty("--AlmostWhite", "#AAAAAA");
         document.documentElement.style.setProperty("--WhiteFocus", "#fdfdfd");
         document.documentElement.style.setProperty("--White", "#ffffff");     
         document.documentElement.style.setProperty("--White2", "#ffffff");
