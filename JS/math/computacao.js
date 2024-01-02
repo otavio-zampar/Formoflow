@@ -9,35 +9,19 @@ function bitShiftZR(x, y){ // msm q multiplicar x por 2
 }
 
 function bitShiftSR(x, y){ // dropa o ultimo bit e duplica o bit a esquerda
-    if (reg.test(String(x)) || reg.test(String(y))) {
-        return parseInt(String(x), 2) >> parseInt(String(y), 2);  
-    }else{
-        return x >> y;
-    } 
+    return x >> y;
 }
 
 function and(x, y){
-    if (reg.test(String(x)) || reg.test(String(y))) {
-        return parseInt(String(x), 2) & parseInt(String(y), 2);  
-    }else{
-        return x & y;
-    }
+    return x & y;
 }
 
 function or(x, y){
-    if (reg.test(String(x)) || reg.test(String(y))) {
-        return parseInt(String(x), 2) | parseInt(String(y), 2);  
-    }else{
-        return x | y;
-    }
+    return x | y;
 }
 
 function xor(x, y){
-    if (reg.test(String(x)) || reg.test(String(y))) {
-        return parseInt(String(x), 2) ^ parseInt(String(y), 2);  
-    }else{
-        return x ^ y;
-    }
+    return x ^ y;
 }
 
 function not(x){
