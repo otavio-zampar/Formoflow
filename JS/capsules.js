@@ -118,7 +118,7 @@ function createDiv(AA) {
             "height": "30px",
             "padding": "2px",
             "color": "#FFFFFF"
-        }).addClass("nocopy");
+        }).addClass("noCopy");
         var form = $('<form>');
 
         for (let index = 0; index < inputForm; index++) {
@@ -461,7 +461,7 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
 
     {
         // cria o formulario
-        var nome = $('<p>').text(nomeForm).css("margin", "0px").addClass("nocopy");
+        var nome = $('<p>').text(nomeForm).css("margin", "0px").addClass("noCopy");
         nome.css("height", "30px");
         nome.css("padding", "2px");
         var form = $('<form>');
@@ -484,7 +484,8 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
                 "max-height": "calc(100% - (6vh + 30px))",
                 "padding": "1rem",
                 "font-size": "18px",
-                "font-weight": "bold"
+                "font-weight": "bold",
+                "min-height": "4.4rem"
             });
         }else{
             input.css("height", "2.2rem");   

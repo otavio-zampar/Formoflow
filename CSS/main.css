@@ -23,7 +23,6 @@ p{
     background-color: var(--AccentColor);
     z-index: 3;
 }
-
 .noCopy{
     user-select: none;
 }
@@ -95,7 +94,7 @@ div.sticky{
 #answer{
     color:var(--LightGrayBTN);
     background-color: var(--SecondAccentColorCalc);
-    caret-color: var(--LightGray);
+    caret-color: var(--LightGrayBTN);
     border-width: 0px;
     height: 10vh;
     width: 95%;

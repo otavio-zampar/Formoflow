@@ -72,9 +72,6 @@
     z-index: 9999; 
     display: none;
   }
-  .nocopy{
-    user-select: none;
-  }
   .tstDiv .icon {
     overflow-x: hidden;
     outline: var(--Black) solid min(1rem, 1vh);
@@ -117,6 +114,7 @@
     text-align: center;
     font-size: 1.3rem;
     color: var(--BaseColor);
+    user-select: none;
   } 
   .CloseR{
     position: absolute;
@@ -130,6 +128,7 @@
     text-align: center;
     font-size: 1.3rem;
     color: var(--BaseColor);
+    user-select: none;
   }
   
   .resize-handle {
