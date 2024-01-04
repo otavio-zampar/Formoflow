@@ -174,7 +174,7 @@ function hContrastModeCyan(){
     document.documentElement.style.setProperty("--WhiteBTN", "#FFF");
     document.documentElement.style.setProperty("--textColorWindow", "#0F1515");
 
-    document.getElementById("pTema").innerHTML = "Cyan";
+    document.getElementById("pTema").innerHTML = "CYAN";
 
     document.getElementById("ColPck").value = "#00FFFF";
     $("#ColPck").trigger("change");
@@ -208,7 +208,7 @@ function hContrastModeYellow(){
     document.documentElement.style.setProperty("--WhiteBTN", "#FFF");
     document.documentElement.style.setProperty("--textColorWindow", "#15150F");
 
-    document.getElementById("pTema").innerHTML = "Cyan";
+    document.getElementById("pTema").innerHTML = "YELLOW";
 
     document.getElementById("ColPck").value = "#FFFF00";
     $("#ColPck").trigger("change");
@@ -242,7 +242,7 @@ function hContrastModeMagenta(){
     document.documentElement.style.setProperty("--WhiteBTN", "#FFF");
     document.documentElement.style.setProperty("--textColorWindow", "#150F15");
 
-    document.getElementById("pTema").innerHTML = "Cyan";
+    document.getElementById("pTema").innerHTML = "MAGENTA";
 
     document.getElementById("ColPck").value = "#FF00FF";
     $("#ColPck").trigger("change");
