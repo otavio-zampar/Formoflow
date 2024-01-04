@@ -745,7 +745,7 @@ function uploadImg(selectedFile, naturalHeight, naturalWidth){
         tstDiv.css("background-color", "var(--White)");
 
 
-        var ActualResizeHandleS = $('<div>').addClass('resize-handle s ui-resizable-s').css('min-width', '320px'); // S
+        var ActualResizeHandleS = $('<div>').addClass('resize-handle s ui-resizable-s').css('min-width', '290px'); // S
         var ActualResizeHandleE = $('<div>').addClass('resize-handle e ui-resizable-e').css('min-height', '320px'); // E
         var ActualResizeHandleW = $('<div>').addClass('resize-handle w ui-resizable-w').css('min-height', '320px'); // W
         var ActualResizeHandleSE = $('<div>').addClass('resize-handle se ui-resizable-se'); // SE
@@ -779,11 +779,10 @@ function uploadImg(selectedFile, naturalHeight, naturalWidth){
                 'min-width': "320px",
                 width: '320px'
             });
-            ActualResizeHandleS.css("min-width", "320px");
             ActualResizeHandleE.css("height", 320*ar+"px");
             ActualResizeHandleW.css("height", 320*ar+"px");
-            ActualResizeHandleE.css("min-height", 320*ar+"px");
-            ActualResizeHandleW.css("min-height", 320*ar+"px");
+            // ActualResizeHandleE.css("min-height", 320*ar+"px");
+            // ActualResizeHandleW.css("min-height", 320*ar+"px");
             imgElement.css("min-height", 290*ar+"px");
             
         }else{
@@ -805,11 +804,8 @@ function uploadImg(selectedFile, naturalHeight, naturalWidth){
                 width: 290*ar+"px"
             });
             ActualResizeHandleS.css("width", 290*ar+"px");
-            ActualResizeHandleS.css("min-width", 290*ar+"px");
             imgElement.css("min-width", 290*ar+"px");
         }
-
-
         
 
 
