@@ -153,7 +153,6 @@
   .w {
     width: 5px;
     height: 320px;
-    cursor: w-resize;
     left: 0px;
   }
   .se {
@@ -161,12 +160,6 @@
     height: 5px;
     cursor: se-resize;
     right: 0px;
-  }
-  .sw {
-    width: 5px;
-    height: 5px;
-    cursor: sw-resize;
-    left: 0px;
   }
 
   .arrow{

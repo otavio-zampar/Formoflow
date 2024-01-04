@@ -103,13 +103,12 @@ function createDiv(AA) {
         tstDiv.css("background-color", colorC);
     }
     
-    var ActualResizeHandle = $('<div>').addClass('resize-handle s ui-resizable-s'); // S
-    var ActualResizeHandle2 = $('<div>').addClass('resize-handle e ui-resizable-e') // E
-    var ActualResizeHandle3 = $('<div>').addClass('resize-handle w ui-resizable-w'); //.css('z-index', '0px'); // W
+    var ActualResizeHandleS = $('<div>').addClass('resize-handle s ui-resizable-s'); // S
+    var ActualResizeHandleE = $('<div>').addClass('resize-handle e ui-resizable-e') // E
+    var ActualResizeHandleW = $('<div>').addClass('resize-handle w ui-resizable-w'); //.css('z-index', '0px'); // W
 
 
-    var ActualResizeHandle4 = $('<div>').addClass('resize-handle se ui-resizable-se'); // SE
-    var ActualResizeHandle5 = $('<div>').addClass('resize-handle sw ui-resizable-sw'); // SW
+    var ActualResizeHandleSE = $('<div>').addClass('resize-handle se ui-resizable-se'); // SE
 
     {
         // cria o formulario
@@ -262,19 +261,16 @@ function createDiv(AA) {
     DraggableDiv.append(minimize);
     DraggableDiv.append(CloseR);
     ActualDiv.append(tstDiv);
-    ActualDiv.append(ActualResizeHandle);
-    ActualDiv.append(ActualResizeHandle2);
-    ActualDiv.append(ActualResizeHandle3);
-    ActualDiv.append(ActualResizeHandle4);
-    ActualDiv.append(ActualResizeHandle5);
+    ActualDiv.append(ActualResizeHandleS);
+    ActualDiv.append(ActualResizeHandleE);
+    ActualDiv.append(ActualResizeHandleW);
+    ActualDiv.append(ActualResizeHandleSE);
 
     ActualDiv.resizable({
         handles: {
             s: ".s",
             e: ".e",
-            w: ".w",
             se: ".se",
-            sw: ".sw",
         },
         minWidth: 300,
 
@@ -285,9 +281,9 @@ function createDiv(AA) {
 
             DraggableDiv.css('width', actualWidth);
             DraggableDiv.css('left', ui.originalLeft);
-            ActualResizeHandle.css('width', actualWidth);
-            ActualResizeHandle2.css('height', actualHeight);
-            ActualResizeHandle3.css('height', actualHeight);
+            ActualResizeHandleS.css('width', actualWidth);
+            ActualResizeHandleE.css('height', actualHeight);
+            ActualResizeHandleW.css('height', actualHeight);
             tstDiv.css('width', actualWidth);
             tstDiv.css('height', actualHeight);
             
@@ -323,11 +319,11 @@ function createDiv(AA) {
         left: "calc(5vw + "+ 50 * ActualTop +"px + "+ 50 * leftOffset +"px)",
         top: "calc(20vh + "+ 50 * ActualTop +"px + "+ 30 * leftOffset +"px)"
     });
-    ActualResizeHandle2.css({
+    ActualResizeHandleE.css({
         'min-height': minHeight,
         'height': minHeight
     });
-    ActualResizeHandle3.css({
+    ActualResizeHandleW.css({
         'min-height': minHeight,
         'height': minHeight
     });
@@ -453,11 +449,10 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
     }else{
         tstDiv.css("background-color", colorC);
     }
-    var ActualResizeHandle = $('<div>').addClass('resize-handle s ui-resizable-s'); // S
-    var ActualResizeHandle2 = $('<div>').addClass('resize-handle e ui-resizable-e') // E
-    var ActualResizeHandle3 = $('<div>').addClass('resize-handle w ui-resizable-w'); // W
-    var ActualResizeHandle4 = $('<div>').addClass('resize-handle se ui-resizable-se'); // SE
-    var ActualResizeHandle5 = $('<div>').addClass('resize-handle sw ui-resizable-sw'); // SW
+    var ActualResizeHandleS = $('<div>').addClass('resize-handle s ui-resizable-s'); // S
+    var ActualResizeHandleE = $('<div>').addClass('resize-handle e ui-resizable-e') // E
+    var ActualResizeHandleW = $('<div>').addClass('resize-handle w ui-resizable-w'); // W
+    var ActualResizeHandleSE = $('<div>').addClass('resize-handle se ui-resizable-se'); // SE
 
     {
         // cria o formulario
@@ -567,19 +562,16 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
     DraggableDiv.append(minimize);
     DraggableDiv.append(CloseR);
     ActualDiv.append(tstDiv);
-    ActualDiv.append(ActualResizeHandle);
-    ActualDiv.append(ActualResizeHandle2);
-    ActualDiv.append(ActualResizeHandle3);
-    ActualDiv.append(ActualResizeHandle4);
-    ActualDiv.append(ActualResizeHandle5);
+    ActualDiv.append(ActualResizeHandleS);
+    ActualDiv.append(ActualResizeHandleE);
+    ActualDiv.append(ActualResizeHandleW);
+    ActualDiv.append(ActualResizeHandleSE);
 
     ActualDiv.resizable({
         handles: {
             s: ".s",
             e: ".e",
-            w: ".w",
             se: ".se",
-            sw: ".sw",
         },
         minWidth: 300,
 
@@ -590,9 +582,9 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
 
             DraggableDiv.css('width', actualWidth);
             DraggableDiv.css('left', ui.originalLeft);
-            ActualResizeHandle.css('width', actualWidth);
-            ActualResizeHandle2.css('height', actualHeight);
-            ActualResizeHandle3.css('height', actualHeight);
+            ActualResizeHandleS.css('width', actualWidth);
+            ActualResizeHandleE.css('height', actualHeight);
+            ActualResizeHandleW.css('height', actualHeight);
             tstDiv.css('width', actualWidth);
             tstDiv.css('height', actualHeight);
             input.css("max-height", "calc("+tstDiv.css("height")+" - 20% - 30px)");
@@ -634,11 +626,11 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
         left: "calc(5vw + "+ 50 * ActualTop +"px + "+ 50 * leftOffset +"px)",
         top: "calc(20vh + "+ 50 * ActualTop +"px + "+ 30 * leftOffset +"px)"
     });
-    ActualResizeHandle2.css({
+    ActualResizeHandleE.css({
         'min-height': minHeight,
         'height': minHeight
     });
-    ActualResizeHandle3.css({
+    ActualResizeHandleW.css({
         'min-height': minHeight,
         'height': minHeight
     });
@@ -750,14 +742,13 @@ function uploadImg(selectedFile, naturalHeight, naturalWidth){
         var tstDiv = $('<div>').addClass('tstDiv');
         tstDiv.css("padding", "0px");
         tstDiv.css("padding-top", "30px");
-        tstDiv.css("background-color", getGrayColor());
+        tstDiv.css("background-color", "var(--White)");
 
 
-        var ActualResizeHandle = $('<div>').addClass('resize-handle s ui-resizable-s').css('min-width', '320px'); // S
-        var ActualResizeHandle2 = $('<div>').addClass('resize-handle e ui-resizable-e').css('min-height', '320px'); // E
-        var ActualResizeHandle3 = $('<div>').addClass('resize-handle w ui-resizable-w').css('min-height', '320px'); // W
-        var ActualResizeHandle4 = $('<div>').addClass('resize-handle se ui-resizable-se'); // SE
-        var ActualResizeHandle5 = $('<div>').addClass('resize-handle sw ui-resizable-sw'); // SW
+        var ActualResizeHandleS = $('<div>').addClass('resize-handle s ui-resizable-s').css('min-width', '320px'); // S
+        var ActualResizeHandleE = $('<div>').addClass('resize-handle e ui-resizable-e').css('min-height', '320px'); // E
+        var ActualResizeHandleW = $('<div>').addClass('resize-handle w ui-resizable-w').css('min-height', '320px'); // W
+        var ActualResizeHandleSE = $('<div>').addClass('resize-handle se ui-resizable-se'); // SE
 
         var label = $('<label>').attr({
             "for": "previewImage",
@@ -788,11 +779,11 @@ function uploadImg(selectedFile, naturalHeight, naturalWidth){
                 'min-width': "320px",
                 width: '320px'
             });
-            ActualResizeHandle.css("min-width", "320px");
-            ActualResizeHandle2.css("height", 320*ar+"px");
-            ActualResizeHandle3.css("height", 320*ar+"px");
-            ActualResizeHandle2.css("min-height", 320*ar+"px");
-            ActualResizeHandle3.css("min-height", 320*ar+"px");
+            ActualResizeHandleS.css("min-width", "320px");
+            ActualResizeHandleE.css("height", 320*ar+"px");
+            ActualResizeHandleW.css("height", 320*ar+"px");
+            ActualResizeHandleE.css("min-height", 320*ar+"px");
+            ActualResizeHandleW.css("min-height", 320*ar+"px");
             imgElement.css("min-height", 290*ar+"px");
             
         }else{
@@ -813,8 +804,8 @@ function uploadImg(selectedFile, naturalHeight, naturalWidth){
                 'min-width': 290*ar+"px",
                 width: 290*ar+"px"
             });
-            ActualResizeHandle.css("width", 290*ar+"px");
-            ActualResizeHandle.css("min-width", 290*ar+"px");
+            ActualResizeHandleS.css("width", 290*ar+"px");
+            ActualResizeHandleS.css("min-width", 290*ar+"px");
             imgElement.css("min-width", 290*ar+"px");
         }
 
@@ -829,20 +820,17 @@ function uploadImg(selectedFile, naturalHeight, naturalWidth){
         tstDiv.append(label);
         tstDiv.append(imgElement);
         ActualDiv.append(tstDiv);
-        ActualDiv.append(ActualResizeHandle);
-        ActualDiv.append(ActualResizeHandle2);
-        ActualDiv.append(ActualResizeHandle3);
+        ActualDiv.append(ActualResizeHandleS);
+        ActualDiv.append(ActualResizeHandleE);
+        ActualDiv.append(ActualResizeHandleW);
 
-        ActualDiv.append(ActualResizeHandle4);
-        ActualDiv.append(ActualResizeHandle5);
+        ActualDiv.append(ActualResizeHandleSE);
 
         ActualDiv.resizable({
             handles: {
                 s: ".s",
                 e: ".e",
-                w: ".w",
                 se: ".se",
-                sw: ".sw",
             },
             minHeight: 50,
             minWidth: 50,
@@ -853,9 +841,9 @@ function uploadImg(selectedFile, naturalHeight, naturalWidth){
 
                 DraggableDiv.css('width', actualWidth);
                 DraggableDiv.css('left', ui.originalLeft);
-                ActualResizeHandle.css('width', actualWidth);
-                ActualResizeHandle2.css('height', actualHeight);
-                ActualResizeHandle3.css('height', actualHeight);
+                ActualResizeHandleS.css('width', actualWidth);
+                ActualResizeHandleE.css('height', actualHeight);
+                ActualResizeHandleW.css('height', actualHeight);
                 tstDiv.css('width', actualWidth);
                 tstDiv.css('height', actualHeight);
             }
