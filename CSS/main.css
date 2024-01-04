@@ -97,6 +97,7 @@ div.sticky{
     caret-color: var(--LightGrayBTN);
     border-width: 0px;
     height: 10vh;
+    padding-left: 10px;
     width: 95%;
     top: 10vh;
     left: 1vw;
@@ -109,7 +110,7 @@ div.sticky{
     border-width: 0px;
     height: 7vh;
     width: 92%;
-    top: 20vh;
+    top: 21vh;
     left: 2vw;
     font-size: max(1rem, 6vh);
     position: absolute;

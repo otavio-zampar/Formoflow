@@ -20,10 +20,12 @@
     --AlmostWhite: #888888;              /* plano de fundo atras do bkgd, borda da barra de pesquisa */
     --WhiteFocus: #fdfdfd;               /* focus na barra de pesquisa */
     --White: #ffffff;                    /* background */
+    --WhiteDraw: #ffffff;                    /* background */
     --White2: #ffffff;                    /* background */
     --WhiteBTN: #ffffff;                    /* background */
     --AlmostBlack: #fdfdfd;
     --SecondAccentColorCalc: #605869;
+    --textColorWindow: #FFFFFF;
 }
 
     /* 000000

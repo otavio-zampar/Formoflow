@@ -104,7 +104,8 @@ window.onload = function () {
     
 }
 
-window.onresize = function(){
+window.addEventListener('resize', function(){
+
     vw = document.documentElement.clientWidth / 100;
     vh = document.documentElement.clientHeight / 100;
     var ctx = myCanvas.getContext("2d");
@@ -115,7 +116,7 @@ window.onresize = function(){
     document.getElementById("mouseFollower").style.height = ctx.lineWidth + "px";
     document.getElementById("mouseFollower").style.width = ctx.lineWidth + "px";
 
-};
+});
 
 function clearCanvas(){
     var ctx = myCanvas.getContext("2d");

@@ -193,7 +193,7 @@
 #myCanvas{
     /* height: 90vh;
     width: 55vw; */
-    background-color:var(--White);
+    background-color:var(--WhiteDraw);
     margin-left: 0px;
     border-radius: 1rem;
     position: absolute;
@@ -336,7 +336,7 @@
     height: 2rem; 
     width:2rem; 
     top: calc(5vh + 0.5rem); 
-    right: calc(2vw - 1rem); 
+    left: 67vw; 
     cursor: pointer; 
     float: right; 
     position: absolute;

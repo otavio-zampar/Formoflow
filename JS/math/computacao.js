@@ -1,4 +1,4 @@
-var reg = /^0[box]$/i;
+var reg = /^0[box]/;
 
 function bitShiftZL(x, y){ // msm q multiplicar x por 2
     return  x << y;
@@ -33,9 +33,10 @@ function binario(x){
 }
 
 function basePraDecimal(x, base){
-    if (reg.test(String(x))) {
-        console.log(parseInt(x));
-    }    
+    console.log(reg.test(String(x)));
+    // if (){
+    //     console.log(parseInt(x));
+    // }    
     return parseInt(x, base);
 
 }

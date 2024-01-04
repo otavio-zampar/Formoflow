@@ -1,18 +1,23 @@
 function mudaTema(dark) {
     switch (dark) {
         case 1:
-            console.log("Light");
             lightMode();
             break;
 
         case 2:
-            console.log("Dark");
             darkMode();
             break;
 
         case 3:
-            console.log("Red");
-            redMode();
+            hContrastModeCyan();
+            break;
+
+        case 4:
+            hContrastModeYellow();
+            break;
+
+        case 5:
+            hContrastModeMagenta();
             break;
     
         default:
@@ -23,67 +28,12 @@ function mudaTema(dark) {
 
 function loopDark(dark){
 
-if (dark != 3) { // caso apareça mais cases de cores tem q alterar esse negocio
+if (dark != 5) { // caso apareça mais cases de cores tem q alterar esse negocio
     dark++;
-    console.log(dark);
 } else {
     dark = 1;
-    console.log(dark);
 }
     return dark;
-}
-
-function darkMode(){
-    document.documentElement.style.setProperty("--Black", "#FFFFFF");
-    document.documentElement.style.setProperty("--BlackFocus", "#797979");
-    document.documentElement.style.setProperty("--RealDarkBlue", "#696969");
-    document.documentElement.style.setProperty("--RealDarkBlueCalc", "#0f0f0f");
-    document.documentElement.style.setProperty("--RealDarkBlueBTN", "#f0f0f0");
-    document.documentElement.style.setProperty("--AlmostTransparent", "#0000001f");
-    document.documentElement.style.setProperty("--BaseColor", "#000000");
-    document.documentElement.style.setProperty("--BaseColorBTN", "#121212");
-    document.documentElement.style.setProperty("--AzulClaroBkg", "#FFFFFF33");
-    document.documentElement.style.setProperty("--Red", "#FFFFFF");
-    document.documentElement.style.setProperty("--SecondAccentColor", "#464646");
-    document.documentElement.style.setProperty("--SecondAccentColorCalc", "#232323");
-    document.documentElement.style.setProperty("--SecondAccentColorFlags", "#212121");
-    document.documentElement.style.setProperty("--AccentColor", "#121212");
-    document.documentElement.style.setProperty("--AccentColorExtra", "#1f1f1f");
-    document.documentElement.style.setProperty("--AccentColorPick", "#212121");
-    document.documentElement.style.setProperty("--AccentColorBTN", "#f0f0f0");
-    document.documentElement.style.setProperty("--LightGray", "#232323");
-    document.documentElement.style.setProperty("--LightGrayBTN", "#f0f0f0");
-    document.documentElement.style.setProperty("--AlmostWhite", "#111111");
-    document.documentElement.style.setProperty("--WhiteFocus", "#282828");
-    document.documentElement.style.setProperty("--White", "#232323");
-    document.documentElement.style.setProperty("--White2", "#212121");
-    document.documentElement.style.setProperty("--WhiteBTN", "#f0f0f0");
-    
-    var github = document.getElementById("github");
-    github.firstElementChild.style.display = "none";
-    github.lastElementChild.style.display = "initial";
-
-    document.getElementById("moon").style.display = "initial";
-    document.getElementById("sun").style.display = "none";
-    document.getElementById("pTema").innerHTML = "DARK";
-
-    document.getElementById("ColPck").value = "#FFFFFF";
-    $("#ColPck").trigger("change");
-
-    $(".tstDiv").each(function () {
-        this.style.backgroundColor = $(this).attr("graycolor");
-    });
-
-    $(".tstDiv :input").each(function () {
-        if ($(this).attr("inputpai")) {
-            var inputPai = "#" + $(this).attr("inputpai");
-            if ($(this).attr("inputpai").slice(0, 4) == "icon") {
-                $(this).css("outline-color", $(inputPai).parent().css("background-color"));
-            }else{
-                $(this).css("outline-color", $(inputPai).parent().parent().css("background-color"));
-            }
-        }
-    });
 }
 
 function lightMode(){
@@ -108,9 +58,11 @@ function lightMode(){
     document.documentElement.style.setProperty("--LightGrayBTN", "#dddddd");
     document.documentElement.style.setProperty("--AlmostWhite", "#AAAAAA");
     document.documentElement.style.setProperty("--WhiteFocus", "#fdfdfd");
-    document.documentElement.style.setProperty("--White", "#ffffff");     
+    document.documentElement.style.setProperty("--White", "#ffffff");  
+    document.documentElement.style.setProperty("--WhiteDraw", "#ffffff");   
     document.documentElement.style.setProperty("--White2", "#ffffff");
     document.documentElement.style.setProperty("--WhiteBTN", "#ffffff");
+    document.documentElement.style.setProperty("--textColorWindow", "#FFFFFF");
 
     var github = document.getElementById("github");
     github.firstElementChild.style.display = "initial";
@@ -139,32 +91,161 @@ function lightMode(){
     });
 }
 
-function redMode(){
-    document.documentElement.style.setProperty("--Black", "#FF0000");
-    document.documentElement.style.setProperty("--BlackFocus", "#FF7979");
-    document.documentElement.style.setProperty("--RealDarkBlue", "#FF6969");
-    document.documentElement.style.setProperty("--RealDarkBlueCalc", "#FF0F0F");
-    document.documentElement.style.setProperty("--RealDarkBlueBTN", "#FFF0F0");
-    document.documentElement.style.setProperty("--AlmostTransparent", "#FF00001F");
-    document.documentElement.style.setProperty("--BaseColor", "#FF0000");
-    document.documentElement.style.setProperty("--BaseColorBTN", "#FF1212");
-    document.documentElement.style.setProperty("--AzulClaroBkg", "#FF000033");
-    document.documentElement.style.setProperty("--Red", "#FF0000");
-    document.documentElement.style.setProperty("--SecondAccentColor", "#FF4646");
-    document.documentElement.style.setProperty("--SecondAccentColorCalc", "#FF2323");
-    document.documentElement.style.setProperty("--SecondAccentColorFlags", "#FF2121");
-    document.documentElement.style.setProperty("--AccentColor", "#FF1212");
-    document.documentElement.style.setProperty("--AccentColorExtra", "#FF1F1F");
-    document.documentElement.style.setProperty("--AccentColorPick", "#FF2121");
-    document.documentElement.style.setProperty("--AccentColorBTN", "#FFF0F0");
-    document.documentElement.style.setProperty("--LightGray", "#FF2323");
-    document.documentElement.style.setProperty("--LightGrayBTN", "#FFF0F0");
-    document.documentElement.style.setProperty("--AlmostWhite", "#FF1111");
-    document.documentElement.style.setProperty("--WhiteFocus", "#FF2828");
-    document.documentElement.style.setProperty("--White", "#FF2323");
-    document.documentElement.style.setProperty("--White2", "#FF2121");
-    document.documentElement.style.setProperty("--WhiteBTN", "#FFF0F0");
+function darkMode(){
+    document.documentElement.style.setProperty("--Black", "#FFFFFF");
+    document.documentElement.style.setProperty("--BlackFocus", "#797979");
+    document.documentElement.style.setProperty("--RealDarkBlue", "#696969");
+    document.documentElement.style.setProperty("--RealDarkBlueCalc", "#0f0f0f");
+    document.documentElement.style.setProperty("--RealDarkBlueBTN", "#f0f0f0");
+    document.documentElement.style.setProperty("--AlmostTransparent", "#0000001f");
+    document.documentElement.style.setProperty("--BaseColor", "#000000");
+    document.documentElement.style.setProperty("--BaseColorBTN", "#121212");
+    document.documentElement.style.setProperty("--AzulClaroBkg", "#FFFFFF33");
+    document.documentElement.style.setProperty("--Red", "#FFFFFF");
+    document.documentElement.style.setProperty("--SecondAccentColor", "#464646");
+    document.documentElement.style.setProperty("--SecondAccentColorCalc", "#232323");
+    document.documentElement.style.setProperty("--SecondAccentColorFlags", "#212121");
+    document.documentElement.style.setProperty("--AccentColor", "#121212");
+    document.documentElement.style.setProperty("--AccentColorExtra", "#1f1f1f");
+    document.documentElement.style.setProperty("--AccentColorPick", "#212121");
+    document.documentElement.style.setProperty("--AccentColorBTN", "#f0f0f0");
+    document.documentElement.style.setProperty("--LightGray", "#232323");
+    document.documentElement.style.setProperty("--LightGrayBTN", "#f0f0f0");
+    document.documentElement.style.setProperty("--AlmostWhite", "#111111");
+    document.documentElement.style.setProperty("--WhiteFocus", "#282828");
+    document.documentElement.style.setProperty("--White", "#232323");
+    document.documentElement.style.setProperty("--WhiteDraw", "#232323");
+    document.documentElement.style.setProperty("--White2", "#212121");
+    document.documentElement.style.setProperty("--WhiteBTN", "#f0f0f0");
+    document.documentElement.style.setProperty("--textColorWindow", "#FFFFFF");
+    
+    var github = document.getElementById("github");
+    github.firstElementChild.style.display = "none";
+    github.lastElementChild.style.display = "initial";
 
+    document.getElementById("moon").style.display = "initial";
+    document.getElementById("sun").style.display = "none";
+    document.getElementById("pTema").innerHTML = "DARK";
+
+    document.getElementById("ColPck").value = "#FFFFFF";
+    $("#ColPck").trigger("change");
+
+    $(".tstDiv").each(function () {
+        this.style.backgroundColor = $(this).attr("graycolor");
+    });
+
+    $(".tstDiv :input").each(function () {
+        if ($(this).attr("inputpai")) {
+            var inputPai = "#" + $(this).attr("inputpai");
+            if ($(this).attr("inputpai").slice(0, 4) == "icon") {
+                $(this).css("outline-color", $(inputPai).parent().css("background-color"));
+            }else{
+                $(this).css("outline-color", $(inputPai).parent().parent().css("background-color"));
+            }
+        }
+    });
+}
+
+function hContrastModeCyan(){
+    document.documentElement.style.setProperty("--Black", "#0FF");
+    document.documentElement.style.setProperty("--BlackFocus", "#EEE");
+    document.documentElement.style.setProperty("--RealDarkBlue", "#FFF");
+    document.documentElement.style.setProperty("--RealDarkBlueCalc", "#000");
+    document.documentElement.style.setProperty("--RealDarkBlueBTN", "#0FF");
+    document.documentElement.style.setProperty("--AlmostTransparent", "#0000001f");
+    document.documentElement.style.setProperty("--BaseColor", "#0FF");
+    document.documentElement.style.setProperty("--BaseColorBTN", "#000");
+    document.documentElement.style.setProperty("--AzulClaroBkg", "#FFFFFF33");
+    document.documentElement.style.setProperty("--Red", "#FFF");
+    document.documentElement.style.setProperty("--SecondAccentColor", "#000");
+    document.documentElement.style.setProperty("--SecondAccentColorCalc", "#000");
+    document.documentElement.style.setProperty("--SecondAccentColorFlags", "#000");
+    document.documentElement.style.setProperty("--AccentColor", "#000");
+    document.documentElement.style.setProperty("--AccentColorExtra", "#0F1515");
+    document.documentElement.style.setProperty("--AccentColorPick", "#000");
+    document.documentElement.style.setProperty("--AccentColorBTN", "#0FF");
+    document.documentElement.style.setProperty("--LightGray", "#000");
+    document.documentElement.style.setProperty("--LightGrayBTN", "#0FF");
+    document.documentElement.style.setProperty("--AlmostWhite", "#000");
+    document.documentElement.style.setProperty("--WhiteFocus", "#000");
+    document.documentElement.style.setProperty("--White", "#000");
+    document.documentElement.style.setProperty("--WhiteDraw", "#0F1515");
+    document.documentElement.style.setProperty("--White2", "#000");
+    document.documentElement.style.setProperty("--WhiteBTN", "#FFF");
+    document.documentElement.style.setProperty("--textColorWindow", "#0F1515");
+
+    document.getElementById("pTema").innerHTML = "Cyan";
+
+    document.getElementById("ColPck").value = "#00FFFF";
+    $("#ColPck").trigger("change");
+}
+
+function hContrastModeYellow(){
+    document.documentElement.style.setProperty("--Black", "#FF0");
+    document.documentElement.style.setProperty("--BlackFocus", "#EEE");
+    document.documentElement.style.setProperty("--RealDarkBlue", "#FFF");
+    document.documentElement.style.setProperty("--RealDarkBlueCalc", "#000");
+    document.documentElement.style.setProperty("--RealDarkBlueBTN", "#FF0");
+    document.documentElement.style.setProperty("--AlmostTransparent", "#0000001f");
+    document.documentElement.style.setProperty("--BaseColor", "#FF0");
+    document.documentElement.style.setProperty("--BaseColorBTN", "#000");
+    document.documentElement.style.setProperty("--AzulClaroBkg", "#FFFFFF33");
+    document.documentElement.style.setProperty("--Red", "#FFF");
+    document.documentElement.style.setProperty("--SecondAccentColor", "#000");
+    document.documentElement.style.setProperty("--SecondAccentColorCalc", "#000");
+    document.documentElement.style.setProperty("--SecondAccentColorFlags", "#000");
+    document.documentElement.style.setProperty("--AccentColor", "#000");
+    document.documentElement.style.setProperty("--AccentColorExtra", "#15150F");
+    document.documentElement.style.setProperty("--AccentColorPick", "#000");
+    document.documentElement.style.setProperty("--AccentColorBTN", "#FF0");
+    document.documentElement.style.setProperty("--LightGray", "#000");
+    document.documentElement.style.setProperty("--LightGrayBTN", "#FF0");
+    document.documentElement.style.setProperty("--AlmostWhite", "#000");
+    document.documentElement.style.setProperty("--WhiteFocus", "#000");
+    document.documentElement.style.setProperty("--White", "#000");
+    document.documentElement.style.setProperty("--WhiteDraw", "#15150F");
+    document.documentElement.style.setProperty("--White2", "#000");
+    document.documentElement.style.setProperty("--WhiteBTN", "#FFF");
+    document.documentElement.style.setProperty("--textColorWindow", "#15150F");
+
+    document.getElementById("pTema").innerHTML = "Cyan";
+
+    document.getElementById("ColPck").value = "#FFFF00";
+    $("#ColPck").trigger("change");
+}
+
+function hContrastModeMagenta(){
+    document.documentElement.style.setProperty("--Black", "#F0F");
+    document.documentElement.style.setProperty("--BlackFocus", "#EEE");
+    document.documentElement.style.setProperty("--RealDarkBlue", "#FFF");
+    document.documentElement.style.setProperty("--RealDarkBlueCalc", "#000");
+    document.documentElement.style.setProperty("--RealDarkBlueBTN", "#F0F");
+    document.documentElement.style.setProperty("--AlmostTransparent", "#0000001f");
+    document.documentElement.style.setProperty("--BaseColor", "#F0F");
+    document.documentElement.style.setProperty("--BaseColorBTN", "#000");
+    document.documentElement.style.setProperty("--AzulClaroBkg", "#FFFFFF33");
+    document.documentElement.style.setProperty("--Red", "#FFF");
+    document.documentElement.style.setProperty("--SecondAccentColor", "#000");
+    document.documentElement.style.setProperty("--SecondAccentColorCalc", "#000");
+    document.documentElement.style.setProperty("--SecondAccentColorFlags", "#000");
+    document.documentElement.style.setProperty("--AccentColor", "#000");
+    document.documentElement.style.setProperty("--AccentColorExtra", "#150F15");
+    document.documentElement.style.setProperty("--AccentColorPick", "#000");
+    document.documentElement.style.setProperty("--AccentColorBTN", "#F0F");
+    document.documentElement.style.setProperty("--LightGray", "#000");
+    document.documentElement.style.setProperty("--LightGrayBTN", "#F0F");
+    document.documentElement.style.setProperty("--AlmostWhite", "#000");
+    document.documentElement.style.setProperty("--WhiteFocus", "#000");
+    document.documentElement.style.setProperty("--White", "#000");
+    document.documentElement.style.setProperty("--WhiteDraw", "#150F15");
+    document.documentElement.style.setProperty("--White2", "#000");
+    document.documentElement.style.setProperty("--WhiteBTN", "#FFF");
+    document.documentElement.style.setProperty("--textColorWindow", "#150F15");
+
+    document.getElementById("pTema").innerHTML = "Cyan";
+
+    document.getElementById("ColPck").value = "#FF00FF";
+    $("#ColPck").trigger("change");
 }
 
 function abreLista(abertoLista){
@@ -192,4 +273,36 @@ function abreLista(abertoLista){
     }
 
 
+}
+
+// MEMES
+function redMode(){
+    document.documentElement.style.setProperty("--Black", "#FFC0CB");
+    document.documentElement.style.setProperty("--BlackFocus", "#FF737D");
+    document.documentElement.style.setProperty("--RealDarkBlue", "#FF4D4D");
+    document.documentElement.style.setProperty("--RealDarkBlueCalc", "#FF1A1A");
+    document.documentElement.style.setProperty("--RealDarkBlueBTN", "#FF8080");
+    document.documentElement.style.setProperty("--AlmostTransparent", "#FF00001F");
+    document.documentElement.style.setProperty("--BaseColor", "#FF0000");
+    document.documentElement.style.setProperty("--BaseColorBTN", "#990000");
+    document.documentElement.style.setProperty("--AzulClaroBkg", "#FFC0CB33");
+    document.documentElement.style.setProperty("--Red", "#FFC0CB");
+    document.documentElement.style.setProperty("--SecondAccentColor", "#FF8C8C");
+    document.documentElement.style.setProperty("--SecondAccentColorCalc", "#FF5757");
+    document.documentElement.style.setProperty("--SecondAccentColorFlags", "#FF5252");
+    document.documentElement.style.setProperty("--AccentColor", "#990000");
+    document.documentElement.style.setProperty("--AccentColorExtra", "#800000");
+    document.documentElement.style.setProperty("--AccentColorPick", "#FF5252");
+    document.documentElement.style.setProperty("--AccentColorBTN", "#FF8080");
+    document.documentElement.style.setProperty("--LightGray", "#575757");
+    document.documentElement.style.setProperty("--LightGrayBTN", "#FF8080");
+    document.documentElement.style.setProperty("--AlmostWhite", "#525252");
+    document.documentElement.style.setProperty("--WhiteFocus", "#737373");
+    document.documentElement.style.setProperty("--White", "#575757");
+    document.documentElement.style.setProperty("--WhiteDraw", "#575757");
+    document.documentElement.style.setProperty("--White2", "#525252");
+    document.documentElement.style.setProperty("--WhiteBTN", "#FF8080");
+
+
+    document.getElementById("pTema").innerHTML = "RED";
 }

@@ -97,7 +97,7 @@ function createDiv(AA) {
     const colorC = getColor();
     tstDiv.attr("ActualColor", colorC);
     tstDiv.attr("GrayColor", grayC);
-    if (dark == 2) { // se for modo dark
+    if (dark != 1) { // se for modo dark
         tstDiv.css("background-color", grayC);
     }else{
         tstDiv.css("background-color", colorC);
@@ -116,7 +116,8 @@ function createDiv(AA) {
             "margin": "0px",
             "height": "30px",
             "padding": "2px",
-            "color": "#FFFFFF"
+            "font-weight": "bold",
+            "color": "var(--textColorWindow)"
         }).addClass("noCopy");
         var form = $('<form>');
 
@@ -310,6 +311,8 @@ function createDiv(AA) {
     });
     
     tstDiv.css('min-height', minHeight);
+    tstDiv.css('height', minHeight);
+
     if (ActualTop >= 9) {
         ActualTop = 1;
         leftOffset++;
@@ -444,7 +447,7 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
     const colorC = getColor();
     tstDiv.attr("ActualColor", colorC);
     tstDiv.attr("GrayColor", grayC);
-    if (dark == 2) { // se for modo dark
+    if (dark != 1) { // se for modo dark
         tstDiv.css("background-color", grayC);
     }else{
         tstDiv.css("background-color", colorC);
@@ -881,8 +884,7 @@ function uploadImg(selectedFile, naturalHeight, naturalWidth){
     }
 }
 
-
-window.onresize = function(){
+window.addEventListener('resize', function(){
     $(".tstDiv > .arrow").each(function () {
         linhaId = this.id.replace("seta", "linha");
         $(this).css({
@@ -890,7 +892,7 @@ window.onresize = function(){
             "left": ""
         });
     });
-}
+});
 
 $(document).mousedown(function (){
     b = 200; // ACABA A PORCARIA DO BUG GRAÇADEUS

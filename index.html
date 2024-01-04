@@ -70,7 +70,7 @@
         var bringContato = false;
         var abertoLista = false;
         
-        var dark = 1; // 1 = tema claro; 2 = tema escuro;
+        var dark = 1; // 1 = tema claro; 2 = tema escuro; 3 = tema vermelho e preto;
         
     </script>
 
@@ -306,7 +306,8 @@
 
             document.getElementById("draggablediv1").style.left = "calc(90vw - 15rem)";
             document.getElementById("draggablediv1").style.top = "calc(90vh - 15rem)";
-            document.getElementById("draggablediv1").style.color = "#FFFFFF";
+            document.getElementById("draggablediv1").style.color = "var(--textColorWindow)";
+            document.getElementById("draggablediv1").style.fontWeight = "bold";
 
         }, 0);
     </script>
