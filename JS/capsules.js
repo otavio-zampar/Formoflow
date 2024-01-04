@@ -742,8 +742,9 @@ function uploadImg(selectedFile, naturalHeight, naturalWidth){
         var tstDiv = $('<div>').addClass('tstDiv');
         tstDiv.css("padding", "0px");
         tstDiv.css("padding-top", "30px");
-        tstDiv.css("background-color", "var(--White)");
-
+        tstDiv.css("background-color", document.documentElement.style.getPropertyValue("--White")); 
+        // basicamente eu estou pegando o valor da propriedade no momento q eu crio a janela, ao invés de pegar a propriedade
+        // isso é util pq jogar diretamente como a variável deixaria o texto ilegível ao mudar o tema
 
         var ActualResizeHandleS = $('<div>').addClass('resize-handle s ui-resizable-s').css('min-width', '290px'); // S
         var ActualResizeHandleE = $('<div>').addClass('resize-handle e ui-resizable-e').css('min-height', '320px'); // E
