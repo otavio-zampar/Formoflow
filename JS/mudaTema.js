@@ -1,20 +1,36 @@
 function mudaTema(dark) {
+    switch (dark) {
+        case 1:
+            console.log("Light");
+            lightMode();
+            break;
 
-    // switch (dark) {
-    //     case 1:
-            
-    //         break;
+        case 2:
+            console.log("Dark");
+            darkMode();
+            break;
+
+        case 3:
+            console.log("Red");
+            redMode();
+            break;
     
-    //     default:
-
-    //         break;
-    // }
-
-    if(dark){
-        darkMode();
-    }else{
-        lightMode();
+        default:
+            lightMode();
+            break;
     }
+}
+
+function loopDark(dark){
+
+if (dark != 3) { // caso apareça mais cases de cores tem q alterar esse negocio
+    dark++;
+    console.log(dark);
+} else {
+    dark = 1;
+    console.log(dark);
+}
+    return dark;
 }
 
 function darkMode(){
@@ -121,6 +137,34 @@ function lightMode(){
             }
         }
     });
+}
+
+function redMode(){
+    document.documentElement.style.setProperty("--Black", "#FF0000");
+    document.documentElement.style.setProperty("--BlackFocus", "#FF7979");
+    document.documentElement.style.setProperty("--RealDarkBlue", "#FF6969");
+    document.documentElement.style.setProperty("--RealDarkBlueCalc", "#FF0F0F");
+    document.documentElement.style.setProperty("--RealDarkBlueBTN", "#FFF0F0");
+    document.documentElement.style.setProperty("--AlmostTransparent", "#FF00001F");
+    document.documentElement.style.setProperty("--BaseColor", "#FF0000");
+    document.documentElement.style.setProperty("--BaseColorBTN", "#FF1212");
+    document.documentElement.style.setProperty("--AzulClaroBkg", "#FF000033");
+    document.documentElement.style.setProperty("--Red", "#FF0000");
+    document.documentElement.style.setProperty("--SecondAccentColor", "#FF4646");
+    document.documentElement.style.setProperty("--SecondAccentColorCalc", "#FF2323");
+    document.documentElement.style.setProperty("--SecondAccentColorFlags", "#FF2121");
+    document.documentElement.style.setProperty("--AccentColor", "#FF1212");
+    document.documentElement.style.setProperty("--AccentColorExtra", "#FF1F1F");
+    document.documentElement.style.setProperty("--AccentColorPick", "#FF2121");
+    document.documentElement.style.setProperty("--AccentColorBTN", "#FFF0F0");
+    document.documentElement.style.setProperty("--LightGray", "#FF2323");
+    document.documentElement.style.setProperty("--LightGrayBTN", "#FFF0F0");
+    document.documentElement.style.setProperty("--AlmostWhite", "#FF1111");
+    document.documentElement.style.setProperty("--WhiteFocus", "#FF2828");
+    document.documentElement.style.setProperty("--White", "#FF2323");
+    document.documentElement.style.setProperty("--White2", "#FF2121");
+    document.documentElement.style.setProperty("--WhiteBTN", "#FFF0F0");
+
 }
 
 function abreLista(abertoLista){

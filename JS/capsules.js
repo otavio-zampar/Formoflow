@@ -97,7 +97,7 @@ function createDiv(AA) {
     const colorC = getColor();
     tstDiv.attr("ActualColor", colorC);
     tstDiv.attr("GrayColor", grayC);
-    if (!dark) {
+    if (dark == 2) { // se for modo dark
         tstDiv.css("background-color", grayC);
     }else{
         tstDiv.css("background-color", colorC);
@@ -444,7 +444,7 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
     const colorC = getColor();
     tstDiv.attr("ActualColor", colorC);
     tstDiv.attr("GrayColor", grayC);
-    if (!dark) {
+    if (dark == 2) { // se for modo dark
         tstDiv.css("background-color", grayC);
     }else{
         tstDiv.css("background-color", colorC);

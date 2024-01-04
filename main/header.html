@@ -3,19 +3,19 @@
 <div class="shadow p-1 text-center topMenu">
     <h1 class="noCopy">FORMOFLOW</h1>
     <button id="list" onmousedown="{
-        if(isSet == false){
+        if(bringContato == false){
             document.getElementById('contato').style.top = '70vh';
-            isSet = true;
+            bringContato = true;
             
         }else{
             document.getElementById('contato').style.top = '100vh';
-            isSet = false;
+            bringContato = false;
         }
     }" class="traduzir">Contato</button>
 
     <div id="tema" onclick="
-    mudaTema(dark); 
-    dark = !dark;    
+        mudaTema(dark); 
+        dark = loopDark(dark);    
     ">
 
         <!-- moon -->
@@ -31,5 +31,8 @@
           <p id="pTema"> LIGHT </p>
     </div>
 
-    <Script>mudaTema(dark); dark = !dark;</Script>
+    <Script>
+        mudaTema(dark);
+        dark = loopDark(dark);
+    </Script>
 </div>
