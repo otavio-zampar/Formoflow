@@ -38,10 +38,12 @@ body{
     height: 62px; 
     background-color: var(--SecondAccentColorFlags); 
     border-radius: 10px;
+    opacity: 1;
 }
 
 #flags > img{
     width: 59px;
+    cursor: pointer;
 }
 
 .dot {

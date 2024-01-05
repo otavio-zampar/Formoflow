@@ -28,7 +28,7 @@ function mudaTema(dark) {
 
 function loopDark(dark){
 
-if (dark != 5) { // caso apareça mais cases de cores tem q alterar esse negocio
+if (dark != 2) { // caso apareça mais cases de cores tem q alterar esse negocio
     dark++;
 } else {
     dark = 1;
@@ -63,32 +63,34 @@ function lightMode(){
     document.documentElement.style.setProperty("--White2", "#ffffff");
     document.documentElement.style.setProperty("--WhiteBTN", "#ffffff");
     document.documentElement.style.setProperty("--textColorWindow", "#FFFFFF");
+    document.documentElement.style.setProperty("--WhiteSwitch", "#A2A2A2");
+    // document.documentElement.style.setProperty("--Yellow", "#eb9d0e");
+    document.documentElement.style.setProperty("--Yellow", "#000");
 
-    var github = document.getElementById("github");
-    github.firstElementChild.style.display = "initial";
-    github.lastElementChild.style.display = "none";
+    {
+        var github = document.getElementById("github");
+        github.firstElementChild.style.display = "initial";
+        github.lastElementChild.style.display = "none";
+        document.getElementById('temaCircle').style.left = '';
+        document.getElementById("flags").style.opacity = '1';
+        document.getElementById("ColPck").value = "#000000";
+        $("#ColPck").trigger("change");
 
-    document.getElementById("moon").style.display = "none";
-    document.getElementById("sun").style.display = "initial";
-    document.getElementById("pTema").innerHTML = "LIGHT";
-    
-    document.getElementById("ColPck").value = "#000000";
-    $("#ColPck").trigger("change");
+        $(".tstDiv").each(function () {
+            this.style.backgroundColor = $(this).attr("actualcolor");
+        });
 
-    $(".tstDiv").each(function () {
-        this.style.backgroundColor = $(this).attr("actualcolor");
-    });
-
-    $(".tstDiv :input").each(function () {
-        if ($(this).attr("inputpai")) {
-            var inputPai = "#" + $(this).attr("inputpai");
-            if ($(this).attr("inputpai").slice(0, 4) == "icon") {
-                $(this).css("outline-color", $(inputPai).parent().css("background-color"));
-            }else{
-                $(this).css("outline-color", $(inputPai).parent().parent().css("background-color"));
+        $(".tstDiv :input").each(function () {
+            if ($(this).attr("inputpai")) {
+                var inputPai = "#" + $(this).attr("inputpai");
+                if ($(this).attr("inputpai").slice(0, 4) == "icon") {
+                    $(this).css("outline-color", $(inputPai).parent().css("background-color"));
+                }else{
+                    $(this).css("outline-color", $(inputPai).parent().parent().css("background-color"));
+                }
             }
-        }
-    });
+        });
+    }
 }
 
 function darkMode(){
@@ -118,32 +120,33 @@ function darkMode(){
     document.documentElement.style.setProperty("--White2", "#212121");
     document.documentElement.style.setProperty("--WhiteBTN", "#f0f0f0");
     document.documentElement.style.setProperty("--textColorWindow", "#FFFFFF");
-    
-    var github = document.getElementById("github");
-    github.firstElementChild.style.display = "none";
-    github.lastElementChild.style.display = "initial";
+    document.documentElement.style.setProperty("--WhiteSwitch", "#0F0F0F");
+    document.documentElement.style.setProperty("--Yellow", "#FF0");
 
-    document.getElementById("moon").style.display = "initial";
-    document.getElementById("sun").style.display = "none";
-    document.getElementById("pTema").innerHTML = "DARK";
+    {
+        var github = document.getElementById("github");
+        github.firstElementChild.style.display = "none";
+        github.lastElementChild.style.display = "initial";
+        document.getElementById('temaCircle').style.left = 'calc(100% - 30px)'; 
+        document.getElementById("flags").style.opacity = '0.5';
+        document.getElementById("ColPck").value = "#FFFFFF";
+        $("#ColPck").trigger("change");
 
-    document.getElementById("ColPck").value = "#FFFFFF";
-    $("#ColPck").trigger("change");
+        $(".tstDiv").each(function () {
+            this.style.backgroundColor = $(this).attr("graycolor");
+        });
 
-    $(".tstDiv").each(function () {
-        this.style.backgroundColor = $(this).attr("graycolor");
-    });
-
-    $(".tstDiv :input").each(function () {
-        if ($(this).attr("inputpai")) {
-            var inputPai = "#" + $(this).attr("inputpai");
-            if ($(this).attr("inputpai").slice(0, 4) == "icon") {
-                $(this).css("outline-color", $(inputPai).parent().css("background-color"));
-            }else{
-                $(this).css("outline-color", $(inputPai).parent().parent().css("background-color"));
+        $(".tstDiv :input").each(function () {
+            if ($(this).attr("inputpai")) {
+                var inputPai = "#" + $(this).attr("inputpai");
+                if ($(this).attr("inputpai").slice(0, 4) == "icon") {
+                    $(this).css("outline-color", $(inputPai).parent().css("background-color"));
+                }else{
+                    $(this).css("outline-color", $(inputPai).parent().parent().css("background-color"));
+                }
             }
-        }
-    });
+        });
+    }
 }
 
 function hContrastModeCyan(){
@@ -173,8 +176,8 @@ function hContrastModeCyan(){
     document.documentElement.style.setProperty("--White2", "#000");
     document.documentElement.style.setProperty("--WhiteBTN", "#FFF");
     document.documentElement.style.setProperty("--textColorWindow", "#0F1515");
+    document.documentElement.style.setProperty("--Yellow", "#0FF");
 
-    document.getElementById("pTema").innerHTML = "CYAN";
 
     document.getElementById("ColPck").value = "#00FFFF";
     $("#ColPck").trigger("change");
@@ -207,8 +210,8 @@ function hContrastModeYellow(){
     document.documentElement.style.setProperty("--White2", "#000");
     document.documentElement.style.setProperty("--WhiteBTN", "#FFF");
     document.documentElement.style.setProperty("--textColorWindow", "#15150F");
+    document.documentElement.style.setProperty("--Yellow", "#FF0");
 
-    document.getElementById("pTema").innerHTML = "YELLOW";
 
     document.getElementById("ColPck").value = "#FFFF00";
     $("#ColPck").trigger("change");
@@ -241,8 +244,8 @@ function hContrastModeMagenta(){
     document.documentElement.style.setProperty("--White2", "#000");
     document.documentElement.style.setProperty("--WhiteBTN", "#FFF");
     document.documentElement.style.setProperty("--textColorWindow", "#150F15");
+    document.documentElement.style.setProperty("--Yellow", "#F0F");
 
-    document.getElementById("pTema").innerHTML = "MAGENTA";
 
     document.getElementById("ColPck").value = "#FF00FF";
     $("#ColPck").trigger("change");
@@ -273,36 +276,4 @@ function abreLista(abertoLista){
     }
 
 
-}
-
-// MEMES
-function redMode(){
-    document.documentElement.style.setProperty("--Black", "#FFC0CB");
-    document.documentElement.style.setProperty("--BlackFocus", "#FF737D");
-    document.documentElement.style.setProperty("--RealDarkBlue", "#FF4D4D");
-    document.documentElement.style.setProperty("--RealDarkBlueCalc", "#FF1A1A");
-    document.documentElement.style.setProperty("--RealDarkBlueBTN", "#FF8080");
-    document.documentElement.style.setProperty("--AlmostTransparent", "#FF00001F");
-    document.documentElement.style.setProperty("--BaseColor", "#FF0000");
-    document.documentElement.style.setProperty("--BaseColorBTN", "#990000");
-    document.documentElement.style.setProperty("--AzulClaroBkg", "#FFC0CB33");
-    document.documentElement.style.setProperty("--Red", "#FFC0CB");
-    document.documentElement.style.setProperty("--SecondAccentColor", "#FF8C8C");
-    document.documentElement.style.setProperty("--SecondAccentColorCalc", "#FF5757");
-    document.documentElement.style.setProperty("--SecondAccentColorFlags", "#FF5252");
-    document.documentElement.style.setProperty("--AccentColor", "#990000");
-    document.documentElement.style.setProperty("--AccentColorExtra", "#800000");
-    document.documentElement.style.setProperty("--AccentColorPick", "#FF5252");
-    document.documentElement.style.setProperty("--AccentColorBTN", "#FF8080");
-    document.documentElement.style.setProperty("--LightGray", "#575757");
-    document.documentElement.style.setProperty("--LightGrayBTN", "#FF8080");
-    document.documentElement.style.setProperty("--AlmostWhite", "#525252");
-    document.documentElement.style.setProperty("--WhiteFocus", "#737373");
-    document.documentElement.style.setProperty("--White", "#575757");
-    document.documentElement.style.setProperty("--WhiteDraw", "#575757");
-    document.documentElement.style.setProperty("--White2", "#525252");
-    document.documentElement.style.setProperty("--WhiteBTN", "#FF8080");
-
-
-    document.getElementById("pTema").innerHTML = "RED";
 }

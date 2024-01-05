@@ -29,28 +29,67 @@ p{
 
 #tema{
     position: absolute;
-    background-color: var(--SecondAccentColor);
-    top: 0px;
-    height: 100%;
-    width: 70px;
-    right: 0px;
+    background-color: var(--WhiteSwitch);
+    top: 34px;
+    height: 32px;
+    width: 62px;
+    right: 15px;
     font-weight: bold;
+    border-radius: 15px;
+    outline: thin solid var(--White);
 }
 
-#tema > svg:first-child { /* minha teoria é que a primeira criança do id é um elemento escondido*/
-    display:none;
+#HC{
+    position: absolute;
+    background-color: var(--WhiteSwitch);
+    top: 34px;
+    height: 32px;
+    width: 32px;
+    right: 100px;
+    font-weight: bold;
+    padding-top: 4px;
+    border-radius: 15px;
+    outline: thin solid var(--White);
 }
+
+/* #tema > svg:first-child { 
+    display:none;
+} */
 
 #tema > svg{
     pointer-events: none; 
-    fill: var(--Black);
+    fill: var(--Yellow);
+}
+
+#temaCircle{
+    border-radius: 50%;
+    height: 26px;
+    width: 26px;
+    position: absolute;
+    top: 3px;
+    z-index: 5;
+    left: 5px;
+    background-color: var(--White);
+
+    transition: left 150ms ease-in;
 }
 
 #sun, #moon{
-    height: 30px;
-    width: 30px;
-    margin-top: 20px;
-    margin-bottom: 5px;
+    position: absolute;
+    top: 8px;
+    position: inherit;
+    height: 15px;
+    width: 15px;
+}
+
+#sun{
+    right: 7px;
+    transition: fill 150ms ease-out;
+}
+
+#moon{
+    left: 7px;
+    transition: fill 150ms ease-in;
 }
 
 #list{
@@ -88,6 +127,11 @@ div.sticky{
     -webkit-transition: top 0.3s;
     z-index: 999;
 }
+
+.NVMdoCopy{
+    user-select: all;
+}
+
 #answer:focus{
     outline: 0px;
 }
