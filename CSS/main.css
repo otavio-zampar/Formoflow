@@ -27,16 +27,49 @@ p{
     user-select: none;
 }
 
+#ColorHC{
+    position: absolute;
+    top: 20px;
+    right: 62px;
+    width: 62px;
+    height: 16px;
+    border: 0px;
+    padding: 0px;
+    display: none;
+}
+
 #tema{
     position: absolute;
     background-color: var(--WhiteSwitch);
     top: 34px;
     height: 32px;
     width: 62px;
-    right: 15px;
+    right: 62px;
     font-weight: bold;
-    border-radius: 15px;
-    outline: thin solid var(--White);
+    border-radius: 16px;
+    /* outline: thin solid var(--White); */
+}
+
+#HCtema{
+    position: absolute;
+    background-color: var(--WhiteSwitch);
+    bottom: 20px;
+    height: 32px;
+    width: 62px;
+    right: 62px;
+    font-weight: bold;
+    border-radius: 16px;
+    padding: 3px 5px 0px 5px;
+    display: none;
+}
+
+#HCCircle{
+    border-radius: 50%;
+    height: 26px;
+    width: 26px;
+    z-index: 5;
+    background-color: var(--Black);
+    transition: margin-left 150ms ease-in;
 }
 
 #HC{
@@ -45,16 +78,16 @@ p{
     top: 34px;
     height: 32px;
     width: 32px;
-    right: 100px;
+    right: 15px;
     font-weight: bold;
-    padding-top: 4px;
-    border-radius: 15px;
-    outline: thin solid var(--White);
+    padding-top: 5px;
+    border-radius: 16px;
+    font-size: 0.9rem;
 }
 
-/* #tema > svg:first-child { 
-    display:none;
-} */
+#HC, #tema, #HCtema, #BTNoutraLista {
+    cursor: pointer;
+}
 
 #tema > svg{
     pointer-events: none; 
@@ -69,7 +102,7 @@ p{
     top: 3px;
     z-index: 5;
     left: 5px;
-    background-color: var(--White);
+    background-color: var(--WhiteSwitchCircle);
 
     transition: left 150ms ease-in;
 }
@@ -102,7 +135,7 @@ p{
 }
 #list:hover{
     /* background-color: var(--White); */
-    color: antiquewhite;
+    color: var(--AlmostWhite);
     transition: color 0.2s;
     -webkit-transition: color 0.2s;
 }

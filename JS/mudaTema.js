@@ -26,13 +26,13 @@ function mudaTema(dark) {
     }
 }
 
-function loopDark(dark){
+function loopDark(dark, start, end){ // eg dark, 1, 2 para fazer loop entre 1 e 2
 
-if (dark != 2) { // caso apareça mais cases de cores tem q alterar esse negocio
-    dark++;
-} else {
-    dark = 1;
-}
+    if (dark != end) { // caso apareça mais cases de cores tem q alterar esse negocio
+        dark++;
+    } else {
+        dark = start;
+    }
     return dark;
 }
 
@@ -63,8 +63,8 @@ function lightMode(){
     document.documentElement.style.setProperty("--White2", "#ffffff");
     document.documentElement.style.setProperty("--WhiteBTN", "#ffffff");
     document.documentElement.style.setProperty("--textColorWindow", "#FFFFFF");
-    document.documentElement.style.setProperty("--WhiteSwitch", "#A2A2A2");
-    // document.documentElement.style.setProperty("--Yellow", "#eb9d0e");
+    document.documentElement.style.setProperty("--WhiteSwitch", "#fff");
+    document.documentElement.style.setProperty("--WhiteSwitchCircle", "#D2D2D2");
     document.documentElement.style.setProperty("--Yellow", "#000");
 
     {
@@ -121,6 +121,7 @@ function darkMode(){
     document.documentElement.style.setProperty("--WhiteBTN", "#f0f0f0");
     document.documentElement.style.setProperty("--textColorWindow", "#FFFFFF");
     document.documentElement.style.setProperty("--WhiteSwitch", "#0F0F0F");
+    document.documentElement.style.setProperty("--WhiteSwitchCircle", "#232323");
     document.documentElement.style.setProperty("--Yellow", "#FF0");
 
     {
@@ -176,11 +177,33 @@ function hContrastModeCyan(){
     document.documentElement.style.setProperty("--White2", "#000");
     document.documentElement.style.setProperty("--WhiteBTN", "#FFF");
     document.documentElement.style.setProperty("--textColorWindow", "#0F1515");
-    document.documentElement.style.setProperty("--Yellow", "#0FF");
+    document.documentElement.style.setProperty("--WhiteSwitch", "#0F0F0F");
+    document.documentElement.style.setProperty("--Yellow", "#FF0");
 
+    {
+        var github = document.getElementById("github");
+        github.firstElementChild.style.display = "none";
+        github.lastElementChild.style.display = "initial";
+        document.getElementById('temaCircle').style.left = 'calc(100% - 30px)'; 
+        document.getElementById("flags").style.opacity = '0.5';
+        document.getElementById("ColPck").value = "#00FFFF";
+        $("#ColPck").trigger("change");
 
-    document.getElementById("ColPck").value = "#00FFFF";
-    $("#ColPck").trigger("change");
+        $(".tstDiv").each(function () {
+            this.style.backgroundColor = $(this).attr("graycolor");
+        });
+
+        $(".tstDiv :input").each(function () {
+            if ($(this).attr("inputpai")) {
+                var inputPai = "#" + $(this).attr("inputpai");
+                if ($(this).attr("inputpai").slice(0, 4) == "icon") {
+                    $(this).css("outline-color", $(inputPai).parent().css("background-color"));
+                }else{
+                    $(this).css("outline-color", $(inputPai).parent().parent().css("background-color"));
+                }
+            }
+        });
+    }
 }
 
 function hContrastModeYellow(){
@@ -210,11 +233,33 @@ function hContrastModeYellow(){
     document.documentElement.style.setProperty("--White2", "#000");
     document.documentElement.style.setProperty("--WhiteBTN", "#FFF");
     document.documentElement.style.setProperty("--textColorWindow", "#15150F");
+    document.documentElement.style.setProperty("--WhiteSwitch", "#0F0F0F");
     document.documentElement.style.setProperty("--Yellow", "#FF0");
 
+    {
+        var github = document.getElementById("github");
+        github.firstElementChild.style.display = "none";
+        github.lastElementChild.style.display = "initial";
+        document.getElementById('temaCircle').style.left = 'calc(100% - 30px)'; 
+        document.getElementById("flags").style.opacity = '0.5';
+        document.getElementById("ColPck").value = "#FFFF00";
+        $("#ColPck").trigger("change");
 
-    document.getElementById("ColPck").value = "#FFFF00";
-    $("#ColPck").trigger("change");
+        $(".tstDiv").each(function () {
+            this.style.backgroundColor = $(this).attr("graycolor");
+        });
+
+        $(".tstDiv :input").each(function () {
+            if ($(this).attr("inputpai")) {
+                var inputPai = "#" + $(this).attr("inputpai");
+                if ($(this).attr("inputpai").slice(0, 4) == "icon") {
+                    $(this).css("outline-color", $(inputPai).parent().css("background-color"));
+                }else{
+                    $(this).css("outline-color", $(inputPai).parent().parent().css("background-color"));
+                }
+            }
+        });
+    }
 }
 
 function hContrastModeMagenta(){
@@ -244,11 +289,33 @@ function hContrastModeMagenta(){
     document.documentElement.style.setProperty("--White2", "#000");
     document.documentElement.style.setProperty("--WhiteBTN", "#FFF");
     document.documentElement.style.setProperty("--textColorWindow", "#150F15");
-    document.documentElement.style.setProperty("--Yellow", "#F0F");
+    document.documentElement.style.setProperty("--WhiteSwitch", "#0F0F0F");
+    document.documentElement.style.setProperty("--Yellow", "#FF0");
 
+    {
+        var github = document.getElementById("github");
+        github.firstElementChild.style.display = "none";
+        github.lastElementChild.style.display = "initial";
+        document.getElementById('temaCircle').style.left = 'calc(100% - 30px)'; 
+        document.getElementById("flags").style.opacity = '0.5';
+        document.getElementById("ColPck").value = "#FF00FF";
+        $("#ColPck").trigger("change");
 
-    document.getElementById("ColPck").value = "#FF00FF";
-    $("#ColPck").trigger("change");
+        $(".tstDiv").each(function () {
+            this.style.backgroundColor = $(this).attr("graycolor");
+        });
+
+        $(".tstDiv :input").each(function () {
+            if ($(this).attr("inputpai")) {
+                var inputPai = "#" + $(this).attr("inputpai");
+                if ($(this).attr("inputpai").slice(0, 4) == "icon") {
+                    $(this).css("outline-color", $(inputPai).parent().css("background-color"));
+                }else{
+                    $(this).css("outline-color", $(inputPai).parent().parent().css("background-color"));
+                }
+            }
+        });
+    }
 }
 
 function abreLista(abertoLista){

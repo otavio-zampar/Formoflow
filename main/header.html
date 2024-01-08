@@ -17,20 +17,58 @@
 
         if (document.getElementById('tema').style.display == 'none') {
             document.getElementById('tema').style.display = '';
+            document.getElementById('HCtema').style.display = 'none';
+            document.getElementById('ColorHC').style.display = 'none';
+            mudaTema(dark);
         }else{
             document.getElementById('tema').style.display = 'none';
+            document.getElementById('HCtema').style.display = 'initial';
+            document.getElementById('ColorHC').style.display = 'grid';
+            mudaTema(hc);
         }
     ">
     HC
     </div>
 
-    <div id="HCtema">
+    <div id="HCtema" onclick="
+        hc = loopDark(hc, 3, 5); // trocar entre os temas HC dark
+        mudaTema(hc);
+        document.getElementById('HCCircle').style.marginLeft = 'calc(25% * '+ (hc-2) +' - 13px)'; // 3 posições 100/4%, 4 posições = 100/6%, 5 posições = 100/8
+    ">
         <div id="HCCircle"></div>
     </div>
 
+    <form>
+        <input type="color" value="#00FFFF" id="ColorHC">
+    </form>
+
+    <script>
+        $('#ColorHC').change(function (a) {
+            document.documentElement.style.setProperty('--Black', this.value);
+            document.documentElement.style.setProperty('--RealDarkBlueBTN', this.value);
+            document.documentElement.style.setProperty('--BaseColor', this.value);
+            document.documentElement.style.setProperty('--AccentColorBTN', this.value);
+            document.documentElement.style.setProperty('--LightGrayBTN', this.value);
+            document.getElementById("ColPck").value = this.value;
+            $("#ColPck").trigger("change");
+            var tst = "#";
+            for (let i = 1; i < 7; i += 2) { // pegando a versao mais escura do cor
+                var u = Math.floor(parseInt(this.value.slice(i, i+2), 16)/42.5 + 15);
+                if(u.toString(16).length < 2){
+                    tst+= '0';
+                }
+                tst += u.toString(16);
+                
+            }
+            document.documentElement.style.setProperty("--AccentColorExtra", tst);
+            document.documentElement.style.setProperty("--WhiteDraw", tst);
+            document.documentElement.style.setProperty("--textColorWindow", tst);
+        });
+    </script>
+
     <div id="tema" onclick="
-        mudaTema(dark); 
-        dark = loopDark(dark);
+        dark = loopDark(dark, 1, 2); // trocar somente entre light e dark
+        mudaTema(dark);
     ">
         <div id="temaCircle"></div>
 
@@ -45,6 +83,6 @@
     </div>
 
     <Script>
-        $('#tema').trigger("click");
+        // $('#tema').trigger("click");
     </Script>
 </div>
