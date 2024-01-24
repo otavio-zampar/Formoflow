@@ -172,3 +172,61 @@ function dataEnUs(){
     ];
     return data;
 }
+
+function dataBarren() { // não possui option nem group 
+    var data = [
+        { form: "doEval", qnt: 1, exit: 1, placeholder: ["2 + 2"]},
+        { form: "bhaskara", qnt: 3, exit: 2, placeholder: ["A", "B", "C"]},
+        { form: "fPrimeiro", qnt: 3, exit: 1, placeholder: ["X", "B", "C"]  },
+        { form: "fSegundo", qnt: 4, exit: 1, placeholder: ["X", "A", "B", "C"]  },
+        { form: "fExponencial", qnt: 4, exit: 1, placeholder: ["X", "A", "B", "C"]  },
+        { form: "fatoracao", qnt: 1, exit: 1, placeholder: []  },
+        { form: "Acirculo", qnt: 1, exit: 1, placeholder: ["Raio"]},
+        { form: "Aretangulo", qnt: 2, exit: 1, placeholder: ["Base", "Altura"] },
+        { form: "Atriangulo", qnt: 2, exit: 1, placeholder: ["Base", "Altura"] },
+        { form: "AtrianguloEquilatero", qnt: 1, exit: 1, placeholder: ["Lado"] },
+        { form: "Atrapezio", qnt: 3, exit: 1, placeholder: ["Base", "base", "Altura"] },
+        { form: "Alosango", qnt: 2, exit: 1, placeholder: ["Diagonal", "diagonal"] },
+        { form: "AanguloTriangulo", qnt: 3, exit: 1, placeholder: ["Lado 1", "Lado 2", "Angulo"]  },
+        { form: "Vcubo", qnt: 1, exit: 1, placeholder: ["Lado"]  },
+        { form: "Vparalelepipedo", qnt: 3, exit: 1, placeholder: ["Largura", "Comprimento", "Altura"]  },
+        { form: "Vcilindro", qnt: 2, exit: 1, placeholder: ["Raio", "Altura"]  },
+        { form: "Vesfera", qnt: 1, exit: 1, placeholder: ["Raio"]  },
+        { form: "Vcone", qnt: 2, exit: 1, placeholder: ["Raio", "Altura"]  },
+        { form: "Vprisma", qnt: 2, exit: 1, placeholder: ["Área da Base", "Altura"]  },
+        { form: "hipotenusa", qnt: 2, exit: 1, placeholder: ["Cateto", "cateto"]  },
+        { form: "cateto", qnt: 2, exit: 1, placeholder: ["Cateto", "Hipotenusa"]  },
+        { form: "perimetro", qnt: 2, exit: 1, placeholder: ["Lado", "Tamanho"]  },
+        { form: "soma", qnt: 2, exit: 1, placeholder: []  },
+        { form: "subtracao", qnt: 2, exit: 1, placeholder: []  },
+        { form: "multiplicacao", qnt: 2, exit: 1, placeholder: []  },
+        { form: "divisao", qnt: 2, exit: 1, placeholder: []  },
+        { form: "Math.pow", qnt: 2, exit: 1, placeholder: ["Base", "Expoente"]  },
+        { form: "raizQ", qnt: 2, exit: 1, placeholder: ["Radicando", "Índice"]  },
+        { form: "log", qnt: 1, exit: 1, placeholder: []  },
+        { form: "log10", qnt: 1, exit: 1, placeholder: []  },
+        { form: "log2", qnt: 1, exit: 1, placeholder: []  },
+        { form: "inversao", qnt: 1, exit: 1, placeholder: []  },
+        { form: "modulo", qnt: 1, exit: 1, placeholder: []  },
+        { form: "Math.sin", qnt: 1, exit: 1, placeholder: ["Seno"]  },
+        { form: "Math.cos", qnt: 1, exit: 1, placeholder: ["Coseno"]  },
+        { form: "Math.tan", qnt: 1, exit: 1, placeholder: ["Tangente"]  },
+        { form: "aleatorio", qnt: 2, exit: 1, placeholder: ["Mínimo", "Máximo"] },
+        { form: "bitShiftZL", qnt: 2, exit: 1, placeholder: ["5 (0b101)", "2 (0b10)"] },
+        { form: "bitShiftSR", qnt: 2, exit: 1, placeholder: ["5 (0b101)", "2 (0b10)"] },
+        { form: "bitShiftZR", qnt: 2, exit: 1, placeholder: ["5 (0b101)", "2 (0b10)"] },
+        { form: "and", qnt: 2, exit: 1, placeholder: ["5 (0b101)", "2 (0b10)"] },
+        { form: "or", qnt: 2, exit: 1, placeholder: ["5 (0b101)", "2 (0b10)"] },
+        { form: "xor", qnt: 2, exit: 1, placeholder: ["5 (0b101)", "2 (0b10)"] },
+        { form: "not", qnt: 1, exit: 1, placeholder: [] },
+        { form: "binario", qnt: 1, exit: 1, placeholder: [] },
+        { form: "hexadecimal", qnt: 1, exit: 1, placeholder: [] },
+        { form: "octal", qnt: 1, exit: 1, placeholder: [] },
+        { form: "base", qnt: 2, exit: 1, placeholder: ["X", "Base"] },
+        { form: "basePraDecimal", qnt: 2, exit: 1, placeholder: ["X", "Base"] },
+        { form: "input", type: "range", qnt: 1, exit: 1 },
+        { form: "textarea", type: "", qnt: 0, exit: 0}
+        // Adicione outras opções com mensagens personalizadas aqui
+    ];
+    return data;
+}

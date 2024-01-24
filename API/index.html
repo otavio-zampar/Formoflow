@@ -1,0 +1,59 @@
+<script src="../JS/idiomas/data.js"></script>
+<script src="../JS/math/fatoracao.js"></script>
+<script src="../JS/math/bhaskara.js"></script>
+<script src="../JS/math/areas2d.js"></script>
+<script src="../JS/math/hipotenusa.js"></script>
+<script src="../JS/math/perimetro.js"></script>
+<script src="../JS/math/volumes.js"></script>
+<script src="../JS/math/modificadores.js"></script>
+<script src="../JS/math/computacao.js"></script>
+<script src="../JS/math/algebra.js"></script>
+
+<script>
+
+    var data = dataBarren();
+
+    var params = window.location.href.split("?");
+    var reg = /[&=]/gi
+
+    let arr = params[1].split(reg);
+
+    let obj = {};
+
+    for (let i = 0; i < arr.length; i += 2) {
+        obj[arr[i]] = arr[i + 1];
+    }
+
+    // data.forEach(element => {
+        
+    // });
+
+    // console.log()
+
+    console.log(bhaskara(obj.a, obj.b, obj.c));
+
+
+
+    var json = {
+        "usuarios": [
+            {
+                "nome": "carlos",
+                "idade": 22
+            },
+            {
+                "nome": "Marcelo",
+                "idade": 46
+            },
+            {
+                "nome": "Silvia",
+                "idade": 21
+            },
+            {
+                "nome": "Daniela",
+                "idade": 18
+            }
+        ]
+    }
+</script>
+
+<link rel="shortcut icon" href="#">

@@ -204,8 +204,6 @@ if (typeof(ansDoc) == 'number') {
        hasSin++; 
     }
 
-    // alert(ansDoc); // pra testar coisas antes de resolver
-
     //da parse na string
     if(ansDoc != ""){
         ansDoc = Function('"use strict"; return '+ ansDoc)(); 
@@ -232,5 +230,4 @@ if (typeof(ansDoc) == 'number') {
 
     //imprime na tela
     return ansDoc;
-    // alert(document.calculator.ans.value); /para testar depois de resolver
 }
