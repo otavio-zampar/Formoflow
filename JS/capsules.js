@@ -56,13 +56,19 @@ function avaliaJanela(a, c){
 
         try{
             var x = [];
-            x = String(eval(avaliacao)).split(" "); 
-            for (let index = 0; index < exit; index++) {
-                if (String(x[index]) == "undefined") {
-                    x[index] = "NaN";
+            x = eval(avaliacao);
+            console.log(x + ", "+ typeof(x));
+            if (typeof(x) == "number") {
+                document.getElementById("icon"+thisDivCount+"1").innerHTML = x;
+            }else{
+                for (let index = 0; index < exit; index++) {
+                    if (String(x[index]) == "undefined") {
+                        x[index] = "NaN";
+                    }
+                    document.getElementById("icon"+thisDivCount+(inputForm+index)).innerHTML = x[index];
                 }
-                document.getElementById("icon"+thisDivCount+(inputForm+index)).innerHTML = x[index];
             }
+            
         } catch(e){
             if (e instanceof SyntaxError || ReferenceError) {
                 console.log("Erro esperado, fórmula não concluída.");

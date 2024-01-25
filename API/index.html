@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<link rel="shortcut icon" href="#">
 <script src="../JS/idiomas/data.js"></script>
 <script src="../JS/math/fatoracao.js"></script>
 <script src="../JS/math/bhaskara.js"></script>
@@ -8,52 +10,64 @@
 <script src="../JS/math/modificadores.js"></script>
 <script src="../JS/math/computacao.js"></script>
 <script src="../JS/math/algebra.js"></script>
-
 <script>
+    function createJSON(arr) {
+        var data = dataBarren();
+        let obj = {};
 
-    var data = dataBarren();
+        for (let i = 0; i < arr.length; i += 2) {
+            obj[arr[i]] = arr[i + 1];
+        }
 
-    var params = window.location.href.split("?");
-    var reg = /[&=]/gi
+        let element = data.find(o => o.form === obj.function);
 
-    let arr = params[1].split(reg);
+        if (element === undefined) {
+            var MeuJson = {
+                "success": "false",
+                "message": "could not find function"
+            };
+        }else{
+            let obj2 = {};
+            let str = String(obj.function)+"(";
 
-    let obj = {};
+            let missingPlaceholders = element.placeholder.filter(p => !(p in obj));
+            if (missingPlaceholders.length > 0) {
+                var MeuJson = {
+                    "success": "false",
+                    "message": "Missing variable(s): " + missingPlaceholders.join(', ')
+                };
+            }else{
+                element.placeholder.forEach(element => {
+                    str += obj[element]+", ";
+                    obj2[element] = obj[element];
+                });
+                str = str.slice(0, -2) + ")";
 
-    for (let i = 0; i < arr.length; i += 2) {
-        obj[arr[i]] = arr[i + 1];
-    }
-
-    // data.forEach(element => {
-        
-    // });
-
-    // console.log()
-
-    console.log(bhaskara(obj.a, obj.b, obj.c));
-
-
-
-    var json = {
-        "usuarios": [
-            {
-                "nome": "carlos",
-                "idade": 22
-            },
-            {
-                "nome": "Marcelo",
-                "idade": 46
-            },
-            {
-                "nome": "Silvia",
-                "idade": 21
-            },
-            {
-                "nome": "Daniela",
-                "idade": 18
+                var MeuJson = {
+                    "success": "true",
+                    "function": obj.function,
+                    "variables": obj2,
+                    "results": eval(str),
+                };
             }
-        ]
-    }
-</script>
+                
+        }
 
-<link rel="shortcut icon" href="#">
+        // console.log(MeuJson);
+        var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(MeuJson, null, 2));
+        var downloadAnchorNode = document.createElement('a');
+        downloadAnchorNode.setAttribute("href", dataStr);
+        downloadAnchorNode.setAttribute("download", obj.function+".json");
+        document.body.appendChild(downloadAnchorNode); // necessário para o Firefox
+        downloadAnchorNode.click();
+        downloadAnchorNode.remove();
+    }    
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        var params = window.location.href.split("?");
+        var reg = /[&=]/gi
+        let arr = params[1].split(reg);
+        createJSON(arr);
+    });
+</script>

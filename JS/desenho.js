@@ -155,6 +155,7 @@ function download_img(yrn){ // yrn = fundo transparente ou n
                 link.download = nome;
                 link.click();
         }
+        link.remove();
 }
 
 function send_img(){
