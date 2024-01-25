@@ -53,14 +53,13 @@
                 
         }
 
-        // console.log(MeuJson);
         var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(MeuJson, null, 2));
-        var downloadAnchorNode = document.createElement('a');
-        downloadAnchorNode.setAttribute("href", dataStr);
-        downloadAnchorNode.setAttribute("download", obj.function+".json");
-        document.body.appendChild(downloadAnchorNode); // necessário para o Firefox
-        downloadAnchorNode.click();
-        downloadAnchorNode.remove();
+        var download = document.createElement('a');
+        download.setAttribute("href", dataStr);
+        download.setAttribute("download", obj.function+".json");
+        document.body.appendChild(download); // necessário para o Firefox
+        download.click();
+        download.remove();
     }    
 </script>
 <script>

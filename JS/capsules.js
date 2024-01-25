@@ -57,7 +57,6 @@ function avaliaJanela(a, c){
         try{
             var x = [];
             x = eval(avaliacao);
-            console.log(x + ", "+ typeof(x));
             if (typeof(x) == "number") {
                 document.getElementById("icon"+thisDivCount+"1").innerHTML = x;
             }else{
