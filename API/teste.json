@@ -1,21 +1,27 @@
 {
-    "success": "true",
-    "function": "bhaskara",
-    "input": {
-        "input20": "3",
-        "input21": "-4",
-        "input22": "-4"
-    },
-    "icon":{
-        "icon23": "18",
-        "icon24": "-6"
-    },
-    "atrr": {
-        "x": "1px",
-        "y": "40px",
-        "width":"320px",
-        "height":"320px",
-        "actualcolor": "#6a676d",
-        "graycolor": "#131313"
+    "sucess": "true",
+    "windows": [
+        {
+        "success": "true",
+        "function": "bhaskara",
+        "actualdiv": "div2",
+        "input": {
+            "input20": "3",
+            "input21": "-4",
+            "input22": "-4"
+        },
+        "icon":{
+            "icon23": "18",
+            "icon24": "-6"
+        },
+        "atrr": {
+            "x": "300px",
+            "y": "400px",
+            "width":"320px",
+            "height":"320px",
+            "actualcolor": "#6a676d",
+            "graycolor": "#131313"
+        }
     }
+]
 }
