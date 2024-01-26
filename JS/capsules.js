@@ -310,6 +310,7 @@ function createDiv(AA) {
     ActualDiv.css({
         minHeight: minHeight,
         height:minHeight,
+        width: "320px",
         zIndex: highestZIndex + 1,
         left: "calc(5vw + "+ 50 * ActualTop +"px + "+ 50 * leftOffset +"px)",
         top: "calc(20vh + "+ 50 * ActualTop +"px + "+ 30 * leftOffset +"px)"
@@ -619,6 +620,7 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
     ActualDiv.css({
         minHeight: minHeight,
         height: minHeight,
+        width: "320px",
         zIndex: highestZIndex + 1,
         left: "calc(5vw + "+ 50 * ActualTop +"px + "+ 50 * leftOffset +"px)",
         top: "calc(20vh + "+ 50 * ActualTop +"px + "+ 30 * leftOffset +"px)"
@@ -906,3 +908,66 @@ $(document).mousedown(function (){
 $(document).on("input", function (){
     b = 200;
 });
+
+function saveJson(element){
+    var JsonWindow = {
+        "ActualDiv": element.id,
+        "name": document.querySelector("#draggable"+element.id+" p").innerHTML,
+        "atrr": {
+            "left": element.style.left,
+            "top": element.style.top,
+            "width": element.style.width,
+            "height": element.style.height,
+            "actualcolor": document.querySelector("#"+element.id+" .tstDiv").attributes.actualcolor.value,
+            "graycolor": document.querySelector("#"+element.id+" .tstDiv").attributes.graycolor.value
+        }
+    }
+
+    if (element.attributes.actualname != undefined) {
+        JsonWindow["function"] = element.attributes.actualname.value;
+    }
+
+    if (document.querySelectorAll("#"+element.id+" .inputFormula").length != 0) {
+        JsonWindow["input"] = [];
+        document.querySelectorAll("#"+element.id+" .inputFormula").forEach(em => {
+            if(em.attributes.inputpai){
+                JsonWindow["input"].push({
+                    "value": em.value,
+                    "inputpai": em.attributes.inputpai.value,
+                    "outline-color": em.style.outlineColor
+                });
+            }else{
+                JsonWindow["input"].push({
+                    "value": em.value
+                });
+            }
+        });
+    }
+    
+    if (document.querySelectorAll("#"+element.id+" .icon").length != 0) {
+        JsonWindow["icon"] = [];
+        document.querySelectorAll("#"+element.id+" .icon").forEach(em => {
+            JsonWindow["icon"].push(em.innerHTML);
+        });
+    }
+
+    return JsonWindow;
+}
+
+function saveAll() {
+    var json = {
+        "success": "true",
+        "windows": []
+    }
+    document.querySelectorAll(".ActualDiv").forEach(em => {
+        json["windows"].push(saveJson(em));
+    });
+
+    var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(json, null, 2));
+    var download = document.createElement('a');
+    download.setAttribute("href", dataStr);
+    download.setAttribute("download", "backup.json");
+    document.body.appendChild(download); // necessário para o Firefox
+    download.click();
+    download.remove();
+}

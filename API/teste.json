@@ -3,31 +3,27 @@
     "windows": [
         {
             "function": "bhaskara",
-            
             "actualdiv": "div2",
-            
-            "input": {
-                "input20": {
+            "input": [
+                {
                     "value": "3",
                     "inputpai": "icon31",
                     "outline-color": "rgb(31, 75, 161)"
                 },
-                "input21": {
+                {
                     "value": "-4"
                 },
-                "input22": {
+                {
                     "value": "-4"
                 }
-            },
-
-            "icon": {
-                "icon23": "18",
-                "icon24": "-6"
-            },
-            
+            ],
+            "icon": [
+                "18",
+                "-6"
+            ],
             "atrr": {
-                "x": "300px",
-                "y": "400px",
+                "left": "300px",
+                "top": "400px",
                 "width":"320px",
                 "height":"320px",
                 "actualcolor": "#6a676d",
