@@ -49,15 +49,16 @@
     <script lang="JavaScript">  
 
         var data = dataPtBr(); // coloca tds as janelas em PT-BR
+        var linguagem = "PT-BR";
+        var tema = 1;
+        var customColor = "#0FF";
 
         //usada na calculadora pra nao dar erro na pontuaçao (i) e na operaçao (f)
         var i = 0;
         var f = 0;
 
         //usado para alternar entre abrir e fechar os menus laterais
-        var openCal = 0;
-        var openDra = 0;
-        var openExt = 0;
+        var openCal = openDra = openExt = openImp = 0;
         var MathDeg = '(Math.PI/180)*';
         var sin = 'Sin(';
         var cos = 'Cos(';
@@ -80,6 +81,7 @@
             $('#whereHeader').load("./main/header.html");
             $('#whereSidenavC').load("./main/sidenavCalculadora.html");
             $('#whereSidenavU').load("./main/sidenavUpload.html");
+            $('#whereSidenavI').load("./main/sidenavImport.html");
         });
         
     </script>
@@ -96,6 +98,7 @@
     <div id="whereHeader" class="noCopy"></div>
     <div id="whereSidenavC" class="noCopy"></div>
     <div id="whereSidenavU" class="noCopy"></div>
+    <div id="whereSidenavI" class="noCopy"></div>
 
     <!-- basicamente eu tive que incluir a sidenav de desenho no index pq o JS depende do canvas criado aqui, 
     e o JS estava sendo chamado primeiro -->
@@ -215,6 +218,7 @@
     <div id="flags" class="noCopy">
         <label for="flagBr" class="traduzir" hidden>Brasil</label>
         <img id="flagBr" class="noCopy" src="./src/br.svg" onclick="{
+            linguagem = 'PT-BR';
             var array = Array.from(document.getElementsByClassName('traduzir')).concat(Array.from(document.getElementsByClassName('traduzirPlaceholder')));
             traducao(array, traducaoPtBr());
             data = dataPtBr();
@@ -223,6 +227,7 @@
         }">
         <label for="flagMx" class="traduzir" hidden>México</label>
         <img id="flagMx" class="noCopy" src="./src/mx.svg" onclick="{
+            linguagem = 'SP-MX';
             var array = Array.from(document.getElementsByClassName('traduzir')).concat(Array.from(document.getElementsByClassName('traduzirPlaceholder')));
             traducao(array, traducaoSpMx());
             data = dataSpMx();
@@ -232,6 +237,7 @@
         }">
         <label for="flagUs" class="traduzir" hidden>Estados Unidos da América</label>
         <img id="flagUs" class="noCopy" src="./src/us.svg" onclick="{
+            linguagem = 'EN-US';
             var array = Array.from(document.getElementsByClassName('traduzir')).concat(Array.from(document.getElementsByClassName('traduzirPlaceholder')));
             traducao(array, traducaoEnUs());
             data = dataEnUs();
@@ -296,7 +302,7 @@
         criaListaCompleta(data);
 
         createEntradaDiv({option: "TUTORIAL", form: "textarea", qnt: 0, exit: 0});
-        const texo = "Bem vindo ao FORMOFLOW!\nPara utilizar números não decimais siga o padrão:\nDecimal: 15,\nBinário: 0b1111,\nOctal: 0o17,\nHexadecimal: 0xF.\n\tPara exportar as janelas, use a função saveAll() no console"; 
+        const texo = "Bem vindo ao FORMOFLOW!\nPara utilizar números não decimais siga o padrão:\nDecimal: 15,\nBinário: 0b1111,\nOctal: 0o17,\nHexadecimal: 0xF."; 
         setTimeout(() => {
             document.getElementById("input11").value = texo;
             document.getElementById("input11").style.fontSize = "1rem";
@@ -316,9 +322,7 @@
             //         setTimeout(() => {mudaTema(4)}, 1500);
             //         setTimeout(() => {mudaTema(5)}, 2000);
             //         setTimeout(() => {mudaTema(1)}, 2500);
-                
             // });
-
         }, 0);
     </script>
         

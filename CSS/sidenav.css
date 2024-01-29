@@ -11,7 +11,41 @@
     border-top-right-radius: 25px; 
     border-bottom-right-radius: 25px;
 }
-
+.sidenavImport{
+    height: calc(max(6vw, 2rem) + 5vw);
+    top: calc(45vh + 5rem - (calc(max(6vw, 2rem) + 5vw) / 4));
+    margin: 0px;
+    background-color: var(--AccentColor);
+    z-index: 9995;
+    width: 20vw; 
+    right: -20vw;
+    border-top-left-radius: 25px; 
+    border-bottom-left-radius: 25px;
+}
+.ImportBase {
+    position: absolute;
+    width: 16vw;
+    height: max(3vw, 1rem);
+    background-color: var(--BaseColorBTN);
+    text-align: center;
+    padding-top: 8px;
+    border-radius: 1rem;
+    cursor: pointer;
+}
+.extraImport{
+    position: absolute;
+    top: 1vw;
+    left: 1vw;
+    width: 18vw;
+    padding: 1vw;
+    border-radius: 1rem;
+    background-color: var(--LightGray);
+    color: var(--AlmostBlack);
+    height: calc(max(6vw, 2rem) + 3vw);
+}
+.export{
+    bottom: 1vw;
+}
 .calcShadow{
     height: 94vh; 
     top: 3vh;
@@ -130,10 +164,16 @@
 }
 
 #btnMyUp{
-    top: 50vh; 
+    top: 45vh; 
     left: calc(100vw - 3.5rem); 
     background-color: var(--BaseColor); 
     z-index: 9983;
+}
+#btnMyimport{
+    top: calc(45vh + 5rem);
+    left: calc(100vw - 3.5rem); 
+    background-color: var(--AccentColor); 
+    z-index: 9990;
 }
 #btnMyCalc{
     top: 45vh; 
@@ -143,10 +183,8 @@
 .base{
     position: fixed;
     overflow-x: hidden;
-    transition: left 0.5s;
-    -webkit-transition: left 0.5s;
-    margin-top: 0px;
-    margin-bottom: 100%;
+    transition: left 0.5s, right 0.5s;
+    -webkit-transition: left 0.5s, right 0.5s;
 }
 .sla{
     transition: background-color 0.5s;
@@ -357,10 +395,29 @@
     margin-left: 0.75rem;
 }
 
-input[type="file"] {
+#btnImport{
+    height:2.5rem;
+    width: auto;
+    margin-top: 1.25rem;
+    margin-left: 0.75rem;
+    transition: transform 0.3s; 
+    -webkit-transition: transform 0.3s; 
+    transform: scaleX(-1);
+}
+
+#file-upload {
     opacity: 0;
     height: 5rem;
     width: 7rem;
+    top: 0px;
+    position: absolute;
+    left: 0px;
+    cursor: pointer;
+}
+#json-upload{
+    opacity: 0;
+    height: max(3vw, 1rem);
+    width: 16vw;
     top: 0px;
     position: absolute;
     left: 0px;

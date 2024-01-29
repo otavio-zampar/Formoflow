@@ -24,6 +24,7 @@ function mudaTema(dark) {
             lightMode();
             break;
     }
+    return dark;
 }
 
 function loopDark(dark, start, end){ // eg dark, 1, 2 para fazer loop entre 1 e 2

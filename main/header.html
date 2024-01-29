@@ -19,12 +19,12 @@
             document.getElementById('tema').style.display = '';
             document.getElementById('HCtema').style.display = 'none';
             document.getElementById('ColorHC').style.display = 'none';
-            mudaTema(dark);
+            tema = mudaTema(dark);
         }else{
             document.getElementById('tema').style.display = 'none';
             document.getElementById('HCtema').style.display = 'initial';
             document.getElementById('ColorHC').style.display = 'grid';
-            mudaTema(hc);
+            tema = mudaTema(hc);
         }
     ">
     HC
@@ -32,7 +32,8 @@
 
     <div id="HCtema" onclick="
         hc = loopDark(hc, 3, 5); // trocar entre os temas HC dark
-        mudaTema(hc);
+        tema = mudaTema(hc);
+        customColor = document.documentElement.style.getPropertyValue('--Black');
         document.getElementById('HCCircle').style.marginLeft = 'calc(25% * '+ (hc-2) +' - 13px)'; // 3 posições 100/4%, 4 posições = 100/6%, 5 posições = 100/8
     ">
         <div id="HCCircle"></div>
@@ -44,6 +45,7 @@
 
     <script>
         $('#ColorHC').change(function (a) {
+            customColor = this.value;
             document.documentElement.style.setProperty('--Black', this.value);
             document.documentElement.style.setProperty('--RealDarkBlueBTN', this.value);
             document.documentElement.style.setProperty('--BaseColor', this.value);
@@ -68,7 +70,7 @@
 
     <div id="tema" onclick="
         dark = loopDark(dark, 1, 2); // trocar somente entre light e dark
-        mudaTema(dark);
+        tema = mudaTema(dark);
     ">
         <div id="temaCircle"></div>
 

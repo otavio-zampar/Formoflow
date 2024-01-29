@@ -40,7 +40,11 @@ function avaliaJanela(a, c){
         var thisDivCount = String(a.parentElement.parentElement.id).replace("div", ""); // form, tstDiv, ActualDiv
         var actualName = $("#div"+thisDivCount).attr("actualname");
         var exit = $("#div"+thisDivCount).attr("exit");
-        var avaliacao = actualName+"(";
+        if (actualName == "doEval") {
+            var avaliacao = actualName+"(\"";
+        }else{
+            var avaliacao = actualName+"(";
+        }
 
         for (let index = 0; index < inputForm; index++) {
             if (inputElements[index].value == "") {
@@ -52,13 +56,18 @@ function avaliaJanela(a, c){
                 avaliacao += ", ";
             }
         }
-        avaliacao += ")";
+        if (actualName == "doEval") {
+            avaliacao += "\")";
+        }else{
+            avaliacao += ")";
+        }
 
         try{
             var x = [];
             x = eval(avaliacao);
             if (typeof(x) == "number") {
-                document.getElementById("icon"+thisDivCount+"1").innerHTML = x;
+                // console.log(thisDivCount + ", " + inputForm );
+                document.getElementById("icon"+String(thisDivCount).concat(inputForm)).innerHTML = x;
             }else{
                 for (let index = 0; index < exit; index++) {
                     if (String(x[index]) == "undefined") {
@@ -67,11 +76,10 @@ function avaliaJanela(a, c){
                     document.getElementById("icon"+thisDivCount+(inputForm+index)).innerHTML = x[index];
                 }
             }
-            
         } catch(e){
             if (e instanceof SyntaxError || ReferenceError) {
                 console.log("Erro esperado, fórmula não concluída.");
-                // Faça algo para lidar com o erro de sintaxe, se necessário
+                // console.error("Erro:", e);
             } else {
                 // Outros tipos de erros que não são de sintaxe
                 console.error("Erro:", e);
@@ -494,6 +502,7 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
         }else{
             input.css("height", "2.2rem");   
         }
+        input.addClass("inputFormula");
 
         // add ao form
         form.append(label);
@@ -957,6 +966,9 @@ function saveJson(element){
 function saveAll() {
     var json = {
         "success": "true",
+        "language": linguagem,
+        "theme": tema,
+        "customColor": customColor,
         "windows": []
     }
     document.querySelectorAll(".ActualDiv").forEach(em => {

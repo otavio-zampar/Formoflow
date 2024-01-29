@@ -46,10 +46,6 @@ function doFat(expression) {
       return "fatoracao(" + match.slice(0, -1) + ")";
     });
   }
-  
-  
-
-
 // (3+5)^2 gives 28 (3 + 5^2), not 64
 function doExpo(result){
     var entireString = "";
