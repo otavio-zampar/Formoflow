@@ -131,6 +131,23 @@
     user-select: none;
   }
   
+.hiddenName{
+  margin-left: 0px;
+  background-color: #00000044;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 1rem;
+  padding-left: 10px;
+  border: 0px;
+  color: var(--White);
+  width: 100px;
+  height: 100%;
+  overflow: hidden;
+}
+.hiddenName:focus{
+  outline: 0px;
+}
+
   .resize-handle {
     bottom: 0px;
     /* background-color: var(--AccentColor); */

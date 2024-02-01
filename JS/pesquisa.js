@@ -88,10 +88,7 @@ function criaListaCompleta(data){
     criaLiCompleto(dataAgrupado);
 }
 
-
 function criaLiCompleto(data){
-
-    
 
     for (const [keys, value] of Object.entries(data)) {
 

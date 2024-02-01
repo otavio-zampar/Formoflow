@@ -7,76 +7,76 @@ var leftOffset = 0;
 var b = 200;
 
 function findZindex() {
-    $('.ActualDiv').each(function() {
+    $('.ActualDiv').each(function () {
         var zIndex = parseInt($(this).css('z-index'));
         if (!isNaN(zIndex) && zIndex > highestZIndex) {
             highestZIndex = zIndex;
         }
     });
 }
-function getColor(){
-    var color = Math.floor(Math.random()*16777215).toString(16);
+function getColor() {
+    var color = Math.floor(Math.random() * 16777215).toString(16);
     var regex = /[0-5]/ig;
-    color = color.replace(regex, function(char, index){
+    color = color.replace(regex, function (char, index) {
         return Math.floor(color[index] * 1.6);
     });
-    if(color.length == 5) color = color.concat('f'); 
-    return "#"+color;
+    if (color.length == 5) color = color.concat('f');
+    return "#" + color;
 }
 
-function getGrayColor(){
+function getGrayColor() {
     var color = Math.floor(Math.random() * 255).toString(16);
     var regex = /[a-f]/ig;
-    color = color.replace(regex, function(char, index){
+    color = color.replace(regex, function (char, index) {
         return Math.floor((color.charCodeAt(index) - 97) * 1.6);
     });
-    return "#"+color+color+color;
+    return "#" + color + color + color;
 }
 
-function avaliaJanela(a, c){
-    if(c >= 0){
+function avaliaJanela(a, c) {
+    if (c >= 0) {
         var inputElements = a.querySelectorAll('input');
         inputForm = inputElements.length;
         var thisDivCount = String(a.parentElement.parentElement.id).replace("div", ""); // form, tstDiv, ActualDiv
-        var actualName = $("#div"+thisDivCount).attr("actualname");
-        var exit = $("#div"+thisDivCount).attr("exit");
+        var actualName = $("#div" + thisDivCount).attr("actualname");
+        var exit = $("#div" + thisDivCount).attr("exit");
         if (actualName == "doEval") {
-            var avaliacao = actualName+"(\"";
-        }else{
-            var avaliacao = actualName+"(";
+            var avaliacao = actualName + "(\"";
+        } else {
+            var avaliacao = actualName + "(";
         }
 
         for (let index = 0; index < inputForm; index++) {
             if (inputElements[index].value == "") {
                 avaliacao += "0";
-            }else{
+            } else {
                 avaliacao += inputElements[index].value;
             }
-            if (index < inputForm-1) {
+            if (index < inputForm - 1) {
                 avaliacao += ", ";
             }
         }
         if (actualName == "doEval") {
             avaliacao += "\")";
-        }else{
+        } else {
             avaliacao += ")";
         }
 
-        try{
+        try {
             var x = [];
             x = eval(avaliacao);
-            if (typeof(x) == "number") {
+            if (typeof (x) == "number") {
                 // console.log(thisDivCount + ", " + inputForm );
-                document.getElementById("icon"+String(thisDivCount).concat(inputForm)).innerHTML = x;
-            }else{
+                document.getElementById("icon" + String(thisDivCount).concat(inputForm)).innerHTML = x;
+            } else {
                 for (let index = 0; index < exit; index++) {
                     if (String(x[index]) == "undefined") {
                         x[index] = "NaN";
                     }
-                    document.getElementById("icon"+thisDivCount+(inputForm+index)).innerHTML = x[index];
+                    document.getElementById("icon" + thisDivCount + (inputForm + index)).innerHTML = x[index];
                 }
             }
-        } catch(e){
+        } catch (e) {
             if (e instanceof SyntaxError || ReferenceError) {
                 console.log("Erro esperado, fórmula não concluída.");
                 // console.error("Erro:", e);
@@ -90,7 +90,7 @@ function avaliaJanela(a, c){
 }
 
 // para criar uma div sem o onclick é so colocar o inputForm como 0
-function createDiv(AA) {    
+function createDiv(AA) {
     var nomeForm = AA.option;
     var actualName = AA.form;
     var inputForm = AA.qnt;
@@ -112,10 +112,10 @@ function createDiv(AA) {
     tstDiv.attr("GrayColor", grayC);
     if (dark != 1) { // se for modo dark
         tstDiv.css("background-color", grayC);
-    }else{
+    } else {
         tstDiv.css("background-color", colorC);
     }
-    
+
     var ActualResizeHandleS = $('<div>').addClass('resize-handle s ui-resizable-s'); // S
     var ActualResizeHandleE = $('<div>').addClass('resize-handle e ui-resizable-e') // E
     var ActualResizeHandleW = $('<div>').addClass('resize-handle w ui-resizable-w'); //.css('z-index', '0px'); // W
@@ -137,60 +137,60 @@ function createDiv(AA) {
         for (let index = 0; index < inputForm; index++) {
             // cria o input
             var label = $('<label>').attr({
-                "for": "input"+divCount+index,
-                "hidden" : ""
+                "for": "input" + divCount + index,
+                "hidden": ""
             });
-            var input = $('<input>').attr('type', 'text').attr('id', "input"+divCount+index).addClass("inputFormula");
-            
+            var input = $('<input>').attr('type', 'text').attr('id', "input" + divCount + index).addClass("inputFormula");
+
             if (AA.placeholder[index] != undefined) {
                 input.attr("placeholder", AA.placeholder[index]);
                 label.empty();
                 label.html(AA.placeholder[index]);
-            }else{
+            } else {
                 input.attr("placeholder", "Digite o texto");
                 label.html("Digite o texto");
             }
 
-            input.css("height", "2.2rem");   
+            input.css("height", "2.2rem");
             input.css("outline-color", "transparent");
-            var valor = "10% + 30px + "+ index +" * (min(2rem, 2vh) + 2.2rem - 1px)";
-            input.css("top", "calc("+valor+")");
+            var valor = "10% + 30px + " + index + " * (min(2rem, 2vh) + 2.2rem - 1px)";
+            input.css("top", "calc(" + valor + ")");
 
-            input.keydown(function(event) {
+            input.keydown(function (event) {
                 if (event.which === 13) {
                     event.preventDefault();
                 }
             });
 
             // cria as setas
-            var seta = $("<div>").addClass("arrow right").attr('id', "seta"+divCount+index).css("position", "absolute");
-            var linha = $('<div>').addClass("linha").attr('id', "linha"+divCount+index); // linha q completa a seta
+            var seta = $("<div>").addClass("arrow right").attr('id', "seta" + divCount + index).css("position", "absolute");
+            var linha = $('<div>').addClass("linha").attr('id', "linha" + divCount + index); // linha q completa a seta
 
-            seta.css("top", "calc("+valor+" - 5px + 1.1rem)");
-            linha.css("top", "calc("+valor+" - 2px + 1.1rem)");
+            seta.css("top", "calc(" + valor + " - 5px + 1.1rem)");
+            linha.css("top", "calc(" + valor + " - 2px + 1.1rem)");
 
             seta.draggable({
-                start: function(){
+                start: function () {
                     selectedArrowX = $(this).css("left");
                     selectedArrowY = $(this).css("top");
                     arrowId = $(this).attr('id');
                     inputId = $('#' + arrowId.replace('seta', 'input'));
                     ActualTop = 1;
                     leftOffset = 0;
-                    
+
                     // apaga a linha inicial
-                    $('#' + arrowId.replace('seta', 'linha')).css("display", "none"); 
+                    $('#' + arrowId.replace('seta', 'linha')).css("display", "none");
 
                     findZindex();
                     highestZIndex += 2;
-                    $(this).css('z-index', highestZIndex+200);
+                    $(this).css('z-index', highestZIndex + 200);
                 },
-                stop: function() {
+                stop: function () {
                     $(this).css({
                         "top": selectedArrowY,
                         "left": selectedArrowX
                     });
-                    $('#' + arrowId.replace('seta', 'linha')).css("display", "initial"); 
+                    $('#' + arrowId.replace('seta', 'linha')).css("display", "initial");
                 },
             });
             // add ao form
@@ -199,11 +199,11 @@ function createDiv(AA) {
             form.append(seta);
             form.append(linha);
 
-            input.on('input', function(){
+            input.on('input', function () {
                 avaliaJanela(this.parentElement, b);
             });
-            
-            input.on('inputDiferente', function(){
+
+            input.on('inputDiferente', function () {
                 avaliaJanela(this.parentElement, b);
             });
 
@@ -212,54 +212,54 @@ function createDiv(AA) {
         tstDiv.append(form);
 
         for (let index = 0; index < exit; index++) {
-        
-            var icon = $('<div>').addClass('icon noCopy').attr('id', "icon"+divCount+(inputForm+index)); // Unicode emoji for smiling face 
+
+            var icon = $('<div>').addClass('icon noCopy').attr('id', "icon" + divCount + (inputForm + index)); // Unicode emoji for smiling face 
             icon.css("position", "absolute");
             icon.css("outline-color", "transparent");
-            icon.on("click", function(){
-                var copyText = document.getElementById("icon"+divCount+(inputForm+index));
+            icon.on("click", function () {
+                var copyText = document.getElementById("icon" + divCount + (inputForm + index));
                 navigator.clipboard.writeText(copyText.innerHTML); // copy to clipboard
                 document.getElementById('BTNAlerta').style.display = "initial";
                 ActualTop = 1;
                 leftOffset = 0;
                 setTimeout(() => {
-                document.getElementById('BTNAlerta').style.display = "none";
+                    document.getElementById('BTNAlerta').style.display = "none";
                 }, 1000);
             });
 
-            var valor = "10% + 30px + "+ (index+inputForm) +" * (min(2rem, 2vh) + 2.2rem - 1px)";
-            icon.css("top", "calc("+valor+")");
-            
-            
-            var seta = $("<div>").addClass("arrow right").attr('id', "seta"+divCount+(inputForm+index)).css("position", "absolute");
-            var linha = $('<div>').addClass("linha").attr('id', "linha"+divCount+(inputForm+index)); // linha q completa a seta
+            var valor = "10% + 30px + " + (index + inputForm) + " * (min(2rem, 2vh) + 2.2rem - 1px)";
+            icon.css("top", "calc(" + valor + ")");
 
-            seta.css("top", "calc("+valor+" - 5px + 1.1rem)");
-            linha.css("top", "calc("+valor+" - 2px + 1.1rem)");
 
-            
+            var seta = $("<div>").addClass("arrow right").attr('id', "seta" + divCount + (inputForm + index)).css("position", "absolute");
+            var linha = $('<div>').addClass("linha").attr('id', "linha" + divCount + (inputForm + index)); // linha q completa a seta
+
+            seta.css("top", "calc(" + valor + " - 5px + 1.1rem)");
+            linha.css("top", "calc(" + valor + " - 2px + 1.1rem)");
+
+
             seta.draggable({
-                start: function(){
+                start: function () {
                     selectedArrowX = $(this).css("left");
                     selectedArrowY = $(this).css("top");
                     arrowId = $(this).attr('id');
                     inputId = $('#' + arrowId.replace('seta', 'icon'));
                     ActualTop = 1;
                     leftOffset = 0;
-                    
+
                     // apaga a linha inicial
-                    $('#' + arrowId.replace('seta', 'linha')).css("display", "none"); 
+                    $('#' + arrowId.replace('seta', 'linha')).css("display", "none");
 
                     findZindex();
                     highestZIndex += 2;
-                    $(this).css('z-index', highestZIndex+9999);
+                    $(this).css('z-index', highestZIndex + 9999);
                 },
-                stop: function() {
+                stop: function () {
                     $(this).css({
                         "top": selectedArrowY,
                         "left": selectedArrowX
                     });
-                    $('#' + arrowId.replace('seta', 'linha')).css("display", "initial"); 
+                    $('#' + arrowId.replace('seta', 'linha')).css("display", "initial");
                 },
             });
 
@@ -288,7 +288,7 @@ function createDiv(AA) {
         },
         minWidth: 300,
 
-        resize: function(event, ui) {
+        resize: function (event, ui) {
             var actualWidth = ui.size.width;
             var actualHeight = ui.size.height;
             ui.originalLeft = ui.position.left;
@@ -300,30 +300,30 @@ function createDiv(AA) {
             ActualResizeHandleW.css('height', actualHeight);
             tstDiv.css('width', actualWidth);
             tstDiv.css('height', actualHeight);
-            
+
             $(".tstDiv > .arrow").each(function () {
                 linhaId = this.id.replace("seta", "linha");
                 $(this).css({
-                    "top": "calc("+$("#"+linhaId).css("top")+" - 3px)",
+                    "top": "calc(" + $("#" + linhaId).css("top") + " - 3px)",
                     "left": ""
                 });
             });
         }
     });
-    var minHeight = "calc("+icon.css('top')+" + "+ icon.css('height') +" + 30px)";
+    var minHeight = "calc(" + icon.css('top') + " + " + icon.css('height') + " + 30px)";
     if (ActualTop >= 9) {
         ActualTop = 1;
         leftOffset++;
     }
     ActualDiv.css({
         minHeight: minHeight,
-        height:minHeight,
+        height: minHeight,
         width: "320px",
         zIndex: highestZIndex + 1,
-        left: "calc(5vw + "+ 50 * ActualTop +"px + "+ 50 * leftOffset +"px)",
-        top: "calc(20vh + "+ 50 * ActualTop +"px + "+ 30 * leftOffset +"px)"
+        left: "calc(5vw + " + 50 * ActualTop + "px + " + 50 * leftOffset + "px)",
+        top: "calc(20vh + " + 50 * ActualTop + "px + " + 30 * leftOffset + "px)"
     });
-    
+
     tstDiv.css('min-height', minHeight);
     tstDiv.css('height', minHeight);
 
@@ -333,8 +333,8 @@ function createDiv(AA) {
     }
     DraggableDiv.css({
         zIndex: highestZIndex + 1,
-        left: "calc(5vw + "+ 50 * ActualTop +"px + "+ 50 * leftOffset +"px)",
-        top: "calc(20vh + "+ 50 * ActualTop +"px + "+ 30 * leftOffset +"px)"
+        left: "calc(5vw + " + 50 * ActualTop + "px + " + 50 * leftOffset + "px)",
+        top: "calc(20vh + " + 50 * ActualTop + "px + " + 30 * leftOffset + "px)"
     });
     ActualResizeHandleE.css({
         'min-height': minHeight,
@@ -347,7 +347,7 @@ function createDiv(AA) {
 
     DraggableDiv.draggable({
         containment: "#container",
-        drag: function(event, ui) {
+        drag: function (event, ui) {
             var offset = ui.offset;
             var left = offset.left;
             var top = offset.top;
@@ -358,18 +358,18 @@ function createDiv(AA) {
         }
     });
 
-    CloseR.on('mousedown', function(){ 
+    CloseR.on('mousedown', function () {
 
-        $("#"+DraggableDiv.attr("id")).remove();
-        $("#"+ActualDiv.attr("id")).remove();
+        $("#" + DraggableDiv.attr("id")).remove();
+        $("#" + ActualDiv.attr("id")).remove();
 
     });
 
-    minimize.on('mousedown', function(){
-        if(mini == 0){
+    minimize.on('mousedown', function () {
+        if (mini == 0) {
             ActualDiv.css('display', 'none');
             mini = 1;
-        }else{  
+        } else {
             ActualDiv.css('display', 'initial');
             mini = 0;
         }
@@ -378,23 +378,23 @@ function createDiv(AA) {
 
     $('input[class="inputFormula"]').droppable({
         accept: '.arrow',
-        drop: function() {
+        drop: function () {
             if (String(inputId.attr("id")).includes("icon")) {
                 $(this).val(inputId.text()); // caso a seta venha de um div
-                if(inputId.attr("InputPai")){
+                if (inputId.attr("InputPai")) {
                     $(this).attr("InputPai", inputId.attr("InputPai"));
                     $(this).css("outline-color", document.getElementById(inputId.attr("InputPai")).parentElement.style.backgroundColor);
                     // console.log(+document.getElementById(inputId.attr("InputPai"))+", "+document.getElementById(inputId.attr("InputPai")).parentElement.style.backgroundColor);
-                }else{
+                } else {
                     $(this).attr("InputPai", inputId.attr("id"));
                     $(this).css("outline-color", document.getElementById(inputId.attr("id")).parentElement.style.backgroundColor);
                 }
             } else {
                 $(this).val(inputId.val()); // caso a seta venha de um input
-                if(inputId.attr("InputPai")){
+                if (inputId.attr("InputPai")) {
                     $(this).attr("InputPai", inputId.attr("InputPai"));
                     $(this).css("outline-color", document.getElementById(inputId.attr("InputPai")).parentElement.parentElement.style.backgroundColor);
-                }else{
+                } else {
                     $(this).attr("InputPai", inputId.attr("id"));
                     $(this).css("outline-color", document.getElementById(inputId.attr("id")).parentElement.parentElement.style.backgroundColor);
                 }
@@ -404,19 +404,19 @@ function createDiv(AA) {
     });
 
 
-    $('.inputFormula').on('input', function(){
+    $('.inputFormula').on('input', function () {
         var mudado = $(this);
 
-        $('.inputFormula').each(function() {
+        $('.inputFormula').each(function () {
             if (mudado.attr("id") == $(this).attr("InputPai")) {
                 $(this).val(mudado.val());
                 $(this).trigger('inputDiferente');
             }
         });
     });
-    $('.icon').on('DOMSubtreeModified', function(){
+    $('.icon').on('DOMSubtreeModified', function () {
         var mudado = this;
-        $('.inputFormula').each(function() {
+        $('.inputFormula').each(function () {
             if (mudado.id == $(this).attr("InputPai")) {
                 $(this).val(mudado.innerHTML);
                 $(this).trigger('inputDiferente');
@@ -424,15 +424,15 @@ function createDiv(AA) {
         });
     });
 
-    $(document).mousedown(function(e){
-        var string = String('#'+randomId+", #draggable"+randomId);
+    $(document).mousedown(function (e) {
+        var string = String('#' + randomId + ", #draggable" + randomId);
         if ($(string).children().is(e.target)) {
             ActualTop = 1;
             leftOffset = 0;
             findZindex();
             highestZIndex += 2;
-            $("#"+randomId).css("z-index", highestZIndex);
-            $("#draggable"+randomId).css("z-index", highestZIndex);
+            $("#" + randomId).css("z-index", highestZIndex);
+            $("#draggable" + randomId).css("z-index", highestZIndex);
         }
     });
 
@@ -463,7 +463,7 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
     tstDiv.attr("GrayColor", grayC);
     if (dark != 1) { // se for modo dark
         tstDiv.css("background-color", grayC);
-    }else{
+    } else {
         tstDiv.css("background-color", colorC);
     }
     var ActualResizeHandleS = $('<div>').addClass('resize-handle s ui-resizable-s'); // S
@@ -480,16 +480,16 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
 
         // cria o input
         var label = $('<label>').attr({
-            "for": "input"+divCount+1,
-            "hidden" : ""
+            "for": "input" + divCount + 1,
+            "hidden": ""
         }).html(nomeForm);
-        var input = $('<'+inputInput+'>').attr('type', actualName).attr('id', "input"+divCount+1).attr("min", 0).attr("max", 100).attr("value", 0); // .addClass("inputFormula")
+        var input = $('<' + inputInput + '>').attr('type', actualName).attr('id', "input" + divCount + 1).attr("min", 0).attr("max", 100).attr("value", 0); // .addClass("inputFormula")
         input.css("position", "absolute");
         input.css("left", "3vh");
         input.css("width", "calc(100% - 6vh)");
         input.css("outline-color", "transparent");
         var valor = "3vh + 30px";
-        input.css("top", "calc("+valor+")");
+        input.css("top", "calc(" + valor + ")");
         if (exit == 0) { // somente p textarea
             input.css({
                 "height": "calc(100% - (6vh + 30px))",
@@ -499,8 +499,8 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
                 "font-weight": "bold",
                 "min-height": "4.4rem"
             });
-        }else{
-            input.css("height", "2.2rem");   
+        } else {
+            input.css("height", "2.2rem");
         }
         input.addClass("inputFormula");
 
@@ -509,35 +509,35 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
         form.append(input);
         tstDiv.append(form);
 
-        if(exit != 0){
-            var icon = $('<div>').addClass('icon noCopy').attr('id', "icon"+divCount+(inputForm+1)); // Unicode emoji for smiling face 
+        if (exit != 0) {
+            var icon = $('<div>').addClass('icon noCopy').attr('id', "icon" + divCount + (inputForm + 1)); // Unicode emoji for smiling face 
             icon.css("position", "absolute");
             icon.css("left", "10%");
             icon.css("outline-color", "transparent");
-            icon.on("click", function(){
-                var copyText = document.getElementById("icon"+divCount+(inputForm+1));
+            icon.on("click", function () {
+                var copyText = document.getElementById("icon" + divCount + (inputForm + 1));
                 navigator.clipboard.writeText(copyText.innerHTML); // copy to clipboard
                 ActualTop = 1;
                 leftOffset = 0;
                 document.getElementById('BTNAlerta').style.display = "initial";
                 setTimeout(() => {
-                document.getElementById('BTNAlerta').style.display = "none";
+                    document.getElementById('BTNAlerta').style.display = "none";
                 }, 1000);
             });
 
             var valor = "10% + 60px + 2.2rem";
-            icon.css("top", "calc("+valor+")");
-            
-            
-            var seta = $("<div>").addClass("arrow right").attr('id', "seta"+divCount+(inputForm+1)).css("position", "absolute");
-            var linha = $('<div>').addClass("linha").attr('id', "linha"+divCount+(inputForm+1)); // linha q completa a seta
+            icon.css("top", "calc(" + valor + ")");
 
-            seta.css("top", "calc("+valor+" - 5px + 1.1rem)");
-            linha.css("top", "calc("+valor+" - 2px + 1.1rem)");
 
-            
+            var seta = $("<div>").addClass("arrow right").attr('id', "seta" + divCount + (inputForm + 1)).css("position", "absolute");
+            var linha = $('<div>').addClass("linha").attr('id', "linha" + divCount + (inputForm + 1)); // linha q completa a seta
+
+            seta.css("top", "calc(" + valor + " - 5px + 1.1rem)");
+            linha.css("top", "calc(" + valor + " - 2px + 1.1rem)");
+
+
             seta.draggable({
-                start: function(){
+                start: function () {
                     // $(this) = $(this);
                     selectedArrowX = $(this).css("left");
                     selectedArrowY = $(this).css("top");
@@ -545,20 +545,20 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
                     inputId = $('#' + arrowId.replace('seta', 'icon'));
                     ActualTop = 1;
                     leftOffset = 0;
-                    
+
                     // apaga a linha inicial
-                    $('#' + arrowId.replace('seta', 'linha')).css("display", "none"); 
+                    $('#' + arrowId.replace('seta', 'linha')).css("display", "none");
 
                     findZindex();
                     highestZIndex += 2;
-                    $(this).css('z-index', highestZIndex+200);
+                    $(this).css('z-index', highestZIndex + 200);
                 },
-                stop: function() {
+                stop: function () {
                     $(this).css({
                         "top": selectedArrowY,
                         "left": selectedArrowX
                     });
-                    $('#' + arrowId.replace('seta', 'linha')).css("display", "initial"); 
+                    $('#' + arrowId.replace('seta', 'linha')).css("display", "initial");
                 },
             });
 
@@ -566,14 +566,14 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
             tstDiv.append(linha);
             tstDiv.append(seta);
 
-            form.on('input', function(){
+            form.on('input', function () {
                 icon.text(input.val());
             });
-        
+
         }
     }
 
-    
+
     $('body').append(ActualDiv);
     $('body').append(DraggableDiv);
     DraggableDiv.append(nome);
@@ -593,7 +593,7 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
         },
         minWidth: 300,
 
-        resize: function(event, ui) {
+        resize: function (event, ui) {
             var actualWidth = ui.size.width;
             var actualHeight = ui.size.height;
             ui.originalLeft = ui.position.left;
@@ -605,12 +605,12 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
             ActualResizeHandleW.css('height', actualHeight);
             tstDiv.css('width', actualWidth);
             tstDiv.css('height', actualHeight);
-            input.css("max-height", "calc("+tstDiv.css("height")+" - 20% - 30px)");
-            
+            input.css("max-height", "calc(" + tstDiv.css("height") + " - 20% - 30px)");
+
             $(".tstDiv > .arrow").each(function () {
                 linhaId = this.id.replace("seta", "linha");
                 $(this).css({
-                    "top": "calc("+$("#"+linhaId).css("top")+" - 3px)",
+                    "top": "calc(" + $("#" + linhaId).css("top") + " - 3px)",
                     "left": ""
                 });
             });
@@ -618,8 +618,8 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
         }
     });
     if (exit != 0) {
-        var minHeight = "calc("+icon.css('top')+" + "+ icon.css('height') +" + 30px)";    
-    }else{
+        var minHeight = "calc(" + icon.css('top') + " + " + icon.css('height') + " + 30px)";
+    } else {
         var minHeight = "calc(20% + 30px)";
     }
     if (ActualTop >= 9) {
@@ -631,8 +631,8 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
         height: minHeight,
         width: "320px",
         zIndex: highestZIndex + 1,
-        left: "calc(5vw + "+ 50 * ActualTop +"px + "+ 50 * leftOffset +"px)",
-        top: "calc(20vh + "+ 50 * ActualTop +"px + "+ 30 * leftOffset +"px)"
+        left: "calc(5vw + " + 50 * ActualTop + "px + " + 50 * leftOffset + "px)",
+        top: "calc(20vh + " + 50 * ActualTop + "px + " + 30 * leftOffset + "px)"
     });
 
     if (exit == 0) {
@@ -642,8 +642,8 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
     tstDiv.css('min-height', minHeight);
     DraggableDiv.css({
         'z-index': highestZIndex + 1,
-        left: "calc(5vw + "+ 50 * ActualTop +"px + "+ 50 * leftOffset +"px)",
-        top: "calc(20vh + "+ 50 * ActualTop +"px + "+ 30 * leftOffset +"px)"
+        left: "calc(5vw + " + 50 * ActualTop + "px + " + 50 * leftOffset + "px)",
+        top: "calc(20vh + " + 50 * ActualTop + "px + " + 30 * leftOffset + "px)"
     });
     ActualResizeHandleE.css({
         'min-height': minHeight,
@@ -656,7 +656,7 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
 
     DraggableDiv.draggable({
         containment: "#container",
-        drag: function(event, ui) {
+        drag: function (event, ui) {
             var offset = ui.offset;
             var left = offset.left;
             var top = offset.top;
@@ -668,18 +668,18 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
         }
     });
 
-    CloseR.on('mousedown', function(){ 
+    CloseR.on('mousedown', function () {
 
-        $("#"+DraggableDiv.attr("id")).remove();
-        $("#"+ActualDiv.attr("id")).remove();
+        $("#" + DraggableDiv.attr("id")).remove();
+        $("#" + ActualDiv.attr("id")).remove();
 
     });
 
-    minimize.on('mousedown', function(){
-        if(mini == 0){
+    minimize.on('mousedown', function () {
+        if (mini == 0) {
             ActualDiv.css('display', 'none');
             mini = 1;
-        }else{  
+        } else {
             ActualDiv.css('display', 'initial');
             mini = 0;
         }
@@ -687,22 +687,22 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
 
     $('input[class="inputFormula"]').droppable({
         accept: '.arrow',
-        drop: function() {
+        drop: function () {
             if (String(inputId.attr("id")).includes("icon")) {
                 $(this).val(inputId.text()); // caso a seta venha de um div
-                if(inputId.attr("InputPai")){
+                if (inputId.attr("InputPai")) {
                     $(this).attr("InputPai", inputId.attr("InputPai"));
                     $(this).css("outline-color", document.getElementById(inputId.attr("InputPai")).parentElement.style.backgroundColor);
-                }else{
+                } else {
                     $(this).attr("InputPai", inputId.attr("id"));
                     $(this).css("outline-color", document.getElementById(inputId.attr("id")).parentElement.style.backgroundColor);
                 }
             } else {
                 $(this).val(inputId.val()); // caso a seta venha de um input
-                if(inputId.attr("InputPai")){
+                if (inputId.attr("InputPai")) {
                     $(this).attr("InputPai", inputId.attr("InputPai"));
                     $(this).css("outline-color", document.getElementById(inputId.attr("InputPai")).parentElement.parentElement.style.backgroundColor);
-                }else{
+                } else {
                     $(this).attr("InputPai", inputId.attr("id"));
                     $(this).css("outline-color", document.getElementById(inputId.attr("id")).parentElement.parentElement.style.backgroundColor);
                 }
@@ -711,9 +711,9 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
         }
     });
 
-    $('.inputFormula').on('input', function(){
+    $('.inputFormula').on('input', function () {
         var mudado = $(this);
-        $('.inputFormula').each(function() {
+        $('.inputFormula').each(function () {
             if (mudado.attr("id") == $(this).attr("InputPai")) {
                 $(this).val(mudado.val());
                 $(this).trigger('inputDiferente');
@@ -721,9 +721,9 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
         });
     });
 
-    $('.icon').on('DOMSubtreeModified', function(){
+    $('.icon').on('DOMSubtreeModified', function () {
         var mudado = this;
-        $('.inputFormula').each(function() {
+        $('.inputFormula').each(function () {
             if (mudado.id == $(this).attr("InputPai")) {
                 $(this).val(mudado.innerHTML);
                 $(this).trigger('inputDiferente');
@@ -731,20 +731,20 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
         });
     });
 
-    $(document).mousedown(function(e){
-        var string = String('#'+randomId+", #draggable"+randomId);
+    $(document).mousedown(function (e) {
+        var string = String('#' + randomId + ", #draggable" + randomId);
         if ($(string).children().is(e.target)) {
             findZindex();
             ActualTop = 1;
             leftOffset = 0;
             highestZIndex += 2;
-            $("#"+randomId).css("z-index", highestZIndex);
-            $("#draggable"+randomId).css("z-index", highestZIndex);
+            $("#" + randomId).css("z-index", highestZIndex);
+            $("#draggable" + randomId).css("z-index", highestZIndex);
         }
     });
 }
 
-function uploadImg(selectedFile, naturalHeight, naturalWidth){
+function uploadImg(selectedFile, naturalHeight, naturalWidth) {
     if (selectedFile) {
 
         var ar = 0;
@@ -754,14 +754,15 @@ function uploadImg(selectedFile, naturalHeight, naturalWidth){
         var mini = 0;
         var ActualDiv = $('<div>').attr('id', randomId).addClass('ActualDiv noCopy');
         var DraggableDiv = $('<div>').attr('id', 'draggable' + randomId).addClass('DraggableDiv');
+        var nome = $('<input type="text">').css("margin", "0px").addClass("noCopy hiddenName");
         var minimize = $('<div>').addClass('minimize noCopy').html('&#128469');
         {
-        var CloseR = $('<div>').addClass('CloseR noCopy').html('&#10006');
+            var CloseR = $('<div>').addClass('CloseR noCopy').html('&#10006');
         }
         var tstDiv = $('<div>').addClass('tstDiv');
         tstDiv.css("padding", "0px");
         tstDiv.css("padding-top", "30px");
-        tstDiv.css("background-color", document.documentElement.style.getPropertyValue("--White")); 
+        tstDiv.css("background-color", document.documentElement.style.getPropertyValue("--White"));
         // basicamente eu estou pegando o valor da propriedade no momento q eu crio a janela, ao invés de pegar a propriedade
         // isso é util pq jogar diretamente como a variável deixaria o texto ilegível ao mudar o tema
 
@@ -772,7 +773,7 @@ function uploadImg(selectedFile, naturalHeight, naturalWidth){
 
         var label = $('<label>').attr({
             "for": "previewImage",
-            "hidden" : ""
+            "hidden": ""
         });
         var imgElement = $("<img>", {
             id: "previewImage",
@@ -781,17 +782,17 @@ function uploadImg(selectedFile, naturalHeight, naturalWidth){
             style: "min-width: 290px; min-height: 290px; max-width:100%; max-height:100%; position: relative;"
         });
 
-        if(naturalHeight > naturalWidth){
-            ar = naturalHeight/naturalWidth;
+        if (naturalHeight > naturalWidth) {
+            ar = naturalHeight / naturalWidth;
             tstDiv.css({
-                height:320*ar+"px",
-                'min-height': 320*ar+"px",
+                height: 320 * ar + "px",
+                'min-height': 320 * ar + "px",
                 'min-width': "320px",
                 width: '320px'
             });
             ActualDiv.css({
-                height:320*ar+"px",
-                'min-height': 320*ar+"px",
+                height: 320 * ar + "px",
+                'min-height': 320 * ar + "px",
                 'min-width': "320px",
                 width: '320px'
             });
@@ -799,38 +800,39 @@ function uploadImg(selectedFile, naturalHeight, naturalWidth){
                 'min-width': "320px",
                 width: '320px'
             });
-            ActualResizeHandleE.css("height", 320*ar+"px");
-            ActualResizeHandleW.css("height", 320*ar+"px");
+            ActualResizeHandleE.css("height", 320 * ar + "px");
+            ActualResizeHandleW.css("height", 320 * ar + "px");
             // ActualResizeHandleE.css("min-height", 320*ar+"px");
             // ActualResizeHandleW.css("min-height", 320*ar+"px");
-            imgElement.css("min-height", 290*ar+"px");
-            
-        }else{
-            ar = naturalWidth/naturalHeight;
+            imgElement.css("min-height", 290 * ar + "px");
+
+        } else {
+            ar = naturalWidth / naturalHeight;
             tstDiv.css({
-                height:"320px",
+                height: "320px",
                 'min-height': "320px",
-                'min-width': 290*ar+"px",
-                width: 290*ar+"px"
+                'min-width': 290 * ar + "px",
+                width: 290 * ar + "px"
             });
             ActualDiv.css({
-                height:"320px",
+                height: "320px",
                 'min-height': "320px",
-                'min-width': 290*ar+"px",
-                width: 290*ar+"px"
+                'min-width': 290 * ar + "px",
+                width: 290 * ar + "px"
             });
             DraggableDiv.css({
-                'min-width': 290*ar+"px",
-                width: 290*ar+"px"
+                'min-width': 290 * ar + "px",
+                width: 290 * ar + "px"
             });
-            ActualResizeHandleS.css("width", 290*ar+"px");
-            imgElement.css("min-width", 290*ar+"px");
+            ActualResizeHandleS.css("width", 290 * ar + "px");
+            imgElement.css("min-width", 290 * ar + "px");
         }
-        
+
 
 
         $('body').append(ActualDiv);
         $('body').append(DraggableDiv);
+        DraggableDiv.append(nome);
         DraggableDiv.append(minimize);
         DraggableDiv.append(CloseR);
         tstDiv.append(label);
@@ -842,6 +844,19 @@ function uploadImg(selectedFile, naturalHeight, naturalWidth){
 
         ActualDiv.append(ActualResizeHandleSE);
 
+        nome.keydown(em => {
+            let div = document.createElement("div");
+            div.setAttribute("style", "width: auto; white-space: nowrap;");
+            div.innerHTML = em.target.value;
+            let size = em.target.value.length + 1;
+            console.log(div.style.width);
+            console.log(div.innerHTML);
+            
+            if ((size * 12) <= (parseInt(em.target.parentElement.style.width) - 100)) {
+                nome.css("width", "calc(" + size * 12 + "px + 20px)");
+            }
+        });
+
         ActualDiv.resizable({
             handles: {
                 s: ".s",
@@ -850,7 +865,7 @@ function uploadImg(selectedFile, naturalHeight, naturalWidth){
             },
             minHeight: 50,
             minWidth: 50,
-            resize: function(event, ui) {
+            resize: function (event, ui) {
                 var actualWidth = ui.size.width;
                 var actualHeight = ui.size.height;
                 ui.originalLeft = ui.position.left;
@@ -867,7 +882,7 @@ function uploadImg(selectedFile, naturalHeight, naturalWidth){
 
         DraggableDiv.draggable({
             containment: "#container",
-            drag: function(event, ui) {
+            drag: function (event, ui) {
                 var offset = ui.offset;
                 var left = offset.left;
                 var top = offset.top;
@@ -878,18 +893,18 @@ function uploadImg(selectedFile, naturalHeight, naturalWidth){
                 });
             }
         });
-        CloseR.on('mousedown', function(){
+        CloseR.on('mousedown', function () {
 
-            $("#"+DraggableDiv.attr("id")).remove();
-            $("#"+ActualDiv.attr("id")).remove();
+            $("#" + DraggableDiv.attr("id")).remove();
+            $("#" + ActualDiv.attr("id")).remove();
 
         });
 
-        minimize.on('mousedown', function(){
-            if(mini == 0){
+        minimize.on('mousedown', function () {
+            if (mini == 0) {
                 ActualDiv.children().hide();
                 mini = 1;
-            }else{  
+            } else {
                 ActualDiv.children().show();
                 mini = 0;
             }
@@ -900,35 +915,35 @@ function uploadImg(selectedFile, naturalHeight, naturalWidth){
     }
 }
 
-window.addEventListener('resize', function(){
+window.addEventListener('resize', function () {
     $(".tstDiv > .arrow").each(function () {
         linhaId = this.id.replace("seta", "linha");
         $(this).css({
-            "top": "calc("+$("#"+linhaId).css("top")+" - 3px)",
+            "top": "calc(" + $("#" + linhaId).css("top") + " - 3px)",
             "left": ""
         });
     });
 });
 
-$(document).mousedown(function (){
+$(document).mousedown(function () {
     b = 200; // ACABA A PORCARIA DO BUG GRAÇADEUS
 });
 
-$(document).on("input", function (){
+$(document).on("input", function () {
     b = 200;
 });
 
-function saveJson(element){
+function saveJson(element) {
     var JsonWindow = {
         "ActualDiv": element.id,
-        "name": document.querySelector("#draggable"+element.id+" p").innerHTML,
+        "name": document.querySelector("#draggable" + element.id + " p").innerHTML,
         "atrr": {
             "left": element.style.left,
             "top": element.style.top,
             "width": element.style.width,
             "height": element.style.height,
-            "actualcolor": document.querySelector("#"+element.id+" .tstDiv").attributes.actualcolor.value,
-            "graycolor": document.querySelector("#"+element.id+" .tstDiv").attributes.graycolor.value
+            "actualcolor": document.querySelector("#" + element.id + " .tstDiv").attributes.actualcolor.value,
+            "graycolor": document.querySelector("#" + element.id + " .tstDiv").attributes.graycolor.value
         }
     }
 
@@ -936,26 +951,26 @@ function saveJson(element){
         JsonWindow["function"] = element.attributes.actualname.value;
     }
 
-    if (document.querySelectorAll("#"+element.id+" .inputFormula").length != 0) {
+    if (document.querySelectorAll("#" + element.id + " .inputFormula").length != 0) {
         JsonWindow["input"] = [];
-        document.querySelectorAll("#"+element.id+" .inputFormula").forEach(em => {
-            if(em.attributes.inputpai){
+        document.querySelectorAll("#" + element.id + " .inputFormula").forEach(em => {
+            if (em.attributes.inputpai) {
                 JsonWindow["input"].push({
                     "value": em.value,
                     "inputpai": em.attributes.inputpai.value,
                     "outline-color": em.style.outlineColor
                 });
-            }else{
+            } else {
                 JsonWindow["input"].push({
                     "value": em.value
                 });
             }
         });
     }
-    
-    if (document.querySelectorAll("#"+element.id+" .icon").length != 0) {
+
+    if (document.querySelectorAll("#" + element.id + " .icon").length != 0) {
         JsonWindow["icon"] = [];
-        document.querySelectorAll("#"+element.id+" .icon").forEach(em => {
+        document.querySelectorAll("#" + element.id + " .icon").forEach(em => {
             JsonWindow["icon"].push(em.innerHTML);
         });
     }
