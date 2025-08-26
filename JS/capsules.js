@@ -4,7 +4,7 @@ var inputId = null; // Armazena o input de destino selecionado
 var highestZIndex = 11;
 var ActualTop = 0;
 var leftOffset = 0;
-var b = 200;
+var counter = 200;
 
 function findZindex() {
     $('.ActualDiv').each(function () {
@@ -33,11 +33,11 @@ function getGrayColor() {
     return "#" + color + color + color;
 }
 
-function avaliaJanela(a, c) {
-    if (c >= 0) {
-        var inputElements = a.querySelectorAll('input');
+function avaliaJanela(input, counter) {
+    if (counter >= 0) {
+        var inputElements = input.querySelectorAll('input');
         inputForm = inputElements.length;
-        var thisDivCount = String(a.parentElement.parentElement.id).replace("div", ""); // form, tstDiv, ActualDiv
+        var thisDivCount = String(input.parentElement.parentElement.id).replace("div", ""); // form, tstDiv, ActualDiv
         var actualName = $("#div" + thisDivCount).attr("actualname");
         var exit = $("#div" + thisDivCount).attr("exit");
         if (actualName == "doEval") {
@@ -86,7 +86,7 @@ function avaliaJanela(a, c) {
             }
         }
     }
-    b--;
+    counter--;
 }
 
 // para criar uma div sem o onclick é so colocar o inputForm como 0
@@ -200,11 +200,11 @@ function createDiv(AA) {
             form.append(linha);
 
             input.on('input', function () {
-                avaliaJanela(this.parentElement, b);
+                avaliaJanela(this.parentElement, counter);
             });
 
             input.on('inputDiferente', function () {
-                avaliaJanela(this.parentElement, b);
+                avaliaJanela(this.parentElement, counter);
             });
 
         }
@@ -399,7 +399,7 @@ function createDiv(AA) {
                     $(this).css("outline-color", document.getElementById(inputId.attr("id")).parentElement.parentElement.style.backgroundColor);
                 }
             }
-            avaliaJanela(this.parentElement, b);
+            avaliaJanela(this.parentElement, counter);
         }
     });
 
@@ -707,7 +707,7 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
                     $(this).css("outline-color", document.getElementById(inputId.attr("id")).parentElement.parentElement.style.backgroundColor);
                 }
             }
-            avaliaJanela(this.parentElement, b);
+            avaliaJanela(this.parentElement, counter);
         }
     });
 
@@ -925,13 +925,13 @@ window.addEventListener('resize', function () {
     });
 });
 
-$(document).mousedown(function () {
-    b = 200; // ACABA A PORCARIA DO BUG GRAÇADEUS
-});
+// $(document).mousedown(function () {
+//     counter = 200; // ACABA A PORCARIA DO BUG GRAÇADEUS
+// });
 
-$(document).on("input", function () {
-    b = 200;
-});
+// $(document).on("input", function () {
+//     counter = 200;
+// });
 
 function saveJson(element) {
     var JsonWindow = {

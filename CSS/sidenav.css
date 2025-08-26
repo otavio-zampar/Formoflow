@@ -119,6 +119,15 @@
     position: absolute; 
     border-bottom-left-radius: 1rem;
 }
+#borderCorner{
+    background-color:var(--BaseColor); 
+    bottom: 0px; 
+    right: -2vw; 
+    height: 64vh ; 
+    width: 2vw;
+    position: absolute; 
+    z-index: 9999;
+}
 
 #corner{
     background-color:var(--AccentColorExtra); 

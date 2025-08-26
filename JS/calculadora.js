@@ -84,9 +84,9 @@ function multiply(CharAnsDoc){
 }
 
 function doEval(ansDoc){
-if (typeof(ansDoc) == 'number') {
-    ansDoc = String(ansDoc);
-}
+    if (typeof(ansDoc) == 'number') {
+        ansDoc = String(ansDoc);
+    }
     if(ansDoc.includes('π')){
         if(multiply(ansDoc[parseFloat(ansDoc.indexOf('π')-1)])){
             ansDoc = ansDoc.substring(0, ansDoc.indexOf('π')) + "*" + ansDoc.substring(ansDoc.indexOf('π'));

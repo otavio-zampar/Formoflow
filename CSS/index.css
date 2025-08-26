@@ -30,19 +30,19 @@ body{
 
 #flags{
     z-index: 4; 
-    padding: 10px; 
+    padding: 5px; 
     position: fixed; 
     left: 10px; 
     top: 18px; 
-    width: 210px; 
-    height: 62px; 
+    width: 105px;
+    height: 36px;
     background-color: var(--SecondAccentColorFlags); 
     border-radius: 10px;
     opacity: 1;
 }
 
 #flags > img{
-    width: 59px;
+    width: 28px;
     cursor: pointer;
 }
 

@@ -39,60 +39,61 @@
             <input id="btn9" type="button" value="9" class="grid-item-number" onmousedown="document.calculator.ans.value+='9'; f = 0; ">
             <label for="btn0" hidden>0</label>    
             <input id="btn0" type="button" value="0" class="grid-item-number" onmousedown="document.calculator.ans.value+='0'; f = 0; ">
-            <label for="btnPoint" hidden>.</label>    
-            <input id="btnPoint" type="button" value="." class="grid-item-number" onmousedown="{
+            <label for="btnPoint" hidden>.</label>
+            <input id="btnPoint" type="button" value="." class="grid-item-number" onmousedown="
                     if(i == 0){
                         document.calculator.ans.value+='.';
                         i = 1;
                     }
-                }">
+                ">
                 <!-- ao apertar o botao '.' ele muda uma variavel de valor por exemplo 1, nao se pode colocar outro '.' enquanto esta variavel for 1, a variavel so muda de valor depois de colocar um operando como + - / ou * -->
                 <label for="eval" hidden class="traduzir">Igual</label>
-                <input id="eval" type="button" value="=" class="grid-item-number" onmousedown="{
+                <input id="eval" type="button" value="=" class="grid-item-number" onmousedown="
                     document.calculator.preAns.value = document.calculator.ans.value;
                     document.calculator.ans.value = doEval(document.calculator.ans.value);
-                }">
+                ">
             </div>
         <!-- div de operaçoes -->
         <div class="borda"></div> <!-- this is the border separating the two divs -->
         <div class="grid-container gridOperandos">
             <p class="grid-item-operandos noCopy"  onmousedown="document.calculator.ans.value = document.calculator.ans.value.substring(0, document.calculator.ans.value.length - 1); i = 0; f = 0;">
             C</p>
-            <p class="grid-item-operandos noCopy" onmousedown="{
+            <p class="grid-item-operandos noCopy" onmousedown="
                 if(f == 0){
                     document.calculator.ans.value+='÷';
                     
                     f = 1;
                 }
                 i = 0;
-            }">÷</p>
-            <p class="grid-item-operandos noCopy" onmousedown="{
+            ">÷</p>
+            <p class="grid-item-operandos noCopy" onmousedown="
                 if(f == 0){
                     document.calculator.ans.value+='×';
                     
                     f = 1;
                 }
                 i = 0;
-            }" >×</p>
-            <p class="grid-item-operandos noCopy" onmousedown="{
+            " >×</p>
+            <p class="grid-item-operandos noCopy" onmousedown="
                     document.calculator.ans.value+='-';
                     
                     f = 1;
                     i = 0;
-            }">-</p>
-            <p class="grid-item-operandos noCopy" onmousedown="{
+            ">-</p>
+            <p class="grid-item-operandos noCopy" onmousedown="
                 if(f == 0){
                     document.calculator.ans.value+='+';
                     
                     f = 1;
                 }
                 i = 0;
-            }">+</p>
+            ">+</p>
         </div>
         <!-- div de operaçoes extras -->
         <div class="DivExtras"></div>
         <div id="corner" onmousedown="if(openExt == 0){openExtra();}"></div>
         <div id="otherCorner"></div>
+        <div id="borderCorner"></div>
         <div id="myExtra">
             <div class="openExtra" onmousedown="openExtra()">
                 <svg id="rotate" xmlns="https://www.w3.org/2000/svg" width="16" height="16" fill="var(--RealDarkBlueCalc)" class="bi bi-chevron-compact-left chevronExtra" viewBox="0 0 16 16">
@@ -106,7 +107,7 @@
                 <label for="btnRB" hidden class="traduzir">Parêntesis Direito</label>
                 <input id="btnRB" type="button" value=")" class="grid-item-extra" onmousedown="document.calculator.ans.value+=')'; f = 0; ">
                 <label for="switch" id="labelRAD" hidden class="traduzir">Radiano</label>
-                <input type="button" id="switch" value="RAD" class="grid-item-extra" onmousedown="{
+                <input type="button" id="switch" value="RAD" class="grid-item-extra" onmousedown="
                     if(document.getElementById('switch').value != 'DEG'){
                         document.getElementById('switch').value = 'DEG';
                         document.getElementById('labelRAD').innerHTML = 'Graus';
@@ -117,7 +118,7 @@
                         document.getElementById('switch2').innerHTML = 'DEG';
                     }
                     f = 0;
-                }">
+                ">
 
                 <!-- switches DEG for RAD on top left corner -->
                 

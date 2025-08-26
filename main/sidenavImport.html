@@ -6,7 +6,7 @@
 <div id="myImport" class="sidenavImport base">
     <div class="extraImport">
         <div class="ImportBase">Import
-            <input id="json-upload" type="file" accept="application/JSON" onchange="{
+            <input id="json-upload" type="file" accept="application/JSON" onchange="
                 var maxSize = 5 * 1024 * 1024;
                 if (this.files[0].size > maxSize) {
                     document.getElementById('BTNAlerta').firstElementChild.innerHTML = 'Arquivos maiores que 5MB não serão exibidos';
@@ -33,7 +33,7 @@
                     };
                     reader.readAsText(this.files[0]);
                 }
-            }">
+            ">
         </div>
         <div class="ImportBase export" onmousedown="saveAll()">Export</div>
     </div>
