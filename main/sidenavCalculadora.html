@@ -106,16 +106,14 @@
                 <input id="bntLB" type="button" value="(" class="grid-item-extra" onmousedown="document.calculator.ans.value+='('; f = 0; ">
                 <label for="btnRB" hidden class="traduzir">Parêntesis Direito</label>
                 <input id="btnRB" type="button" value=")" class="grid-item-extra" onmousedown="document.calculator.ans.value+=')'; f = 0; ">
-                <label for="switch" id="labelRAD" hidden class="traduzir">Radiano</label>
-                <input type="button" id="switch" value="RAD" class="grid-item-extra" onmousedown="
+                <label for="switch" id="labelRAD" hidden class="traduzir">Ângulo</label>
+                <input type="button" id="switch" value="DEG" class="grid-item-extra" title="Alternar entre graus e radianos" onmousedown="
                     if(document.getElementById('switch').value != 'DEG'){
                         document.getElementById('switch').value = 'DEG';
-                        document.getElementById('labelRAD').innerHTML = 'Graus';
-                        document.getElementById('switch2').innerHTML = 'RAD';
+                        document.getElementById('switch2').innerHTML = 'DEG';
                     }else{
                         document.getElementById('switch').value = 'RAD';
-                        document.getElementById('labelRAD').innerHTML = 'Radiano';
-                        document.getElementById('switch2').innerHTML = 'DEG';
+                        document.getElementById('switch2').innerHTML = 'RAD';
                     }
                     f = 0;
                 ">

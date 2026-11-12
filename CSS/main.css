@@ -192,19 +192,6 @@ div.sticky{
     font-size: max(1rem, 6vh);
     position: absolute;
 }
-#caneta{
-    background-color: var(--LightGray);
-    height: 90vh;
-    width: 14vw;
-    left: 0vw;
-    top: 5vh;
-    border: 5px;
-    border-radius: 1rem;
-    border-bottom-left-radius: 0px;
-    border-top-left-radius: 0px;
-    position: absolute;
-    overflow: hidden;
-}
 .grid-container {
     display: grid;
     align-content: center;

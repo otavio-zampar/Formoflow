@@ -213,43 +213,7 @@
     left: -3.5rem;
 }
 
-.basic_instruments{
-    height: max(5vw, 2rem);
-    width: max(5vw, 2rem);
-    cursor: pointer;
-    position: absolute;
-    top:5vh;
-    transition: .1s transform;
-    -webkit-transition: .1s transform;
-}
 
-.index6{
-    display: none;
-}
-
-.eraser{
-    left: 2vw;
-}
-.pen{
-    left: calc(2vw + max(5vw, 2rem));
-}
-.basic_instruments:hover{
-    transform: scale(1.02);
-}
-
-#myCanvas{
-    /* height: 90vh;
-    width: 55vw; */
-    background-color:var(--WhiteDraw);
-    margin-left: 0px;
-    border-radius: 1rem;
-    position: absolute;
-    /* border: 3px dotted var(--Black); */
-}
-#myCanvas:hover{
-    /* cursor: crosshair; */
-    cursor: none;
-}
 
 .borda{
     background-color:var(--SecondAccentColorCalc); 
@@ -289,12 +253,22 @@
 
 #mouseFollower {
     position: absolute;
-    opacity: 0;
-    border: 1px solid var(--Black);
-    height: 5px;
+    left: 0;
+    top: 0;
     width: 5px;
+    height: 5px;
     border-radius: 50%;
-    pointer-events: none; /* Evita que o círculo interfira com eventos do mouse */
+    border: 1.5px solid rgba(0, 0, 0, .72);
+    box-shadow: 0 0 0 1.5px rgba(255, 255, 255, .72);
+    background: transparent;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 3;
+    box-sizing: border-box;
+}
+#divCanvas[data-tool="eraser"] #mouseFollower {
+    background: rgba(255, 255, 255, .45);
 }
 
 #btnDraw{
@@ -329,72 +303,10 @@
     max-height: 100vh; 
     width: max(70%, 20rem); 
     left: min(-70%, -20rem); 
+    padding-top: 0;
     border-top-right-radius: 25px; 
     border-bottom-right-radius: 25px; 
-    overflow-y: hidden;
-}
-
-.up{
-    height: 2.5vh; 
-    min-height: 10px;
-    width: 100%;  
-    position: absolute; 
-    top: 0vh; 
-    left: 0px;
-    
-}
-
-.down{
-    height:2.5vh; 
-    width: 100%; 
-    transform: scaleY(-1); 
-    position: absolute; 
-    top: 0vh; 
-    left: 0px;
-}
-
-#divSave{
-    width: 12vw; 
-    right: 1vw; 
-    bottom: 5vh; 
-    position: absolute;
-}
-
-.BTNsave{
-    margin: 0px; 
-    width: 100%; 
-    height: max(3vw, 1rem); 
-    font-size: max(1.1vw, 1rem);
-    background-color: var(--BaseColorBTN);
-    color: var(--AlmostBlack);
-    border: 0px;
-    border-radius: 1rem;
-}
-
-
-#BTNDesktop{
-    height: max(4vw, 1rem);
-    margin-top: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-.trash{
-    height: 2rem; 
-    width:2rem; 
-    top: calc(5vh + 0.5rem); 
-    left: 67vw; 
-    cursor: pointer; 
-    float: right; 
-    position: absolute;
-}
-
-#divDrawBoxes{
-    width: 13vw; 
-    height: 12vh; 
-    min-height: 45px;
-    bottom: calc(max(3vw, 1rem) + max(4vw, 1rem) + 5vh + 20px); 
-    position: absolute;
+    overflow: hidden;
 }
 
 #btnFile{
@@ -443,59 +355,429 @@
     transform: scaleX(-1);
 }
 
-#sizeRange{
-    position: absolute;
-    left: 0vh;
-    width: 96.5%;
-    top: 0px;
-    min-height: 20px;
-    height: 5vh;
-    width: 12vw;
-    margin-left: 1vw;
-    margin-right: 1vw;
+/* ---------------------------------------------------------------
+ * Área de desenho
+ * ------------------------------------------------------------- */
+
+.drawShell {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
 }
-#sizeText{
-    position: absolute;
-    width: 40px; 
-    min-height: 20px; 
-    text-align: center;
-    height: 5vh;
-    margin: 0px; 
-    background-color:var(--White2);
+
+.drawTopbar {
+    flex: 0 0 62px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 0 16px 0 20px;
+    border-bottom: 1px solid rgba(127, 127, 127, .28);
+}
+
+.drawHeadingWrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+}
+
+.drawHeadingIcon {
+    flex: 0 0 auto;
+    width: 22px;
+    height: 22px;
     color: var(--Black);
-    border: 0px;
-    /* outline: 1px solid var(--Black); */
-    bottom:0px;
-    left: 1vw;
+    opacity: .8;
 }
 
-#drawBoxDown{
-    /* margin-top: max(calc(2.5vh + 1px), 11px); */
-    bottom: 0px;
+.drawHeading {
+    margin: 0;
+    overflow: hidden;
+    color: var(--Black);
+    font-size: 1.02rem;
+    font-weight: 700;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    cursor: default;
 }
 
-.BTNIncrease{
-    width: 1vw; 
-    height: calc(2.5vh - 1px);
-    min-width: 30px; 
-    min-height: 10px; 
-    position: absolute;
-    bottom: max(calc(2.5vh + 1px), 11px);
-    left: calc(45px + 1vw);
-    border-radius: 1rem;
-    border: 0px;
-    background-color: var(--AccentColorPick);
+.drawTopActions {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
-#ColPck{
+
+.drawIconButton {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border: 0;
+    border-radius: 11px;
+    background: transparent;
+    color: var(--Black);
+    cursor: pointer;
+    transition: background-color .15s, transform .15s, opacity .15s;
+}
+.drawIconButton svg {
+    width: 19px;
+    height: 19px;
+}
+.drawIconButton:hover:not(:disabled) {
+    background: rgba(127, 127, 127, .18);
+    transform: translateY(-1px);
+}
+.drawIconButton:active:not(:disabled) {
+    transform: translateY(0);
+}
+.drawIconButton:disabled {
+    opacity: .3;
+    cursor: default;
+}
+.drawTopDivider {
+    width: 1px;
+    height: 22px;
+    margin: 0 4px;
+    background: rgba(127, 127, 127, .3);
+}
+
+.drawBody {
+    flex: 1 1 auto;
+    display: flex;
+    min-width: 0;
+    min-height: 0;
+}
+
+.drawTools {
+    flex: 0 0 62px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    width: 62px;
+    padding: 14px 0;
+    overflow-y: auto;
+    border-right: 1px solid rgba(127, 127, 127, .28);
+    scrollbar-width: none;
+}
+.drawTools::-webkit-scrollbar {
+    display: none;
+}
+
+.drawTool {
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    width: 42px;
+    height: 42px;
+    border: 0;
+    border-radius: 12px;
+    background: transparent;
+    color: var(--Black);
+    cursor: pointer;
+    transition: background-color .15s, color .15s, transform .15s;
+}
+.drawTool svg {
+    width: 22px;
+    height: 22px;
+}
+.drawTool:hover {
+    background: rgba(127, 127, 127, .18);
+    transform: translateY(-1px);
+}
+.drawTool.active {
+    background: var(--BaseColorBTN);
+    color: var(--AlmostBlack);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, .18);
+}
+.drawToolsDivider {
+    flex: 0 0 auto;
+    width: 26px;
+    height: 1px;
+    margin: 4px 0;
+    background: rgba(127, 127, 127, .35);
+}
+
+#myDraw #divCanvas {
+    flex: 1 1 auto;
+    position: relative;
+    min-width: 0;
+    min-height: 0;
+    margin: 16px;
+    overflow: hidden;
+    border-radius: 16px;
+    background-color: var(--WhiteDraw);
+    background-image: radial-gradient(circle, rgba(127, 127, 127, .22) 1px, transparent 1.4px);
+    background-size: 22px 22px;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, .16);
+}
+
+#divCanvas > #myCanvas {
     position: absolute;
-    margin: 0px;
-    height: 5vh;
-    width: calc(12vw - 50px - 2vw);
-    min-width: 30px;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    border-radius: inherit;
+    background-color: transparent;
+    touch-action: none;
+    cursor: none;
+}
+#divCanvas.draw-shape-tool > #myCanvas {
+    cursor: crosshair;
+}
+
+.drawEmptyHint {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 24px;
+    color: var(--Black);
+    text-align: center;
+    opacity: .34;
+    pointer-events: none;
+    transition: opacity .2s ease, visibility .2s ease;
+}
+.drawEmptyHint svg {
+    width: 54px;
+    height: 54px;
+}
+.drawEmptyHint strong {
+    font-size: 1rem;
+    font-weight: 700;
+}
+.drawEmptyHint span {
+    font-size: .8rem;
+}
+.drawEmptyHint.hidden {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.drawOptions {
+    flex: 0 0 216px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 216px;
+    padding: 16px 14px 16px 0;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
+.drawOptionGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    padding: 12px;
+    border-radius: 14px;
+    background: rgba(127, 127, 127, .12);
+}
+
+.drawOptionTitle {
+    color: var(--Black);
+    font-size: .72rem;
+    font-weight: 800;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    opacity: .72;
+}
+
+.drawSizeRow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.drawSizeRow input[type="range"] {
+    flex: 1 1 auto;
+    min-width: 0;
+    accent-color: var(--BaseColor);
+    cursor: pointer;
+}
+#sizeText {
+    flex: 0 0 46px;
+    width: 46px;
+    height: 31px;
+    padding: 0 4px;
+    border: 1px solid rgba(127, 127, 127, .35);
+    border-radius: 9px;
+    background: var(--White2);
+    color: var(--Black);
+    font-size: .85rem;
+    font-weight: 600;
+    text-align: center;
+    -moz-appearance: textfield;
+}
+#sizeText::-webkit-outer-spin-button,
+#sizeText::-webkit-inner-spin-button {
+    margin: 0;
+    -webkit-appearance: none;
+}
+.drawUnit {
+    color: var(--Black);
+    font-size: .72rem;
+    font-weight: 600;
+    opacity: .6;
+}
+
+.drawColorRow {
+    display: flex;
+    align-items: stretch;
+    gap: 9px;
+}
+#ColPck {
+    flex: 0 0 46px;
+    width: 46px;
+    height: 46px;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+    border-radius: 11px;
+    background: transparent;
+    cursor: pointer;
+}
+#ColPck::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+#ColPck::-webkit-color-swatch {
+    border: 0;
+    border-radius: 10px;
+}
+.drawSwatches {
+    flex: 1 1 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+}
+.drawSwatch {
+    width: 100%;
     min-height: 20px;
-    bottom: 0px;
-    left: calc(50px + 3vw);
-    border: 0px;
-    padding: 3px;
-    background-color: var(--AccentColorPick);
+    aspect-ratio: 1 / 1;
+    padding: 0;
+    border: 2px solid transparent;
+    border-radius: 7px;
+    background: var(--swatch);
+    box-shadow: inset 0 0 0 1px rgba(127, 127, 127, .35);
+    cursor: pointer;
+    transition: transform .12s, border-color .12s;
+}
+.drawSwatch:hover {
+    transform: scale(1.08);
+}
+.drawSwatch.active {
+    border-color: var(--Black);
+    transform: scale(1.08);
+}
+
+.drawTips {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 0 4px;
+    color: var(--Black);
+    font-size: .7rem;
+    opacity: .55;
+}
+.drawTips kbd {
+    display: inline-block;
+    padding: 1px 5px;
+    border-radius: 5px;
+    background: rgba(127, 127, 127, .2);
+    box-shadow: 0 0 0 1px rgba(127, 127, 127, .25);
+    font-family: inherit;
+    font-size: .68rem;
+}
+
+.drawFooter {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: auto;
+    padding-top: 4px;
+}
+.drawAction {
+    width: 100%;
+    min-height: 42px;
+    padding: 9px 12px;
+    border: 0;
+    border-radius: 12px;
+    font-size: .82rem;
+    font-weight: 700;
+    line-height: 1.2;
+    cursor: pointer;
+    transition: filter .15s, transform .15s;
+}
+.drawAction:hover {
+    filter: brightness(1.06);
+    transform: translateY(-1px);
+}
+.drawAction:active {
+    transform: translateY(0);
+}
+.drawActionSecondary {
+    background: rgba(127, 127, 127, .2);
+    color: var(--Black);
+}
+.drawActionPrimary {
+    background: var(--BaseColorBTN);
+    color: var(--AlmostBlack);
+}
+
+.drawToast {
+    position: absolute;
+    left: 50%;
+    bottom: 18px;
+    z-index: 10;
+    max-width: calc(100% - 40px);
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: var(--BaseColor);
+    color: var(--AlmostBlack);
+    font-size: .84rem;
+    font-weight: 600;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, 10px);
+    transition: opacity .22s ease, transform .22s ease;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, .25);
+}
+.drawToast.show {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+@media (max-width: 900px) {
+    .drawOptions {
+        flex-basis: 176px;
+        width: 176px;
+        padding-right: 10px;
+    }
+    .drawTools {
+        flex-basis: 52px;
+        width: 52px;
+    }
+    .drawTool {
+        width: 38px;
+        height: 38px;
+    }
+    #myDraw #divCanvas {
+        margin: 10px;
+    }
+}
+
+@media (max-height: 620px) {
+    .drawTips {
+        display: none;
+    }
+    .drawTopbar {
+        flex-basis: 52px;
+    }
 }

@@ -130,6 +130,34 @@
     color: var(--BaseColor);
     user-select: none;
   }
+  .angleToggle{
+    position: absolute;
+    top: 4px;
+    right: 64px;
+    height: 22px;
+    min-width: 42px;
+    padding: 0 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 999px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--textColorWindow);
+    font-family: inherit;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    line-height: 20px;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  }
+  .angleToggle:hover{
+    background-color: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.32);
+  }
+  .angleToggle:focus-visible{
+    outline: 2px solid var(--AccentColor);
+    outline-offset: 1px;
+  }
   
 .hiddenName{
   margin-left: 0px;

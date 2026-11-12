@@ -31,7 +31,9 @@ function Alosango(Diagonal, diagonal){
     return area;
 }
 
-function AanguloTriangulo(lad1, lad2, ang){
-    area = (lad1 * lad2 * Math.sin(ang))/2;
+function AanguloTriangulo(lad1, lad2, ang, modo){
+    var modoAngulo = String(modo || "DEG").toUpperCase();
+    var angulo = modoAngulo === "RAD" ? ang : (ang * Math.PI) / 180;
+    area = (lad1 * lad2 * Math.sin(angulo))/2;
     return area;
 }

@@ -103,115 +103,158 @@
     <!-- basicamente eu tive que incluir a sidenav de desenho no index pq o JS depende do canvas criado aqui, 
     e o JS estava sendo chamado primeiro -->
     <div id="whereSidenavD" class="noCopy">
-        <label for="btnMyDraw" class="traduzir" hidden>Área de desenho</label>
         <div class="rounded-pill base pill" id="btnMyDraw" onmousedown='openDraw()'>
             <svg xmlns="https://www.w3.org/2000/svg" id="btnDraw" width="16" height="16" fill="var(--BaseColor)" class="bi bi-chevron-compact-left" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M9.224 1.553a.5.5 0 0 1 .223.67L6.56 8l2.888 5.776a.5.5 0 1 1-.894.448l-3-6a.5.5 0 0 1 0-.448l3-6a.5.5 0 0 1 .67-.223z"/>
             </svg>
         </div>
+
         <div id="myDraw" class="sidenavDraw base">
-            <!-- menu para configuraçoes da caneta -->
-            <!-- div de canetas de desenho -->
-            <div class="shadow" id="caneta">
-                <!-- div eraser -->
-                <div>
-                    <!-- empty -->
-                    <svg id="eraserMT" xmlns="https://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="basic_instruments bi bi-eraser eraser" viewBox="0 0 16 16" onmousedown="
-                        document.getElementById('eraserMT').style.display = 'none';
-                        document.getElementById('eraserFull').style.display = 'initial';
-
-                        document.getElementById('penMT').style.display = 'initial';
-                        document.getElementById('penFull').style.display = 'none';
-                    ">
-                        <path d="M8.086 2.207a2 2 0 0 1 2.828 0l3.879 3.879a2 2 0 0 1 0 2.828l-5.5 5.5A2 2 0 0 1 7.879 15H5.12a2 2 0 0 1-1.414-.586l-2.5-2.5a2 2 0 0 1 0-2.828l6.879-6.879zm2.121.707a1 1 0 0 0-1.414 0L4.16 7.547l5.293 5.293 4.633-4.633a1 1 0 0 0 0-1.414l-3.879-3.879zM8.746 13.547 3.453 8.254 1.914 9.793a1 1 0 0 0 0 1.414l2.5 2.5a1 1 0 0 0 .707.293H7.88a1 1 0 0 0 .707-.293l.16-.16z"/>
-                    </svg>
-                    <!-- full -->
-                    <svg id="eraserFull" xmlns="https://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="basic_instruments bi bi-eraser-fill eraser index6" viewBox="0 0 16 16" onmousedown="
-                        document.getElementById('eraserMT').style.display = 'initial';
-                        document.getElementById('eraserFull').style.display = 'none';
-                    ">
-                        <path d="M8.086 2.207a2 2 0 0 1 2.828 0l3.879 3.879a2 2 0 0 1 0 2.828l-5.5 5.5A2 2 0 0 1 7.879 15H5.12a2 2 0 0 1-1.414-.586l-2.5-2.5a2 2 0 0 1 0-2.828l6.879-6.879zm.66 11.34L3.453 8.254 1.914 9.793a1 1 0 0 0 0 1.414l2.5 2.5a1 1 0 0 0 .707.293H7.88a1 1 0 0 0 .707-.293l.16-.16z"/>
-                    </svg>
-                </div>
-                
-                <!-- div pen -->
-                <div>
-                    <!-- empty -->
-                    <svg id="penMT" xmlns="https://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="basic_instruments bi bi-pen pen index6" viewBox="0 0 16 16" onmousedown="
-                        document.getElementById('penMT').style.display = 'none';
-                        document.getElementById('penFull').style.display = 'initial';
-
-                        document.getElementById('eraserMT').style.display = 'initial';
-                        document.getElementById('eraserFull').style.display = 'none';
-                    ">
-                        <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/> 
-                    </svg>
-                    <!-- full -->
-                    <svg id="penFull" xmlns="https://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="basic_instruments bi bi-pen-fill pen" viewBox="0 0 16 16"onmousedown="
-                        document.getElementById('penMT').style.display = 'initial';
-                        document.getElementById('penFull').style.display = 'none';
-                    " style="display: initial;">
-                        <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
-                    </svg>
-                </div>
-
-                <div id="divDrawBoxes">
-                    <!-- width -->
-                    <label for="sizeRange" hidden class="traduzir">Range da Caneta</label>
-                    <input type="range" id="sizeRange" min="1" max="140" value="5" oninput="changeSize(this.value); document.getElementById('sizeText').value = myCanvas.getContext('2d').lineWidth;">
-                    <label for="sizeText" hidden class="traduzir">Text da Caneta</label>
-                    <input type="text" id="sizeText" value="5" autocomplete="false" onkeyup="myCanvas.getContext('2d').lineWidth = this.value; document.getElementById('mouseFollower').style.height = this.value+'px'; document.getElementById('mouseFollower').style.width = this.value+'px';">
-                    
-                    <button onmousedown="increaseSize(true);" onmouseup="stopIncreasing()" class="BTNIncrease">
-                        <svg xmlns="https://www.w3.org/2000/svg" width="16" height="16" fill="var(--Black)" class="bi bi-chevron-up up" viewBox="0 0 16 16" >
-                            <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
+            <div class="drawShell">
+                <header class="drawTopbar">
+                    <div class="drawHeadingWrap">
+                        <svg class="drawHeadingIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                            <path d="M4 20l4.6-1 9.8-9.8a2.1 2.1 0 0 0-3-3L5.6 16 4 20z"/>
+                            <path d="m13.7 6.3 4 4"/>
                         </svg>
-                    </button>
-                    
-                    <button onmousedown="increaseSize(false)" onmouseup="stopIncreasing()" class="BTNIncrease" id="drawBoxDown">
-                        <svg xmlns="https://www.w3.org/2000/svg" width="16" height="16" fill="var(--Black)" class="bi bi-chevron-up down" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
-                        </svg>
-                    </button>
-                
-                    <!-- color -->
-                    <label for="ColPck" hidden class="traduzir">Cor da Caneta</label>
-                    <input id="ColPck" type="color"/>
-                </div>
+                        <label for="btnMyDraw" class="traduzir drawHeading">Área de desenho</label>
+                    </div>
 
-                <div id="divSave">
-                    <!-- undo -->
-                    <!-- <button class="margin0" onclick="und();">kinda Undo</button> -->
-            
-                    <!-- redo -->
-                    <!-- <button class="margin0" onclick="red();">kinda Redo</button> -->
-                    
-                    <!-- save -->
-                    <button class="BTNsave traduzir" onclick="
-                    // perguntar se quer fundo transparente
-                        download_img();
-                    ">Salvar</button>
-                    <!-- mandar para a area de trabalho -->
-                    <button id="BTNDesktop" class="BTNsave traduzir" onclick="
-                        // perguntar se quer fundo transparente
-                        send_img();
-                    ">Mandar para a àrea de Trabalho</button>
-                </div>
+                    <div class="drawTopActions">
+                        <button type="button" class="drawIconButton" id="drawUndo" disabled title="Desfazer (Ctrl+Z)" aria-label="Desfazer">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                                <path d="M9 14 4 9l5-5"/>
+                                <path d="M4 9h9a6 6 0 0 1 0 12h-2"/>
+                            </svg>
+                        </button>
+                        <button type="button" class="drawIconButton" id="drawRedo" disabled title="Refazer (Ctrl+Y)" aria-label="Refazer">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                                <path d="m15 14 5-5-5-5"/>
+                                <path d="M20 9h-9a6 6 0 0 0 0 12h2"/>
+                            </svg>
+                        </button>
+                        <span class="drawTopDivider" aria-hidden="true"></span>
+                        <button type="button" class="drawIconButton" id="drawClear" title="Limpar quadro" aria-label="Limpar quadro">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                                <path d="M4 7h16"/>
+                                <path d="M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
+                                <path d="m6 7 .9 12a1.4 1.4 0 0 0 1.4 1.3h7.4a1.4 1.4 0 0 0 1.4-1.3L18 7"/>
+                                <path d="M10 11v5M14 11v5"/>
+                            </svg>
+                        </button>
+                    </div>
+                </header>
 
+                <div class="drawBody">
+                    <aside class="drawTools" aria-label="Ferramentas de desenho">
+                        <button type="button" class="drawTool active" data-tool="pen" aria-pressed="true" title="Caneta (P)" aria-label="Caneta">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                                <path d="M4 20l4.6-1 9.8-9.8a2.1 2.1 0 0 0-3-3L5.6 16 4 20z"/>
+                                <path d="m13.7 6.3 4 4"/>
+                            </svg>
+                        </button>
+                        <button type="button" class="drawTool" data-tool="highlighter" aria-pressed="false" title="Marca-texto (H)" aria-label="Marca-texto">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                                <path d="M14.5 3.5 20.5 9.5 12 18H6.5l-3-3L14.5 3.5z"/>
+                                <path d="M5 18h9"/>
+                                <path d="M17 18h3"/>
+                            </svg>
+                        </button>
+                        <span class="drawToolsDivider" aria-hidden="true"></span>
+                        <button type="button" class="drawTool" data-tool="eraser" aria-pressed="false" title="Borracha (E)" aria-label="Borracha">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                                <path d="m4.5 14.5 6.8-6.8a2 2 0 0 1 2.8 0l3.2 3.2a2 2 0 0 1 0 2.8L12 19H7.5l-3-3a1.4 1.4 0 0 1 0-1.5z"/>
+                                <path d="m9.5 9.5 6 6"/>
+                            </svg>
+                        </button>
+                        <span class="drawToolsDivider" aria-hidden="true"></span>
+                        <button type="button" class="drawTool" data-tool="line" aria-pressed="false" title="Linha (L)" aria-label="Linha">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true" focusable="false">
+                                <path d="M4 20 20 4"/>
+                                <circle cx="4" cy="20" r="1.4" fill="currentColor" stroke="none"/>
+                                <circle cx="20" cy="4" r="1.4" fill="currentColor" stroke="none"/>
+                            </svg>
+                        </button>
+                        <button type="button" class="drawTool" data-tool="rect" aria-pressed="false" title="Retângulo (R)" aria-label="Retângulo">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                                <rect x="4" y="5.5" width="16" height="13" rx="1.5"/>
+                            </svg>
+                        </button>
+                        <button type="button" class="drawTool" data-tool="ellipse" aria-pressed="false" title="Elipse (O)" aria-label="Elipse">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true" focusable="false">
+                                <ellipse cx="12" cy="12" rx="8.5" ry="6.5"/>
+                            </svg>
+                        </button>
+                        <button type="button" class="drawTool" data-tool="arrow" aria-pressed="false" title="Seta (A)" aria-label="Seta">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                                <path d="M4 20 20 4"/>
+                                <path d="M13 4h7v7"/>
+                            </svg>
+                        </button>
+                    </aside>
+
+                    <!-- aqui é realmente a area de desenhar -->
+                    <div id="divCanvas">
+                        <canvas id="myCanvas">
+                            Sorry, your browser doesn't support canvas technology.
+                        </canvas>
+                        <div id="mouseFollower" aria-hidden="true"></div>
+                        <div id="drawEmptyHint" class="drawEmptyHint">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                                <path d="M4 20l4.6-1 9.8-9.8a2.1 2.1 0 0 0-3-3L5.6 16 4 20z"/>
+                                <path d="m13.7 6.3 4 4"/>
+                                <path d="M19 17.5v4M17 19.5h4"/>
+                            </svg>
+                            <strong class="traduzir">Desenhe aqui</strong>
+                            <span class="traduzir">Use as ferramentas à esquerda ou o atalho P</span>
+                        </div>
+                    </div>
+
+                    <aside class="drawOptions">
+                        <div class="drawOptionGroup">
+                            <label for="sizeRange" hidden class="traduzir">Range da Caneta</label>
+                            <label for="sizeText" hidden class="traduzir">Text da Caneta</label>
+                            <span class="drawOptionTitle traduzir">Tamanho</span>
+                            <div class="drawSizeRow">
+                                <input type="range" id="sizeRange" min="1" max="60" value="5">
+                                <input type="number" id="sizeText" min="1" max="200" step="1" value="5" inputmode="numeric" autocomplete="off">
+                                <span class="drawUnit">px</span>
+                            </div>
+                        </div>
+
+                        <div class="drawOptionGroup">
+                            <label for="ColPck" hidden class="traduzir">Cor da Caneta</label>
+                            <span class="drawOptionTitle traduzir">Cor</span>
+                            <div class="drawColorRow">
+                                <input id="ColPck" type="color" value="#000000">
+                                <div class="drawSwatches" aria-label="Cores rápidas">
+                                    <button type="button" class="drawSwatch" style="--swatch:#000000" data-color="#000000" title="Preto" aria-label="Preto" aria-pressed="false"></button>
+                                    <button type="button" class="drawSwatch" style="--swatch:#ffffff" data-color="#ffffff" title="Branco" aria-label="Branco" aria-pressed="false"></button>
+                                    <button type="button" class="drawSwatch" style="--swatch:#e03131" data-color="#e03131" title="Vermelho" aria-label="Vermelho" aria-pressed="false"></button>
+                                    <button type="button" class="drawSwatch" style="--swatch:#f08c00" data-color="#f08c00" title="Laranja" aria-label="Laranja" aria-pressed="false"></button>
+                                    <button type="button" class="drawSwatch" style="--swatch:#fcc419" data-color="#fcc419" title="Amarelo" aria-label="Amarelo" aria-pressed="false"></button>
+                                    <button type="button" class="drawSwatch" style="--swatch:#2f9e44" data-color="#2f9e44" title="Verde" aria-label="Verde" aria-pressed="false"></button>
+                                    <button type="button" class="drawSwatch" style="--swatch:#1971c2" data-color="#1971c2" title="Azul" aria-label="Azul" aria-pressed="false"></button>
+                                    <button type="button" class="drawSwatch" style="--swatch:#7048e8" data-color="#7048e8" title="Roxo" aria-label="Roxo" aria-pressed="false"></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="drawTips">
+                            <span><kbd>Ctrl</kbd> + <kbd>Z</kbd> desfaz</span>
+                            <span><kbd>Ctrl</kbd> + <kbd>Y</kbd> refaz</span>
+                            <span><kbd>Shift</kbd> mantém a proporção</span>
+                        </div>
+
+                        <div class="drawFooter">
+                            <button class="drawAction drawActionSecondary traduzir" onclick="download_img();">Salvar</button>
+                            <button id="BTNDesktop" class="drawAction drawActionPrimary traduzir" onclick="send_img();">Mandar para a àrea de Trabalho</button>
+                        </div>
+                    </aside>
+                </div>
             </div>
 
-            <!-- confirm('Limpar a tela?'); -->
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="var(--BaseColor)" class="bi bi-trash3 trash" viewBox="0 0 16 16" onmousedown="clearCanvas();">
-                <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
-            </svg>
-
-            <!-- aqui é realmente a area de desenhar -->
-            <div id="divCanvas">
-                <canvas id="myCanvas" class="shadow" onload="">
-                    Sorry, your browser doesn't support canvas technology.
-                </canvas>
-                <div id="mouseFollower"></div>
-            </div>
+            <div id="drawToast" class="drawToast" role="status" aria-live="polite"></div>
         </div>
     </div>
 

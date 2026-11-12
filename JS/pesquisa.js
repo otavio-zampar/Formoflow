@@ -39,7 +39,6 @@ function searchQuery(query, resultsList){
                     resultsList.append(listItem);
                 });
             $("#lista").show();
-            $("#lista").css("z-index", "9983");
         } else {
             $("#lista").hide();
         }

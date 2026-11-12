@@ -1,15 +1,22 @@
 #container{
     height: calc(100vh - 100px);
-    width: 100vw; 
-    position: fixed; 
+    width: 100vw;
+    /* absolute em vez de fixed para a barra/lista de busca poderem ficar
+       acima das cápsulas, que são inseridas diretamente no body */
+    position: absolute;
     background-color: var(--White);
-    top:100px; 
+    top:100px;
     left:0px;
-}
-body{
-    color:var(--Black); 
-    background-color: var(--AlmostWhite); 
     overflow: auto;
+}
+html, body{
+    height: 100%;
+}
+
+body{
+    color:var(--Black);
+    background-color: var(--AlmostWhite);
+    overflow: hidden;
 }
 .opaque{
     opacity: 0.1;
@@ -20,12 +27,8 @@ body{
 }
 
 #divCanvas{
-    height:90vh; 
-    width: 50vw; 
-    left: 16vw;  
-    top: 5vh; 
-    border-radius: 1rem; 
-    position: absolute;
+    border-radius: 1rem;
+    position: relative;
 }
 
 #flags{
@@ -56,7 +59,7 @@ body{
 
 .linha-horizontal {
     border: 1px solid var(--AzulClaroBkg);
-    width: 100vw;
+    width: 100%;
     position: absolute;
     pointer-events: none;
 }
@@ -75,7 +78,7 @@ body{
 
 .linha-vertical {
     border: 1px solid var(--AzulClaroBkg);
-    height: 100vh;
+    height: 100%;
     position: absolute;
 }
 

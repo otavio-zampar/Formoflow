@@ -7,6 +7,38 @@ var leftOffset = 0;
 var counter = 200;
 var profundidadeMaximaPropagacao = 50;
 
+// Centraliza o aviso inferior para que uma mensagem antiga (por exemplo, o
+// envio de um desenho) nunca apareça no lugar do "Copiado!" de um card.
+function textoCopiado() {
+    if (typeof linguagem !== 'undefined') {
+        if (linguagem === 'EN-US') {
+            return 'Copied!';
+        }
+
+        if (linguagem === 'SP-MX') {
+            return '¡Copiado!';
+        }
+    }
+
+    return 'Copiado!';
+}
+
+function mostrarAlertaGlobal(mensagem, duracao) {
+    var alerta = document.getElementById('BTNAlerta');
+
+    if (!alerta || !alerta.firstElementChild) {
+        return;
+    }
+
+    alerta.firstElementChild.innerHTML = mensagem;
+    alerta.style.display = 'initial';
+    window.clearTimeout(window.__alertaGlobalTimer);
+
+    window.__alertaGlobalTimer = window.setTimeout(function () {
+        alerta.style.display = 'none';
+    }, duracao || 1600);
+}
+
 // Recalcula uma cápsula a partir de um input (função) ou atualiza a saída de
 // uma cápsula de entrada (range).
 function avaliarEntrada(entrada, visitados, profundidade) {
@@ -65,6 +97,12 @@ function propagarValor(origem, valor, visitados, profundidade) {
     });
 }
 
+// Funções de cápsula que recebem um ângulo e precisam respeitar o modo
+// DEG/RAD escolhido no próprio card.
+function funcaoUsaAngulo(nome) {
+    return nome === 'Math.sin' || nome === 'Math.cos' || nome === 'Math.tan' || nome === 'AanguloTriangulo';
+}
+
 function findZindex() {
     $('.ActualDiv').each(function () {
         var zIndex = parseInt($(this).css('z-index'));
@@ -104,34 +142,44 @@ function avaliaJanela(input, counter, visitados, profundidade) {
     var actualName = $(janela).attr("actualname");
     var exit = $(janela).attr("exit");
     var avaliacao = "";
-
-    if (actualName == "doEval") {
-        avaliacao = actualName + "(\"";
-    } else {
-        avaliacao = actualName + "(";
-    }
+    var modoAngulo = String($(janela).attr("anglemode") || "DEG").toUpperCase();
+    modoAngulo = modoAngulo === "RAD" ? "RAD" : "DEG";
+    var argumentos = "";
 
     for (let index = 0; index < inputForm; index++) {
         if (inputElements[index].value == "") {
-            avaliacao += "0";
+            argumentos += "0";
         } else {
-            avaliacao += normalizarEntrada(inputElements[index].value);
+            argumentos += normalizarEntrada(inputElements[index].value);
         }
         if (index < inputForm - 1) {
-            avaliacao += ", ";
+            argumentos += ", ";
         }
     }
 
     if (actualName == "doEval") {
-        avaliacao += "\")";
+        avaliacao = actualName + "(\"" + argumentos + "\")";
+    } else if (funcaoUsaAngulo(actualName) && actualName != "AanguloTriangulo" && modoAngulo == "DEG") {
+        // Math.sin/cos/tan trabalham em radianos; nos cards o padrão é DEG.
+        avaliacao = actualName + "(((" + argumentos + ") * Math.PI) / 180)";
+    } else if (actualName == "AanguloTriangulo") {
+        // A área do triângulo por dois lados e o ângulo entre eles também
+        // precisa saber se o ângulo digitado está em graus ou radianos.
+        avaliacao = actualName + "(" + argumentos + ", \"" + modoAngulo + "\")";
     } else {
-        avaliacao += ")";
+        avaliacao = actualName + "(" + argumentos + ")";
     }
 
     var saidas = [];
 
     try {
         var x = eval(avaliacao);
+
+        // Remove o ruído de ponto flutuante das funções trigonométricas
+        // (Math.sin(30°) = 0.49999999999999994, por exemplo).
+        if (funcaoUsaAngulo(actualName) && typeof x === "number" && typeof limparResultado === "function") {
+            x = limparResultado(x, actualName !== "AanguloTriangulo");
+        }
 
         // Funções que retornam texto (binário, hexadecimal, ∞ etc.) precisam
         // ser escritas inteiras, e não apenas o primeiro caractere.
@@ -218,6 +266,41 @@ function createDiv(AA) {
 
 
     var ActualResizeHandleSE = $('<div>').addClass('resize-handle se ui-resizable-se'); // SE
+
+    var angleToggle = null;
+
+    if (funcaoUsaAngulo(actualName)) {
+        ActualDiv.attr("anglemode", "DEG");
+        angleToggle = $('<button>')
+            .attr({
+                type: 'button',
+                title: 'Alternar entre graus (DEG) e radianos (RAD)',
+                'aria-label': 'Ângulo em graus'
+            })
+            .addClass('angleToggle noCopy')
+            .text('DEG');
+
+        angleToggle.on('mousedown', function (evento) {
+            evento.stopPropagation();
+        });
+
+        angleToggle.on('click', function (evento) {
+            evento.preventDefault();
+            evento.stopPropagation();
+
+            var novoModo = ActualDiv.attr('anglemode') === 'DEG' ? 'RAD' : 'DEG';
+            ActualDiv.attr('anglemode', novoModo);
+            $(this)
+                .text(novoModo)
+                .attr('aria-label', novoModo === 'DEG' ? 'Ângulo em graus' : 'Ângulo em radianos');
+
+            var primeiraEntrada = ActualDiv.find('.inputFormula').first()[0];
+
+            if (primeiraEntrada) {
+                avaliarEntrada(primeiraEntrada);
+            }
+        });
+    }
 
     {
         // cria o formulario
@@ -307,12 +390,9 @@ function createDiv(AA) {
             icon.on("click", function () {
                 var copyText = document.getElementById("icon" + divCount + (inputForm + index));
                 navigator.clipboard.writeText(copyText.innerHTML); // copy to clipboard
-                document.getElementById('BTNAlerta').style.display = "initial";
                 ActualTop = 1;
                 leftOffset = 0;
-                setTimeout(() => {
-                    document.getElementById('BTNAlerta').style.display = "none";
-                }, 1000);
+                mostrarAlertaGlobal(textoCopiado(), 1000);
             });
 
             var valor = "10% + 30px + " + (index + inputForm) + " * (min(2rem, 2vh) + 2.2rem - 1px)";
@@ -360,6 +440,11 @@ function createDiv(AA) {
     $('body').append(ActualDiv);
     $('body').append(DraggableDiv);
     DraggableDiv.append(nome);
+
+    if (angleToggle) {
+        DraggableDiv.append(angleToggle);
+    }
+
     DraggableDiv.append(minimize);
     DraggableDiv.append(CloseR);
     ActualDiv.append(tstDiv);
@@ -588,10 +673,7 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
                 navigator.clipboard.writeText(copyText.innerHTML); // copy to clipboard
                 ActualTop = 1;
                 leftOffset = 0;
-                document.getElementById('BTNAlerta').style.display = "initial";
-                setTimeout(() => {
-                    document.getElementById('BTNAlerta').style.display = "none";
-                }, 1000);
+                mostrarAlertaGlobal(textoCopiado(), 1000);
             });
 
             var valor = "10% + 60px + 2.2rem";
@@ -795,7 +877,7 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
     });
 }
 
-function uploadImg(selectedFile, naturalHeight, naturalWidth) {
+function uploadImg(selectedFile, naturalHeight, naturalWidth, nomeArquivo) {
     if (selectedFile) {
 
         var ar = 0;
@@ -806,6 +888,10 @@ function uploadImg(selectedFile, naturalHeight, naturalWidth) {
         var ActualDiv = $('<div>').attr('id', randomId).addClass('ActualDiv noCopy');
         var DraggableDiv = $('<div>').attr('id', 'draggable' + randomId).addClass('DraggableDiv');
         var nome = $('<input type="text">').css("margin", "0px").addClass("noCopy hiddenName");
+
+        if (nomeArquivo) {
+            nome.val(nomeArquivo);
+        }
         var minimize = $('<div>').addClass('minimize noCopy').html('&#128469');
         {
             var CloseR = $('<div>').addClass('CloseR noCopy').html('&#10006');
@@ -880,6 +966,26 @@ function uploadImg(selectedFile, naturalHeight, naturalWidth) {
         }
 
 
+
+        // espalha as imagens novas pela área de trabalho em vez de empilhar todas no mesmo ponto
+        var colunaImagem = (divCount - 1) % 6;
+        var linhaImagem = Math.floor((divCount - 1) / 6) % 5;
+        var posicaoImagem = {
+            left: 'calc(5vw + ' + (colunaImagem * 46) + 'px)',
+            top: 'calc(16vh + ' + (linhaImagem * 46) + 'px)'
+        };
+
+        highestZIndex += 2;
+        ActualDiv.css({
+            left: posicaoImagem.left,
+            top: posicaoImagem.top,
+            zIndex: highestZIndex
+        });
+        DraggableDiv.css({
+            left: posicaoImagem.left,
+            top: posicaoImagem.top,
+            zIndex: highestZIndex
+        });
 
         $('body').append(ActualDiv);
         $('body').append(DraggableDiv);
@@ -1013,6 +1119,10 @@ function saveJson(element) {
 
     if (element.attributes.actualname != undefined) {
         JsonWindow["function"] = element.attributes.actualname.value;
+    }
+
+    if (element.attributes.anglemode != undefined) {
+        JsonWindow["angleMode"] = element.attributes.anglemode.value;
     }
 
     if (document.querySelectorAll("#" + element.id + " .inputFormula").length != 0) {
