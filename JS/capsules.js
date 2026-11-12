@@ -5,6 +5,65 @@ var highestZIndex = 11;
 var ActualTop = 0;
 var leftOffset = 0;
 var counter = 200;
+var profundidadeMaximaPropagacao = 50;
+
+// Recalcula uma cápsula a partir de um input (função) ou atualiza a saída de
+// uma cápsula de entrada (range).
+function avaliarEntrada(entrada, visitados, profundidade) {
+    var janela = $(entrada).closest('.ActualDiv');
+
+    if (janela.length == 0) {
+        return;
+    }
+
+    if (janela.attr('actualname')) {
+        avaliaJanela(entrada.parentElement, counter, visitados, profundidade);
+    } else {
+        $(entrada.parentElement).trigger('input');
+    }
+}
+
+// Propaga o valor de um input ou de um ícone de saída para todas as caixas
+// que foram ligadas a ele. A propagação é recursiva, então uma alteração na
+// subtração também recalcula a multiplicação que usa o resultado dela.
+function propagarValor(origem, valor, visitados, profundidade) {
+    if (!origem || !origem.id || valor === undefined || valor === null) {
+        return;
+    }
+
+    visitados = visitados || {};
+    profundidade = profundidade || 0;
+
+    if (profundidade > profundidadeMaximaPropagacao) {
+        return;
+    }
+
+    var texto = String(valor);
+    var chave = origem.id + '=' + texto;
+
+    // evita loops caso o usuário liga uma caixa na outra
+    if (visitados[chave]) {
+        return;
+    }
+    visitados[chave] = true;
+
+    $('.inputFormula').each(function () {
+        if ($(this).attr('InputPai') !== origem.id) {
+            return;
+        }
+
+        var entrada = this;
+
+        // se o valor não mudou, a cápsula filha já está atualizada
+        if (entrada.value === texto) {
+            return;
+        }
+
+        entrada.value = texto;
+        avaliarEntrada(entrada, visitados, profundidade + 1);
+        propagarValor(entrada, entrada.value, visitados, profundidade + 1);
+    });
+}
 
 function findZindex() {
     $('.ActualDiv').each(function () {
@@ -33,60 +92,97 @@ function getGrayColor() {
     return "#" + color + color + color;
 }
 
-function avaliaJanela(input, counter) {
-    if (counter >= 0) {
-        var inputElements = input.querySelectorAll('input');
-        inputForm = inputElements.length;
-        var thisDivCount = String(input.parentElement.parentElement.id).replace("div", ""); // form, tstDiv, ActualDiv
-        var actualName = $("#div" + thisDivCount).attr("actualname");
-        var exit = $("#div" + thisDivCount).attr("exit");
-        if (actualName == "doEval") {
-            var avaliacao = actualName + "(\"";
-        } else {
-            var avaliacao = actualName + "(";
-        }
+function avaliaJanela(input, counter, visitados, profundidade) {
+    if (counter !== undefined && counter < 0) {
+        return;
+    }
 
-        for (let index = 0; index < inputForm; index++) {
-            if (inputElements[index].value == "") {
-                avaliacao += "0";
-            } else {
-                avaliacao += normalizarEntrada(inputElements[index].value);
-            }
-            if (index < inputForm - 1) {
-                avaliacao += ", ";
-            }
-        }
-        if (actualName == "doEval") {
-            avaliacao += "\")";
-        } else {
-            avaliacao += ")";
-        }
+    var inputElements = input.querySelectorAll('input');
+    var inputForm = inputElements.length;
+    var janela = input.parentElement.parentElement; // form, tstDiv, ActualDiv
+    var thisDivCount = String(janela.id).replace(/^div/, "");
+    var actualName = $(janela).attr("actualname");
+    var exit = $(janela).attr("exit");
+    var avaliacao = "";
 
-        try {
-            var x = [];
-            x = eval(avaliacao);
-            if (typeof (x) == "number") {
-                // console.log(thisDivCount + ", " + inputForm );
-                document.getElementById("icon" + String(thisDivCount).concat(inputForm)).innerHTML = x;
-            } else {
-                for (let index = 0; index < exit; index++) {
-                    if (String(x[index]) == "undefined") {
-                        x[index] = "NaN";
-                    }
-                    document.getElementById("icon" + thisDivCount + (inputForm + index)).innerHTML = x[index];
-                }
-            }
-        } catch (e) {
-            if (e instanceof SyntaxError || ReferenceError) {
-                console.log("Erro esperado, fórmula não concluída.");
-                // console.error("Erro:", e);
-            } else {
-                // Outros tipos de erros que não são de sintaxe
-                console.error("Erro:", e);
-            }
+    if (actualName == "doEval") {
+        avaliacao = actualName + "(\"";
+    } else {
+        avaliacao = actualName + "(";
+    }
+
+    for (let index = 0; index < inputForm; index++) {
+        if (inputElements[index].value == "") {
+            avaliacao += "0";
+        } else {
+            avaliacao += normalizarEntrada(inputElements[index].value);
+        }
+        if (index < inputForm - 1) {
+            avaliacao += ", ";
         }
     }
-    counter--;
+
+    if (actualName == "doEval") {
+        avaliacao += "\")";
+    } else {
+        avaliacao += ")";
+    }
+
+    var saidas = [];
+
+    try {
+        var x = eval(avaliacao);
+
+        // Funções que retornam texto (binário, hexadecimal, ∞ etc.) precisam
+        // ser escritas inteiras, e não apenas o primeiro caractere.
+        if (typeof x == "number" || typeof x == "string") {
+            var iconId = "icon" + thisDivCount + inputForm;
+            var icon = document.getElementById(iconId);
+
+            if (icon) {
+                icon.innerHTML = x;
+                saidas.push({ id: iconId, valor: x });
+            }
+        } else {
+            if (x === undefined || x === null) {
+                x = [];
+            }
+
+            for (let index = 0; index < exit; index++) {
+                var valor = x[index];
+
+                if (String(valor) == "undefined") {
+                    valor = "NaN";
+                }
+
+                var iconId = "icon" + thisDivCount + (inputForm + index);
+                var icon = document.getElementById(iconId);
+
+                if (icon) {
+                    icon.innerHTML = valor;
+                    saidas.push({ id: iconId, valor: valor });
+                }
+            }
+        }
+    } catch (e) {
+        if (e instanceof SyntaxError || e instanceof ReferenceError) {
+            console.log("Erro esperado, fórmula não concluída.");
+            // console.error("Erro:", e);
+        } else {
+            // Outros tipos de erros que não são de sintaxe
+            console.error("Erro:", e);
+        }
+    }
+
+    // depois de atualizar as saídas, atualiza as caixas filhas
+    for (let index = 0; index < saidas.length; index++) {
+        propagarValor(
+            document.getElementById(saidas[index].id),
+            saidas[index].valor,
+            visitados,
+            (profundidade || 0) + 1
+        );
+    }
 }
 
 // para criar uma div sem o onclick é so colocar o inputForm como 0
@@ -198,14 +294,6 @@ function createDiv(AA) {
             form.append(input);
             form.append(seta);
             form.append(linha);
-
-            input.on('input', function () {
-                avaliaJanela(this.parentElement, counter);
-            });
-
-            input.on('inputDiferente', function () {
-                avaliaJanela(this.parentElement, counter);
-            });
 
         }
 
@@ -399,30 +487,11 @@ function createDiv(AA) {
                     $(this).css("outline-color", document.getElementById(inputId.attr("id")).parentElement.parentElement.style.backgroundColor);
                 }
             }
-            avaliaJanela(this.parentElement, counter);
+            avaliarEntrada(this);
+            propagarValor(this, this.value);
         }
     });
 
-
-    $('.inputFormula').on('input', function () {
-        var mudado = $(this);
-
-        $('.inputFormula').each(function () {
-            if (mudado.attr("id") == $(this).attr("InputPai")) {
-                $(this).val(mudado.val());
-                $(this).trigger('inputDiferente');
-            }
-        });
-    });
-    $('.icon').on('DOMSubtreeModified', function () {
-        var mudado = this;
-        $('.inputFormula').each(function () {
-            if (mudado.id == $(this).attr("InputPai")) {
-                $(this).val(mudado.innerHTML);
-                $(this).trigger('inputDiferente');
-            }
-        });
-    });
 
     $(document).mousedown(function (e) {
         var string = String('#' + randomId + ", #draggable" + randomId);
@@ -568,6 +637,7 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
 
             form.on('input', function () {
                 icon.text(input.val());
+                propagarValor(icon[0], icon.text());
             });
 
         }
@@ -707,28 +777,9 @@ function createEntradaDiv(AA) { // Range, range, 1, 1 // Text Area, textarea, 1,
                     $(this).css("outline-color", document.getElementById(inputId.attr("id")).parentElement.parentElement.style.backgroundColor);
                 }
             }
-            avaliaJanela(this.parentElement, counter);
+            avaliarEntrada(this);
+            propagarValor(this, this.value);
         }
-    });
-
-    $('.inputFormula').on('input', function () {
-        var mudado = $(this);
-        $('.inputFormula').each(function () {
-            if (mudado.attr("id") == $(this).attr("InputPai")) {
-                $(this).val(mudado.val());
-                $(this).trigger('inputDiferente');
-            }
-        });
-    });
-
-    $('.icon').on('DOMSubtreeModified', function () {
-        var mudado = this;
-        $('.inputFormula').each(function () {
-            if (mudado.id == $(this).attr("InputPai")) {
-                $(this).val(mudado.innerHTML);
-                $(this).trigger('inputDiferente');
-            }
-        });
     });
 
     $(document).mousedown(function (e) {
@@ -914,6 +965,19 @@ function uploadImg(selectedFile, naturalHeight, naturalWidth) {
         alert('Nenhum arquivo selecionado.');
     }
 }
+
+// Um único handler para todos os inputs de função. Antes cada cápsula criada
+// registrava outro handler global, o que duplicava as atualizações.
+$(document).on('input', '.inputFormula', function () {
+    var janela = $(this).closest('.ActualDiv');
+
+    if (janela.length == 0 || !janela.attr('actualname')) {
+        return;
+    }
+
+    avaliarEntrada(this);
+    propagarValor(this, this.value);
+});
 
 window.addEventListener('resize', function () {
     $(".tstDiv > .arrow").each(function () {
