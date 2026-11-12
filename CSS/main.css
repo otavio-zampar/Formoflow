@@ -22,6 +22,17 @@ p{
     width: 100vw;
     background-color: var(--AccentColor);
     z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.topMenu h1{
+    margin: 0;
+    padding: 0;
+    color: var(--WhiteBTN);
+    font-size: 2.5rem;
+    line-height: 1;
 }
 .noCopy{
     user-select: none;
@@ -125,19 +136,36 @@ p{
     transition: fill 150ms ease-in;
 }
 
-#list{
-    z-index:initial;
-    background-color: var(--SecondAccentColor);
-    color: var(--WhiteBTN);
-    border-width: 0px;
-    transition: color 0.05s;
-    -webkit-transition: color 0.05s;
+.contactFab{
+    position: fixed;
+    top: 29px;
+    left: 16px;
+    z-index: 9997;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 42px;
+    padding: 0 14px 0 12px;
+    border: 1px solid rgba(127, 127, 127, .28);
+    border-radius: 999px;
+    background: var(--White);
+    color: var(--Black);
+    font-size: .9rem;
+    font-weight: 700;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .14);
+    cursor: pointer;
+    transition: transform .15s, box-shadow .15s, background-color .15s;
 }
-#list:hover{
-    /* background-color: var(--White); */
-    color: var(--AlmostWhite);
-    transition: color 0.2s;
-    -webkit-transition: color 0.2s;
+
+.contactFab svg{
+    width: 18px;
+    height: 18px;
+    flex: 0 0 auto;
+}
+
+.contactFab:hover{
+    transform: translateY(-1px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, .18);
 }
 
 div.sticky{
@@ -148,21 +176,42 @@ div.sticky{
 
 #contato{
     position: fixed;
-    /* height: 30vh; */
-    width: 99vw;
-    left: 0.5vw;
-    top: 100vh;
-    height: 40vh;
-    padding: 20px;
-    background-color: var(--AccentColor);
-    border-radius: 20px;
-    transition: top 0.3s;
-    -webkit-transition: top 0.3s;
-    z-index: 999;
+    width: min(420px, calc(100vw - 32px));
+    left: -460px;
+    top: 72px;
+    height: auto;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+    background: var(--White);
+    border: 1px solid rgba(127, 127, 127, .28);
+    border-radius: 18px;
+    color: var(--Black);
+    padding: 18px 18px 16px 18px;
+    font-size: .98rem;
+    box-shadow: 0 18px 48px rgba(0, 0, 0, .22);
+    transition: left 0.3s ease, opacity 0.25s ease;
+    -webkit-transition: left 0.3s ease, opacity 0.25s ease;
+    z-index: 9997;
+    opacity: 0;
+    pointer-events: none;
+}
+
+#contato.aberto{
+    left: 16px;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#contato p{
+    margin-bottom: .45rem;
+}
+
+#contato .contato{
+    color: var(--Black);
 }
 
 .NVMdoCopy{
-    user-select: all;
+    user-select: none;
 }
 
 #answer:focus{

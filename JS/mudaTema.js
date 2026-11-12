@@ -19,6 +19,10 @@ function mudaTema(dark) {
         case 5:
             hContrastModeMagenta();
             break;
+
+        case 6:
+            hContrastModeAmoled();
+            break;
     
         default:
             lightMode();
@@ -70,12 +74,15 @@ function lightMode(){
 
     {
         var github = document.getElementById("github");
-        github.firstElementChild.style.display = "initial";
-        github.lastElementChild.style.display = "none";
-        document.getElementById('temaCircle').style.left = '';
-        document.getElementById("flags").style.opacity = '1';
-        document.getElementById("ColPck").value = "#000000";
-        $("#ColPck").trigger("change");
+        if (github && github.firstElementChild) github.firstElementChild.style.display = "initial";
+        if (github && github.lastElementChild) github.lastElementChild.style.display = "none";
+        var temaCircle = document.getElementById('temaCircle');
+        if (temaCircle) temaCircle.style.left = '';
+        var flags = document.getElementById("flags");
+        if (flags) flags.style.opacity = '1';
+        var colPck = document.getElementById("ColPck");
+        if (colPck) colPck.value = "#000000";
+        if (typeof window.jQuery === 'function') window.jQuery("#ColPck").trigger("change");
 
         $(".tstDiv").each(function () {
             this.style.backgroundColor = $(this).attr("actualcolor");
@@ -127,12 +134,15 @@ function darkMode(){
 
     {
         var github = document.getElementById("github");
-        github.firstElementChild.style.display = "none";
-        github.lastElementChild.style.display = "initial";
-        document.getElementById('temaCircle').style.left = 'calc(100% - 30px)'; 
-        document.getElementById("flags").style.opacity = '0.5';
-        document.getElementById("ColPck").value = "#FFFFFF";
-        $("#ColPck").trigger("change");
+        if (github && github.firstElementChild) github.firstElementChild.style.display = "none";
+        if (github && github.lastElementChild) github.lastElementChild.style.display = "initial";
+        var temaCircle = document.getElementById('temaCircle');
+        if (temaCircle) temaCircle.style.left = 'calc(100% - 30px)';
+        var flags = document.getElementById("flags");
+        if (flags) flags.style.opacity = '0.5';
+        var colPck = document.getElementById("ColPck");
+        if (colPck) colPck.value = "#FFFFFF";
+        if (typeof window.jQuery === 'function') window.jQuery("#ColPck").trigger("change");
 
         $(".tstDiv").each(function () {
             this.style.backgroundColor = $(this).attr("graycolor");
@@ -183,12 +193,15 @@ function hContrastModeCyan(){
 
     {
         var github = document.getElementById("github");
-        github.firstElementChild.style.display = "none";
-        github.lastElementChild.style.display = "initial";
-        document.getElementById('temaCircle').style.left = 'calc(100% - 30px)'; 
-        document.getElementById("flags").style.opacity = '0.5';
-        document.getElementById("ColPck").value = "#00FFFF";
-        $("#ColPck").trigger("change");
+        if (github && github.firstElementChild) github.firstElementChild.style.display = "none";
+        if (github && github.lastElementChild) github.lastElementChild.style.display = "initial";
+        var temaCircle = document.getElementById('temaCircle');
+        if (temaCircle) temaCircle.style.left = 'calc(100% - 30px)';
+        var flags = document.getElementById("flags");
+        if (flags) flags.style.opacity = '0.5';
+        var colPck = document.getElementById("ColPck");
+        if (colPck) colPck.value = "#00FFFF";
+        if (typeof window.jQuery === 'function') window.jQuery("#ColPck").trigger("change");
 
         $(".tstDiv").each(function () {
             this.style.backgroundColor = $(this).attr("graycolor");
@@ -239,12 +252,15 @@ function hContrastModeYellow(){
 
     {
         var github = document.getElementById("github");
-        github.firstElementChild.style.display = "none";
-        github.lastElementChild.style.display = "initial";
-        document.getElementById('temaCircle').style.left = 'calc(100% - 30px)'; 
-        document.getElementById("flags").style.opacity = '0.5';
-        document.getElementById("ColPck").value = "#FFFF00";
-        $("#ColPck").trigger("change");
+        if (github && github.firstElementChild) github.firstElementChild.style.display = "none";
+        if (github && github.lastElementChild) github.lastElementChild.style.display = "initial";
+        var temaCircle = document.getElementById('temaCircle');
+        if (temaCircle) temaCircle.style.left = 'calc(100% - 30px)';
+        var flags = document.getElementById("flags");
+        if (flags) flags.style.opacity = '0.5';
+        var colPck = document.getElementById("ColPck");
+        if (colPck) colPck.value = "#FFFF00";
+        if (typeof window.jQuery === 'function') window.jQuery("#ColPck").trigger("change");
 
         $(".tstDiv").each(function () {
             this.style.backgroundColor = $(this).attr("graycolor");
@@ -295,12 +311,74 @@ function hContrastModeMagenta(){
 
     {
         var github = document.getElementById("github");
-        github.firstElementChild.style.display = "none";
-        github.lastElementChild.style.display = "initial";
-        document.getElementById('temaCircle').style.left = 'calc(100% - 30px)'; 
-        document.getElementById("flags").style.opacity = '0.5';
-        document.getElementById("ColPck").value = "#FF00FF";
-        $("#ColPck").trigger("change");
+        if (github && github.firstElementChild) github.firstElementChild.style.display = "none";
+        if (github && github.lastElementChild) github.lastElementChild.style.display = "initial";
+        var temaCircle = document.getElementById('temaCircle');
+        if (temaCircle) temaCircle.style.left = 'calc(100% - 30px)';
+        var flags = document.getElementById("flags");
+        if (flags) flags.style.opacity = '0.5';
+        var colPck = document.getElementById("ColPck");
+        if (colPck) colPck.value = "#FF00FF";
+        if (typeof window.jQuery === 'function') window.jQuery("#ColPck").trigger("change");
+
+        $(".tstDiv").each(function () {
+            this.style.backgroundColor = $(this).attr("graycolor");
+        });
+
+        $(".tstDiv :input").each(function () {
+            if ($(this).attr("inputpai")) {
+                var inputPai = "#" + $(this).attr("inputpai");
+                if ($(this).attr("inputpai").slice(0, 4) == "icon") {
+                    $(this).css("outline-color", $(inputPai).parent().css("background-color"));
+                }else{
+                    $(this).css("outline-color", $(inputPai).parent().parent().css("background-color"));
+                }
+            }
+        });
+    }
+}
+
+function hContrastModeAmoled(){
+    document.documentElement.style.setProperty("--Black", "#FFFFFF");
+    document.documentElement.style.setProperty("--BlackFocus", "#EEEEEE");
+    document.documentElement.style.setProperty("--RealDarkBlue", "#FFFFFF");
+    document.documentElement.style.setProperty("--RealDarkBlueCalc", "#000000");
+    document.documentElement.style.setProperty("--RealDarkBlueBTN", "#FFFFFF");
+    document.documentElement.style.setProperty("--AlmostTransparent", "#0000001f");
+    document.documentElement.style.setProperty("--BaseColor", "#FFFFFF");
+    document.documentElement.style.setProperty("--BaseColorBTN", "#000000");
+    document.documentElement.style.setProperty("--AzulClaroBkg", "#FFFFFF33");
+    document.documentElement.style.setProperty("--Red", "#FFFFFF");
+    document.documentElement.style.setProperty("--SecondAccentColor", "#000000");
+    document.documentElement.style.setProperty("--SecondAccentColorCalc", "#000000");
+    document.documentElement.style.setProperty("--SecondAccentColorFlags", "#000000");
+    document.documentElement.style.setProperty("--AccentColor", "#000000");
+    document.documentElement.style.setProperty("--AccentColorExtra", "#0F0F0F");
+    document.documentElement.style.setProperty("--AccentColorPick", "#000000");
+    document.documentElement.style.setProperty("--AccentColorBTN", "#FFFFFF");
+    document.documentElement.style.setProperty("--LightGray", "#000000");
+    document.documentElement.style.setProperty("--LightGrayBTN", "#FFFFFF");
+    document.documentElement.style.setProperty("--AlmostWhite", "#000000");
+    document.documentElement.style.setProperty("--WhiteFocus", "#000000");
+    document.documentElement.style.setProperty("--White", "#000000");
+    document.documentElement.style.setProperty("--WhiteDraw", "#0F0F0F");
+    document.documentElement.style.setProperty("--White2", "#000000");
+    document.documentElement.style.setProperty("--WhiteBTN", "#FFFFFF");
+    document.documentElement.style.setProperty("--textColorWindow", "#0F0F0F");
+    document.documentElement.style.setProperty("--WhiteSwitch", "#0F0F0F");
+    document.documentElement.style.setProperty("--Yellow", "#FFFFFF");
+
+    {
+        var github = document.getElementById("github");
+        if (github && github.firstElementChild) github.firstElementChild.style.display = "none";
+        if (github && github.lastElementChild) github.lastElementChild.style.display = "initial";
+        var temaCircle = document.getElementById('temaCircle');
+        if (temaCircle) temaCircle.style.left = 'calc(100% - 30px)';
+        var flags = document.getElementById("flags");
+        if (flags) flags.style.opacity = '0.5';
+        var colPck = document.getElementById("ColPck");
+        if (colPck) colPck.value = "#FFFFFF";
+        if (typeof window.jQuery === 'function') window.jQuery("#ColPck").trigger("change");
 
         $(".tstDiv").each(function () {
             this.style.backgroundColor = $(this).attr("graycolor");

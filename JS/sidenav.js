@@ -5,18 +5,21 @@ function openCalc() {
     document.getElementById("darker").style.backgroundColor = "#00000050";
     document.getElementById("darker").style.pointerEvents = "auto";
     document.getElementById("btnCalc").style.transform = "scaleX(1)";
-    document.getElementById("btnMyimport").style.zIndex = 9983;
+    document.getElementById("btnMyimport").style.zIndex = 9994;
     openCal = 1;
   }else{
     document.getElementById("myCalc").style.left = "-40vw";
     document.getElementById("btnMyCalc").style.left= "-3.5rem";
-    document.getElementById("darker").style.backgroundColor = "#00000000";
-    document.getElementById("darker").style.pointerEvents = "none";
+    var popupCfg = document.getElementById("settingsPopup");
+    if (!(popupCfg && !popupCfg.hidden)) {
+      document.getElementById("darker").style.backgroundColor = "#00000000";
+      document.getElementById("darker").style.pointerEvents = "none";
+    }
     document.getElementById("btnCalc").style.transform = "scaleX(-1)";
     setTimeout(()=> {
-      document.getElementById("btnMyimport").style.zIndex = 9990;
+      document.getElementById("btnMyimport").style.zIndex = 9994;
     }, 500);
-    
+
     openCal = 0;
   }
 }
@@ -28,16 +31,19 @@ function openDraw() {
     document.getElementById("darker").style.backgroundColor = "#00000050";
     document.getElementById("darker").style.pointerEvents = "auto";
     document.getElementById("btnDraw").style.transform = "scaleX(1)";
-    document.getElementById("btnMyimport").style.zIndex = 9983;
+    document.getElementById("btnMyimport").style.zIndex = 9994;
     openDra = 1;
   }else{
     document.getElementById("myDraw").style.left = "min(-70%, -20rem)";
     document.getElementById("btnMyDraw").style.left= "-3.5rem";
-    document.getElementById("darker").style.backgroundColor = "#00000000";
-    document.getElementById("darker").style.pointerEvents = "none";
+    var popupCfg = document.getElementById("settingsPopup");
+    if (!(popupCfg && !popupCfg.hidden)) {
+      document.getElementById("darker").style.backgroundColor = "#00000000";
+      document.getElementById("darker").style.pointerEvents = "none";
+    }
     document.getElementById("btnDraw").style.transform = "scaleX(-1)";
     setTimeout(()=> {
-      document.getElementById("btnMyimport").style.zIndex = 9990;
+      document.getElementById("btnMyimport").style.zIndex = 9994;
     }, 500);
     openDra = 0;
   }
@@ -68,13 +74,16 @@ function openImport(){
   }else{
     document.getElementById("myImport").style.right = "-20vw";
     document.getElementById("btnMyimport").style.left= "calc(100vw - 3.5rem)";
-    document.getElementById("darker").style.backgroundColor = "#00000000";
-    document.getElementById("darker").style.pointerEvents = "none";
+    var popupCfg = document.getElementById("settingsPopup");
+    if (!(popupCfg && !popupCfg.hidden)) {
+      document.getElementById("darker").style.backgroundColor = "#00000000";
+      document.getElementById("darker").style.pointerEvents = "none";
+    }
     document.getElementById("btnImport").style.transform = "scaleX(-1)";
 
     setTimeout(()=> {
-      document.getElementById("btnMyCalc").style.zIndex = 9990;
-      document.getElementById("btnMyDraw").style.zIndex = 9990;
+      document.getElementById("btnMyCalc").style.zIndex = 9994;
+      document.getElementById("btnMyDraw").style.zIndex = 9994;
     }, 500);
     openImp = 0;
   }

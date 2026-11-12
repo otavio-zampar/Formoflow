@@ -31,23 +31,7 @@ body{
     position: relative;
 }
 
-#flags{
-    z-index: 4; 
-    padding: 5px; 
-    position: fixed; 
-    left: 10px; 
-    top: 18px; 
-    width: 105px;
-    height: 36px;
-    background-color: var(--SecondAccentColorFlags); 
-    border-radius: 10px;
-    opacity: 1;
-}
 
-#flags > img{
-    width: 28px;
-    cursor: pointer;
-}
 
 .dot {
     height: 1px;

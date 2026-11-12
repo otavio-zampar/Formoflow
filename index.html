@@ -19,7 +19,11 @@
     <link rel="stylesheet" type="text/css" href="CSS/index.css">
     <link rel="stylesheet" type="text/css" href="CSS/capsules.css">
     <link rel="stylesheet" type="text/css" href="CSS/pesquisa.css">
+    <link rel="stylesheet" type="text/css" href="CSS/settings.css">
 
+    <!-- cookies / preferências e configurações -->
+    <script src="./JS/store.js"></script>
+    <script src="./JS/settings.js"></script>
 
     <!-- links para a sidenav & fatoracao-->
     <script src="./JS/mudaTema.js"></script>
@@ -38,6 +42,7 @@
 
     <!-- coisa das janelas/capsulas -->
     <script src="./JS/capsules.js"></script>
+    <script src="./JS/workspace.js"></script>
     <script src="./JS/pesquisa.js"></script>
     <script src="./JS/background.js"></script>
     <script src="./JS/idiomas/data.js"></script>
@@ -78,10 +83,20 @@
 
     <script>
         $(document).ready(function() {
-            $('#whereHeader').load("./main/header.html");
-            $('#whereSidenavC').load("./main/sidenavCalculadora.html");
-            $('#whereSidenavU').load("./main/sidenavUpload.html");
-            $('#whereSidenavI').load("./main/sidenavImport.html");
+            $('#whereHeader').load("./main/header.html", function () {
+                if (window.Settings) {
+                    window.Settings.iniciarAposHeader();
+                }
+            });
+            $('#whereSidenavC').load("./main/sidenavCalculadora.html", function () {
+                if (window.Settings) window.Settings.aplicarIdioma();
+            });
+            $('#whereSidenavU').load("./main/sidenavUpload.html", function () {
+                if (window.Settings) window.Settings.aplicarIdioma();
+            });
+            $('#whereSidenavI').load("./main/sidenavImport.html", function () {
+                if (window.Settings) window.Settings.aplicarIdioma();
+            });
         });
         
     </script>
@@ -258,37 +273,7 @@
         </div>
     </div>
 
-    <div id="flags" class="noCopy">
-        <label for="flagBr" class="traduzir" hidden>Brasil</label>
-        <img id="flagBr" class="noCopy" src="./src/br.svg" onclick="
-            linguagem = 'PT-BR';
-            var array = Array.from(document.getElementsByClassName('traduzir')).concat(Array.from(document.getElementsByClassName('traduzirPlaceholder')));
-            traducao(array, traducaoPtBr());
-            data = dataPtBr();
-            document.getElementById('outraLista').innerHTML = '';
-            criaListaCompleta(data);
-        ">
-        <label for="flagMx" class="traduzir" hidden>México</label>
-        <img id="flagMx" class="noCopy" src="./src/mx.svg" onclick="
-            linguagem = 'SP-MX';
-            var array = Array.from(document.getElementsByClassName('traduzir')).concat(Array.from(document.getElementsByClassName('traduzirPlaceholder')));
-            traducao(array, traducaoSpMx());
-            data = dataSpMx();
 
-            document.getElementById('outraLista').innerHTML = '';
-            criaListaCompleta(data);
-        ">
-        <label for="flagUs" class="traduzir" hidden>Estados Unidos da América</label>
-        <img id="flagUs" class="noCopy" src="./src/us.svg" onclick="
-            linguagem = 'EN-US';
-            var array = Array.from(document.getElementsByClassName('traduzir')).concat(Array.from(document.getElementsByClassName('traduzirPlaceholder')));
-            traducao(array, traducaoEnUs());
-            data = dataEnUs();
-
-            document.getElementById('outraLista').innerHTML = '';
-            criaListaCompleta(data);
-        ">
-    </div>
 
     <div id="container">
         <!-- Linhas horizontais -->
@@ -344,29 +329,37 @@
     <script>
         criaListaCompleta(data);
 
-        createEntradaDiv({option: "TUTORIAL", form: "textarea", qnt: 0, exit: 0});
-        const texo = "Bem vindo ao FORMOFLOW!\nPara utilizar números não decimais siga o padrão:\nDecimal: 15,\nBinário: 0b1111,\nOctal: 0o17,\nHexadecimal: 0xF."; 
-        setTimeout(() => {
-            document.getElementById("input11").value = texo;
-            document.getElementById("input11").style.fontSize = "1rem";
-            document.getElementById("input11").style.overflowY = "auto";
-            document.getElementById("div1").style.height = "290px";
-            document.getElementById("div1").style.left = "calc(90vw - 15rem)";
-            document.getElementById("div1").style.top = "calc(90vh - 15rem)";
+        var workspaceSalvo = window.Store ? window.Store.get('workspace', null) : null;
+        var temWorkspaceSalvo = workspaceSalvo && Array.isArray(workspaceSalvo.windows) && workspaceSalvo.windows.length > 0;
 
-            document.getElementById("draggablediv1").style.left = "calc(90vw - 15rem)";
-            document.getElementById("draggablediv1").style.top = "calc(90vh - 15rem)";
-            document.getElementById("draggablediv1").style.color = "var(--textColorWindow)";
-            document.getElementById("draggablediv1").style.fontWeight = "bold";
+        if (!temWorkspaceSalvo) {
+            createEntradaDiv({option: "TUTORIAL", form: "textarea", qnt: 0, exit: 0});
+            const texo = "Bem vindo ao FORMOFLOW!\nPara utilizar números não decimais siga o padrão:\nDecimal: 15,\nBinário: 0b1111,\nOctal: 0o17,\nHexadecimal: 0xF.";
+            setTimeout(() => {
+                var input = document.getElementById("input11");
+                var div = document.getElementById("div1");
+                var drag = document.getElementById("draggablediv1");
 
-            // $("#draggablediv1").on("mousedown", function () {
-            //         setTimeout(() => {mudaTema(2)}, 500);
-            //         setTimeout(() => {mudaTema(3)}, 1000);
-            //         setTimeout(() => {mudaTema(4)}, 1500);
-            //         setTimeout(() => {mudaTema(5)}, 2000);
-            //         setTimeout(() => {mudaTema(1)}, 2500);
-            // });
-        }, 0);
+                if (input) {
+                    input.value = texo;
+                    input.style.fontSize = "1rem";
+                    input.style.overflowY = "auto";
+                }
+
+                if (div) {
+                    div.style.height = "290px";
+                    div.style.left = "calc(90vw - 15rem)";
+                    div.style.top = "calc(90vh - 15rem)";
+                }
+
+                if (drag) {
+                    drag.style.left = "calc(90vw - 15rem)";
+                    drag.style.top = "calc(90vh - 15rem)";
+                    drag.style.color = "var(--textColorWindow)";
+                    drag.style.fontWeight = "bold";
+                }
+            }, 0);
+        }
     </script>
         
     </div>

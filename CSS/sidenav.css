@@ -176,13 +176,13 @@
     top: 45vh; 
     left: calc(100vw - 3.5rem); 
     background-color: var(--BaseColor); 
-    z-index: 9983;
+    z-index: 9994;
 }
 #btnMyimport{
     top: calc(45vh + 5rem);
     left: calc(100vw - 3.5rem); 
     background-color: var(--AccentColor); 
-    z-index: 9990;
+    z-index: 9994;
 }
 #btnMyCalc{
     top: 45vh; 
@@ -201,14 +201,14 @@
 
     width: 100vw; 
     height: 100vh; 
-    z-index: 9984; 
+    z-index: 9993; 
     pointer-events: none;
 }
 .pill{
     height: 5rem;
     width: 7rem;
     cursor: pointer;
-    z-index: 9990;
+    z-index: 9994;
     top: 45%; 
     left: -3.5rem;
 }

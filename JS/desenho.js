@@ -1030,13 +1030,8 @@
             return;
         }
 
-        imagem.toBlob(function (blob) {
-            if (!blob) {
-                mostrarToast('Não foi possível enviar o desenho.');
-                return;
-            }
-
-            var url = URL.createObjectURL(blob);
+        try {
+            var url = imagem.toDataURL('image/png');
 
             window.uploadImg(url, imagem.height, imagem.width, 'DESENHO');
             mostrarToast('Desenho enviado para a área de trabalho!');
@@ -1049,11 +1044,9 @@
 
                 mostrarAvisoGlobal('Desenho enviado para a área de trabalho!');
             }, 550);
-
-            window.setTimeout(function () {
-                URL.revokeObjectURL(url);
-            }, 30000);
-        }, 'image/png');
+        } catch (e) {
+            mostrarToast('Não foi possível enviar o desenho.');
+        }
     }
 
     function mostrarAvisoGlobal(mensagem) {
