@@ -4,8 +4,8 @@ function bhaskara(a, b, c){ // 1, 3, -4 = [1, -4]
         return ["NaN", "NaN"];
     }else{
         var x = [];
-        x[0] = ((-b) + Math.sqrt(delta))/2 * a;
-        x[1] = ((-b) - Math.sqrt(delta))/2 * a;
+        x[0] = ((-b) + Math.sqrt(delta)) / (2 * a);
+        x[1] = ((-b) - Math.sqrt(delta)) / (2 * a);
 
         return x;
     }

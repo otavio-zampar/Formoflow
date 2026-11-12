@@ -33,12 +33,14 @@ function binario(x){
 }
 
 function basePraDecimal(x, base){
-    console.log(reg.test(String(x)));
-    // if (){
-    //     console.log(parseInt(x));
-    // }    
-    return parseInt(x, base);
+    var texto = String(x).trim();
 
+    // parseInt não entende os prefixos 0b (binário) e 0o (octal).
+    if (/^0[bBoOxX]/.test(texto)) {
+        return Number(texto);
+    }
+
+    return parseInt(texto, base);
 }
 
 function hexadecimal(x){

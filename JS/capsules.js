@@ -50,7 +50,7 @@ function avaliaJanela(input, counter) {
             if (inputElements[index].value == "") {
                 avaliacao += "0";
             } else {
-                avaliacao += inputElements[index].value;
+                avaliacao += normalizarEntrada(inputElements[index].value);
             }
             if (index < inputForm - 1) {
                 avaliacao += ", ";
