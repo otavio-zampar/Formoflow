@@ -1,102 +1,129 @@
 <label for="btnMyCalc" class="traduzir" hidden>calculadora</label>
 <div class="rounded-pill base pill" id="btnMyCalc" onmousedown='openCalc()'>
-    <svg xmlns="https://www.w3.org/2000/svg" id="btnCalc" width="16" height="16" fill="var(--AccentColor)" class="bi bi-chevron-compact-left" viewBox="0 0 16 16">
+    <svg xmlns="https://www.w3.org/2000/svg" id="btnCalc" width="16" height="16" fill="var(--Black)" class="bi bi-chevron-compact-left" viewBox="0 0 16 16">
         <path fill-rule="evenodd" d="M9.224 1.553a.5.5 0 0 1 .223.67L6.56 8l2.888 5.776a.5.5 0 1 1-.894.448l-3-6a.5.5 0 0 1 0-.448l3-6a.5.5 0 0 1 .67-.223z"/>
     </svg>
 </div>
 <div id="myCalc" class="sidenavCalc base">
     <div class="shadow calcShadow">
-        <!-- div de resposta -->
+        <!-- visor -->
         <div id="resposta">
-            <form name="calculator">
-                <label for="answer" hidden class="traduzir">Resposta da calculadora</label>
-                <input type="text" id="answer" name="ans" value="" autocomplete="off">
-                <label for="preAns" hidden class="traduzir">Histórico da calculadora</label>
-                <input type="text" id="preAns" name="preAns" value="" autocomplete="off" disabled> <!-- caixa de texto da pergunta caso precise: disabled-->
-            </form>
-            <p class="noCopy" id="switch2">DEG</p>
-            <p class="noCopy clearAnswer" onmousedown="document.calculator.ans.value=''; document.calculator.preAns.value=''; i = 0; f = 0; ">CE</p>
-        </div>
-        <!-- div dos numeros -->
-        <div class="grid-container divNumeros">
-            <label for="btn1" hidden>1</label>    
-            <input id="btn1" type="button" value="1" class="grid-item-number" onmousedown="document.calculator.ans.value+='1'; f = 0; ">
-            <label for="btn2" hidden>2</label>        
-            <input id="btn2" type="button" value="2" class="grid-item-number" onmousedown="document.calculator.ans.value+='2'; f = 0; ">
-            <label for="btn3" hidden>3</label>     
-            <input id="btn3" type="button" value="3" class="grid-item-number" onmousedown="document.calculator.ans.value+='3'; f = 0; ">
-            <label for="btn4" hidden>4</label>    
-            <input id="btn4" type="button" value="4" class="grid-item-number" onmousedown="document.calculator.ans.value+='4'; f = 0; ">
-            <label for="btn5" hidden>5</label>    
-            <input id="btn5" type="button" value="5" class="grid-item-number" onmousedown="document.calculator.ans.value+='5'; f = 0; ">
-            <label for="btn6" hidden>6</label>    
-            <input id="btn6" type="button" value="6" class="grid-item-number" onmousedown="document.calculator.ans.value+='6'; f = 0; ">
-            <label for="btn7" hidden>7</label>    
-            <input id="btn7" type="button" value="7" class="grid-item-number" onmousedown="document.calculator.ans.value+='7'; f = 0; ">
-            <label for="btn8" hidden>8</label>    
-            <input id="btn8" type="button" value="8" class="grid-item-number" onmousedown="document.calculator.ans.value+='8'; f = 0; ">
-            <label for="btn9" hidden>9</label>    
-            <input id="btn9" type="button" value="9" class="grid-item-number" onmousedown="document.calculator.ans.value+='9'; f = 0; ">
-            <label for="btn0" hidden>0</label>    
-            <input id="btn0" type="button" value="0" class="grid-item-number" onmousedown="document.calculator.ans.value+='0'; f = 0; ">
-            <label for="btnPoint" hidden>.</label>
-            <input id="btnPoint" type="button" value="." class="grid-item-number" onmousedown="
-                    if(i == 0){
-                        document.calculator.ans.value+='.';
-                        i = 1;
+            <div class="calcDisplayTop">
+                <div class="calcTitle">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                        <rect x="5" y="3" width="14" height="18" rx="3"/>
+                        <path d="M8 7h8"/>
+                        <path d="M8.5 11h.01M12 11h.01M15.5 11h.01M8.5 14.5h.01M12 14.5h.01M15.5 14.5h.01M8.5 18h.01M12 18h.01M15.5 18h.01"/>
+                    </svg>
+                    <span>Calculadora</span>
+                </div>
+                <div class="calcDisplayActions">
+                    <p class="noCopy" id="switch2" onmousedown="
+                    if(document.getElementById('switch').value != 'DEG'){
+                        document.getElementById('switch').value = 'DEG';
+                        document.getElementById('switch2').innerHTML = 'DEG';
+                    }else{
+                        document.getElementById('switch').value = 'RAD';
+                        document.getElementById('switch2').innerHTML = 'RAD';
                     }
-                ">
-                <!-- ao apertar o botao '.' ele muda uma variavel de valor por exemplo 1, nao se pode colocar outro '.' enquanto esta variavel for 1, a variavel so muda de valor depois de colocar um operando como + - / ou * -->
+                    f = 0;
+                ">DEG</p>
+                    <p class="noCopy clearAnswer" onmousedown="document.calculator.ans.value=''; document.calculator.preAns.value=''; i = 0; f = 0; ">CE</p>
+                </div>
+            </div>
+            <form name="calculator" class="calcForm">
+                <label for="preAns" hidden class="traduzir">Histórico da calculadora</label>
+                <input type="text" id="preAns" name="preAns" value="" autocomplete="off" disabled>
+                <label for="answer" hidden class="traduzir">Resposta da calculadora</label>
+                <input type="text" id="answer" name="ans" value="" placeholder="0" autocomplete="off">
+            </form>
+        </div>
+
+        <!-- teclado -->
+        <div class="calcKeys">
+            <div class="grid-container divNumeros">
+                <label for="btn1" hidden>1</label>
+                <input id="btn1" type="button" value="1" class="grid-item-number" onmousedown="document.calculator.ans.value+='1'; f = 0; ">
+                <label for="btn2" hidden>2</label>
+                <input id="btn2" type="button" value="2" class="grid-item-number" onmousedown="document.calculator.ans.value+='2'; f = 0; ">
+                <label for="btn3" hidden>3</label>
+                <input id="btn3" type="button" value="3" class="grid-item-number" onmousedown="document.calculator.ans.value+='3'; f = 0; ">
+                <label for="btn4" hidden>4</label>
+                <input id="btn4" type="button" value="4" class="grid-item-number" onmousedown="document.calculator.ans.value+='4'; f = 0; ">
+                <label for="btn5" hidden>5</label>
+                <input id="btn5" type="button" value="5" class="grid-item-number" onmousedown="document.calculator.ans.value+='5'; f = 0; ">
+                <label for="btn6" hidden>6</label>
+                <input id="btn6" type="button" value="6" class="grid-item-number" onmousedown="document.calculator.ans.value+='6'; f = 0; ">
+                <label for="btn7" hidden>7</label>
+                <input id="btn7" type="button" value="7" class="grid-item-number" onmousedown="document.calculator.ans.value+='7'; f = 0; ">
+                <label for="btn8" hidden>8</label>
+                <input id="btn8" type="button" value="8" class="grid-item-number" onmousedown="document.calculator.ans.value+='8'; f = 0; ">
+                <label for="btn9" hidden>9</label>
+                <input id="btn9" type="button" value="9" class="grid-item-number" onmousedown="document.calculator.ans.value+='9'; f = 0; ">
+                <label for="btn0" hidden>0</label>
+                <input id="btn0" type="button" value="0" class="grid-item-number" onmousedown="document.calculator.ans.value+='0'; f = 0; ">
+                <label for="btnPoint" hidden>.</label>
+                <input id="btnPoint" type="button" value="." class="grid-item-number" onmousedown="
+                        if(i == 0){
+                            document.calculator.ans.value+='.';
+                            i = 1;
+                        }
+                    ">
                 <label for="eval" hidden class="traduzir">Igual</label>
                 <input id="eval" type="button" value="=" class="grid-item-number" onmousedown="
-                    document.calculator.preAns.value = document.calculator.ans.value;
-                    document.calculator.ans.value = doEval(document.calculator.ans.value);
-                ">
+                        document.calculator.preAns.value = document.calculator.ans.value;
+                        document.calculator.ans.value = doEval(document.calculator.ans.value);
+                    ">
             </div>
-        <!-- div de operaçoes -->
-        <div class="borda"></div> <!-- this is the border separating the two divs -->
-        <div class="grid-container gridOperandos">
-            <p class="grid-item-operandos noCopy"  onmousedown="document.calculator.ans.value = document.calculator.ans.value.substring(0, document.calculator.ans.value.length - 1); i = 0; f = 0;">
-            C</p>
-            <p class="grid-item-operandos noCopy" onmousedown="
-                if(f == 0){
-                    document.calculator.ans.value+='÷';
-                    
-                    f = 1;
-                }
-                i = 0;
-            ">÷</p>
-            <p class="grid-item-operandos noCopy" onmousedown="
-                if(f == 0){
-                    document.calculator.ans.value+='×';
-                    
-                    f = 1;
-                }
-                i = 0;
-            " >×</p>
-            <p class="grid-item-operandos noCopy" onmousedown="
-                    document.calculator.ans.value+='-';
-                    
-                    f = 1;
+
+            <div class="grid-container gridOperandos">
+                <p class="grid-item-operandos noCopy"  onmousedown="document.calculator.ans.value = document.calculator.ans.value.substring(0, document.calculator.ans.value.length - 1); i = 0; f = 0;">
+                C</p>
+                <p class="grid-item-operandos noCopy" onmousedown="
+                    if(f == 0){
+                        document.calculator.ans.value+='÷';
+                        
+                        f = 1;
+                    }
                     i = 0;
-            ">-</p>
-            <p class="grid-item-operandos noCopy" onmousedown="
-                if(f == 0){
-                    document.calculator.ans.value+='+';
-                    
-                    f = 1;
-                }
-                i = 0;
-            ">+</p>
+                ">÷</p>
+                <p class="grid-item-operandos noCopy" onmousedown="
+                    if(f == 0){
+                        document.calculator.ans.value+='×';
+                        
+                        f = 1;
+                    }
+                    i = 0;
+                " >×</p>
+                <p class="grid-item-operandos noCopy" onmousedown="
+                        document.calculator.ans.value+='-';
+                        
+                        f = 1;
+                        i = 0;
+                ">-</p>
+                <p class="grid-item-operandos noCopy" onmousedown="
+                    if(f == 0){
+                        document.calculator.ans.value+='+';
+                        
+                        f = 1;
+                    }
+                    i = 0;
+                ">+</p>
+            </div>
         </div>
-        <!-- div de operaçoes extras -->
+
+        <!-- alças/abas laterais -->
         <div class="DivExtras"></div>
+        <div id="corner2" onmousedown="if(openExt == 0){openExtra();}"></div>
         <div id="corner" onmousedown="if(openExt == 0){openExtra();}"></div>
         <div id="otherCorner"></div>
+        <div id="otherCorner2"></div>
         <div id="borderCorner"></div>
+
+        <!-- painel de funções extras -->
         <div id="myExtra">
             <div class="openExtra" onmousedown="openExtra()">
-                <svg id="rotate" xmlns="https://www.w3.org/2000/svg" width="16" height="16" fill="var(--RealDarkBlueCalc)" class="bi bi-chevron-compact-left chevronExtra" viewBox="0 0 16 16">
+                <svg id="rotate" xmlns="https://www.w3.org/2000/svg" width="16" height="16" fill="var(--Black)" class="bi bi-chevron-compact-left chevronExtra" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M9.224 1.553a.5.5 0 0 1 .223.67L6.56 8l2.888 5.776a.5.5 0 1 1-.894.448l-3-6a.5.5 0 0 1 0-.448l3-6a.5.5 0 0 1 .67-.223z"/>
                 </svg>
             </div>
@@ -118,9 +145,6 @@
                     f = 0;
                 ">
 
-                <!-- switches DEG for RAD on top left corner -->
-                
-                
                 <label for="btnPi" hidden class="traduzir">Pi</label>
                 <input id="btnPi" type="button" value="π" class="grid-item-extra" onmousedown="document.calculator.ans.value+='π'; f = 0; ">
                 <label for="btnE" hidden class="traduzir">Euler</label>

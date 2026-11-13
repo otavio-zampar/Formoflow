@@ -154,7 +154,6 @@ p{
     color: var(--Black);
     font-size: .9rem;
     font-weight: 700;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, .14);
     cursor: pointer;
     transition: transform .15s, box-shadow .15s, background-color .15s;
 }
@@ -167,7 +166,6 @@ p{
 
 .contactFab:hover{
     transform: translateY(-1px);
-    box-shadow: 0 12px 28px rgba(0, 0, 0, .18);
 }
 
 div.sticky{
@@ -190,7 +188,6 @@ div.sticky{
     color: var(--Black);
     padding: 18px 18px 16px 18px;
     font-size: .98rem;
-    box-shadow: 0 18px 48px rgba(0, 0, 0, .22);
     transition: left 0.3s ease, opacity 0.25s ease;
     -webkit-transition: left 0.3s ease, opacity 0.25s ease;
     z-index: 9997;
@@ -217,31 +214,35 @@ div.sticky{
 }
 
 #answer:focus{
-    outline: 0px;
+    outline: 0;
 }
-#answer{
-    color:var(--LightGrayBTN);
-    background-color: var(--SecondAccentColorCalc);
+#answer,
+#preAns{
+    position: static;
+    width: 100%;
+    min-width: 0;
+    height: auto;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--LightGrayBTN);
     caret-color: var(--LightGrayBTN);
-    border-width: 0px;
-    height: 10vh;
-    padding-left: 10px;
-    width: 95%;
-    top: 10vh;
-    left: 1vw;
-    font-size: max(1rem, 10vh);
-    position: absolute;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -.01em;
 }
 #preAns{
-    color: var(--LightGrayBTN);
-    background-color: var(--SecondAccentColorCalc);
-    border-width: 0px;
-    height: 7vh;
-    width: 92%;
-    top: 21vh;
-    left: 2vw;
-    font-size: max(1rem, 6vh);
-    position: absolute;
+    font-size: clamp(.8rem, 2vh, 1.25rem);
+    opacity: .5;
+}
+#answer{
+    font-size: clamp(2rem, 6.4vh, 4.2rem);
+    font-weight: 700;
+    line-height: 1.05;
+}
+#answer::placeholder{
+    color: currentColor;
+    opacity: .22;
 }
 .grid-container {
     display: grid;
@@ -270,30 +271,76 @@ div.sticky{
 }
 
 .grid-item-number {
-    background-color: var(--RealDarkBlueCalc);
-    border: 0px;
-    padding-left: 10%;
-    padding-right: 10%;
-    font-size: min(10vh, max(10vw, 1rem));
+    background-color: var(--SecondAccentColorCalc);
+    border: 0;
+    border-radius: 16px;
+    padding: 0;
+    font-family: inherit;
+    font-size: clamp(1.1rem, 2.4vw, 2rem);
+    font-weight: 600;
     text-align: center;
-    color: var(--LightGrayBTN); 
-    border-radius: 1rem;
+    color: var(--LightGrayBTN);
+    cursor: pointer;
+    transition: background-color .15s ease, color .15s ease, transform .1s ease;
+}
+.grid-item-number:hover{
+    background-color: var(--AccentColor);
+    color: var(--Black);
+}
+.grid-item-number:active{
+    transform: scale(.97);
+}
+#eval{
+    background-color: var(--AccentColor);
+    color: var(--Black);
+    font-weight: 800;
+}
+#eval:hover{
+    filter: brightness(1.12);
 }
 .grid-item-operandos{
-    position: relative;
-    cursor: pointer;
-    border: 0px;
+    position: static;
+    display: grid;
+    place-items: center;
+    margin: 0;
+    border: 0;
+    border-radius: 16px;
+    background-color: var(--SecondAccentColorCalc);
     color: var(--AccentColorBTN);
-    margin: 0px;
-    font-size: min(8vh, max(8vw, 1rem));
-    text-align: center;
-    display: inherit;
+    font-family: inherit;
+    font-size: clamp(1.1rem, 2.2vw, 1.9rem);
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: inset 0 0 0 1px rgba(127, 127, 127, .18);
+    transition: background-color .15s ease, color .15s ease, transform .1s ease;
+}
+.grid-item-operandos:hover{
+    background-color: var(--AccentColor);
+    color: var(--Black);
+}
+.grid-item-operandos:active{
+    transform: scale(.97);
 }
 .grid-item-extra{
     background-color: var(--AccentColorExtra);
-    border: 0px;
-    color: var(--RealDarkBlueBTN); 
-    font-size: min(5.5vh, max(5.5vw, 1rem));
+    border: 0;
+    border-radius: 14px;
+    color: var(--RealDarkBlueBTN);
+    font-family: inherit;
+    font-size: clamp(.9rem, 1.7vw, 1.35rem);
+    font-weight: 600;
     text-align: center;
-    height: calc(64vh / 5);
+    height: auto;
+    cursor: pointer;
+    transition: background-color .15s ease, color .15s ease, transform .1s ease;
+}
+.grid-item-extra:hover{
+    background-color: var(--LightGrayBTN);
+    color: var(--Black);
+}
+.grid-item-extra:active{
+    transform: scale(.97);
+}
+#btnFat{
+    grid-column: 1 / -1;
 }

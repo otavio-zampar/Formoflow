@@ -132,13 +132,17 @@
     outline-offset: 2px;
 }
 .calcShadow{
-    height: 94vh; 
     top: 3vh;
-    width: 36vw; 
-    margin-left: 2vw; 
-    border-radius: 1rem; 
+    left: 2vw;
+    right: 2vw;
+    bottom: 3vh;
+    width: auto;
+    height: auto;
+    margin: 0;
+    border-radius: 22px;
     position: absolute;
-    background-color: #00000000;
+    background-color: transparent;
+    box-shadow: none !important;
 }
 
 #hideCalcRight{
@@ -151,38 +155,113 @@
 }
 
 #resposta{
-    background-color:var(--SecondAccentColorCalc); 
-    height:30vh; 
-    width:36vw; 
-    position: absolute; 
-    border-top-left-radius: 1rem; 
-    border-top-right-radius: 1rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 26vh;
+    padding: 16px 20px 18px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: var(--SecondAccentColorCalc);
+    border-radius: 20px;
+    color: var(--LightGrayBTN);
+    overflow: hidden;
 }
 
-#switch2{
-    font-size: 6vh; 
-    color: var(--LightGrayBTN); 
-    left: 1.5vw; 
-    top: 0px; 
-    position:absolute;
+.calcDisplayTop{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex: 0 0 auto;
 }
 
+.calcTitle{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    font-size: clamp(.68rem, .82vw, .8rem);
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    opacity: .7;
+    white-space: nowrap;
+}
+
+.calcTitle svg{
+    flex: 0 0 auto;
+    width: 17px;
+    height: 17px;
+}
+
+.calcDisplayActions{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#switch2,
 .clearAnswer{
-    font-size: 6vh; 
-    color: var(--LightGrayBTN); 
-    cursor: pointer; 
-    position:absolute; 
-    top:0px; 
-    right:1.5vw;
+    position: static;
+    margin: 0;
+    padding: 6px 11px;
+    border-radius: 999px;
+    background-color: rgba(127, 127, 127, .2);
+    color: var(--LightGrayBTN);
+    font-size: clamp(.64rem, .78vw, .76rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: .04em;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color .15s ease, color .15s ease;
+}
+
+#switch2:hover,
+.clearAnswer:hover{
+    background-color: var(--AccentColor);
+    color: var(--Black);
+}
+
+.calcForm{
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 2px;
+    min-height: 0;
+}
+
+.calcKeys{
+    position: absolute;
+    top: calc(26vh + 14px);
+    left: 0;
+    right: 4vw;
+    bottom: 0;
+    display: flex;
+    gap: 12px;
+    min-height: 0;
 }
 
 .gridOperandos{
-    background-color:var(--RealDarkBlueCalc); 
-    color: var(--AccentColor); 
-    top:30vh; left: 24vw; 
-    height:64vh; 
-    width:8vw; 
-    position: absolute;
+    position: static;
+    flex: 1 1 0;
+    width: auto;
+    height: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(5, 1fr);
+    gap: 12px;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: var(--RealDarkBlueCalc);
+    color: var(--AccentColorBTN);
+    border-radius: 20px;
+    margin-right: 12px;
 }
 
 .divExtras{
@@ -196,35 +275,54 @@
 }
 
 .divNumeros{
-    grid-template-columns: auto auto auto; 
-    background-color:var(--RealDarkBlueCalc); 
-    top: 30vh; 
-    height:64vh; 
-    width:24vw; 
-    position: absolute; 
-    border-bottom-left-radius: 1rem;
+    position: static;
+    flex: 3 1 0;
+    width: auto;
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 12px;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: var(--RealDarkBlueCalc);
+    border-radius: 20px;
 }
 #borderCorner{
     background-color:var(--BaseColor); 
-    bottom: 0px; 
+    top: calc(26vh + 14px);
+    bottom: 0px;
     right: -2vw; 
-    height: 64vh ; 
+    height: auto;
     width: 2vw;
     position: absolute; 
     z-index: 9999;
 }
 
-#corner{
-    background-color:var(--AccentColorExtra); 
-    bottom: 0px; 
-    right: 0px; 
-    height: 15px; 
-    width: 4vw;
-    position: absolute; 
-    z-index: 9999; 
-    border-bottom-right-radius: 1rem; 
+#corner {
+    background-color: var(--AccentColorExtra);
+    bottom: 0px;
+    right: 0px;
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    z-index: 9999;
+    border-bottom-right-radius: 1rem;
     cursor: pointer;
 }
+
+#corner2 {
+    background-color: var(--AccentColorExtra);
+    top: calc(26vh + 14px);
+    right: 0px;
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    z-index: 9999;
+    border-top-right-radius: 1rem;
+    cursor: pointer;
+}
+
 
 #otherCorner{
     background-color:var(--BaseColor); 
@@ -232,8 +330,18 @@
     z-index: 9998;
     bottom: 0px; 
     right: 0px; 
-    height: 15px; 
-    width: 15px;
+    height: 20px; 
+    width: 20px;
+}
+
+#otherCorner2{
+    background-color:var(--BaseColor); 
+    position: absolute;
+    z-index: 9998;
+    top: calc(26vh + 14px);
+    right: 0px; 
+    height: 20px; 
+    width: 20px;
 }
 
 .sidenavDraw {
@@ -246,12 +354,15 @@
 }
 
 #myExtra{
-    background-color:var(--AccentColorExtra); 
-    top:30vh; 
-    left: 32vw; 
-    height:64vh;
-    width:24vw; 
-    position: absolute; 
+    position: absolute;
+    top: calc(26vh + 14px);
+    bottom: 0;
+    left: 32vw;
+    width: 24vw;
+    height: auto;
+    background-color: var(--AccentColorExtra);
+    border-radius: 20px;
+    overflow: hidden;
     transition: left 0.5s;
     -webkit-transition: left 0.5s;
     z-index: 9997;
@@ -268,20 +379,13 @@
     left: calc(100vw - 3.5rem); 
     background-color: var(--AccentColor); 
     z-index: 9994;
-    box-shadow: -10px 10px 26px rgba(0, 0, 0, .22);
     transition: left .5s, right .5s, box-shadow .2s ease, filter .2s ease;
 }
-#btnMyimport:hover{
-    box-shadow: -12px 14px 32px rgba(0, 0, 0, .3);
-    filter: brightness(1.04);
-}
-#btnMyimport:focus-visible{
-    outline: 2px solid var(--Black);
-    outline-offset: 3px;
-}
+
 #btnMyCalc{
-    top: 45vh; 
+    top: 45vh;
     background-color: var(--BaseColor);
+    transition: left .5s, box-shadow .2s ease, filter .2s ease;
 }
 
 .base{
@@ -308,42 +412,40 @@
     left: -3.5rem;
 }
 
-
-
-.borda{
-    background-color:var(--SecondAccentColorCalc); 
-    top:30vh; 
-    left: 24vw; 
-    height:64vh; 
-    width:3px; 
-    position: absolute; 
-    z-index: 9996;
-}
-
 .openExtra{
-    height: 64vh; 
-    width: 4vw; 
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4vw;
     cursor: pointer;
 }
 
 .chevronExtra{
-    width:4vw; 
-    height:4vw; 
-    margin-top:calc(32vh - 2vw); 
-    pointer-events:none; 
-    transition: transform 0.5s; 
-    -webkit-transition: transform 0.5s
+    width: clamp(16px, 1.6vw, 24px);
+    height: clamp(16px, 1.6vw, 24px);
+    margin-top: 0;
+    pointer-events: none;
+    transition: transform 0.5s;
+    -webkit-transition: transform 0.5s;
 }
 
 .containerExtra{
-    grid-template-columns: 33% 33% 33%; 
-    /* grid-template-rows: auto auto auto auto;  */
-    padding: 1vw; 
-    left: 4vw; 
-    top: 0px; 
-    position: absolute; 
-    width: 20vw; 
-    height: 100%;
+    position: absolute;
+    top: 20px;
+    bottom: 20px;
+    left: calc(4vw + 6px);
+    right: 20px;
+    width: auto;
+    height: auto;
+    padding: 0;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 1fr;
+    gap: 8px;
+    box-sizing: border-box;
 }
 
 #mouseFollower {
