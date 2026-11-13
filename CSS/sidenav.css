@@ -12,39 +12,124 @@
     border-bottom-right-radius: 25px;
 }
 .sidenavImport{
-    height: calc(max(6vw, 2rem) + 5vw);
-    top: calc(45vh + 5rem - (calc(max(6vw, 2rem) + 5vw) / 4));
+    --importPanelHeight: clamp(200px, 13.5vw, 240px);
+    height: var(--importPanelHeight);
+    top: calc(45vh + 7.5rem - (var(--importPanelHeight) / 2));
     margin: 0px;
     background-color: var(--AccentColor);
     z-index: 9995;
     width: 20vw; 
     right: -20vw;
-    border-top-left-radius: 25px; 
-    border-bottom-left-radius: 25px;
-}
-.ImportBase {
-    position: absolute;
-    width: 16vw;
-    height: max(3vw, 1rem);
-    background-color: var(--BaseColorBTN);
-    text-align: center;
-    padding-top: 8px;
-    border-radius: 1rem;
-    cursor: pointer;
+    border-top-left-radius: 26px;
+    border-bottom-left-radius: 26px;
+    overflow: hidden;
 }
 .extraImport{
     position: absolute;
-    top: 1vw;
-    left: 1vw;
-    width: 18vw;
-    padding: 1vw;
-    border-radius: 1rem;
-    background-color: var(--LightGray);
-    color: var(--AlmostBlack);
-    height: calc(max(6vw, 2rem) + 3vw);
+    inset: 10px 10px 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    padding: 14px;
+    border-radius: 18px;
+    background-color: var(--WhiteDraw);
+    color: var(--Black);
+    box-sizing: border-box;
+    overflow: hidden;
+}
+.importHeader{
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    min-width: 0;
+    padding: 0 2px;
+}
+.importTitle{
+    font-size: clamp(.8rem, 1vw, .95rem);
+    font-weight: 800;
+    letter-spacing: .02em;
+    line-height: 1.1;
+}
+.importSubtitle{
+    overflow: hidden;
+    font-size: clamp(.6rem, .78vw, .72rem);
+    font-weight: 600;
+    opacity: .62;
+    line-height: 1.2;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.ImportBase {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    min-height: 46px;
+    padding: 8px 12px;
+    border: 1px solid transparent;
+    border-radius: 13px;
+    background: transparent;
+    color: var(--Black);
+    font-family: inherit;
+    text-align: left;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: background-color .16s ease, color .16s ease, border-color .16s ease, transform .16s ease, box-shadow .16s ease, filter .16s ease;
+}
+.ImportSecondary{
+    border-color: var(--Black);
+}
+.ImportSecondary:hover{
+    transform: translateY(-1px);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, .2);
+    background: rgba(127, 127, 127, .18);
+    color: var(--Black);
 }
 .export{
-    bottom: 1vw;
+    border-color: var(--Black);
+    background-color: rgba(127, 127, 127, .12);
+    color: var(--Black);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, .14);
+}
+.export:hover{
+    transform: translateY(-1px);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, .2);
+    background: rgba(127, 127, 127, .18);
+    color: var(--Black);
+}
+.export:active{
+    transform: translateY(0);
+}
+.importIcon{
+    flex: 0 0 auto;
+    width: 18px;
+    height: 18px;
+    opacity: .92;
+}
+.importActionText{
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    min-width: 0;
+}
+.importActionTitle{
+    font-size: clamp(.72rem, .92vw, .86rem);
+    font-weight: 800;
+    line-height: 1.15;
+}
+.importActionHint{
+    overflow: hidden;
+    font-size: clamp(.58rem, .74vw, .68rem);
+    font-weight: 600;
+    opacity: .66;
+    line-height: 1.2;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.ImportBase:focus-visible{
+    outline: 2px solid var(--Black);
+    outline-offset: 2px;
 }
 .calcShadow{
     height: 94vh; 
@@ -183,6 +268,16 @@
     left: calc(100vw - 3.5rem); 
     background-color: var(--AccentColor); 
     z-index: 9994;
+    box-shadow: -10px 10px 26px rgba(0, 0, 0, .22);
+    transition: left .5s, right .5s, box-shadow .2s ease, filter .2s ease;
+}
+#btnMyimport:hover{
+    box-shadow: -12px 14px 32px rgba(0, 0, 0, .3);
+    filter: brightness(1.04);
+}
+#btnMyimport:focus-visible{
+    outline: 2px solid var(--Black);
+    outline-offset: 3px;
 }
 #btnMyCalc{
     top: 45vh; 
@@ -336,13 +431,7 @@
     cursor: pointer;
 }
 #json-upload{
-    opacity: 0;
-    height: max(3vw, 1rem);
-    width: 16vw;
-    top: 0px;
-    position: absolute;
-    left: 0px;
-    cursor: pointer;
+    display: none;
 }
 
 #btnCalc{

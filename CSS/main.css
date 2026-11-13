@@ -6,6 +6,8 @@ html > * {
 p{
     font-size: 1rem;
     margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
 }
 ::placeholder {
     color: var(--Black);
@@ -30,7 +32,7 @@ p{
 .topMenu h1{
     margin: 0;
     padding: 0;
-    color: var(--WhiteBTN);
+    color: var(--Black);
     font-size: 2.5rem;
     line-height: 1;
 }
@@ -285,6 +287,7 @@ div.sticky{
     margin: 0px;
     font-size: min(8vh, max(8vw, 1rem));
     text-align: center;
+    display: inherit;
 }
 .grid-item-extra{
     background-color: var(--AccentColorExtra);

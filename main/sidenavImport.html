@@ -1,13 +1,38 @@
-<div class="rounded-pill base pill" id="btnMyimport" onmousedown="openImport()">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="var(--BaseColor)" class="bi bi-arrow-left-right" viewBox="0 0 16 16" id="btnImport">
+<div class="rounded-pill base pill" id="btnMyimport" onmousedown="openImport()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openImport();}" role="button" tabindex="0" aria-label="Importar e exportar dados" aria-expanded="false">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="var(--BaseColor)" class="bi bi-arrow-left-right" viewBox="0 0 16 16" id="btnImport" aria-hidden="true" focusable="false">
         <path fill-rule="evenodd" d="M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5m14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5"/>
     </svg>
 </div>
-<div id="myImport" class="sidenavImport base">
+<div id="myImport" class="sidenavImport base" role="dialog" aria-label="Importar e exportar dados">
     <div class="extraImport">
-        <div class="ImportBase">Import
-            <input id="json-upload" type="file" accept="application/JSON">
+        <div class="importHeader">
+            <span class="importTitle">Dados</span>
+            <span class="importSubtitle">Backup do workspace</span>
         </div>
-        <div class="ImportBase export" onmousedown="saveAll()">Export</div>
+
+        <label class="ImportBase ImportSecondary" for="json-upload">
+            <svg class="importIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <path d="M12 3v12"/>
+                <path d="m7 10 5 5 5-5"/>
+                <path d="M5 21h14"/>
+            </svg>
+            <span class="importActionText">
+                <span class="importActionTitle">Importar</span>
+                <span class="importActionHint">Restaurar backup (.json)</span>
+            </span>
+            <input id="json-upload" type="file" accept="application/JSON">
+        </label>
+
+        <button type="button" class="ImportBase export" onclick="saveAll()">
+            <svg class="importIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <path d="M12 21V9"/>
+                <path d="m7 14 5-5 5 5"/>
+                <path d="M5 4h14"/>
+            </svg>
+            <span class="importActionText">
+                <span class="importActionTitle">Exportar</span>
+                <span class="importActionHint">Salvar backup (.json)</span>
+            </span>
+        </button>
     </div>
 </div>

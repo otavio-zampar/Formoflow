@@ -67,6 +67,7 @@ function openImport(){
     document.getElementById("darker").style.backgroundColor = "#00000050";
     document.getElementById("darker").style.pointerEvents = "auto";
     document.getElementById("btnImport").style.transform = "scaleX(1)";
+    document.getElementById("btnMyimport").setAttribute("aria-expanded", "true");
 
     document.getElementById("btnMyCalc").style.zIndex = 9983;
     document.getElementById("btnMyDraw").style.zIndex = 9983;
@@ -80,6 +81,7 @@ function openImport(){
       document.getElementById("darker").style.pointerEvents = "none";
     }
     document.getElementById("btnImport").style.transform = "scaleX(-1)";
+    document.getElementById("btnMyimport").setAttribute("aria-expanded", "false");
 
     setTimeout(()=> {
       document.getElementById("btnMyCalc").style.zIndex = 9994;
