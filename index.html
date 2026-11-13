@@ -22,11 +22,11 @@
     <link rel="stylesheet" type="text/css" href="CSS/settings.css">
 
     <!-- cookies / preferências e configurações -->
-    <script src="./JS/store.js"></script>
-    <script src="./JS/settings.js"></script>
+    <script src="./JS/store.js?v=20261113-2"></script>
+    <script src="./JS/settings.js?v=20261113-5"></script>
 
     <!-- links para a sidenav & fatoracao-->
-    <script src="./JS/mudaTema.js"></script>
+    <script src="./JS/mudaTema.js?v=20261113-3"></script>
     <script src="./JS/sidenav.js"></script>
     <script src="./JS/calculadora.js"></script>
     <script src="./JS/desenho.js"></script>
@@ -41,8 +41,8 @@
     <script src="./JS/math/algebra.js"></script>
 
     <!-- coisa das janelas/capsulas -->
-    <script src="./JS/capsules.js"></script>
-    <script src="./JS/workspace.js"></script>
+    <script src="./JS/capsules.js?v=20261113-2"></script>
+    <script src="./JS/workspace.js?v=20261113-2"></script>
     <script src="./JS/pesquisa.js"></script>
     <script src="./JS/background.js"></script>
     <script src="./JS/idiomas/data.js"></script>
@@ -88,13 +88,13 @@
                     window.Settings.iniciarAposHeader();
                 }
             });
-            $('#whereSidenavC').load("./main/sidenavCalculadora.html", function () {
+            $('#whereSidenavC').load("./main/sidenavCalculadora.html?v=2", function () {
                 if (window.Settings) window.Settings.aplicarIdioma();
             });
-            $('#whereSidenavU').load("./main/sidenavUpload.html", function () {
+            $('#whereSidenavU').load("./main/sidenavUpload.html?v=2", function () {
                 if (window.Settings) window.Settings.aplicarIdioma();
             });
-            $('#whereSidenavI').load("./main/sidenavImport.html", function () {
+            $('#whereSidenavI').load("./main/sidenavImport.html?v=2", function () {
                 if (window.Settings) window.Settings.aplicarIdioma();
             });
         });
@@ -282,8 +282,11 @@
             criaBckgnd(600);
 
             function pesquisa(meuQuery){
-                const query = meuQuery.toLowerCase().trim();
-                const filteredResults = data.filter(item => item.option.toLowerCase().includes(query));
+                const query = removeAccents(String(meuQuery || "").toLowerCase().trim());
+                const filteredResults = query
+                    ? data.filter(item => removeAccents(item.option.toLowerCase()).includes(query))
+                    : [];
+
                 if (filteredResults.length > 0) {
                     if(filteredResults[0].type == 'range' || filteredResults[0].form == 'textarea'){
                         createEntradaDiv(filteredResults[0]);

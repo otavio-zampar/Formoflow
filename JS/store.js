@@ -112,6 +112,19 @@
             setarCookie(PREFIXO + nome + '_' + i, blocos[i], DIAS);
         }
 
+        // Se os dados voltaram a caber em cookies, descarta o fallback antigo.
+        if (lerCookie(PREFIXO + nome) !== null) {
+            removerCookie(PREFIXO + nome + '_local');
+
+            if (localStorageDisponivel()) {
+                try {
+                    window.localStorage.removeItem(PREFIXO + nome);
+                } catch (e) {
+                    // ignora
+                }
+            }
+        }
+
         return true;
     }
 
@@ -121,6 +134,28 @@
         }
     }
 
+    function removerCookies(nome) {
+        var cabecalho = lerCookie(PREFIXO + nome);
+        var quantidade = 4;
+
+        removerCookie(PREFIXO + nome);
+        removerCookie(PREFIXO + nome + '_local');
+
+        if (cabecalho) {
+            try {
+                var info = JSON.parse(desescapar(cabecalho));
+
+                if (info && info.blocos) {
+                    quantidade = Number(info.blocos) || 4;
+                }
+            } catch (e) {
+                quantidade = 4;
+            }
+        }
+
+        removerBlocos(nome, quantidade);
+    }
+
     function gravarLocal(nome, json) {
         if (!localStorageDisponivel()) {
             return false;
@@ -128,6 +163,9 @@
 
         try {
             window.localStorage.setItem(PREFIXO + nome, json);
+
+            // O cookie antigo não pode continuar tendo prioridade na leitura.
+            removerCookies(nome);
             setarCookie(PREFIXO + nome + '_local', '1', DIAS);
             return true;
         } catch (e) {
@@ -150,6 +188,15 @@
     function lerJson(nome, padrao) {
         if (!cookiePermitido()) {
             return lerLocalOuPadrao(nome, padrao);
+        }
+
+        // Depois que o workspace cresce, o localStorage passa a ser a fonte oficial.
+        if (lerCookie(PREFIXO + nome + '_local')) {
+            var localMarcado = lerLocal(nome);
+
+            if (localMarcado !== null) {
+                return decodificarJson(localMarcado, padrao);
+            }
         }
 
         var cabecalho = lerCookie(PREFIXO + nome);
@@ -207,23 +254,7 @@
     }
 
     function remover(nome) {
-        var cabecalho = lerCookie(PREFIXO + nome);
-
-        removerCookie(PREFIXO + nome);
-        removerCookie(PREFIXO + nome + '_local');
-
-        if (cabecalho) {
-            try {
-                var info = JSON.parse(desescapar(cabecalho));
-                if (info && info.blocos) {
-                    removerBlocos(nome, info.blocos);
-                }
-            } catch (e) {
-                removerBlocos(nome, 4);
-            }
-        } else {
-            removerBlocos(nome, 4);
-        }
+        removerCookies(nome);
 
         if (localStorageDisponivel()) {
             try {

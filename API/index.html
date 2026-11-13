@@ -65,6 +65,9 @@
 <script>
     document.addEventListener('DOMContentLoaded', (event) => {
         var params = window.location.href.split("?");
+        if (!params[1]) {
+            return;
+        }
         var reg = /[&=]/gi
         let arr = params[1].split(reg);
         createJSON(arr);

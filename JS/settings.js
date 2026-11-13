@@ -57,11 +57,12 @@
             window.tema = estado.tema;
         }
 
-        if (estado.tema === 1 || estado.tema === 2) {
-            if (typeof window.dark !== 'undefined') {
-                window.dark = estado.tema;
-            }
-        } else if (estado.tema >= 3 && estado.tema <= 6) {
+        if (typeof window.dark !== 'undefined') {
+            // Temas 2 a 6 são escuros para efeito de criação de cards.
+            window.dark = estado.tema === 1 ? 1 : 2;
+        }
+
+        if (estado.tema >= 3 && estado.tema <= 6) {
             if (typeof window.hc !== 'undefined') {
                 window.hc = estado.tema;
             }
@@ -269,18 +270,10 @@
     }
 
     function aplicarCorDestaque(cor) {
-        var raiz = document.documentElement;
-
-        raiz.style.setProperty('--BaseColor', cor);
-        raiz.style.setProperty('--BaseColorBTN', cor);
-        raiz.style.setProperty('--RealDarkBlueBTN', cor);
-        raiz.style.setProperty('--AccentColorBTN', cor);
-
-        var corEscura = derivarCorEscura(cor);
-        if (corEscura) {
-            raiz.style.setProperty('--AccentColorExtra', corEscura);
-        }
-
+        // Nos temas claro e escuro todas as variáveis de cor pertencem ao tema.
+        // A cor de destaque não sobrescreve nenhuma delas (antes trocava
+        // --RealDarkBlueBTN e --AccentColorExtra e desalinhava a paleta).
+        // A cor escolhida continua salva em estado.cor/customColor.
         var seletorDesenho = document.getElementById('ColPck');
         if (seletorDesenho) {
             // não sobrescreve a cor da caneta, apenas mantém referência se necessário
@@ -308,10 +301,7 @@
 
         if (seletorDesenho) {
             seletorDesenho.value = cor;
-
-            if (typeof window.jQuery === 'function') {
-                window.jQuery(seletorDesenho).trigger('change');
-            }
+            seletorDesenho.dispatchEvent(new Event('change', { bubbles: true }));
         }
     }
 
@@ -381,6 +371,8 @@
     }
 
     function definirTema(valor) {
+        var temaAnterior = estado.tema;
+
         estado.tema = Number(valor) || 1;
 
         if (estado.tema < 1 || estado.tema > 6) {
@@ -395,6 +387,10 @@
             estado.cor = '#FF00FF';
         } else if (estado.tema === 6) {
             estado.cor = '#FFFFFF';
+        } else if (temaAnterior >= 3 && temaAnterior <= 6) {
+            // Ao sair de um tema de alto contraste, a cor de destaque volta ao
+            // padrão em vez de herdar o branco/ciano/amarelo do tema anterior.
+            estado.cor = '#0FF';
         }
 
         aplicarTema();
@@ -429,6 +425,9 @@
         if (!window.confirm('Limpar cards, desenhos e preferências salvas?')) {
             return;
         }
+
+        // Evita que o beforeunload regrave os cards que acabaram de ser apagados.
+        window.ignorarProximoAutosave = true;
 
         window.Store.remove(CHAVE_PREFERENCIAS);
         window.Store.remove(CHAVE_WORKSPACE);
@@ -659,13 +658,16 @@
             aplicarFundo();
             aplicarTextoPopup();
             aplicarIdioma();
-            aplicarCor();
 
             try {
                 aplicarTema();
             } catch (e) {
                 // tema será aplicado no load
             }
+
+            // A cor de destaque precisa ser aplicada depois do tema para não
+            // ser sobrescrita pelos valores padrão do tema.
+            aplicarCor();
 
             vincularEventos();
 

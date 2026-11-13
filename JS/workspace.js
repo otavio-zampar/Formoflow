@@ -5,6 +5,7 @@
     var CHAVE = 'workspace';
     var temporizador = 0;
     var restaurando = false;
+    var avisoArmazenamento = false;
 
     function debounceSalvar() {
         if (restaurando) {
@@ -32,7 +33,7 @@
     }
 
     function salvarWorkspace() {
-        if (!window.Store || restaurando) {
+        if (!window.Store || restaurando || window.ignorarProximoAutosave) {
             return;
         }
 
@@ -41,7 +42,17 @@
             windows: coletarWindows()
         };
 
-        window.Store.set(CHAVE, dados);
+        var salvou = window.Store.set(CHAVE, dados);
+
+        if (salvou === false && !avisoArmazenamento) {
+            avisoArmazenamento = true;
+
+            if (typeof window.mostrarAlertaGlobal === 'function' && typeof window.textoArmazenamentoCheio === 'function') {
+                window.mostrarAlertaGlobal(window.textoArmazenamentoCheio(), 4000);
+            }
+        } else if (salvou !== false) {
+            avisoArmazenamento = false;
+        }
     }
 
     function limparWorkspace() {
@@ -122,7 +133,7 @@
             if (win.atrr.actualcolor) tstDivC.setAttribute('ActualColor', win.atrr.actualcolor);
             if (win.atrr.graycolor) tstDivC.setAttribute('GrayColor', win.atrr.graycolor);
 
-            if (typeof dark !== 'undefined' && dark != 1 && win.atrr.graycolor) {
+            if (typeof temaEscuroAtivo === 'function' && temaEscuroAtivo() && win.atrr.graycolor) {
                 tstDivC.style.backgroundColor = win.atrr.graycolor;
             } else if (win.atrr.actualcolor) {
                 tstDivC.style.backgroundColor = win.atrr.actualcolor;
@@ -252,7 +263,7 @@
         } else if (win.form === 'textarea' || win.name === 'TUTORIAL' || exit === 0) {
             tag = win.form || 'textarea';
             tipo = (win.type !== undefined ? win.type : '');
-            if (win.name === 'TUTORIAL') {
+            if (win.form === 'textarea' || win.name === 'TUTORIAL') {
                 exit = 0;
             }
         } else if (!win.form && !win.type) {
@@ -331,9 +342,150 @@
         debounceSalvar();
     }
 
+    var importandoBackup = false;
+
+    function aplicarPreferenciasDoBackup(json) {
+        if (!window.Settings) {
+            return;
+        }
+
+        if (json.language) {
+            try {
+                window.Settings.definirIdioma(json.language);
+            } catch (e) {
+                console.warn('Não foi possível aplicar o idioma do backup.', e);
+            }
+        }
+
+        if (json.theme) {
+            try {
+                window.Settings.definirTema(json.theme);
+            } catch (e) {
+                console.warn('Não foi possível aplicar o tema do backup.', e);
+            }
+        }
+
+        if (json.customColor) {
+            try {
+                window.Settings.definirCor(json.customColor);
+            } catch (e) {
+                console.warn('Não foi possível aplicar a cor do backup.', e);
+            }
+        }
+    }
+
+    function importarBackupTexto(texto) {
+        if (importandoBackup) {
+            return false;
+        }
+
+        var json;
+
+        try {
+            json = JSON.parse(texto);
+        } catch (e) {
+            throw new Error('Arquivo JSON inválido.');
+        }
+
+        if (!json || !Array.isArray(json.windows) || json.windows.length === 0) {
+            throw new Error('Backup sem cards.');
+        }
+
+        if (!window.Store) {
+            throw new Error('Armazenamento indisponível.');
+        }
+
+        if (!window.confirm('Importar backup e substituir os cards atuais?')) {
+            return false;
+        }
+
+        importandoBackup = true;
+
+        // O beforeunload e o autosave não podem regravar os cards antigos por
+        // cima do backup que acabou de ser importado.
+        window.ignorarProximoAutosave = true;
+
+        try {
+            aplicarPreferenciasDoBackup(json);
+
+            var salvo = window.Store.set(CHAVE, {
+                versao: 1,
+                windows: json.windows
+            });
+
+            if (salvo === false) {
+                throw new Error('Não foi possível salvar o backup. O armazenamento pode estar cheio.');
+            }
+
+            var conferido = window.Store.get(CHAVE, null);
+
+            if (!conferido || !Array.isArray(conferido.windows) || conferido.windows.length !== json.windows.length) {
+                throw new Error('O backup não pôde ser lido de volta após ser salvo.');
+            }
+        } catch (e) {
+            window.ignorarProximoAutosave = false;
+            importandoBackup = false;
+            throw e;
+        }
+
+        window.location.reload();
+        return true;
+    }
+
+    function importarBackupArquivo(input) {
+        var arquivo = input && input.files && input.files[0];
+
+        if (!arquivo) {
+            return;
+        }
+
+        if (arquivo.size > 5 * 1024 * 1024) {
+            if (typeof window.mostrarAlertaGlobal === 'function') {
+                window.mostrarAlertaGlobal('Arquivos maiores que 5MB não serão exibidos', 2500);
+            } else {
+                window.alert('Arquivos maiores que 5MB não serão exibidos');
+            }
+
+            input.value = '';
+            return;
+        }
+
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            try {
+                importarBackupTexto(e.target.result);
+            } catch (erro) {
+                console.error('Erro ao importar backup:', erro);
+                window.alert('Erro ao importar backup: ' + (erro && erro.message ? erro.message : erro));
+            } finally {
+                if (!window.ignorarProximoAutosave) {
+                    input.value = '';
+                }
+            }
+        };
+
+        reader.onerror = function () {
+            window.alert('Erro ao importar backup: não foi possível ler o arquivo.');
+            input.value = '';
+        };
+
+        reader.readAsText(arquivo);
+    }
+
+    // O listener fica no documento para continuar funcionando mesmo quando o
+    // navegador mantém uma versão antiga de main/sidenavImport.html em cache.
+    document.addEventListener('change', function (evento) {
+        if (evento.target && evento.target.id === 'json-upload') {
+            importarBackupArquivo(evento.target);
+        }
+    }, true);
+
     window.salvarWorkspace = salvarWorkspace;
     window.restaurarWorkspace = restaurarWorkspace;
     window.agendarSalvarWorkspace = agendarSalvarWorkspace;
+    window.importarBackupTexto = importarBackupTexto;
+    window.importarBackupArquivo = importarBackupArquivo;
 
     // auto-save
     document.addEventListener('input', debounceSalvar, true);

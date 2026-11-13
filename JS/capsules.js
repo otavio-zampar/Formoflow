@@ -23,6 +23,20 @@ function textoCopiado() {
     return 'Copiado!';
 }
 
+function textoArmazenamentoCheio() {
+    if (typeof linguagem !== 'undefined') {
+        if (linguagem === 'EN-US') {
+            return 'Storage full: recent changes may not be saved.';
+        }
+
+        if (linguagem === 'SP-MX') {
+            return 'Almacenamiento lleno: los cambios recientes pueden no guardarse.';
+        }
+    }
+
+    return 'Armazenamento cheio: alterações recentes podem não ser salvas.';
+}
+
 function mostrarAlertaGlobal(mensagem, duracao) {
     var alerta = document.getElementById('BTNAlerta');
 
@@ -127,23 +141,53 @@ function findZindex() {
         }
     });
 }
+function completarHex(valor, tamanho) {
+    valor = String(valor);
+
+    while (valor.length < tamanho) {
+        valor = '0' + valor;
+    }
+
+    return valor;
+}
+
 function getColor() {
-    var color = Math.floor(Math.random() * 16777215).toString(16);
-    var regex = /[0-5]/ig;
-    color = color.replace(regex, function (char, index) {
-        return Math.floor(color[index] * 1.6);
+    var color = completarHex(Math.floor(Math.random() * 16777216).toString(16), 6);
+    var regex = /[0-5]/g;
+
+    color = color.replace(regex, function (char) {
+        return Math.floor(parseInt(char, 10) * 1.6).toString(16);
     });
-    if (color.length == 5) color = color.concat('f');
+
     return "#" + color;
 }
 
 function getGrayColor() {
-    var color = Math.floor(Math.random() * 255).toString(16);
-    var regex = /[a-f]/ig;
+    var color = completarHex(Math.floor(Math.random() * 256).toString(16), 2);
+    var regex = /[a-f]/g;
+
     color = color.replace(regex, function (char, index) {
-        return Math.floor((color.charCodeAt(index) - 97) * 1.6);
+        return Math.floor((color.charCodeAt(index) - 97) * 1.6).toString(16);
     });
+
     return "#" + color + color + color;
+}
+
+// Temas 2 a 6 usam fundo escuro nos cards; o tema 1 é o claro.
+function temaEscuroAtivo() {
+    var temaAtual = null;
+
+    if (window.Settings && window.Settings.estado) {
+        temaAtual = Number(window.Settings.estado.tema);
+    } else if (typeof window.tema !== 'undefined') {
+        temaAtual = Number(window.tema);
+    }
+
+    if (temaAtual !== null && !isNaN(temaAtual) && temaAtual > 0) {
+        return temaAtual !== 1;
+    }
+
+    return typeof window.dark !== 'undefined' && Number(window.dark) !== 1;
 }
 
 function avaliaJanela(input, counter, visitados, profundidade) {
@@ -258,6 +302,7 @@ function createDiv(AA, options) {
     var opcoes = options || {};
     var randomId = opcoes.randomId || ('div' + (divCount + 1));
     divCount = Math.max(divCount, parseInt(String(randomId).replace(/^div/, ''), 10) || 0);
+    var idBase = parseInt(String(randomId).replace(/^div/, ''), 10) || 0;
     ActualTop++;
     var mini = 0;
     var ActualDiv = $('<div>').attr('id', randomId).addClass('ActualDiv noCopy').attr("actualName", actualName);
@@ -271,7 +316,7 @@ function createDiv(AA, options) {
     const colorC = getColor();
     tstDiv.attr("ActualColor", colorC);
     tstDiv.attr("GrayColor", grayC);
-    if (dark != 1) { // se for modo dark
+    if (temaEscuroAtivo()) {
         tstDiv.css("background-color", grayC);
     } else {
         tstDiv.css("background-color", colorC);
@@ -333,10 +378,10 @@ function createDiv(AA, options) {
         for (let index = 0; index < inputForm; index++) {
             // cria o input
             var label = $('<label>').attr({
-                "for": "input" + divCount + index,
+                "for": "input" + idBase + index,
                 "hidden": ""
             });
-            var input = $('<input>').attr('type', 'text').attr('id', "input" + divCount + index).addClass("inputFormula");
+            var input = $('<input>').attr('type', 'text').attr('id', "input" + idBase + index).addClass("inputFormula");
 
             if (AA.placeholder[index] != undefined) {
                 input.attr("placeholder", AA.placeholder[index]);
@@ -369,8 +414,8 @@ function createDiv(AA, options) {
             });
 
             // cria as setas
-            var seta = $("<div>").addClass("arrow right").attr('id', "seta" + divCount + index).css("position", "absolute");
-            var linha = $('<div>').addClass("linha").attr('id', "linha" + divCount + index); // linha q completa a seta
+            var seta = $("<div>").addClass("arrow right").attr('id', "seta" + idBase + index).css("position", "absolute");
+            var linha = $('<div>').addClass("linha").attr('id', "linha" + idBase + index); // linha q completa a seta
 
             seta.css("top", "calc(" + valor + " - 5px + 1.1rem)");
             linha.css("top", "calc(" + valor + " - 2px + 1.1rem)");
@@ -411,12 +456,11 @@ function createDiv(AA, options) {
 
         for (let index = 0; index < exit; index++) {
 
-            var icon = $('<div>').addClass('icon noCopy').attr('id', "icon" + divCount + (inputForm + index)); // Unicode emoji for smiling face 
+            var icon = $('<div>').addClass('icon noCopy').attr('id', "icon" + idBase + (inputForm + index)); // Unicode emoji for smiling face
             icon.css("position", "absolute");
             icon.css("outline-color", "transparent");
             icon.on("click", function () {
-                var copyText = document.getElementById("icon" + divCount + (inputForm + index));
-                navigator.clipboard.writeText(copyText.innerHTML); // copy to clipboard
+                navigator.clipboard.writeText(this.innerHTML); // copy to clipboard
                 ActualTop = 1;
                 leftOffset = 0;
                 mostrarAlertaGlobal(textoCopiado(), 1000);
@@ -426,8 +470,8 @@ function createDiv(AA, options) {
             icon.css("top", "calc(" + valor + ")");
 
 
-            var seta = $("<div>").addClass("arrow right").attr('id', "seta" + divCount + (inputForm + index)).css("position", "absolute");
-            var linha = $('<div>').addClass("linha").attr('id', "linha" + divCount + (inputForm + index)); // linha q completa a seta
+            var seta = $("<div>").addClass("arrow right").attr('id', "seta" + idBase + (inputForm + index)).css("position", "absolute");
+            var linha = $('<div>').addClass("linha").attr('id', "linha" + idBase + (inputForm + index)); // linha q completa a seta
 
             seta.css("top", "calc(" + valor + " - 5px + 1.1rem)");
             linha.css("top", "calc(" + valor + " - 2px + 1.1rem)");
@@ -581,23 +625,39 @@ function createDiv(AA, options) {
         drop: function () {
             this._ignorandoDesvinculo = true;
             try {
-                if (String(inputId.attr("id")).includes("icon")) {
+                var origemIcone = String(inputId.attr("id")).includes("icon");
+                var paiId = inputId.attr("InputPai");
+                var pai = paiId ? document.getElementById(paiId) : null;
+
+                if (origemIcone) {
                     $(this).val(inputId.text()); // caso a seta venha de um div
-                    if (inputId.attr("InputPai")) {
-                        $(this).attr("InputPai", inputId.attr("InputPai"));
-                        $(this).css("outline-color", document.getElementById(inputId.attr("InputPai")).parentElement.style.backgroundColor);
+
+                    if (pai) {
+                        $(this).attr("InputPai", paiId);
+                        if (pai.parentElement) {
+                            $(this).css("outline-color", pai.parentElement.style.backgroundColor);
+                        }
                     } else {
+                        // o card de origem pode ter sido excluído: religa ao próprio ícone
                         $(this).attr("InputPai", inputId.attr("id"));
-                        $(this).css("outline-color", document.getElementById(inputId.attr("id")).parentElement.style.backgroundColor);
+                        if (inputId[0] && inputId[0].parentElement) {
+                            $(this).css("outline-color", inputId[0].parentElement.style.backgroundColor);
+                        }
                     }
                 } else {
                     $(this).val(inputId.val()); // caso a seta venha de um input
-                    if (inputId.attr("InputPai")) {
-                        $(this).attr("InputPai", inputId.attr("InputPai"));
-                        $(this).css("outline-color", document.getElementById(inputId.attr("InputPai")).parentElement.parentElement.style.backgroundColor);
+
+                    if (pai) {
+                        $(this).attr("InputPai", paiId);
+                        if (pai.parentElement && pai.parentElement.parentElement) {
+                            $(this).css("outline-color", pai.parentElement.parentElement.style.backgroundColor);
+                        }
                     } else {
+                        // o card de origem pode ter sido excluído: religa ao próprio input
                         $(this).attr("InputPai", inputId.attr("id"));
-                        $(this).css("outline-color", document.getElementById(inputId.attr("id")).parentElement.parentElement.style.backgroundColor);
+                        if (inputId[0] && inputId[0].parentElement && inputId[0].parentElement.parentElement) {
+                            $(this).css("outline-color", inputId[0].parentElement.parentElement.style.backgroundColor);
+                        }
                     }
                 }
             } finally {
@@ -635,6 +695,7 @@ function createEntradaDiv(AA, options) { // Range, range, 1, 1 // Text Area, tex
 
     var randomId = opcoes.randomId || ('div' + (divCount + 1));
     divCount = Math.max(divCount, parseInt(String(randomId).replace(/^div/, ''), 10) || 0);
+    var idBase = parseInt(String(randomId).replace(/^div/, ''), 10) || 0;
     ActualTop++;
     var mini = 0;
     var ActualDiv = $('<div>').attr('id', randomId).addClass('ActualDiv noCopy'); // .attr("actualName", actualName)
@@ -647,7 +708,7 @@ function createEntradaDiv(AA, options) { // Range, range, 1, 1 // Text Area, tex
     const colorC = getColor();
     tstDiv.attr("ActualColor", colorC);
     tstDiv.attr("GrayColor", grayC);
-    if (dark != 1) { // se for modo dark
+    if (temaEscuroAtivo()) {
         tstDiv.css("background-color", grayC);
     } else {
         tstDiv.css("background-color", colorC);
@@ -666,10 +727,10 @@ function createEntradaDiv(AA, options) { // Range, range, 1, 1 // Text Area, tex
 
         // cria o input
         var label = $('<label>').attr({
-            "for": "input" + divCount + 1,
+            "for": "input" + idBase + 1,
             "hidden": ""
         }).html(nomeForm);
-        var input = $('<' + inputInput + '>').attr('type', actualName).attr('id', "input" + divCount + 1).attr("min", 0).attr("max", 100).attr("value", 0); // .addClass("inputFormula")
+        var input = $('<' + inputInput + '>').attr('type', actualName).attr('id', "input" + idBase + 1).attr("min", 0).attr("max", 100).attr("value", 0); // .addClass("inputFormula")
         input.css("position", "absolute");
         input.css("left", "3vh");
         input.css("width", "calc(100% - 6vh)");
@@ -705,13 +766,12 @@ function createEntradaDiv(AA, options) { // Range, range, 1, 1 // Text Area, tex
         tstDiv.append(form);
 
         if (exit != 0) {
-            var icon = $('<div>').addClass('icon noCopy').attr('id', "icon" + divCount + (inputForm + 1)); // Unicode emoji for smiling face 
+            var icon = $('<div>').addClass('icon noCopy').attr('id', "icon" + idBase + (inputForm + 1)); // Unicode emoji for smiling face
             icon.css("position", "absolute");
             icon.css("left", "10%");
             icon.css("outline-color", "transparent");
             icon.on("click", function () {
-                var copyText = document.getElementById("icon" + divCount + (inputForm + 1));
-                navigator.clipboard.writeText(copyText.innerHTML); // copy to clipboard
+                navigator.clipboard.writeText(this.innerHTML); // copy to clipboard
                 ActualTop = 1;
                 leftOffset = 0;
                 mostrarAlertaGlobal(textoCopiado(), 1000);
@@ -721,8 +781,8 @@ function createEntradaDiv(AA, options) { // Range, range, 1, 1 // Text Area, tex
             icon.css("top", "calc(" + valor + ")");
 
 
-            var seta = $("<div>").addClass("arrow right").attr('id', "seta" + divCount + (inputForm + 1)).css("position", "absolute");
-            var linha = $('<div>').addClass("linha").attr('id', "linha" + divCount + (inputForm + 1)); // linha q completa a seta
+            var seta = $("<div>").addClass("arrow right").attr('id', "seta" + idBase + (inputForm + 1)).css("position", "absolute");
+            var linha = $('<div>').addClass("linha").attr('id', "linha" + idBase + (inputForm + 1)); // linha q completa a seta
 
             seta.css("top", "calc(" + valor + " - 5px + 1.1rem)");
             linha.css("top", "calc(" + valor + " - 2px + 1.1rem)");
@@ -883,23 +943,39 @@ function createEntradaDiv(AA, options) { // Range, range, 1, 1 // Text Area, tex
         drop: function () {
             this._ignorandoDesvinculo = true;
             try {
-                if (String(inputId.attr("id")).includes("icon")) {
+                var origemIcone = String(inputId.attr("id")).includes("icon");
+                var paiId = inputId.attr("InputPai");
+                var pai = paiId ? document.getElementById(paiId) : null;
+
+                if (origemIcone) {
                     $(this).val(inputId.text()); // caso a seta venha de um div
-                    if (inputId.attr("InputPai")) {
-                        $(this).attr("InputPai", inputId.attr("InputPai"));
-                        $(this).css("outline-color", document.getElementById(inputId.attr("InputPai")).parentElement.style.backgroundColor);
+
+                    if (pai) {
+                        $(this).attr("InputPai", paiId);
+                        if (pai.parentElement) {
+                            $(this).css("outline-color", pai.parentElement.style.backgroundColor);
+                        }
                     } else {
+                        // o card de origem pode ter sido excluído: religa ao próprio ícone
                         $(this).attr("InputPai", inputId.attr("id"));
-                        $(this).css("outline-color", document.getElementById(inputId.attr("id")).parentElement.style.backgroundColor);
+                        if (inputId[0] && inputId[0].parentElement) {
+                            $(this).css("outline-color", inputId[0].parentElement.style.backgroundColor);
+                        }
                     }
                 } else {
                     $(this).val(inputId.val()); // caso a seta venha de um input
-                    if (inputId.attr("InputPai")) {
-                        $(this).attr("InputPai", inputId.attr("InputPai"));
-                        $(this).css("outline-color", document.getElementById(inputId.attr("InputPai")).parentElement.parentElement.style.backgroundColor);
+
+                    if (pai) {
+                        $(this).attr("InputPai", paiId);
+                        if (pai.parentElement && pai.parentElement.parentElement) {
+                            $(this).css("outline-color", pai.parentElement.parentElement.style.backgroundColor);
+                        }
                     } else {
+                        // o card de origem pode ter sido excluído: religa ao próprio input
                         $(this).attr("InputPai", inputId.attr("id"));
-                        $(this).css("outline-color", document.getElementById(inputId.attr("id")).parentElement.parentElement.style.backgroundColor);
+                        if (inputId[0] && inputId[0].parentElement && inputId[0].parentElement.parentElement) {
+                            $(this).css("outline-color", inputId[0].parentElement.parentElement.style.backgroundColor);
+                        }
                     }
                 }
             } finally {
@@ -923,6 +999,52 @@ function createEntradaDiv(AA, options) { // Range, range, 1, 1 // Text Area, tex
     });
 }
 
+function prepararImagemParaSalvar(img, dataUrl) {
+    if (!img || !dataUrl) {
+        return dataUrl;
+    }
+
+    var largura = img.naturalWidth || img.width || 0;
+    var altura = img.naturalHeight || img.height || 0;
+    var maiorLado = Math.max(largura, altura);
+    var limiteLado = 1280;
+    var limiteDados = 900000;
+
+    if (maiorLado <= limiteLado && dataUrl.length <= limiteDados) {
+        return dataUrl;
+    }
+
+    try {
+        var escala = Math.min(1, limiteLado / maiorLado);
+        var canvas = document.createElement("canvas");
+        canvas.width = Math.max(1, Math.round(largura * escala));
+        canvas.height = Math.max(1, Math.round(altura * escala));
+
+        var contexto = canvas.getContext("2d");
+
+        if (!contexto) {
+            return dataUrl;
+        }
+
+        contexto.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+        var ehPng = /^data:image\/png/i.test(dataUrl);
+        var compactada = canvas.toDataURL(ehPng ? "image/png" : "image/jpeg", 0.82);
+
+        if (compactada.length > limiteDados && ehPng) {
+            // JPEG não tem transparência: pinta o fundo de branco antes de converter.
+            contexto.globalCompositeOperation = "destination-over";
+            contexto.fillStyle = "#ffffff";
+            contexto.fillRect(0, 0, canvas.width, canvas.height);
+            compactada = canvas.toDataURL("image/jpeg", 0.82);
+        }
+
+        return compactada.length < dataUrl.length ? compactada : dataUrl;
+    } catch (e) {
+        return dataUrl;
+    }
+}
+
 function uploadImg(selectedFile, naturalHeight, naturalWidth, nomeArquivo, opcoes) {
     if (selectedFile) {
 
@@ -931,6 +1053,7 @@ function uploadImg(selectedFile, naturalHeight, naturalWidth, nomeArquivo, opcoe
 
         var randomId = opcoes.randomId || ('div' + (divCount + 1));
         divCount = Math.max(divCount, parseInt(String(randomId).replace(/^div/, ''), 10) || 0);
+        var idBase = parseInt(String(randomId).replace(/^div/, ''), 10) || 0;
         var mini = 0;
         var ActualDiv = $('<div>').attr('id', randomId).addClass('ActualDiv noCopy');
         var DraggableDiv = $('<div>').attr('id', 'draggable' + randomId).addClass('DraggableDiv');
@@ -955,12 +1078,13 @@ function uploadImg(selectedFile, naturalHeight, naturalWidth, nomeArquivo, opcoe
         var ActualResizeHandleW = $('<div>').addClass('resize-handle w ui-resizable-w').css('min-height', '320px'); // W
         var ActualResizeHandleSE = $('<div>').addClass('resize-handle se ui-resizable-se'); // SE
 
+        var previewId = "previewImage" + randomId;
         var label = $('<label>').attr({
-            "for": "previewImage",
+            "for": previewId,
             "hidden": ""
         });
         var imgElement = $("<img>", {
-            id: "previewImage",
+            id: previewId,
             src: selectedFile,
             alt: "Imagem selecionada",
             style: "min-width: 290px; min-height: 290px; max-width:100%; max-height:100%; position: relative;"
@@ -1015,8 +1139,8 @@ function uploadImg(selectedFile, naturalHeight, naturalWidth, nomeArquivo, opcoe
 
 
         // espalha as imagens novas pela área de trabalho em vez de empilhar todas no mesmo ponto
-        var colunaImagem = (divCount - 1) % 6;
-        var linhaImagem = Math.floor((divCount - 1) / 6) % 5;
+        var colunaImagem = (idBase - 1) % 6;
+        var linhaImagem = Math.floor((idBase - 1) / 6) % 5;
         var posicaoImagem = {
             left: 'calc(5vw + ' + (colunaImagem * 46) + 'px)',
             top: 'calc(16vh + ' + (linhaImagem * 46) + 'px)'
@@ -1202,6 +1326,7 @@ function saveJson(element) {
     if (element.attributes.actualname == undefined && !img && campoEntrada) {
         JsonWindow["form"] = campoEntrada.tagName.toLowerCase();
         JsonWindow["type"] = campoEntrada.getAttribute("type") || "";
+        JsonWindow["exit"] = document.querySelectorAll("#" + element.id + " .icon").length;
     }
 
     if (img) {

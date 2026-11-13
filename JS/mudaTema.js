@@ -61,16 +61,16 @@ function lightMode(){
     document.documentElement.style.setProperty("--AccentColorBTN", "#B6B7CF");
     document.documentElement.style.setProperty("--LightGray", "#dddddd");
     document.documentElement.style.setProperty("--LightGrayBTN", "#dddddd");
-    document.documentElement.style.setProperty("--AlmostWhite", "#AAAAAA");
+    document.documentElement.style.setProperty("--AlmostWhite", "#888888");
     document.documentElement.style.setProperty("--WhiteFocus", "#fdfdfd");
     document.documentElement.style.setProperty("--White", "#ffffff");  
     document.documentElement.style.setProperty("--WhiteDraw", "#ffffff");   
     document.documentElement.style.setProperty("--White2", "#ffffff");
     document.documentElement.style.setProperty("--WhiteBTN", "#ffffff");
     document.documentElement.style.setProperty("--textColorWindow", "#FFFFFF");
-    document.documentElement.style.setProperty("--WhiteSwitch", "#fff");
+    document.documentElement.style.setProperty("--WhiteSwitch", "#FFFFFF");
     document.documentElement.style.setProperty("--WhiteSwitchCircle", "#D2D2D2");
-    document.documentElement.style.setProperty("--Yellow", "#000");
+    document.documentElement.style.setProperty("--Yellow", "#000000");
 
     {
         var github = document.getElementById("github");
@@ -82,7 +82,7 @@ function lightMode(){
         if (flags) flags.style.opacity = '1';
         var colPck = document.getElementById("ColPck");
         if (colPck) colPck.value = "#000000";
-        if (typeof window.jQuery === 'function') window.jQuery("#ColPck").trigger("change");
+        if (colPck) colPck.dispatchEvent(new Event("change", { bubbles: true }));
 
         $(".tstDiv").each(function () {
             this.style.backgroundColor = $(this).attr("actualcolor");
@@ -142,7 +142,7 @@ function darkMode(){
         if (flags) flags.style.opacity = '0.5';
         var colPck = document.getElementById("ColPck");
         if (colPck) colPck.value = "#FFFFFF";
-        if (typeof window.jQuery === 'function') window.jQuery("#ColPck").trigger("change");
+        if (colPck) colPck.dispatchEvent(new Event("change", { bubbles: true }));
 
         $(".tstDiv").each(function () {
             this.style.backgroundColor = $(this).attr("graycolor");
@@ -201,7 +201,7 @@ function hContrastModeCyan(){
         if (flags) flags.style.opacity = '0.5';
         var colPck = document.getElementById("ColPck");
         if (colPck) colPck.value = "#00FFFF";
-        if (typeof window.jQuery === 'function') window.jQuery("#ColPck").trigger("change");
+        if (colPck) colPck.dispatchEvent(new Event("change", { bubbles: true }));
 
         $(".tstDiv").each(function () {
             this.style.backgroundColor = $(this).attr("graycolor");
@@ -260,7 +260,7 @@ function hContrastModeYellow(){
         if (flags) flags.style.opacity = '0.5';
         var colPck = document.getElementById("ColPck");
         if (colPck) colPck.value = "#FFFF00";
-        if (typeof window.jQuery === 'function') window.jQuery("#ColPck").trigger("change");
+        if (colPck) colPck.dispatchEvent(new Event("change", { bubbles: true }));
 
         $(".tstDiv").each(function () {
             this.style.backgroundColor = $(this).attr("graycolor");
@@ -319,7 +319,7 @@ function hContrastModeMagenta(){
         if (flags) flags.style.opacity = '0.5';
         var colPck = document.getElementById("ColPck");
         if (colPck) colPck.value = "#FF00FF";
-        if (typeof window.jQuery === 'function') window.jQuery("#ColPck").trigger("change");
+        if (colPck) colPck.dispatchEvent(new Event("change", { bubbles: true }));
 
         $(".tstDiv").each(function () {
             this.style.backgroundColor = $(this).attr("graycolor");
@@ -378,7 +378,7 @@ function hContrastModeAmoled(){
         if (flags) flags.style.opacity = '0.5';
         var colPck = document.getElementById("ColPck");
         if (colPck) colPck.value = "#FFFFFF";
-        if (typeof window.jQuery === 'function') window.jQuery("#ColPck").trigger("change");
+        if (colPck) colPck.dispatchEvent(new Event("change", { bubbles: true }));
 
         $(".tstDiv").each(function () {
             this.style.backgroundColor = $(this).attr("graycolor");
